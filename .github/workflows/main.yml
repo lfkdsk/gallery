@@ -13,8 +13,8 @@ jobs:
     environment: secrets
     steps:
     - name: trigger album
-    - uses: rshop/trigger-workflow-action@v1
-    - with:
+      uses: rshop/trigger-workflow-action@v1
+      with:
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         repository: 'lfkdsk/album'
         workflowId: 66585106
