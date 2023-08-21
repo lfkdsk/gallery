@@ -46,8 +46,8 @@ jobs:
         python build.py
         cat new_config.yml
       env:
-        GITHUB_SERVER_URL: ${{ vars.GITHUB_SERVER_URL }} 
-        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
+        GITHUB_SERVER_URL: ${{ github.server_url }} 
+        GITHUB_REPOSITORY: ${{ github.repository }}
     - name: Install Dependencies & Build
       run: |
         npm install
