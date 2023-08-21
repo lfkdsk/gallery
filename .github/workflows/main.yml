@@ -43,7 +43,7 @@ jobs:
     - run: pip install -r requirements.txt
     - name: Generate Doc
       run: |
-        echo $BASE_URL
+        export BASE_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/master
         python build.py
         cat new_config.yml
     - name: Install Dependencies & Build
