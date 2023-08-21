@@ -13,7 +13,7 @@ env:
   # the following don't change.
   THEME_REPO: lfkdsk/hexo-theme-type
   THEME_BRANCH: main
-  BASE_URL: https://github.com/lfkdsk/gallery_template/raw/master
+  BASE_URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/master
   TEMPLATE_REPO: lfkdsk/album_template
   TEMPLATE_BRANCE: main
 
