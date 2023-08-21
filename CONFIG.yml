@@ -1,0 +1,20 @@
+title: MOYU 照片集
+subtitle: MOYU Take Photo Think Seriously
+description: MOY 拿起相机，认真思考
+cover: 'https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/IMG_7586.4e91my1ve140.17iz0sa56gik.webp'
+author: MOYU lfkdsk
+
+footer_logo: 
+  use: self
+  self:
+    link: 'https://lfkdsk.github.io/gallery_template'
+    src: 'https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp'
+
+url: https://lfkdsk.github.io/gallery_template
+root: /gallery_template
+
+photography_page:
+  slogan: true
+  slogan_descr: 'The moments when I MOYU, the moments are forever.'
+
+
