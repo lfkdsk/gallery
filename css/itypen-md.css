@@ -1,0 +1,171 @@
+@charset "UTF-8";
+/*
+Photup Article Style
+*/
+p {
+  margin: 1em 0px !important;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--main-black);
+  line-height: 1.8em;
+  letter-spacing: 0;
+}
+
+/*
+文字避头尾法则
+aiokr learn from https://blog.csdn.net/qq_23375733/article/details/99975659
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  table-layout: fixed !important;
+  /*文字避首尾 -- 防止撑开*/
+  word-wrap: break-word !important;
+  /*英文单字因自动换行*/
+  word-break: normal !important;
+  /*正常避头尾 */
+  /*text-align: justify !important;*/
+  /*文字左右对齐*/
+  text-justify: inter-ideograph !important;
+  /*用表意文本来排齐内容*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.5em 0 0.5em 0;
+  padding: 0;
+  font-style: bold !important;
+  color: var(--main-black) !important;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  text-align: left !important;
+  font-weight: 600;
+}
+
+h1 {
+  font-style: normal;
+  font-size: 1.8em;
+  line-height: 140%;
+  text-align: left !important;
+}
+
+h2 {
+  font-size: 1.6em !important;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5 {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1em;
+  font-weight: 400;
+}
+
+strong {
+  font-weight: 700;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol,
+ul {
+  margin-left: 1.4em;
+}
+
+ol li,
+ul li {
+  margin: 10px 0;
+  font-style: normal;
+  line-height: 31px;
+}
+
+img {
+  display: block;
+  margin: auto;
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+blockquote {
+  padding: 0 0px 0 10px;
+  margin: 1.5em 0px !important;
+  border-left: 2px solid #71afdd;
+  quotes: none;
+}
+blockquote p {
+  color: 767676;
+  margin-top: 0 !important;
+}
+
+blockquote::before,
+.stressed-quote::before {
+  content: "“";
+  display: block;
+  font-style: normal;
+  font-size: 28px;
+  color: var(--main-color);
+  font-weight: bold;
+  line-height: 30px;
+}
+
+a {
+  color: var(--main-black);
+  text-decoration: underline;
+  text-decoration-color: #71afdd;
+}
+
+mark {
+  background: rgba(113, 175, 221, 0.5019607843);
+}
+
+ol li,
+ul li {
+  font-size: 16px;
+  line-height: 1.8em;
+  letter-spacing: 0;
+}
+
+.footnotelist ol li span {
+  display: contents !important;
+}
+
+hr {
+  margin: 24px auto;
+  padding: 12px;
+  border: 0;
+  background-image: url("../img/halo.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+pre {
+  margin: 1em 0px !important;
+}
+
+code {
+  line-height: 16px;
+}
