@@ -13,7 +13,6 @@ env:
   # the following don't change.
   THEME_REPO: lfkdsk/hexo-theme-type
   THEME_BRANCH: main
-  BASE_URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/master
   TEMPLATE_REPO: lfkdsk/album_template
   TEMPLATE_BRANCE: main
 
@@ -43,9 +42,12 @@ jobs:
     - run: pip install -r requirements.txt
     - name: Generate Doc
       run: |
-        export BASE_URL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/master
+        export BASE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/master"
         python build.py
         cat new_config.yml
+      env:
+        GITHUB_SERVER_URL: ${{ vars.GITHUB_SERVER_URL }} 
+        GITHUB_REPOSITORY: ${{ vars.GITHUB_REPOSITORY }}
     - name: Install Dependencies & Build
       run: |
         npm install
