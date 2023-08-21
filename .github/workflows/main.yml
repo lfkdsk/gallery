@@ -5,7 +5,7 @@ on:
     branches: [master]
   workflow_dispatch:
   schedule:
-    # - cron: '0 12 * * *'
+    - cron: '0 12 * * *'
 
 env:
   GIT_USER: lfkdsk # change to yourself
