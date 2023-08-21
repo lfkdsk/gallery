@@ -11,6 +11,7 @@ env:
   GIT_USER: lfkdsk # change to yourself
   GIT_EMAIL: lfkdsk@gmail.com # change to yourself
   # the following don't change.
+  BASE_URL: https://github.com/lfkdsk/gallery_template/raw/master
   THEME_REPO: lfkdsk/hexo-theme-type
   THEME_BRANCH: main
   TEMPLATE_REPO: lfkdsk/album_template
@@ -42,12 +43,9 @@ jobs:
     - run: pip install -r requirements.txt
     - name: Generate Doc
       run: |
-        export BASE_URL="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/raw/master"
+        echo $BASE_URL
         python build.py
         cat new_config.yml
-      env:
-        GITHUB_SERVER_URL: ${{ github.server_url }} 
-        GITHUB_REPOSITORY: ${{ github.repository }}
     - name: Install Dependencies & Build
       run: |
         npm install
