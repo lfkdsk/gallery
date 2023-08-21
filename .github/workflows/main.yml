@@ -5,16 +5,59 @@ on:
     branches: [master]
   workflow_dispatch:
   schedule:
-    - cron: '0 12 * * *'
+    # - cron: '0 12 * * *'
+
+env:
+  GIT_USER: lfkdsk # change to yourself
+  GIT_EMAIL: lfkdsk@gmail.com # change to yourself
+  # the following don't change.
+  THEME_REPO: lfkdsk/hexo-theme-type
+  THEME_BRANCH: main
+  BASE_URL: https://github.com/lfkdsk/gallery_template/raw/master
+  TEMPLATE_REPO: lfkdsk/album_template
+  TEMPLATE_BRANCE: main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: secrets
     steps:
-    - name: trigger album
-      uses: rshop/trigger-workflow-action@v1
+    - name: Checkout template repo
+      uses: actions/checkout@v3
       with:
-        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        repository: 'lfkdsk/album'
-        workflowId: 66585106
+        repository: ${{ env.TEMPLATE_REPO }}
+        ref: ${{ env.TEMPLATE_BRANCE }}        
+    - name: Checkout gallery repo
+      uses: actions/checkout@v2
+      with:
+        path: gallery
+    - name: Checkout theme repo
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ env.THEME_REPO }}
+        ref: ${{ env.THEME_BRANCH }}        
+        path: themes/hexo-theme-type
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - run: pip install -r requirements.txt
+    - name: Generate Doc
+      run: |
+        echo $BASE_URL
+        python build.py
+        cat new_config.yml
+    - name: Install Dependencies & Build
+      run: |
+        npm install
+        npm ci
+        npm install hexo-cli -g
+        hexo g --config new_config.yml
+        ls ./public        
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./public
+        github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+        user_name: ${{ env.GIT_USER }}
+        user_email: ${{ env.GIT_EMAIL }}
+        commit_msg: ${{ github.event.head_commit.message }}  
