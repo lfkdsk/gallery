@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>MOYU 照片集</title>
+  <title>照片集</title>
   
-  <subtitle>MOYU Take Photo Think Seriously</subtitle>
-  <link href="https://lfkdsk.github.io/gallery_template/atom.xml" rel="self"/>
+  <subtitle>Take Photo Think Seriously</subtitle>
+  <link href="https://lfkdsk.github.io/gallery/atom.xml" rel="self"/>
   
-  <link href="https://lfkdsk.github.io/gallery_template/"/>
-  <updated>2023-08-21T12:03:29.880Z</updated>
-  <id>https://lfkdsk.github.io/gallery_template/</id>
+  <link href="https://lfkdsk.github.io/gallery/"/>
+  <updated>2023-08-21T12:39:33.792Z</updated>
+  <id>https://lfkdsk.github.io/gallery/</id>
   
   <author>
-    <name>MOYU lfkdsk</name>
+    <name>lfkdsk</name>
     
   </author>
   
@@ -18,10 +18,10 @@
   
   <entry>
     <title>照片集</title>
-    <link href="https://lfkdsk.github.io/gallery_template/2023/undefined/"/>
-    <id>https://lfkdsk.github.io/gallery_template/2023/undefined/</id>
-    <published>2023-08-21T12:03:29.880Z</published>
-    <updated>2023-08-21T12:03:29.880Z</updated>
+    <link href="https://lfkdsk.github.io/gallery/2023/undefined/"/>
+    <id>https://lfkdsk.github.io/gallery/2023/undefined/</id>
+    <published>2023-08-21T12:39:33.792Z</published>
+    <updated>2023-08-21T12:39:33.792Z</updated>
     
     
     
