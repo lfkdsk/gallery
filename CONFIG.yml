@@ -17,3 +17,8 @@ photography_page:
   slogan: true
   slogan_descr: 'The moments when I pressed the shutter, the moments are forever.'
 
+google_analytics: 
+  use: gtag
+  ga_id: 
+  ga_api: 
+  gtag_id: G-8TMSDJG47Q
