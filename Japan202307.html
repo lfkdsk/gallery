@@ -142,7 +142,6 @@
   
   
   
-  
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8TMSDJG47Q" defer></script>
   <script>
@@ -626,11 +625,18 @@
           aspect-ratio: 3 / 2;
         }
 
+        .pic-item > a {
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+        }
+
         .pic-box {
           transition: all .3s ease-in-out;
-          max-height: 100%;
-          max-width: 100%;
+          display: inline-block;
+          width: 100%;
           height: 100%;
+          object-fit: contain;
           margin: 0 auto;
         }
 
