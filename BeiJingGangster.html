@@ -362,6 +362,11 @@
           imageBox.src = imgLink; //替换图片
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+          var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
+          if (fancyBoxImage !== undefined) {
+            fancyBoxImage.src = imgLink;
+          }
+          target.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
           descBox.text(desc);
           updateParams(name);
         }
