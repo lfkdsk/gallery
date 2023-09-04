@@ -529,55 +529,6 @@
           font-size: 1.2rem;
         }
 
-        @media (max-width: 768px) {
-          .content-area {
-            max-width: 100vw;
-          }
-
-          .pic-area {
-            grid-column: span 3 / span 3;
-            padding: 16px;
-          }
-
-          .album-info {
-            grid-column: span 3 / span 3;
-            padding: 12px;
-          }
-
-          .album-article {
-            padding: 2px;
-          }
-        }
-
-        @media (min-width: 769px) {
-          .content-area {
-            max-width: 92%;
-            margin: 0 auto;
-            padding: 135px 16px 16px 16px;
-          }
-
-          .album-article {
-            margin-top: 2px;
-            max-height: 500px;
-            overflow-y: scroll;
-          }
-
-          .pic-area {
-            grid-column: span 2 / span 2;
-          }
-
-          .album-info {
-            grid-column: span 1 / span 1;
-            margin-left: 12px;
-          }
-        }
-
-        @media (min-width: 1304px) {
-          .content-area {
-            max-width: 1400px;
-          }
-        }
-
         .hint-text {
           color: black;
           opacity: 60%;
@@ -645,6 +596,59 @@
           background-position: center;
         }
 
+        @media (max-width: 768px) {
+          .content-area {
+            max-width: 100vw;
+          }
+
+          .pic-area {
+            grid-column: span 3 / span 3;
+            padding: 16px;
+          }
+
+          .album-info {
+            grid-column: span 3 / span 3;
+            padding: 12px;
+          }
+
+          .album-article {
+            padding: 2px;
+          }
+
+          .album-title {
+            font-size: 1.5em;
+          }
+        }
+
+        @media (min-width: 769px) {
+          .content-area {
+            max-width: 92%;
+            margin: 0 auto;
+            padding: 135px 16px 16px 16px;
+          }
+
+          .album-article {
+            margin-top: 2px;
+            max-height: 500px;
+            overflow-y: scroll;
+          }
+
+          .pic-area {
+            grid-column: span 2 / span 2;
+          }
+
+          .album-info {
+            grid-column: span 1 / span 1;
+            margin-left: 12px;
+          }
+        }
+
+        @media (min-width: 1304px) {
+          .content-area {
+            max-width: 1400px;
+          }
+        }
+
         @media (prefers-color-scheme: dark) {
           .album-info {
             color: #fff;
@@ -667,13 +671,13 @@
   <section class="footer-info">
     照片集 &copy; 2017 - 2023
     
+    
+    
     <span> / </span>
-    0k
-    
-    
+    <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
     
     <span> / Theme</span>
-    <a href="https://github.com/aiokr/hexo-theme-type" target="_blank">Type
+    <a href="https://github.com/lfkdsk/hexo-theme-type" target="_blank">Type
     </a>
   </section>
   
@@ -690,6 +694,8 @@
 <!-- mdui -->
 
 <!-- busuanzi -->
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script>
 
 <!-- highlightjs -->
 
