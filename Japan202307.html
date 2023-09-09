@@ -250,9 +250,9 @@
 </style>
   <!-- Main Content -->
   <section class="pjax-area">
-  <div class="content-area post-album">
+  <div class="content-area post-album default-content-area">
     <div class="grid grid-cols-3 gap-2">
-      <div class="pic-area">
+      <div class="pic-area default-pic">
         <div class="pic-item" />
         <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/B17870D6-3FE2-413E-941E-856120428D46_1_102_o.2d7uy3ncwxc0.webp" />
       </div>
@@ -452,7 +452,7 @@
       </div>
       <div class="text-center text-xs pt-2 hint-text"> </div>
     </div>
-    <div class="album-info">
+    <div class="album-info default-info">
       <div class="album-info-main">
         <div class="album-title">日本旅行</div>
         <span class="album-subtitle">
@@ -684,6 +684,10 @@
           .content-area {
             max-width: 1400px;
           }
+
+          .fullscreen-content-area {
+            max-width: 100vh;
+          }
         }
 
         @media (prefers-color-scheme: dark) {
@@ -700,6 +704,14 @@
             opacity: 80%;
           }
         }
+
+        .fullscreen-pic {
+          grid-column: span 3 / span 3;
+        }
+
+        .fullscreen-info {
+          grid-column: span 3 / span 3;
+        }
       </style>
 </section>
   <!-- Footer -->
@@ -713,8 +725,8 @@
     <span> / </span>
     <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
     
-    <span> / Theme</span>
-    <a href="https://github.com/lfkdsk/hexo-theme-type" target="_blank">Type
+    <span> / Template</span>
+    <a href="https://github.com/lfkdsk/album_template" target="_blank">Type
     </a>
   </section>
   
