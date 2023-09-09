@@ -4,7 +4,26 @@
 
 猫猫视频：
 
+<center>
 <video controls src="https://github.com/lfkdsk/_video_/raw/main/DSCF0392.MOV" style="zoom:60%; max-width: 80%;"/>
+</center>
+
+<br/>
+
+<center>
 <video controls src="https://github.com/lfkdsk/_video_/raw/main/DSCF0437.MOV" style="zoom:60%; max-width: 80%;"/>
+</center>
+
+<br/>
+
+<center>
 <video controls src="https://github.com/lfkdsk/_video_/raw/main/DSCF0438.MOV" style="zoom:60%; max-width: 80%;"/>
+</center>
+
+
+<br/>
+
+<center>
 <video controls src="https://github.com/lfkdsk/_video_/raw/main/DSCF0468.MOV" style="zoom:60%; max-width: 80%;"/>
+</center>
+
