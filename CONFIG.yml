@@ -22,3 +22,8 @@ google_analytics:
   ga_id: 
   ga_api: 
   gtag_id: G-8TMSDJG47Q
+
+nav:
+  归档: 
+    link: https://lfkdsk.github.io
+    icon: inbox
