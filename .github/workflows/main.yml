@@ -32,6 +32,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: gallery
+    - name: Checkout thumbnail repo
+      uses: actions/checkout@v2
+      with:
+        path: thumbnail_public        
     - name: Checkout theme repo
       uses: actions/checkout@v3
       with:
