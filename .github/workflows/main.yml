@@ -12,6 +12,7 @@ env:
   GIT_EMAIL: lfkdsk@gmail.com # change to yourself
   # the following don't change.
   BASE_URL: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master
+  THUMBNAIL_URL: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail
   THEME_REPO: lfkdsk/hexo-theme-type
   THEME_BRANCH: main
   TEMPLATE_REPO: lfkdsk/album_template
@@ -53,6 +54,15 @@ jobs:
         npm install hexo-cli -g
         hexo g --config new_config.yml
         ls ./public        
+    - name: Deploy Thumbnail
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./thumbnail_public
+        publish_branch: thumbnail
+        github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+        user_name: ${{ env.GIT_USER }}
+        user_email: ${{ env.GIT_EMAIL }}
+        commit_msg: ${{ github.event.head_commit.message }}          
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
