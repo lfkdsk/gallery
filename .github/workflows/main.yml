@@ -10,9 +10,6 @@ on:
 env:
   GIT_USER: lfkdsk # change to yourself
   GIT_EMAIL: lfkdsk@gmail.com # change to yourself
-  # the following don't change.
-  BASE_URL: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master
-  THUMBNAIL_URL: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail
   THEME_REPO: lfkdsk/hexo-theme-type
   THEME_BRANCH: main
   TEMPLATE_REPO: lfkdsk/album_template
