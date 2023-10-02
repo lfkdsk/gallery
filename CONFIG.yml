@@ -29,3 +29,4 @@ nav:
     icon: inbox
 
 thumbnail_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/
+base_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master
