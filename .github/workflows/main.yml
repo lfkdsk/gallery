@@ -31,6 +31,7 @@ jobs:
         path: gallery
     - name: Checkout thumbnail repo
       uses: actions/checkout@v2
+      continue-on-error: true # allow error.      
       with:
         ref: thumbnail
         path: thumbnail_public        
