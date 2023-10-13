@@ -119,6 +119,13 @@
   
   
   
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>    
+  
   
   
   <!--highlight.js CSS-->
@@ -256,205 +263,150 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
-  <div class="content-area album-area">
-    
-    <div class="container gpro-slogan title">
-      The moments when I pressed the shutter, the moments are forever.
-    </div>
-    
-    <div class="container gpro-container grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <section class="pjax-area">  
+    <div class="content-area album-area">
       
-      
-      <a href="YiHeYuan-Cat">
-        <div class="gpro-tile lazy" data-src="YiHeYuan-Cat/DSCF2260.webp">
-          <div class="gpro-tile-descr">颐和园 · 拍猫</div>
-        </div>
-      </a>
-      
-      <a href="OlympicsCat">
-        <div class="gpro-tile lazy" data-src="OlympicsCat/DSCF1996.webp">
-          <div class="gpro-tile-descr">奥森南园 · 拍猫</div>
-        </div>
-      </a>
-      
-      <a href="Archaeology-Museum">
-        <div class="gpro-tile lazy" data-src="Archaeology-Museum/DSCF1745.webp">
-          <div class="gpro-tile-descr">考古博物馆</div>
-        </div>
-      </a>
-      
-      <a href="DaJue-Temple">
-        <div class="gpro-tile lazy" data-src="DaJue-Temple/DSCF1614.webp">
-          <div class="gpro-tile-descr">大觉寺</div>
-        </div>
-      </a>
-      
-      <a href="DaJue-Temple-Cats">
-        <div class="gpro-tile lazy" data-src="DaJue-Temple-Cats/DSCF1589.webp">
-          <div class="gpro-tile-descr">大觉寺 · 拍猫</div>
-        </div>
-      </a>
-      
-      <a href="MoShiKouCat">
-        <div class="gpro-tile lazy" data-src="MoShiKouCat/15.打呼.jpg">
-          <div class="gpro-tile-descr">模式口 · 拍猫</div>
-        </div>
-      </a>
-      
-      <a href="FaHaiTample">
-        <div class="gpro-tile lazy" data-src="FaHaiTample/DSCF0680.jpg">
-          <div class="gpro-tile-descr">北京 · 法海寺</div>
-        </div>
-      </a>
-      
-      <a href="CiShouTower">
-        <div class="gpro-tile lazy" data-src="CiShouTower/DSCF0603.jpg">
-          <div class="gpro-tile-descr">北京 · 慈寿寺</div>
-        </div>
-      </a>
-      
-      <a href="FaYuanTampleCat">
-        <div class="gpro-tile lazy" data-src="FaYuanTampleCat/1.美丽黑猫.jpg">
-          <div class="gpro-tile-descr">北京 · 法源寺 · 陶然亭 · 拍猫</div>
-        </div>
-      </a>
-      
-      <a href="ZhiHuaTample">
-        <div class="gpro-tile lazy" data-src="ZhiHuaTample/22.梵天衣决.jpeg">
-          <div class="gpro-tile-descr">北京 · 智化寺</div>
-        </div>
-      </a>
-      
-      <a href="JAPAN-Inamuragasaki">
-        <div class="gpro-tile lazy" data-src="JAPAN-Inamuragasaki/DSCF1437.webp">
-          <div class="gpro-tile-descr">Inamuragasaki</div>
-        </div>
-      </a>
-      
-      <a href="JAPAN-KAMAKURA">
-        <div class="gpro-tile lazy" data-src="JAPAN-KAMAKURA/DSCF1408.webp">
-          <div class="gpro-tile-descr">KAMAKURA</div>
-        </div>
-      </a>
-      
-      <a href="JAPAN-YOKOHAMA">
-        <div class="gpro-tile lazy" data-src="JAPAN-YOKOHAMA/DSCF1296.webp">
-          <div class="gpro-tile-descr">YOKOHAMA</div>
-        </div>
-      </a>
-      
-      <a href="JapanTokyo">
-        <div class="gpro-tile lazy" data-src="JapanTokyo/DSCF0758.webp">
-          <div class="gpro-tile-descr">We Are Tokyo</div>
-        </div>
-      </a>
-      
-      <a href="Japan202307">
-        <div class="gpro-tile lazy" data-src="Japan202307/IMG_7586.4e91my1ve140.JPG">
-          <div class="gpro-tile-descr">日本旅行</div>
-        </div>
-      </a>
-      
-      <a href="BeiJingGangster">
-        <div class="gpro-tile lazy" data-src="BeiJingGangster/IMG_7089.4cskb5ur5o00.webp">
-          <div class="gpro-tile-descr">北京暴徒</div>
-        </div>
-      </a>
-      
-      <a href="DaLi2022">
-        <div class="gpro-tile lazy" data-src="DaLi2022/20230818-033845.6obr4awlbf40.webp">
-          <div class="gpro-tile-descr">2022 · 大理</div>
-        </div>
-      </a>
+      <div class="container gpro-slogan title">
+        
+          Travel through all over the world ~
+        
+      </div>
       
     </div>
-  </div>
-  <script>
-    $(function() {
-      $("div.lazy").lazyload();
-    });
-  </script>
-  <style>
-    body {
-      background-color: #fff;
-    }
+    <div class="container map-container">
+        <div id="map"></div>
+    </div>
 
-    .album-area {
-      margin-top: 120px;
-      padding-left: 16px;
-      padding-right: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    <script>
+      $(function() {
+        $("div.lazy").lazyload();
+      });
+    </script>
+    <style>
+      body {
+        background-color: #fff;
+      }
+  
+      #map { 
+        min-height: 600px;
+        max-height: 800px; 
+        max-width: 1400px;
+        margin: 0 auto;
+      }
 
-    .gpro-slogan {
-      text-align: center;
-      font-size: 36px;
-      font-weight: 700;
-      color: #3D4350;
-    }
+      .map-container {
+        margin-top: 120px;
+      }
 
-    .gpro-container {
-      margin-top: 120px;
-      gap: 8px;
-    }
-
-    .gpro-tile {
-      aspect-ratio: 3 / 2;
-      background-position: center;
-      background-size: cover;
-      border-radius: 5px;
-      transition: all .15s ease-in-out;
-      min-height: 211px;
-    }
-
-    .gpro-tile:hover {
-      box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
-      transform: scale(1.02);
-      transition: all .15s ease-in-out;
-    }
-
-    .gpro-tile-descr {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(#00000000 50%, #00000055 100%);
-      color: #fff;
-      font-size: 14px;
-      border-radius: 5px;
-      opacity: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      text-overflow: clip;
-      transition: all .15s ease-in-out;
-      padding-bottom: .85em;
-    }
-
-    .gpro-tile-descr:hover {
-      opacity: 1;
-      transition: all .15s ease-in-out;
-    }
-
-    @media (max-width: 768px) {
+      .album-area {
+        margin-top: 120px;
+        padding-left: 16px;
+        padding-right: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+  
       .gpro-slogan {
-        font-size: 28px;
+        text-align: center;
+        font-size: 36px;
+        font-weight: 700;
+        color: #3D4350;
       }
-
-      .content-area {
-        margin-top: 80px;
-      }
-
+  
       .gpro-container {
-        margin-top: 60px;
+        margin-top: 120px;
+        gap: 12px;
       }
-    }
-  </style>
-</section>
+  
+      .gpro-tile {
+        aspect-ratio: 3 / 2;
+        background-position: center;
+        background-size: cover;
+        transition: all .15s ease-in-out;
+        min-height: 211px;
+      }
+  
+      .gpro-tile:hover {
+        box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+        transition: all .15s ease-in-out;
+      }
+  
+      .gpro-tile-descr {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        font-size: 14px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
+        text-overflow: clip;
+        flex-direction: column;
+        transition: all .15s ease-in-out;
+        padding-bottom: .85em;
+        opacity: 0;
+        background-color: rgb(9, 9, 11);
+      }
+  
+      .gpro-tile-descr:hover {
+        opacity: 0.8;
+        transition: all .15s ease-in-out;
+      }
+  
+      @media (max-width: 768px) {
+        .gpro-tile-descr {
+          opacity: 0.6;
+        }
+  
+        .gpro-slogan {
+          font-size: 28px;
+        }
+  
+        .content-area {
+          margin-top: 80px;
+        }
+  
+        .gpro-container {
+          margin-top: 60px;
+        }
+      }
+    
+    </style>
+    <script type="text/javascript">
+        var album_data = JSON.parse(`{"颐和园 · 拍猫":{"url":"YiHeYuan-Cat","date":"2023-10-12T00:00:00.000Z","cover":"YiHeYuan-Cat/DSCF2260.webp","style":"fullscreen","location":[40.00013020916257,116.27549278433995]},"奥森南园 · 拍猫":{"url":"OlympicsCat","date":"2023-09-27T00:00:00.000Z","cover":"OlympicsCat/DSCF1996.webp","location":[40.01168259545705,116.3930106606849]},"考古博物馆":{"url":"Archaeology-Museum","date":"2023-09-27T00:00:00.000Z","cover":"Archaeology-Museum/DSCF1745.webp","style":"fullscreen","location":[39.99885544291326,116.39889832362664]},"大觉寺":{"url":"DaJue-Temple","date":"2023-09-23T00:00:00.000Z","cover":"DaJue-Temple/DSCF1614.webp","style":"fullscreen","location":[40.05227808497262,116.10656799783511]},"大觉寺 · 拍猫":{"url":"DaJue-Temple-Cats","date":"2023-09-23T00:00:00.000Z","cover":"DaJue-Temple-Cats/DSCF1589.webp","style":"fullscreen","location":[40.05227808497262,116.10656799783511]},"模式口 · 拍猫":{"url":"MoShiKouCat","date":"2023-09-01T00:00:00.000Z","cover":"MoShiKouCat/15.打呼.jpg","location":[39.934556122413355,116.15926839071217]},"北京 · 法海寺":{"url":"FaHaiTample","date":"2023-09-01T00:00:00.000Z","cover":"FaHaiTample/DSCF0680.jpg","location":[39.94114003690045,116.15986645550316]},"北京 · 慈寿寺":{"url":"CiShouTower","date":"2023-08-28T00:00:00.000Z","cover":"CiShouTower/DSCF0603.jpg","location":[39.92822506484559,116.29527872666742]},"北京 · 法源寺 · 陶然亭 · 拍猫":{"url":"FaYuanTampleCat","date":"2023-08-26T00:00:00.000Z","style":"fullscreen","cover":"FaYuanTampleCat/1.美丽黑猫.jpg","location":[39.88426667153332,116.37003452666642]},"北京 · 智化寺":{"url":"ZhiHuaTample","date":"2023-08-25T00:00:00.000Z","cover":"ZhiHuaTample/22.梵天衣决.jpeg","location":[39.91721676953545,116.43230954016073]},"Inamuragasaki":{"url":"JAPAN-Inamuragasaki","date":"","subtitle":2023,"style":"fullscreen","cover":"JAPAN-Inamuragasaki/DSCF1437.webp","location":[35.302147470364964,139.52532325690734]},"KAMAKURA":{"url":"JAPAN-KAMAKURA","date":"","subtitle":2023,"style":"fullscreen","cover":"JAPAN-KAMAKURA/DSCF1408.webp","location":[35.31680571832347,139.53608752046165]},"YOKOHAMA":{"url":"JAPAN-YOKOHAMA","date":"","subtitle":2023,"style":"fullscreen","cover":"JAPAN-YOKOHAMA/DSCF1296.webp","location":[35.45307576603131,139.64422609358917]},"We Are Tokyo":{"url":"JapanTokyo","date":"","subtitle":2023,"style":"fullscreen","cover":"JapanTokyo/DSCF0758.webp","location":[35.658510734691674,139.7454328977352]},"日本旅行":{"url":"Japan202307","date":"2023-07-12T00:00:00.000Z","cover":"Japan202307/IMG_7586.4e91my1ve140.JPG","location":[34.97037388872075,138.9266645400499]},"北京暴徒":{"url":"BeiJingGangster","date":"2023-03-26T00:00:00.000Z","cover":"BeiJingGangster/IMG_7089.4cskb5ur5o00.webp","location":[39.94510077201904,116.33033386289503]},"2022 · 大理":{"url":"DaLi2022","date":"2022-10-01T00:00:00.000Z","cover":"DaLi2022/20230818-033845.6obr4awlbf40.webp","location":[25.752030170382785,100.15397359842969]}}`);
+        var keys = Object.keys(album_data)
+        var map = L.map('map');
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a target="_blank" rel="noopener" href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var first = null;
+        for (const key of keys) {
+          console.log(key)
+          var v = album_data[key];
+          var file = v.cover;
+          var cover = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + file.substr(0, file.lastIndexOf(".")) + ".webp"
+          console.log(v)
+          if (v.hasOwnProperty('location')) {
+            // set center view.
+            if (first === null) {
+              first = v.location;
+            }
+            // add marker
+            var marker = L.marker(v.location).addTo(map);
+            marker.bindPopup(`<a href="/gallery//${v.url}">${key}</a>` + `<img src=${cover} style="margin-top:4px; max-width:300px" />`)
+                  .openPopup();
+          }
+        }
+        map.setView(first, 10);
+    </script>
+  </section>
+  
+  
   <!-- Footer -->
   <!-- Footer -->
 <footer class="itp-footer text-center">
