@@ -17,7 +17,7 @@ photography_page:
   slogan: true
   slogan_descr: 'The moments when I pressed the shutter, the moments are forever.'
   travel_slogan: true
-  travel_slogan_descr: 'Travel through all over the world ~'
+  travel_slogan_descr: 'Travel all over the world ~'
 
 google_analytics: 
   use: gtag
