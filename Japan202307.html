@@ -711,7 +711,7 @@
         };
         function copyToClipboard(content) {
           toastr.options = {
-            "closeButton": false,
+            "closeButton": true,
             "debug": false,
             "newestOnTop": false,
             "progressBar": false,
@@ -729,7 +729,7 @@
           }
           if (window.isSecureContext && navigator.clipboard) {
             navigator.clipboard.writeText(content);
-            toastr.info('Copy single url into Clipboard.');
+            toastr.success('Copy single url into Clipboard.');
           } else {
             toastr.info('Please check your clipboard write permission.')
           }
@@ -886,7 +886,7 @@
             color: #fff;
           }
 
-          .album-location {
+          .album-tool {
             color: #bdbdbd;
           }
 

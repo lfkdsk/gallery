@@ -263,7 +263,7 @@
       <div class="grid grid-cols-3 gap-2">
         <div class="pic-area fullscreen-pic">
           <div class="pic-item" />
-          <img id="imgbox" class="nofancy pic-box" src="" />
+          <img id="imgbox" class="nofancy pic-box"/>
         </div>
         <p id="descbox" class="text-center text-xs hint-text"> </p>
       </div>
@@ -301,12 +301,8 @@
           }
           function changeImageWith(imgLink) {
             imageBox.src = imgLink; //替换图片
-            var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
-            imageFancy.setAttribute("href", imgLink);
-            var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
-            if (fancyBoxImage !== undefined) {
-              fancyBoxImage.src = imgLink;
-            }
+            // var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
+            // imageFancy.setAttribute("href", imgLink);
             // descBox.text(desc);
             // updateParams(name);
           }
