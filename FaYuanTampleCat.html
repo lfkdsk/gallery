@@ -132,6 +132,8 @@
   
   <script src="/gallery/js/jquery.min.js"></script>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
   <!--Comment-->
   
   <!--Vercel Audiences Analytics-->
@@ -256,7 +258,112 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/1.美丽黑猫.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/2.黑猫吃草.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/3.优雅.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/4.呆.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/5.猫球.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/6.大佬.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/7.看看.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/8.另一个BRO.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/9.左右野马分鬃.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/10.😳.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/11.小王子.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/12.法源寺山门.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/13.钟楼.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/14.脊兽.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/15.廊角.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/16.廊角2.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/17.廊角3.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/18.脊兽2.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/19.脊兽3.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/20.初荷.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/21.鼓楼.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/22.陶然亭荷花JPG.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/23.陶然亭一角.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/24.陶然亭.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/25.浸月亭.jpg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
+
+<section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
       <div class="pic-area fullscreen-pic">
@@ -271,11 +378,14 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="1.美丽黑猫" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/1.美丽黑猫.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/1.美丽黑猫.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/1.美丽黑猫.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -285,8 +395,10 @@
           <a class="album-item lazy" id="1"
             name="2.黑猫吃草" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/2.黑猫吃草.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/2.黑猫吃草.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/2.黑猫吃草.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -296,8 +408,10 @@
           <a class="album-item lazy" id="2"
             name="3.优雅" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/3.优雅.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/3.优雅.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/3.优雅.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -307,8 +421,10 @@
           <a class="album-item lazy" id="3"
             name="4.呆" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/4.呆.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/4.呆.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/4.呆.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -318,8 +434,10 @@
           <a class="album-item lazy" id="4"
             name="5.猫球" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/5.猫球.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/5.猫球.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/5.猫球.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -329,8 +447,10 @@
           <a class="album-item lazy" id="5"
             name="6.大佬" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/6.大佬.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/6.大佬.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/6.大佬.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -340,8 +460,10 @@
           <a class="album-item lazy" id="6"
             name="7.看看" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/7.看看.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/7.看看.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/7.看看.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -351,8 +473,10 @@
           <a class="album-item lazy" id="7"
             name="8.另一个BRO" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/8.另一个BRO.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/8.另一个BRO.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/8.另一个BRO.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -362,8 +486,10 @@
           <a class="album-item lazy" id="8"
             name="9.左右野马分鬃" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/9.左右野马分鬃.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/9.左右野马分鬃.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/9.左右野马分鬃.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -373,8 +499,10 @@
           <a class="album-item lazy" id="9"
             name="10.😳" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/10.😳.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/10.😳.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/10.😳.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -384,8 +512,10 @@
           <a class="album-item lazy" id="10"
             name="11.小王子" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/11.小王子.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/11.小王子.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/11.小王子.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -395,8 +525,10 @@
           <a class="album-item lazy" id="11"
             name="12.法源寺山门" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/12.法源寺山门.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/12.法源寺山门.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/12.法源寺山门.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -406,8 +538,10 @@
           <a class="album-item lazy" id="12"
             name="13.钟楼" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/13.钟楼.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/13.钟楼.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/13.钟楼.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -417,8 +551,10 @@
           <a class="album-item lazy" id="13"
             name="14.脊兽" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/14.脊兽.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/14.脊兽.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/14.脊兽.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -428,8 +564,10 @@
           <a class="album-item lazy" id="14"
             name="15.廊角" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/15.廊角.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/15.廊角.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/15.廊角.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -439,8 +577,10 @@
           <a class="album-item lazy" id="15"
             name="16.廊角2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/16.廊角2.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/16.廊角2.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/16.廊角2.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -450,8 +590,10 @@
           <a class="album-item lazy" id="16"
             name="17.廊角3" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/17.廊角3.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/17.廊角3.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/17.廊角3.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -461,8 +603,10 @@
           <a class="album-item lazy" id="17"
             name="18.脊兽2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/18.脊兽2.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/18.脊兽2.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/18.脊兽2.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -472,8 +616,10 @@
           <a class="album-item lazy" id="18"
             name="19.脊兽3" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/19.脊兽3.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/19.脊兽3.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/19.脊兽3.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -483,8 +629,10 @@
           <a class="album-item lazy" id="19"
             name="20.初荷" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/20.初荷.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/20.初荷.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/20.初荷.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -494,8 +642,10 @@
           <a class="album-item lazy" id="20"
             name="21.鼓楼" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/21.鼓楼.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/21.鼓楼.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/21.鼓楼.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -505,8 +655,10 @@
           <a class="album-item lazy" id="21"
             name="22.陶然亭荷花JPG" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/22.陶然亭荷花JPG.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/22.陶然亭荷花JPG.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/22.陶然亭荷花JPG.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -516,8 +668,10 @@
           <a class="album-item lazy" id="22"
             name="23.陶然亭一角" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/23.陶然亭一角.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/23.陶然亭一角.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/23.陶然亭一角.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -527,8 +681,10 @@
           <a class="album-item lazy" id="23"
             name="24.陶然亭" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/24.陶然亭.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/24.陶然亭.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/24.陶然亭.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -538,8 +694,10 @@
           <a class="album-item lazy" id="24"
             name="25.浸月亭" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/25.浸月亭.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/25.浸月亭.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/25.浸月亭.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -549,6 +707,7 @@
           <a class="album-item lazy" id="25"
             name="26.猫头鹰isWatchingYou" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg"
             desc="  - · -  "
+            share="FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/26.猫头鹰isWatchingYou.webp"
             aria-label="the photo 25"></a>
           
@@ -559,9 +718,13 @@
       <div class="album-info-main">
         <div class="album-info-btm">
           
-            <div class="album-location">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=FaYuanTampleCat">MAP: [39.88426667153332, 116.37003452666642]
-            
+            <div class="album-location album-tool">
+              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=FaYuanTampleCat">MAP: [39.88426667153332, 116.37003452666642]</a>
+            </div>
+          
+          <div class="album-share album-tool">
+            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+          </div>
         </div>        
         <div class="album-title">北京 · 法源寺 · 陶然亭 · 拍猫</div>
         <span class="album-subtitle">
@@ -599,85 +762,6 @@
     </div>
   </div>
   
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.jpg" as="image" />  
-    
       </div>
       <script>
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
@@ -707,6 +791,7 @@
           var name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           imageBox.src = imgLink; //替换图片
+          imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
@@ -731,6 +816,9 @@
         const len = +'26'
         if (name !== "" && name !== null) {
           changeImageWithName(name)
+        } else {
+          var value = $(`#0`)[0];
+          imageBox.setAttribute("share", value.getAttribute('share'));
         }
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -757,7 +845,36 @@
             imgno = 0;
             cheangeImageInSelector();
           };
+        };
+        function copyToClipboard(content) {
+          toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          if (window.isSecureContext && navigator.clipboard) {
+            navigator.clipboard.writeText(content);
+            toastr.info('Copy single url into Clipboard.');
+          } else {
+            toastr.info('Please check your clipboard write permission.')
+          }
         }
+        $("#share").on('click', function() {
+          var imageBox = document.getElementById("imgbox"); 
+          copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
+        });
       </script>
       <style>
         body {
@@ -819,7 +936,7 @@
         }
 
 
-        .album-location {
+        .album-tool {
           display: inline-flex;
           font-size: .8em;
           color: #71afdd;
@@ -833,6 +950,7 @@
         }
 
         .album-item {
+          background-color: black;
           aspect-ratio: 1 / 1;
           min-height: 100px;
           min-width: 100px;
@@ -912,6 +1030,14 @@
           .hint-text {
             color: white;
             opacity: 80%;
+          }
+
+          .pic-item {
+            background-color: grey;
+          }
+
+          .album-item {
+            background-color: grey;
           }
         }
 

@@ -132,6 +132,8 @@
   
   <script src="/gallery/js/jquery.min.js"></script>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
   <!--Comment-->
   
   <!--Vercel Audiences Analytics-->
@@ -256,7 +258,56 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1278.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1279.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1287.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1288.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1293.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1294.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1296.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1301.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1303.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1307.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1309.webp" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
+
+<section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
       <div class="pic-area fullscreen-pic">
@@ -271,11 +322,14 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF1278" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1278.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1278.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1278.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -285,8 +339,10 @@
           <a class="album-item lazy" id="1"
             name="DSCF1279" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1279.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1279.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1279.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -296,8 +352,10 @@
           <a class="album-item lazy" id="2"
             name="DSCF1287" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1287.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1287.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1287.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -307,8 +365,10 @@
           <a class="album-item lazy" id="3"
             name="DSCF1288" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1288.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1288.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1288.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -318,8 +378,10 @@
           <a class="album-item lazy" id="4"
             name="DSCF1293" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1293.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1293.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1293.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -329,8 +391,10 @@
           <a class="album-item lazy" id="5"
             name="DSCF1294" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1294.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1294.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1294.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -340,8 +404,10 @@
           <a class="album-item lazy" id="6"
             name="DSCF1296" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1296.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1296.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1296.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -351,8 +417,10 @@
           <a class="album-item lazy" id="7"
             name="DSCF1301" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1301.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1301.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1301.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -362,8 +430,10 @@
           <a class="album-item lazy" id="8"
             name="DSCF1303" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1303.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1303.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1303.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -373,8 +443,10 @@
           <a class="album-item lazy" id="9"
             name="DSCF1307" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1307.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1307.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1307.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -384,8 +456,10 @@
           <a class="album-item lazy" id="10"
             name="DSCF1309" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1309.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1309.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1309.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -395,6 +469,7 @@
           <a class="album-item lazy" id="11"
             name="DSCF1315" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp"
             desc="  - · -  "
+            share="JAPAN-YOKOHAMA/DSCF1315.webp"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-YOKOHAMA/DSCF1315.webp"
             aria-label="the photo 11"></a>
           
@@ -405,9 +480,13 @@
       <div class="album-info-main">
         <div class="album-info-btm">
           
-            <div class="album-location">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=JAPAN-YOKOHAMA">MAP: [35.45307576603131, 139.64422609358917]
-            
+            <div class="album-location album-tool">
+              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=JAPAN-YOKOHAMA">MAP: [35.45307576603131, 139.64422609358917]</a>
+            </div>
+          
+          <div class="album-share album-tool">
+            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+          </div>
         </div>        
         <div class="album-title">YOKOHAMA</div>
         <span class="album-subtitle">
@@ -427,43 +506,6 @@
     </div>
   </div>
   
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-YOKOHAMA/DSCF1315.webp" as="image" />  
-    
       </div>
       <script>
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
@@ -493,6 +535,7 @@
           var name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           imageBox.src = imgLink; //替换图片
+          imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
@@ -517,6 +560,9 @@
         const len = +'12'
         if (name !== "" && name !== null) {
           changeImageWithName(name)
+        } else {
+          var value = $(`#0`)[0];
+          imageBox.setAttribute("share", value.getAttribute('share'));
         }
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -543,7 +589,36 @@
             imgno = 0;
             cheangeImageInSelector();
           };
+        };
+        function copyToClipboard(content) {
+          toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          if (window.isSecureContext && navigator.clipboard) {
+            navigator.clipboard.writeText(content);
+            toastr.info('Copy single url into Clipboard.');
+          } else {
+            toastr.info('Please check your clipboard write permission.')
+          }
         }
+        $("#share").on('click', function() {
+          var imageBox = document.getElementById("imgbox"); 
+          copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
+        });
       </script>
       <style>
         body {
@@ -605,7 +680,7 @@
         }
 
 
-        .album-location {
+        .album-tool {
           display: inline-flex;
           font-size: .8em;
           color: #71afdd;
@@ -619,6 +694,7 @@
         }
 
         .album-item {
+          background-color: black;
           aspect-ratio: 1 / 1;
           min-height: 100px;
           min-width: 100px;
@@ -698,6 +774,14 @@
           .hint-text {
             color: white;
             opacity: 80%;
+          }
+
+          .pic-item {
+            background-color: grey;
+          }
+
+          .album-item {
+            background-color: grey;
           }
         }
 

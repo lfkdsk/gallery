@@ -132,6 +132,8 @@
   
   <script src="/gallery/js/jquery.min.js"></script>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
   <!--Comment-->
   
   <!--Vercel Audiences Analytics-->
@@ -256,7 +258,112 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/1.山门.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/2.智化门.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/3.鼓楼.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/4.往来成古今.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/5.智化殿牌匾.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/6.浮图.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/7.雕刻.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/8.浮雕全景.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/9.脊.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/10.藻井.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/11.藻井.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/12.全景.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/13.韦陀.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/14.仰拍万佛阁三层.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/15.帝释天.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/16.帝释天侧拍.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/17.全景.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/18.大梵天.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/19.如来佛.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/20.帝释天头部细节.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/21.万佛阁内饰.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/22.梵天衣决.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/23.基座细节.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/24.大梵天头部细节.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/25.房内藻井.jpeg" as="image" />  
+
+  
+  
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
+
+<section class="pjax-area">
   <div class="content-area post-album default-content-area">
     <div class="grid grid-cols-3 gap-2">
       <div class="pic-area default-pic">
@@ -271,11 +378,14 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="1.山门" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/1.山门.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO160 SS443/50 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/1.山门.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/1.山门.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -285,8 +395,10 @@
           <a class="album-item lazy" id="1"
             name="2.智化门" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/2.智化门.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO160 SS203/25 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/2.智化门.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/2.智化门.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -296,8 +408,10 @@
           <a class="album-item lazy" id="2"
             name="3.鼓楼" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/3.鼓楼.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO160 SS161/20 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/3.鼓楼.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/3.鼓楼.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -307,8 +421,10 @@
           <a class="album-item lazy" id="3"
             name="4.往来成古今" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/4.往来成古今.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO200 SS15/2 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/4.往来成古今.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/4.往来成古今.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -318,8 +434,10 @@
           <a class="album-item lazy" id="4"
             name="5.智化殿牌匾" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/5.智化殿牌匾.jpeg"
             desc=" FUJIFILM X-S20 F9/2 ISO800 SS681/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/5.智化殿牌匾.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/5.智化殿牌匾.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -329,8 +447,10 @@
           <a class="album-item lazy" id="5"
             name="6.浮图" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/6.浮图.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS78/25 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/6.浮图.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/6.浮图.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -340,8 +460,10 @@
           <a class="album-item lazy" id="6"
             name="7.雕刻" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/7.雕刻.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS387/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/7.雕刻.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/7.雕刻.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -351,8 +473,10 @@
           <a class="album-item lazy" id="7"
             name="8.浮雕全景" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/8.浮雕全景.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS33/10 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/8.浮雕全景.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/8.浮雕全景.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -362,8 +486,10 @@
           <a class="album-item lazy" id="8"
             name="9.脊" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/9.脊.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS117/50 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/9.脊.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/9.脊.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -373,8 +499,10 @@
           <a class="album-item lazy" id="9"
             name="10.藻井" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/10.藻井.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS9/4 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/10.藻井.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/10.藻井.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -384,8 +512,10 @@
           <a class="album-item lazy" id="10"
             name="11.藻井" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/11.藻井.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS273/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/11.藻井.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/11.藻井.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -395,8 +525,10 @@
           <a class="album-item lazy" id="11"
             name="12.全景" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/12.全景.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS51/20 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/12.全景.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/12.全景.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -406,8 +538,10 @@
           <a class="album-item lazy" id="12"
             name="13.韦陀" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/13.韦陀.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS139/50 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/13.韦陀.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/13.韦陀.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -417,8 +551,10 @@
           <a class="album-item lazy" id="13"
             name="14.仰拍万佛阁三层" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/14.仰拍万佛阁三层.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO500 SS33/5 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/14.仰拍万佛阁三层.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/14.仰拍万佛阁三层.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -428,8 +564,10 @@
           <a class="album-item lazy" id="14"
             name="15.帝释天" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/15.帝释天.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS397/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/15.帝释天.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/15.帝释天.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -439,8 +577,10 @@
           <a class="album-item lazy" id="15"
             name="16.帝释天侧拍" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/16.帝释天侧拍.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS207/50 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/16.帝释天侧拍.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/16.帝释天侧拍.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -450,8 +590,10 @@
           <a class="album-item lazy" id="16"
             name="17.全景" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/17.全景.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS101/25 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/17.全景.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/17.全景.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -461,8 +603,10 @@
           <a class="album-item lazy" id="17"
             name="18.大梵天" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/18.大梵天.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS18/5 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/18.大梵天.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/18.大梵天.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -472,8 +616,10 @@
           <a class="album-item lazy" id="18"
             name="19.如来佛" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/19.如来佛.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS383/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/19.如来佛.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/19.如来佛.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -483,8 +629,10 @@
           <a class="album-item lazy" id="19"
             name="20.帝释天头部细节" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/20.帝释天头部细节.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS63/25 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/20.帝释天头部细节.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/20.帝释天头部细节.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -494,8 +642,10 @@
           <a class="album-item lazy" id="20"
             name="21.万佛阁内饰" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/21.万佛阁内饰.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS9/4 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/21.万佛阁内饰.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/21.万佛阁内饰.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -505,8 +655,10 @@
           <a class="album-item lazy" id="21"
             name="22.梵天衣决" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/22.梵天衣决.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS14/5 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/22.梵天衣决.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/22.梵天衣决.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -516,8 +668,10 @@
           <a class="album-item lazy" id="22"
             name="23.基座细节" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/23.基座细节.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS319/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/23.基座细节.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/23.基座细节.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -527,8 +681,10 @@
           <a class="album-item lazy" id="23"
             name="24.大梵天头部细节" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/24.大梵天头部细节.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS167/50 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/24.大梵天头部细节.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/24.大梵天头部细节.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -538,8 +694,10 @@
           <a class="album-item lazy" id="24"
             name="25.房内藻井" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/25.房内藻井.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO800 SS159/100 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/25.房内藻井.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/25.房内藻井.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -549,6 +707,7 @@
           <a class="album-item lazy" id="25"
             name="26.万佛阁二层" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg"
             desc=" FUJIFILM X-S20 F4 ISO500 SS371/50 XF16-80mmF4 R OIS WR  "
+            share="ZhiHuaTample/26.万佛阁二层.jpeg"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//ZhiHuaTample/26.万佛阁二层.webp"
             aria-label="the photo 25"></a>
           
@@ -559,9 +718,13 @@
       <div class="album-info-main">
         <div class="album-info-btm">
           
-            <div class="album-location">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=ZhiHuaTample">MAP: [39.91721676953545, 116.43230954016073]
-            
+            <div class="album-location album-tool">
+              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=ZhiHuaTample">MAP: [39.91721676953545, 116.43230954016073]</a>
+            </div>
+          
+          <div class="album-share album-tool">
+            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+          </div>
         </div>        
         <div class="album-title">北京 · 智化寺</div>
         <span class="album-subtitle">
@@ -581,85 +744,6 @@
     </div>
   </div>
   
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-  
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-    
       </div>
       <script>
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
@@ -689,6 +773,7 @@
           var name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           imageBox.src = imgLink; //替换图片
+          imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
@@ -713,6 +798,9 @@
         const len = +'26'
         if (name !== "" && name !== null) {
           changeImageWithName(name)
+        } else {
+          var value = $(`#0`)[0];
+          imageBox.setAttribute("share", value.getAttribute('share'));
         }
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -739,7 +827,36 @@
             imgno = 0;
             cheangeImageInSelector();
           };
+        };
+        function copyToClipboard(content) {
+          toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          if (window.isSecureContext && navigator.clipboard) {
+            navigator.clipboard.writeText(content);
+            toastr.info('Copy single url into Clipboard.');
+          } else {
+            toastr.info('Please check your clipboard write permission.')
+          }
         }
+        $("#share").on('click', function() {
+          var imageBox = document.getElementById("imgbox"); 
+          copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
+        });
       </script>
       <style>
         body {
@@ -801,7 +918,7 @@
         }
 
 
-        .album-location {
+        .album-tool {
           display: inline-flex;
           font-size: .8em;
           color: #71afdd;
@@ -815,6 +932,7 @@
         }
 
         .album-item {
+          background-color: black;
           aspect-ratio: 1 / 1;
           min-height: 100px;
           min-width: 100px;
@@ -894,6 +1012,14 @@
           .hint-text {
             color: white;
             opacity: 80%;
+          }
+
+          .pic-item {
+            background-color: grey;
+          }
+
+          .album-item {
+            background-color: grey;
           }
         }
 

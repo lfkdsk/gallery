@@ -22,7 +22,7 @@
   <meta name="author" content="lfkdsk">
   
   <!--Open Graph Title-->
-  <meta property="og:title" content="照片集" />
+  <meta property="og:title" content="Map-照片集" />
   <!--Open Graph Description-->
   <meta property="og:description" content="拿起相机，认真思考" />
   <!--Open Graph Site Name-->
@@ -38,7 +38,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Title -->
   
-  <title>照片集 - 照片集</title>
+  <title>Map-照片集 - 照片集</title>
   <!-- 添加到主屏后的标题（iOS 6 新增） -->
   <meta name="apple-mobile-web-app-title" content="照片集">
   <!-- 是否启用 WebApp 全屏模式 -->
@@ -139,6 +139,8 @@
   
   <script src="/gallery/js/jquery.min.js"></script>
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
   <!--Comment-->
   
   <!--Vercel Audiences Analytics-->
@@ -423,7 +425,6 @@
     var first = null;
     var firstMark = null;
     for (const key of keys) {
-      console.log(key)
       var v = album_data[key];
       // jump for non-album key.
       if (album !== "" && album !== null) {
@@ -434,7 +435,6 @@
       }
       var file = v.cover;
       var cover = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + file.substr(0, file.lastIndexOf(".")) + ".webp"
-      console.log(v)
       if (v.hasOwnProperty('location')) {
         // set center view.
         if (first === null) {
@@ -458,7 +458,6 @@
     }
     keys = Object.keys(single_data)
     for (const key of keys) {
-      console.log(key)
       var v = single_data[key];
       var file = v.url;
       if (album !== "" && album !== null) {
