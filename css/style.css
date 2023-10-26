@@ -1218,9 +1218,6 @@ div.close_btn_red {
 i.mdui-icon {
     color: #bdbdbd !important;
   }
-  img {
-    filter: brightness(0.8);
-  }
   .itp-drawer-description,
 .itp-index-header-description {
     color: #e3e3e3;
