@@ -32,6 +32,9 @@ nav:
   归档: 
     link: https://lfkdsk.github.io
     icon: inbox
-
+  随机:
+    link: /gallery/random
+    icon: unsplash
+    
 thumbnail_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/
 base_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master
