@@ -140,6 +140,7 @@
   
   <!--umami analytics-->
   
+  <script src="js/tools.js"></script>
   <!--Howxm Analytics-->
   
   
@@ -653,24 +654,6 @@
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
         var descBox = $("#descbox");
         imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
-        function getParam(key) {
-          const queryString = window.location.search;
-          console.log(queryString);
-          const urlParams = new URLSearchParams(queryString);
-          const id = urlParams.get(key)
-          console.log(id)
-          return id
-        }
-        function replaceQueryParam(param, newval, search) {
-          var regex = new RegExp("([?;&])" + param + "[^&;]*[;&]?");
-          var query = search.replace(regex, "$1").replace(/&$/, '');
-          return (query.length > 2 ? query + "&" : "?") + (newval ? param + "=" + newval : '');
-        }
-        function updateParams(name) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('name', name);
-          window.history.replaceState(null, null, url); // or pushState
-        }
         function changeImageWith(target) {
           imgno = target.getAttribute('id'); 
           var imgLink = target.getAttribute('rel');
@@ -732,31 +715,6 @@
             cheangeImageInSelector();
           };
         };
-        function copyToClipboard(content) {
-          toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-          }
-          if (window.isSecureContext && navigator.clipboard) {
-            navigator.clipboard.writeText(content);
-            toastr.success('Copy single url into Clipboard.');
-          } else {
-            toastr.info('Please check your clipboard write permission.')
-          }
-        }
         $("#share").on('click', function() {
           var imageBox = document.getElementById("imgbox"); 
           copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));

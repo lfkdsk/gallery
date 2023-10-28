@@ -27,6 +27,7 @@ var appDaily = {
     header;
   },
 };
+
 function scrollto(comment) {
   document.querySelector('#comment').scrollIntoView(true);
 }

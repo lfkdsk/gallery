@@ -140,6 +140,7 @@
   
   <!--umami analytics-->
   
+  <script src="js/tools.js"></script>
   <!--Howxm Analytics-->
   
   
@@ -308,7 +309,7 @@
           
           <a class="album-item lazy" id="2"
             name="IMG_7586.4e91my1ve140" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7586.4e91my1ve140.JPG"
-            desc=" Apple iPhone 12 Pro F12/5 ISO1600 SS11867/3093 iPhone 12 Pro back camera 1.54mm f/2.4  "
+            desc=" Apple iPhone 12 Pro 1/14s F12/5 ISO 1600 iPhone 12 Pro back camera 1.54mm f/2.4  "
             share="Japan202307/IMG_7586.4e91my1ve140.JPG"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7586.4e91my1ve140.webp"
             aria-label="the photo 2"></a>
@@ -334,7 +335,7 @@
           
           <a class="album-item lazy" id="4"
             name="IMG_7628.6hru0awc98s0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7628.6hru0awc98s0.JPG"
-            desc=" Apple iPhone 12 Pro F8/5 ISO40 SS61980/8951 iPhone 12 Pro back camera 4.2mm f/1.6  "
+            desc=" Apple iPhone 12 Pro 1/121s F8/5 ISO 40 iPhone 12 Pro back camera 4.2mm f/1.6  "
             share="Japan202307/IMG_7628.6hru0awc98s0.JPG"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7628.6hru0awc98s0.webp"
             aria-label="the photo 4"></a>
@@ -347,7 +348,7 @@
           
           <a class="album-item lazy" id="5"
             name="IMG_7643.2nv6halko6w0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7643.2nv6halko6w0.JPG"
-            desc=" Apple iPhone 12 Pro F8/5 ISO100 SS61980/8951 iPhone 12 Pro back camera 4.2mm f/1.6  "
+            desc=" Apple iPhone 12 Pro 1/121s F8/5 ISO 100 iPhone 12 Pro back camera 4.2mm f/1.6  "
             share="Japan202307/IMG_7643.2nv6halko6w0.JPG"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7643.2nv6halko6w0.webp"
             aria-label="the photo 5"></a>
@@ -425,7 +426,7 @@
           
           <a class="album-item lazy" id="11"
             name="IMG_7899.6chi3fhm2eo0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7899.6chi3fhm2eo0.JPG"
-            desc=" Apple iPhone 12 Pro F8/5 ISO1000 SS72651/17899 iPhone 12 Pro back camera 4.2mm f/1.6  "
+            desc=" Apple iPhone 12 Pro 1/17s F8/5 ISO 1000 iPhone 12 Pro back camera 4.2mm f/1.6  "
             share="Japan202307/IMG_7899.6chi3fhm2eo0.JPG"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7899.6chi3fhm2eo0.webp"
             aria-label="the photo 11"></a>
@@ -438,7 +439,7 @@
           
           <a class="album-item lazy" id="12"
             name="IMG_7931.1s5e3a0n5bnk" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7931.1s5e3a0n5bnk.JPG"
-            desc=" Apple iPhone 12 Pro F2 ISO400 SS11867/3093 iPhone 12 Pro back camera 6mm f/2  "
+            desc=" Apple iPhone 12 Pro 1/14s F2 ISO 400 iPhone 12 Pro back camera 6mm f/2  "
             share="Japan202307/IMG_7931.1s5e3a0n5bnk.JPG"
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7931.1s5e3a0n5bnk.webp"
             aria-label="the photo 12"></a>
@@ -636,24 +637,6 @@
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
         var descBox = $("#descbox");
         imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
-        function getParam(key) {
-          const queryString = window.location.search;
-          console.log(queryString);
-          const urlParams = new URLSearchParams(queryString);
-          const id = urlParams.get(key)
-          console.log(id)
-          return id
-        }
-        function replaceQueryParam(param, newval, search) {
-          var regex = new RegExp("([?;&])" + param + "[^&;]*[;&]?");
-          var query = search.replace(regex, "$1").replace(/&$/, '');
-          return (query.length > 2 ? query + "&" : "?") + (newval ? param + "=" + newval : '');
-        }
-        function updateParams(name) {
-          const url = new URL(window.location.href);
-          url.searchParams.set('name', name);
-          window.history.replaceState(null, null, url); // or pushState
-        }
         function changeImageWith(target) {
           imgno = target.getAttribute('id'); 
           var imgLink = target.getAttribute('rel');
@@ -715,31 +698,6 @@
             cheangeImageInSelector();
           };
         };
-        function copyToClipboard(content) {
-          toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-          }
-          if (window.isSecureContext && navigator.clipboard) {
-            navigator.clipboard.writeText(content);
-            toastr.success('Copy single url into Clipboard.');
-          } else {
-            toastr.info('Please check your clipboard write permission.')
-          }
-        }
         $("#share").on('click', function() {
           var imageBox = document.getElementById("imgbox"); 
           copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
