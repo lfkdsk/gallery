@@ -268,7 +268,7 @@
   <section class="pjax-area">
     <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
-        <div class="pic-area fullscreen-pic">
+        <div id="all-pic" class="pic-area fullscreen-pic">
             <div class="pic-item" />
             <img id="imgbox" class="pic-box" />
         </div>
@@ -285,6 +285,7 @@
                 <div style="padding-left: 10px; display: flex; flex-direction: column; justify-content: center;">
                     <div id="exif-maker"></div>
                     <div id="exif-lens"></div>
+                    <div id="exif-author"></div>
                 </div>
             </div>
         </div>
@@ -295,8 +296,11 @@
     </div>
     <div id="tools-wrapper" class="album-info fullscreen-info">
         <p id="descbox" class="text-center text-xs hint-text"> </p>
-        <button id="nextbox" class="album-next-one">NEXT ONE</button>
-        <button id="copybox" class="album-next-one">COPY URL</button>
+        <div style="display: flex; flex-direction: row;">
+            <button id="copybox" class="album-next-one">COPY URL</button>
+            <button id="nextbox" class="album-next-one">NEXT ONE</button>
+            <button id="downloadbox" class="album-next-one">DOWNLOAD</button>    
+        </div>
         <div class="album-info-main">
         </div>
     </div>
@@ -307,6 +311,7 @@
     }
 
     #nextbox,
+    #downloadbox,
     #copybox {
         margin-top: 10px;
     }
@@ -328,7 +333,7 @@
         color: gray;
     }
 
-    #exif-lens {
+    #exif-lens, #exif-author {
         font-weight: lighter;
         color: gray;
     }
@@ -599,7 +604,6 @@
             var exifLogo = $("#exif-maker-logo");
             var normalWrapper = $("#normal-wrapper");
             var normalData = $("#no-exif-data");
-
             const name = getParam('name');
             var imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + name;
             $("#tools-wrapper").hide();
@@ -650,6 +654,7 @@
                     exifParam.text(v.exif_data['EXIF ISOSpeedRatings'] + ' ' + v.exif_data['EXIF FNumber'] + ' ' + v.exif_data['EXIF ExposureTime']);
                 }
             }
+
             searchPhoto();
         </script>
 </section>
