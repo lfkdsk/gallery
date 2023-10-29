@@ -639,6 +639,7 @@
                     return;
                 }
                 var imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + v.path;
+                imageBox.src = '';
                 imageBox.src = imgLink;
                 var imageFancy = imageBox.parentElement;
                 imageFancy.setAttribute("href", imgLink);
