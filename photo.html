@@ -282,14 +282,17 @@
                     <img id="exif-maker-logo" class="nofancy"></img>
                 </div>
                 <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
-                <div style="padding-left: 10px; display: flex; flex-direction: column; justify-content: center;">
-                    <div id="exif-maker"></div>
-                    <div id="exif-lens"></div>
-                    <div id="exif-author"></div>
+                <div style="padding-left: 10px; position: relative;">
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                        <div id="exif-maker"></div>
+                        <div id="exif-lens"></div>
+                        <div id="exif-author"></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="normal-wrapper" class="pic-wrapper" style="height: 80px; justify-content: center; flex-direction: column;">
+        <div id="normal-wrapper" class="pic-wrapper"
+            style="height: 80px; justify-content: center; flex-direction: column;">
             <div id="no-exif-data" style="text-align: center; font-size: large; font-weight: lighter;">
             </div>
         </div>
@@ -299,7 +302,7 @@
         <div style="display: flex; flex-direction: row;">
             <button id="copybox" class="album-next-one">COPY URL</button>
             <button id="nextbox" class="album-next-one">NEXT ONE</button>
-            <button id="downloadbox" class="album-next-one">DOWNLOAD</button>    
+            <button id="downloadbox" class="album-next-one">DOWNLOAD</button>
         </div>
         <div class="album-info-main">
         </div>
@@ -308,6 +311,10 @@
 <style>
     body {
         background-color: #fff;
+    }
+
+    .screenshot {
+        display: flex;
     }
 
     #nextbox,
@@ -333,13 +340,10 @@
         color: gray;
     }
 
-    #exif-lens, #exif-author {
+    #exif-lens,
+    #exif-author {
         font-weight: lighter;
         color: gray;
-    }
-
-    .itp-footer {
-        margin-top: 15vh;
     }
 
     .pic-wrapper {
@@ -460,6 +464,7 @@
             padding: 0.3em 0.6em;
             margin-left: 4px;
         }
+
         .content-area {
             max-width: 100vw;
         }
@@ -483,23 +488,28 @@
         }
 
         .pic-wrapper {
-            padding: 10px 0px;
+            padding: 4px 0px;
         }
 
         #exif-param {
-            font-size: .6em;
+            font-size: .5rem;
         }
+
         #exif-date {
-            font-size: .8em;
+            font-size: .6rem;
         }
+
         #exif-maker {
-            font-size: .4em;
+            font-size: .5rem;
         }
-        #exif-lens, #exif-author {
-            font-size: .6em;
+
+        #exif-lens,
+        #exif-author {
+            font-size: .5rem;
         }
+
         #exif-maker-logo {
-            height: 40px;
+            height: 30px;
         }
     }
 
@@ -537,6 +547,11 @@
             max-height: 80vh;
             max-width: 100vh;
         }
+
+        .itp-footer {
+            margin-top: 15vh;
+        }
+
     }
 
     @media (prefers-color-scheme: dark) {

@@ -46,6 +46,7 @@ function getParam(key) {
 
   function simulateDownloadImageClick(uri, filename) {
     var link = document.createElement('a');
+    link.setAttribute("class", "screenshot");
     if (typeof link.download !== 'string') {
       window.open(uri);
     } else {
