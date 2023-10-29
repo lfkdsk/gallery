@@ -280,7 +280,7 @@
             </div>
             <div class="exif-right" style="display: flex; flex-direction:row; justify-content: start;">
                 <div style="display: flex; justify-content: center; flex-direction: column;">
-                    <img id="exif-maker-logo" class="nofancy"></img>
+                    <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
                 </div>
                 <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
                 <div style="padding-left: 10px; position: relative;">
@@ -694,6 +694,11 @@
                     simulateDownloadImageClick(canvas.toDataURL('image/png'), name + '.png');
                 });
             });        
+            const widget = getParam("widget");
+            if (widget !== null && widget === "true") {
+                var node = $('#all-pic');
+                node.attr('style', 'padding-top: 50px; padding-bottom: 50px;')
+            }
         </script>
 </section>
   <!-- Footer -->
