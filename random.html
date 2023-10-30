@@ -657,23 +657,7 @@
                     wrapper.show();
                     normalWrapper.hide();
                 }
-                const maker = v.exif_data['Image Make'];
-                switch (maker) {
-                    case 'Apple': {
-                        exifLogo.attr('src', 'img/apple.png');
-                        break;
-                    }
-                    default:
-                    case 'FUJIFILM': {
-                        exifLogo.attr('src', 'img/fujifilm.png');
-                        break;
-                    }
-                }
-                exifLens.text(v.exif_data['EXIF LensModel']);
-                exifMaker.text(v.exif_data['Image Make'] + ' ' + v.exif_data['Image Model'])
-                exifDate.text(v.exif_data['EXIF DateTimeOriginal']);
-                exifAuthor.text("By " + "lfkdsk")
-                exifParam.text(v.exif_data['EXIF ISOSpeedRatings'] + ' ' + v.exif_data['EXIF FNumber'] + ' ' + v.exif_data['EXIF ExposureTime']);
+                wrapperData(v, "lfkdsk");
             }
             function copyLink() {
                 if (value !== null) {
@@ -686,15 +670,15 @@
             download.click(function () {
                 var node = document.getElementById('all-pic');
                 html2canvas(node, {
-                    useCORS: true, 
+                    useCORS: true,
                     allowTaint: true,
-                    scrollX: 0, 
+                    scrollX: 0,
                     scrollY: 0,
                 }).then(function (canvas) {
                     // document.body.appendChild(canvas)
                     simulateDownloadImageClick(canvas.toDataURL('image/png'), name + '.png');
                 });
-            });        
+            });
             const widget = getParam("widget");
             if (widget !== null && widget === "true") {
                 var node = $('#all-pic');
