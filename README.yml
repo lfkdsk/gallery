@@ -1,9 +1,16 @@
 颐和园 · 再探:
   url: YuanMingYuanSec
-  date: 2020-10-28
+  date: 2023-10-28
   style: fullscreen
   cover: YuanMingYuanSec/DSCF3422.webp
   location: [39.99998634836399, 116.27549010918474]
+
+中关村街头:
+  url: BeiJingZhongGuanCun
+  style: fullscreen
+  date: 2023-10-26
+  cover: BeiJingZhongGuanCun/DSCF3289.webp
+  location: [39.97861540629632, 116.31538726842278]
   
 刻舟求猫:
   url: KeZhouQiuCat
