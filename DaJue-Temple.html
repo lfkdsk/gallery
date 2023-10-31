@@ -671,7 +671,7 @@
       </div>
     </div>
   </div>
-  
+  <!-- 
     
     
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple/0.webp" as="image" />  
@@ -783,7 +783,7 @@
     
     
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple/DSCF1726.webp" as="image" />  
-  
+   -->
   
       </div>
       <script>
@@ -795,6 +795,7 @@
           var imgLink = target.getAttribute('rel');
           var name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
+          imageBox.src = '';
           imageBox.src = imgLink; //替换图片
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
@@ -1013,11 +1014,11 @@
           }
 
           .pic-item {
-            background-color: grey;
+            background-color: black;
           }
 
           .album-item {
-            background-color: grey;
+            background-color: black;
           }
         }
 
