@@ -265,7 +265,8 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  <script src="js/html2canvas.js"></script>
+<section class="pjax-area">
     <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
         <div id="all-pic" class="pic-area fullscreen-pic">
@@ -626,8 +627,21 @@
             var normalData = $("#no-exif-data");
             const name = getParam('name');
             var imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + name;
-            $("#tools-wrapper").hide();
-
+            // hide useless button
+            $("#tools-wrapper").show();
+            $("#copybox").hide();
+            $("#nextbox").hide();
+            $("#downloadbox").click(function () {
+                var node = document.getElementById('all-pic');
+                html2canvas(node, {
+                    useCORS: true,
+                    allowTaint: true,
+                    scrollX: 0,
+                    scrollY: 0,
+                }).then(function (canvas) {              
+                    simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+                });
+            });
             function searchPhoto() {
                 if (name === "" || name == null) {
                     return;
