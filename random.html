@@ -298,7 +298,7 @@
             </div>
         </div>
     </div>
-    <div id="tools-wrapper" class="album-info fullscreen-info">
+    <div id="tools-wrapper" class="album-info fullscreen-info" hidden>
         <p id="descbox" class="text-center text-xs hint-text"> </p>
         <div style="display: flex; flex-direction: row;">
             <button id="copybox" class="album-next-one">COPY URL</button>
@@ -611,6 +611,7 @@
     }
 </style>
         <script>
+            $("#tools-wrapper").show();
             var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
             var descBox = $("#descbox");
             var nextBox = $("#nextbox");
@@ -666,7 +667,13 @@
             }
             nextBox.click(nextImage);
             copyBox.click(copyLink);
-            nextImage();
+            nextImage();           
+            const widget = getParam("widget");
+            const daily = getParam("daily");
+            if (widget !== null && widget === "true") {
+                var node = $('#all-pic');
+                node.attr('style', 'padding-top: 60px; padding-bottom:50px')
+            }
             download.click(function () {
                 var node = document.getElementById('all-pic');
                 html2canvas(node, {
@@ -675,15 +682,12 @@
                     scrollX: 0,
                     scrollY: 0,
                 }).then(function (canvas) {
-                    // document.body.appendChild(canvas)
-                    simulateDownloadImageClick(canvas.toDataURL('image/png'), name + '.png');
+                    if (daily !== null && daily === "true") {
+                        name = "download"
+                    }                       
+                    simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
                 });
             });
-            const widget = getParam("widget");
-            if (widget !== null && widget === "true") {
-                var node = $('#all-pic');
-                node.attr('style', 'padding-top: 60px; padding-bottom:50px')
-            }
         </script>
 </section>
   <!-- Footer -->
