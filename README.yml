@@ -135,32 +135,28 @@
 
 Inamuragasaki:
   url: JAPAN-Inamuragasaki
-  date: ''
-  subtitle: 2023
+  date: 2023-09-15
   style: fullscreen
   cover: JAPAN-Inamuragasaki/DSCF1437.webp
   location: [35.302147470364964, 139.52532325690734]
 
 KAMAKURA:
   url: JAPAN-KAMAKURA
-  date: ''
-  subtitle: 2023
+  date: 2023-09-15
   style: fullscreen
   cover: JAPAN-KAMAKURA/DSCF1408.webp
   location: [35.31680571832347, 139.53608752046165]
 
 YOKOHAMA:
   url: JAPAN-YOKOHAMA
-  date: ''
-  subtitle: 2023
+  date: 2023-09-15
   style: fullscreen
   cover: JAPAN-YOKOHAMA/DSCF1296.webp
   location: [35.45307576603131, 139.64422609358917]
 
 We Are Tokyo:
   url: JapanTokyo
-  date: ''
-  subtitle: 2023
+  date: 2023-09-15
   style: fullscreen
   cover: JapanTokyo/DSCF0758.webp
   location: [35.658510734691674, 139.7454328977352]
