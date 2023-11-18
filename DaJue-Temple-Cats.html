@@ -267,14 +267,120 @@
   <!-- Main Content -->
   <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
-    <div class="grid grid-cols-3 gap-2">
-      <div class="pic-area fullscreen-pic">
-        <div class="pic-item" />
-        <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1585.webp" />
+    <div class="grid grid-cols-3">
+      <div class="fullscreen-pic gap-2 wrapper">
+        <div class="pic-area">
+          <div class="pic-item" />
+          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1585.webp" />
+        </div>
+        <div id="exif-wrapper" class="pic-wrapper">
+    <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
+        <div id="exif-param"></div>
+        <div id="exif-date"></div>
+    </div>
+    <div class="exif-right" style="display: flex; flex-direction:row; justify-content: start;">
+        <div style="display: flex; justify-content: center; flex-direction: column;">
+            <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
+        </div>
+        <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
+        <div style="padding-left: 10px; position: relative;">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div id="exif-maker"></div>
+                <div id="exif-lens"></div>
+                <div id="exif-author"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="normal-wrapper" class="pic-wrapper" style="height: 68px; justify-content: center; flex-direction: column;">
+    <div id="no-exif-data" style="text-align: center; font-size: large; font-weight: lighter;">
+    </div>
+</div>
+<style>
+    #exif-maker-logo {
+        text-align: center;
+        vertical-align: baseline;
+        height: 60px;
+    }
+
+    #exif-param {
+        font-weight: bold;
+        font-size: 80%;
+    }
+
+    #exif-maker {
+        font-size: 80%;
+    }
+
+    #exif-date {
+        margin-top: 4px;
+        font-weight: lighter;
+        color: gray;
+        font-size: 80%;
+    }
+
+    #exif-lens,
+    #exif-author {
+        font-weight: lighter;
+        color: gray;
+        font-size: 80%;
+    }
+
+    .pic-wrapper {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 4px 8px;
+    }
+
+    .pic-area {
+        border-style: solid;
+        border-width: thin;
+        border-color: rgb(22, 22, 22);
+    }
+
+    @media (max-width: 768px) {
+        .pic-wrapper {
+            padding: 4px 0px;
+        }        
+
+        #exif-param {
+            font-size: .5rem;
+        }
+
+        #exif-date {
+            font-size: .6rem;
+        }
+
+        #exif-maker {
+            font-size: .5rem;
+        }
+
+        #exif-lens,
+        #exif-author {
+            font-size: .5rem;
+        }
+
+        #exif-maker-logo {
+            height: 30px;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .pic-area {
+            border-style: solid;
+            border-width: thin;
+            background-color: white;
+            border-color: white;
+        }        
+    }
+</style>  
       </div>
-      <p id="descbox" class="text-center text-xs hint-text"> FUJIFILM X-S20 1/180s F4 ISO 800 XF16-80mmF4 R OIS WR  </p>
+      <p id="descbox" class="text-center text-xs hint-text" hidden> FUJIFILM X-S20 1/180s F4 ISO 800 XF16-80mmF4 R OIS WR  </p>
       <div class="album-list flex gap-2">
         
+          
+          
           
           
           
@@ -285,8 +391,11 @@
             name="DSCF1585" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1585.webp"
             desc=" FUJIFILM X-S20 1/180s F4 ISO 800 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1585.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/180s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/180s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 14:45:01","EXIF ExposureTime":"1/180s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1585","path":"DaJue-Temple-Cats/DSCF1585.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1585.webp"
             aria-label="the photo 0"></a>
+          
+          
           
           
           
@@ -298,8 +407,11 @@
             name="DSCF1589" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1589.webp"
             desc=" FUJIFILM X-S20 1/240s F4 ISO 1000 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1589.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/240s F4 ISO 1000 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/240s F4 ISO 1000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 14:45:35","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1589","path":"DaJue-Temple-Cats/DSCF1589.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1589.webp"
             aria-label="the photo 1"></a>
+          
+          
           
           
           
@@ -311,8 +423,11 @@
             name="DSCF1594" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1594.webp"
             desc=" FUJIFILM X-S20 1/240s F4 ISO 400 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1594.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/240s F4 ISO 400 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/240s F4 ISO 400 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 14:46:42","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1594","path":"DaJue-Temple-Cats/DSCF1594.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1594.webp"
             aria-label="the photo 2"></a>
+          
+          
           
           
           
@@ -324,8 +439,11 @@
             name="DSCF1596" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1596.webp"
             desc=" FUJIFILM X-S20 1/180s F4 ISO 500 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1596.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/180s F4 ISO 500 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/180s F4 ISO 500 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 14:47:35","EXIF ExposureTime":"1/180s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1596","path":"DaJue-Temple-Cats/DSCF1596.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1596.webp"
             aria-label="the photo 3"></a>
+          
+          
           
           
           
@@ -337,8 +455,11 @@
             name="DSCF1597" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1597.webp"
             desc=" FUJIFILM X-S20 1/180s F4 ISO 640 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1597.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/180s F4 ISO 640 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/180s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 14:47:38","EXIF ExposureTime":"1/180s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1597","path":"DaJue-Temple-Cats/DSCF1597.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1597.webp"
             aria-label="the photo 4"></a>
+          
+          
           
           
           
@@ -350,8 +471,11 @@
             name="DSCF1640" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1640.webp"
             desc=" FUJIFILM X-S20 1/210s F4 ISO 1600 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1640.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/210s F4 ISO 1600 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/210s F4 ISO 1600 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:10:51","EXIF ExposureTime":"1/210s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 1600","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1640","path":"DaJue-Temple-Cats/DSCF1640.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1640.webp"
             aria-label="the photo 5"></a>
+          
+          
           
           
           
@@ -363,8 +487,11 @@
             name="DSCF1642" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1642.webp"
             desc=" FUJIFILM X-S20 1/220s F4 ISO 1600 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1642.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/220s F4 ISO 1600 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/220s F4 ISO 1600 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:14:56","EXIF ExposureTime":"1/220s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 1600","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1642","path":"DaJue-Temple-Cats/DSCF1642.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1642.webp"
             aria-label="the photo 6"></a>
+          
+          
           
           
           
@@ -376,8 +503,11 @@
             name="DSCF1643" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1643.webp"
             desc=" FUJIFILM X-S20 1/220s F4 ISO 1600 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1643.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/220s F4 ISO 1600 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/220s F4 ISO 1600 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:15:01","EXIF ExposureTime":"1/220s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 1600","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1643","path":"DaJue-Temple-Cats/DSCF1643.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1643.webp"
             aria-label="the photo 7"></a>
+          
+          
           
           
           
@@ -389,8 +519,11 @@
             name="DSCF1673" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1673.webp"
             desc=" FUJIFILM X-S20 1/480s F4 ISO 800 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1673.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/480s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/480s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:35:13","EXIF ExposureTime":"1/480s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1673","path":"DaJue-Temple-Cats/DSCF1673.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1673.webp"
             aria-label="the photo 8"></a>
+          
+          
           
           
           
@@ -402,8 +535,11 @@
             name="DSCF1676" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1676.webp"
             desc=" FUJIFILM X-S20 1/180s F4 ISO 1000 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1676.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/180s F4 ISO 1000 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/180s F4 ISO 1000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:37:24","EXIF ExposureTime":"1/180s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1676","path":"DaJue-Temple-Cats/DSCF1676.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1676.webp"
             aria-label="the photo 9"></a>
+          
+          
           
           
           
@@ -415,8 +551,11 @@
             name="DSCF1680" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1680.webp"
             desc=" FUJIFILM X-S20 1/210s F4 ISO 800 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1680.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/210s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/210s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:39:08","EXIF ExposureTime":"1/210s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1680","path":"DaJue-Temple-Cats/DSCF1680.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1680.webp"
             aria-label="the photo 10"></a>
+          
+          
           
           
           
@@ -428,8 +567,11 @@
             name="DSCF1686" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1686.webp"
             desc=" FUJIFILM X-S20 1/210s F4 ISO 800 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1686.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/210s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/210s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:39:50","EXIF ExposureTime":"1/210s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1686","path":"DaJue-Temple-Cats/DSCF1686.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1686.webp"
             aria-label="the photo 11"></a>
+          
+          
           
           
           
@@ -441,8 +583,11 @@
             name="DSCF1692" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1692.webp"
             desc=" FUJIFILM X-S20 1/240s F4 ISO 800 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1692.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/240s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/240s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:42:35","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1692","path":"DaJue-Temple-Cats/DSCF1692.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1692.webp"
             aria-label="the photo 12"></a>
+          
+          
           
           
           
@@ -454,6 +599,7 @@
             name="DSCF1701" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaJue-Temple-Cats/DSCF1701.webp"
             desc=" FUJIFILM X-S20 1/300s F5 ISO 320 XF16-80mmF4 R OIS WR  "
             share="DaJue-Temple-Cats/DSCF1701.webp"
+            extra='{"desc":"FUJIFILM X-S20 1/300s F5 ISO 320 XF16-80mmF4 R OIS WR ","dir":"DaJue-Temple-Cats","exif":"FUJIFILM X-S20 1/300s F5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:22 15:45:24","EXIF ExposureTime":"1/300s","EXIF FNumber":"F5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1701","path":"DaJue-Temple-Cats/DSCF1701.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaJue-Temple-Cats/DSCF1701.webp"
             aria-label="the photo 13"></a>
           
@@ -465,7 +611,7 @@
         <div class="album-info-btm">
           
             <div class="album-location album-tool">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=DaJue-Temple-Cats">MAP: [40.05227808497262, 116.10656799783511]</a>
+              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=DaJue-Temple-Cats">MAP</a>
             </div>
           
           <div class="album-share album-tool">
@@ -551,12 +697,35 @@
       <script>
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
         var descBox = $("#descbox");
+        var wrapper = $("#exif-wrapper");
+        var exifParam = $("#exif-param");
+        var exifMaker = $("#exif-maker");
+        var exifDate = $("#exif-date");
+        var exifLens = $("#exif-lens");
+        var exifLogo = $("#exif-maker-logo");
+        var exifAuthor = $("#exif-author");
+        var normalWrapper = $("#normal-wrapper");
+        var normalData = $("#no-exif-data");
+
         imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
+        function changeExifData(v) {
+          console.log(Object.keys(v.exif_data))
+          if (Object.keys(v.exif_data).length === 0) {
+            wrapper.hide();
+            normalWrapper.show();
+            normalData.text("Shot By " + "lfkdsk");
+          } else {
+            wrapper.show();
+            normalWrapper.hide();
+            wrapperData(v, "lfkdsk");
+          }
+        }
         function changeImageWith(target) {
           imgno = target.getAttribute('id'); 
           var imgLink = target.getAttribute('rel');
           var name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
+          var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = '';
           imageBox.src = imgLink; //替换图片
           imageBox.setAttribute("share", target.getAttribute('share'));
@@ -568,6 +737,7 @@
           }
           target.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
           descBox.text(desc);
+          changeExifData(v);
           updateParams(name);
         }
         function cheangeImageInSelector() {
@@ -586,8 +756,11 @@
           changeImageWithName(name)
         } else {
           var value = $(`#0`)[0];
+          var v = JSON.parse(value.getAttribute('extra'));
+          changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
         }
+        // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
           if (event.keyCode === 37) {
@@ -688,7 +861,7 @@
         }
 
         .album-list {
-          padding-top: 6px;
+          padding-top: 12px;
           overflow-x: scroll;
         }
 
@@ -708,7 +881,11 @@
 
           .pic-area {
             grid-column: span 3 / span 3;
-            padding: 16px;
+            padding: 8px 8px 0 8px;
+          }
+
+          .default-pic {
+            grid-column: span 3 / span 3;
           }
 
           .album-info {
@@ -723,13 +900,17 @@
           .album-title {
             font-size: 1.5em;
           }
+
+          .wrapper {
+            padding: 8px;
+          }
         }
 
         @media (min-width: 769px) {
           .content-area {
             max-width: 92%;
             margin: 0 auto;
-            padding: 135px 16px 16px 16px;
+            padding: 115px 16px 16px 16px;
           }
 
           .album-article {
@@ -745,9 +926,12 @@
             grid-column: span 2 / span 2;
           }
 
+          .default-pic {
+            grid-column: span 2 / span 2;
+          }
+
           .album-info {
             grid-column: span 1 / span 1;
-            margin-left: 12px;
           }
         }
 

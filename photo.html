@@ -274,29 +274,107 @@
             <img id="imgbox" class="pic-box" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
-            <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
-                <div id="exif-param"></div>
-                <div id="exif-date"></div>
-            </div>
-            <div class="exif-right" style="display: flex; flex-direction:row; justify-content: start;">
-                <div style="display: flex; justify-content: center; flex-direction: column;">
-                    <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
-                </div>
-                <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
-                <div style="padding-left: 10px; position: relative;">
-                    <div style="display: flex; flex-direction: column; justify-content: center;">
-                        <div id="exif-maker"></div>
-                        <div id="exif-lens"></div>
-                        <div id="exif-author"></div>
-                    </div>
-                </div>
+    <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
+        <div id="exif-param"></div>
+        <div id="exif-date"></div>
+    </div>
+    <div class="exif-right" style="display: flex; flex-direction:row; justify-content: start;">
+        <div style="display: flex; justify-content: center; flex-direction: column;">
+            <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
+        </div>
+        <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
+        <div style="padding-left: 10px; position: relative;">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div id="exif-maker"></div>
+                <div id="exif-lens"></div>
+                <div id="exif-author"></div>
             </div>
         </div>
-        <div id="normal-wrapper" class="pic-wrapper"
-            style="height: 80px; justify-content: center; flex-direction: column;">
-            <div id="no-exif-data" style="text-align: center; font-size: large; font-weight: lighter;">
-            </div>
-        </div>
+    </div>
+</div>
+<div id="normal-wrapper" class="pic-wrapper" style="height: 68px; justify-content: center; flex-direction: column;">
+    <div id="no-exif-data" style="text-align: center; font-size: large; font-weight: lighter;">
+    </div>
+</div>
+<style>
+    #exif-maker-logo {
+        text-align: center;
+        vertical-align: baseline;
+        height: 60px;
+    }
+
+    #exif-param {
+        font-weight: bold;
+        font-size: 80%;
+    }
+
+    #exif-maker {
+        font-size: 80%;
+    }
+
+    #exif-date {
+        margin-top: 4px;
+        font-weight: lighter;
+        color: gray;
+        font-size: 80%;
+    }
+
+    #exif-lens,
+    #exif-author {
+        font-weight: lighter;
+        color: gray;
+        font-size: 80%;
+    }
+
+    .pic-wrapper {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 4px 8px;
+    }
+
+    .pic-area {
+        border-style: solid;
+        border-width: thin;
+        border-color: rgb(22, 22, 22);
+    }
+
+    @media (max-width: 768px) {
+        .pic-wrapper {
+            padding: 4px 0px;
+        }        
+
+        #exif-param {
+            font-size: .5rem;
+        }
+
+        #exif-date {
+            font-size: .6rem;
+        }
+
+        #exif-maker {
+            font-size: .5rem;
+        }
+
+        #exif-lens,
+        #exif-author {
+            font-size: .5rem;
+        }
+
+        #exif-maker-logo {
+            height: 30px;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .pic-area {
+            border-style: solid;
+            border-width: thin;
+            background-color: white;
+            border-color: white;
+        }        
+    }
+</style>
     </div>
     <div id="tools-wrapper" class="album-info fullscreen-info" hidden>
         <p id="descbox" class="text-center text-xs hint-text"> </p>

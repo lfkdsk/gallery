@@ -267,14 +267,120 @@
   <!-- Main Content -->
   <section class="pjax-area">
   <div class="content-area post-album default-content-area">
-    <div class="grid grid-cols-3 gap-2">
-      <div class="pic-area default-pic">
-        <div class="pic-item" />
-        <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033826.1c949qkr08m8.webp" />
+    <div class="grid grid-cols-3">
+      <div class="default-pic gap-2 wrapper">
+        <div class="pic-area">
+          <div class="pic-item" />
+          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033826.1c949qkr08m8.webp" />
+        </div>
+        <div id="exif-wrapper" class="pic-wrapper">
+    <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
+        <div id="exif-param"></div>
+        <div id="exif-date"></div>
+    </div>
+    <div class="exif-right" style="display: flex; flex-direction:row; justify-content: start;">
+        <div style="display: flex; justify-content: center; flex-direction: column;">
+            <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
+        </div>
+        <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
+        <div style="padding-left: 10px; position: relative;">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <div id="exif-maker"></div>
+                <div id="exif-lens"></div>
+                <div id="exif-author"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="normal-wrapper" class="pic-wrapper" style="height: 68px; justify-content: center; flex-direction: column;">
+    <div id="no-exif-data" style="text-align: center; font-size: large; font-weight: lighter;">
+    </div>
+</div>
+<style>
+    #exif-maker-logo {
+        text-align: center;
+        vertical-align: baseline;
+        height: 60px;
+    }
+
+    #exif-param {
+        font-weight: bold;
+        font-size: 80%;
+    }
+
+    #exif-maker {
+        font-size: 80%;
+    }
+
+    #exif-date {
+        margin-top: 4px;
+        font-weight: lighter;
+        color: gray;
+        font-size: 80%;
+    }
+
+    #exif-lens,
+    #exif-author {
+        font-weight: lighter;
+        color: gray;
+        font-size: 80%;
+    }
+
+    .pic-wrapper {
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 4px 8px;
+    }
+
+    .pic-area {
+        border-style: solid;
+        border-width: thin;
+        border-color: rgb(22, 22, 22);
+    }
+
+    @media (max-width: 768px) {
+        .pic-wrapper {
+            padding: 4px 0px;
+        }        
+
+        #exif-param {
+            font-size: .5rem;
+        }
+
+        #exif-date {
+            font-size: .6rem;
+        }
+
+        #exif-maker {
+            font-size: .5rem;
+        }
+
+        #exif-lens,
+        #exif-author {
+            font-size: .5rem;
+        }
+
+        #exif-maker-logo {
+            height: 30px;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .pic-area {
+            border-style: solid;
+            border-width: thin;
+            background-color: white;
+            border-color: white;
+        }        
+    }
+</style>  
       </div>
-      <p id="descbox" class="text-center text-xs hint-text">  - · -  </p>
+      <p id="descbox" class="text-center text-xs hint-text" hidden>  - · -  </p>
       <div class="album-list flex gap-2">
         
+          
+          
           
           
           
@@ -285,8 +391,11 @@
             name="20230818-033826.1c949qkr08m8" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033826.1c949qkr08m8.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033826.1c949qkr08m8.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033826.1c949qkr08m8","path":"DaLi2022/20230818-033826.1c949qkr08m8.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033826.1c949qkr08m8.webp"
             aria-label="the photo 0"></a>
+          
+          
           
           
           
@@ -298,8 +407,11 @@
             name="20230818-033841.5jhooprl30k0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033841.5jhooprl30k0.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033841.5jhooprl30k0.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033841.5jhooprl30k0","path":"DaLi2022/20230818-033841.5jhooprl30k0.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033841.5jhooprl30k0.webp"
             aria-label="the photo 1"></a>
+          
+          
           
           
           
@@ -311,8 +423,11 @@
             name="20230818-033845.6obr4awlbf40" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033845.6obr4awlbf40.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033845.6obr4awlbf40.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033845.6obr4awlbf40","path":"DaLi2022/20230818-033845.6obr4awlbf40.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033845.6obr4awlbf40.webp"
             aria-label="the photo 2"></a>
+          
+          
           
           
           
@@ -324,8 +439,11 @@
             name="20230818-033853.3sxwui49wn60" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033853.3sxwui49wn60.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033853.3sxwui49wn60.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033853.3sxwui49wn60","path":"DaLi2022/20230818-033853.3sxwui49wn60.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033853.3sxwui49wn60.webp"
             aria-label="the photo 3"></a>
+          
+          
           
           
           
@@ -337,8 +455,11 @@
             name="20230818-033857.31khg4tqxky0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033857.31khg4tqxky0.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033857.31khg4tqxky0.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033857.31khg4tqxky0","path":"DaLi2022/20230818-033857.31khg4tqxky0.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033857.31khg4tqxky0.webp"
             aria-label="the photo 4"></a>
+          
+          
           
           
           
@@ -350,8 +471,11 @@
             name="20230818-033902.7cikhe0o6ns0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033902.7cikhe0o6ns0.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033902.7cikhe0o6ns0.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033902.7cikhe0o6ns0","path":"DaLi2022/20230818-033902.7cikhe0o6ns0.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033902.7cikhe0o6ns0.webp"
             aria-label="the photo 5"></a>
+          
+          
           
           
           
@@ -363,8 +487,11 @@
             name="20230818-033906.u3bfnoo79xc" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033906.u3bfnoo79xc.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033906.u3bfnoo79xc.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033906.u3bfnoo79xc","path":"DaLi2022/20230818-033906.u3bfnoo79xc.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033906.u3bfnoo79xc.webp"
             aria-label="the photo 6"></a>
+          
+          
           
           
           
@@ -376,8 +503,11 @@
             name="20230818-033911.2tws9yehiby0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033911.2tws9yehiby0.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033911.2tws9yehiby0.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033911.2tws9yehiby0","path":"DaLi2022/20230818-033911.2tws9yehiby0.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033911.2tws9yehiby0.webp"
             aria-label="the photo 7"></a>
+          
+          
           
           
           
@@ -389,8 +519,11 @@
             name="20230818-033915.2qxr6lc8lbk0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033915.2qxr6lc8lbk0.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033915.2qxr6lc8lbk0.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033915.2qxr6lc8lbk0","path":"DaLi2022/20230818-033915.2qxr6lc8lbk0.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033915.2qxr6lc8lbk0.webp"
             aria-label="the photo 8"></a>
+          
+          
           
           
           
@@ -402,8 +535,11 @@
             name="20230818-033920.2zhy3uu2jgs0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-033920.2zhy3uu2jgs0.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-033920.2zhy3uu2jgs0.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-033920.2zhy3uu2jgs0","path":"DaLi2022/20230818-033920.2zhy3uu2jgs0.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-033920.2zhy3uu2jgs0.webp"
             aria-label="the photo 9"></a>
+          
+          
           
           
           
@@ -415,8 +551,11 @@
             name="20230818-034321.18dsiibdbkow" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-034321.18dsiibdbkow.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-034321.18dsiibdbkow.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-034321.18dsiibdbkow","path":"DaLi2022/20230818-034321.18dsiibdbkow.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-034321.18dsiibdbkow.webp"
             aria-label="the photo 10"></a>
+          
+          
           
           
           
@@ -428,8 +567,11 @@
             name="20230818-034323.1nnpoq451xsw" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/20230818-034323.1nnpoq451xsw.webp"
             desc="  - · -  "
             share="DaLi2022/20230818-034323.1nnpoq451xsw.webp"
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"","exif_data":{},"location":[],"name":"20230818-034323.1nnpoq451xsw","path":"DaLi2022/20230818-034323.1nnpoq451xsw.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/20230818-034323.1nnpoq451xsw.webp"
             aria-label="the photo 11"></a>
+          
+          
           
           
           
@@ -441,8 +583,11 @@
             name="IMG_4832" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_4832.JPG"
             desc=" Apple iPhone 12 Pro 1/122s F2 ISO 32 iPhone 12 Pro back camera 6mm f/2  "
             share="DaLi2022/IMG_4832.JPG"
+            extra='{"desc":"Apple iPhone 12 Pro 1/122s F2 ISO 32 iPhone 12 Pro back camera 6mm f/2 ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 1/122s F2 ISO 32 iPhone 12 Pro back camera 6mm f/2 ","exif_data":{"EXIF DateTimeOriginal":"2022:09:26 19:09:33","EXIF ExposureTime":"1/122s","EXIF FNumber":"F2","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 12 Pro back camera 6mm f/2","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[],"name":"IMG_4832","path":"DaLi2022/IMG_4832.JPG"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_4832.webp"
             aria-label="the photo 12"></a>
+          
+          
           
           
           
@@ -454,8 +599,11 @@
             name="IMG_4924" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_4924.jpeg"
             desc=" Apple iPhone 12 Pro 1/2092s F1.6 ISO 32 iPhone 12 Pro back triple camera 4.2mm f/1.6  "
             share="DaLi2022/IMG_4924.jpeg"
+            extra='{"desc":"Apple iPhone 12 Pro 1/2092s F1.6 ISO 32 iPhone 12 Pro back triple camera 4.2mm f/1.6 ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 1/2092s F1.6 ISO 32 iPhone 12 Pro back triple camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2022:09:30 16:40:28","EXIF ExposureTime":"1/2092s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 12 Pro back triple camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[],"name":"IMG_4924","path":"DaLi2022/IMG_4924.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_4924.webp"
             aria-label="the photo 13"></a>
+          
+          
           
           
           
@@ -467,6 +615,7 @@
             name="IMG_5034" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_5034.jpeg"
             desc=" Apple iPhone 12 Pro 1/149s F2 ISO 25 iPhone 12 Pro back triple camera 6mm f/2  "
             share="DaLi2022/IMG_5034.jpeg"
+            extra='{"desc":"Apple iPhone 12 Pro 1/149s F2 ISO 25 iPhone 12 Pro back triple camera 6mm f/2 ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 1/149s F2 ISO 25 iPhone 12 Pro back triple camera 6mm f/2 ","exif_data":{"EXIF DateTimeOriginal":"2022:10:06 17:19:14","EXIF ExposureTime":"1/149s","EXIF FNumber":"F2","EXIF ISOSpeedRatings":"ISO 25","EXIF LensModel":"iPhone 12 Pro back triple camera 6mm f/2","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[],"name":"IMG_5034","path":"DaLi2022/IMG_5034.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_5034.webp"
             aria-label="the photo 14"></a>
           
@@ -478,7 +627,7 @@
         <div class="album-info-btm">
           
             <div class="album-location album-tool">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=DaLi2022">MAP: [25.752030170382785, 100.15397359842969]</a>
+              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=DaLi2022">MAP</a>
             </div>
           
           <div class="album-share album-tool">
@@ -571,12 +720,35 @@
       <script>
         var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
         var descBox = $("#descbox");
+        var wrapper = $("#exif-wrapper");
+        var exifParam = $("#exif-param");
+        var exifMaker = $("#exif-maker");
+        var exifDate = $("#exif-date");
+        var exifLens = $("#exif-lens");
+        var exifLogo = $("#exif-maker-logo");
+        var exifAuthor = $("#exif-author");
+        var normalWrapper = $("#normal-wrapper");
+        var normalData = $("#no-exif-data");
+
         imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
+        function changeExifData(v) {
+          console.log(Object.keys(v.exif_data))
+          if (Object.keys(v.exif_data).length === 0) {
+            wrapper.hide();
+            normalWrapper.show();
+            normalData.text("Shot By " + "lfkdsk");
+          } else {
+            wrapper.show();
+            normalWrapper.hide();
+            wrapperData(v, "lfkdsk");
+          }
+        }
         function changeImageWith(target) {
           imgno = target.getAttribute('id'); 
           var imgLink = target.getAttribute('rel');
           var name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
+          var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = '';
           imageBox.src = imgLink; //替换图片
           imageBox.setAttribute("share", target.getAttribute('share'));
@@ -588,6 +760,7 @@
           }
           target.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
           descBox.text(desc);
+          changeExifData(v);
           updateParams(name);
         }
         function cheangeImageInSelector() {
@@ -606,8 +779,11 @@
           changeImageWithName(name)
         } else {
           var value = $(`#0`)[0];
+          var v = JSON.parse(value.getAttribute('extra'));
+          changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
         }
+        // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
           if (event.keyCode === 37) {
@@ -708,7 +884,7 @@
         }
 
         .album-list {
-          padding-top: 6px;
+          padding-top: 12px;
           overflow-x: scroll;
         }
 
@@ -728,7 +904,11 @@
 
           .pic-area {
             grid-column: span 3 / span 3;
-            padding: 16px;
+            padding: 8px 8px 0 8px;
+          }
+
+          .default-pic {
+            grid-column: span 3 / span 3;
           }
 
           .album-info {
@@ -743,13 +923,17 @@
           .album-title {
             font-size: 1.5em;
           }
+
+          .wrapper {
+            padding: 8px;
+          }
         }
 
         @media (min-width: 769px) {
           .content-area {
             max-width: 92%;
             margin: 0 auto;
-            padding: 135px 16px 16px 16px;
+            padding: 115px 16px 16px 16px;
           }
 
           .album-article {
@@ -765,9 +949,12 @@
             grid-column: span 2 / span 2;
           }
 
+          .default-pic {
+            grid-column: span 2 / span 2;
+          }
+
           .album-info {
             grid-column: span 1 / span 1;
-            margin-left: 12px;
           }
         }
 
