@@ -53,7 +53,7 @@
   <link rel="apple-touch-icon" sizes="114x114" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_iPhoneHD" />
   <link rel="apple-touch-icon" sizes="144x144" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_RetinaiPad" />
   <!-- 添加 RSS 订阅 -->
-  <link rel="alternate" type="application/rss+xml" title="照片集" href="/atom.xml" />
+  <link rel="alternate" type="application/rss+xml" title="照片集" href="/rss" />
   <!-- uc强制竖屏 -->
   <meta name="screen-orientation" content="portrait">
   <!-- QQ强制竖屏 -->
@@ -68,7 +68,8 @@
   <meta name="x5-page-mode" content="app">
   <!-- https://material.io/resources/icons/?style=outline -->
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_20213_18.4a5f87dae8e6f9e336b9ad6fa00f8e8f.js"></script>
+  
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_14.95e63f49ecd5a866541aee0cf8ec0fac.js"></script>
   
   
 <style>
@@ -265,11 +266,12 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  <script src="js/html2canvas.js"></script>
+<section class="pjax-area">
   <div class="content-area post-album default-content-area">
     <div class="grid grid-cols-3">
       <div class="default-pic gap-2 wrapper">
-        <div class="pic-area">
+        <div id="all-pic" class="pic-area">
           <div class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/CiShouTower/DSCF0583.jpg" />
         </div>
@@ -300,7 +302,7 @@
     #exif-maker-logo {
         text-align: center;
         vertical-align: baseline;
-        height: 60px;
+        height: 40px;
     }
 
     #exif-param {
@@ -499,11 +501,14 @@
         <div class="album-info-btm">
           
             <div class="album-location album-tool">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=CiShouTower">MAP</a>
+              <iconpark-icon name="local-two"></iconpark-icon><a href="/gallery/location?album=CiShouTower">MAP</a>
             </div>
           
           <div class="album-share album-tool">
-            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+            <iconpark-icon name="share-three"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link </a>
+          </div>
+          <div class="album-share album-tool">
+            <iconpark-icon name="down-picture"></iconpark-icon><a id="download" href="javascript:void(0)"> Download </a>
           </div>
         </div>        
         <div class="album-title">北京 · 慈寿寺</div>
@@ -610,16 +615,28 @@
           var value = $(`[name='${name}']`)[0];
           changeImageWith(value)
         };
-        const name = getParam('name')
+        var name = getParam('name')
         const len = +'7'
-        if (name !== "" && name !== null) {
+        if (name !== "" && name !== null && name !== 'null') {
           changeImageWithName(name)
         } else {
           var value = $(`#0`)[0];
+          name = value.getAttribute('name');
           var v = JSON.parse(value.getAttribute('extra'));
           changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
         }
+        $('#download').click(function () {
+          var node = document.getElementById('all-pic');
+          html2canvas(node, {
+            useCORS: true,
+            allowTaint: true,
+            scrollX: 0,
+            scrollY: 0,
+          }).then(function (canvas) {                  
+            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          });
+        });        
         // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -656,6 +673,14 @@
         body {
           background-color: #fff;
         }
+
+        .fullscreen-pic {
+          grid-column: span 3 / span 3;
+        }
+
+        .fullscreen-info {
+          grid-column: span 3 / span 3;
+        }        
 
         .album-comment {
           max-width: 800px;
@@ -830,14 +855,6 @@
           .album-item {
             background-color: black;
           }
-        }
-
-        .fullscreen-pic {
-          grid-column: span 3 / span 3;
-        }
-
-        .fullscreen-info {
-          grid-column: span 3 / span 3;
         }
       </style>
 </section>

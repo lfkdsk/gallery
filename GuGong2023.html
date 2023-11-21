@@ -53,7 +53,7 @@
   <link rel="apple-touch-icon" sizes="114x114" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_iPhoneHD" />
   <link rel="apple-touch-icon" sizes="144x144" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_RetinaiPad" />
   <!-- 添加 RSS 订阅 -->
-  <link rel="alternate" type="application/rss+xml" title="照片集" href="/atom.xml" />
+  <link rel="alternate" type="application/rss+xml" title="照片集" href="/rss" />
   <!-- uc强制竖屏 -->
   <meta name="screen-orientation" content="portrait">
   <!-- QQ强制竖屏 -->
@@ -68,7 +68,8 @@
   <meta name="x5-page-mode" content="app">
   <!-- https://material.io/resources/icons/?style=outline -->
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_20213_18.4a5f87dae8e6f9e336b9ad6fa00f8e8f.js"></script>
+  
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_14.95e63f49ecd5a866541aee0cf8ec0fac.js"></script>
   
   
 <style>
@@ -265,11 +266,12 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  <script src="js/html2canvas.js"></script>
+<section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
-        <div class="pic-area">
+        <div id="all-pic" class="pic-area">
           <div class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4906.webp" />
         </div>
@@ -300,7 +302,7 @@
     #exif-maker-logo {
         text-align: center;
         vertical-align: baseline;
-        height: 60px;
+        height: 40px;
     }
 
     #exif-param {
@@ -376,7 +378,7 @@
     }
 </style>  
       </div>
-      <p id="descbox" class="text-center text-xs hint-text" hidden> FUJIFILM X-S20 1/900s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR  </p>
+      <p id="descbox" class="text-center text-xs hint-text" hidden>  - · -  </p>
       <div class="album-list flex gap-2">
         
           
@@ -389,9 +391,9 @@
           
           <a class="album-item lazy" id="0"
             name="DSCF4906" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4906.webp"
-            desc=" FUJIFILM X-S20 1/900s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4906.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/900s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/900s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 14:59:42","EXIF ExposureTime":"1/900s","EXIF FNumber":"F5.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91141388888889,116.39177500000001],"name":"DSCF4906","path":"GuGong2023/DSCF4906.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/900s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 14:59:42","EXIF ExposureTime":"1/900s","EXIF FNumber":"F5.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91141388888889,116.39177500000001],"name":"DSCF4906","path":"GuGong2023/DSCF4906.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4906.webp"
             aria-label="the photo 0"></a>
           
@@ -405,9 +407,9 @@
           
           <a class="album-item lazy" id="1"
             name="DSCF4910" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4910.webp"
-            desc=" FUJIFILM X-S20 1/480s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4910.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/480s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/480s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:00:32","EXIF ExposureTime":"1/480s","EXIF FNumber":"F5.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91141388888889,116.39177500000001],"name":"DSCF4910","path":"GuGong2023/DSCF4910.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/480s F5.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:00:32","EXIF ExposureTime":"1/480s","EXIF FNumber":"F5.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91141388888889,116.39177500000001],"name":"DSCF4910","path":"GuGong2023/DSCF4910.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4910.webp"
             aria-label="the photo 1"></a>
           
@@ -421,9 +423,9 @@
           
           <a class="album-item lazy" id="2"
             name="DSCF4921" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4921.webp"
-            desc=" FUJIFILM X-S20 1/1300s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4921.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/1300s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1300s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:10:14","EXIF ExposureTime":"1/1300s","EXIF FNumber":"F6.4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.913694444444445,116.39404166666667],"name":"DSCF4921","path":"GuGong2023/DSCF4921.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1300s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:10:14","EXIF ExposureTime":"1/1300s","EXIF FNumber":"F6.4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.913694444444445,116.39404166666667],"name":"DSCF4921","path":"GuGong2023/DSCF4921.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4921.webp"
             aria-label="the photo 2"></a>
           
@@ -437,9 +439,9 @@
           
           <a class="album-item lazy" id="3"
             name="DSCF4922" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4922.webp"
-            desc=" FUJIFILM X-S20 1/1400s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4922.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/1400s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1400s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:10:00","EXIF ExposureTime":"1/1400s","EXIF FNumber":"F6.4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.913694444444445,116.39404166666667],"name":"DSCF4922","path":"GuGong2023/DSCF4922.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1400s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:10:00","EXIF ExposureTime":"1/1400s","EXIF FNumber":"F6.4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.913694444444445,116.39404166666667],"name":"DSCF4922","path":"GuGong2023/DSCF4922.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4922.webp"
             aria-label="the photo 3"></a>
           
@@ -453,9 +455,9 @@
           
           <a class="album-item lazy" id="4"
             name="DSCF4930" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4930.webp"
-            desc=" FUJIFILM X-S20 1/1500s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4930.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/1500s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1500s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:12:27","EXIF ExposureTime":"1/1500s","EXIF FNumber":"F6.4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4930","path":"GuGong2023/DSCF4930.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1500s F6.4 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:12:27","EXIF ExposureTime":"1/1500s","EXIF FNumber":"F6.4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4930","path":"GuGong2023/DSCF4930.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4930.webp"
             aria-label="the photo 4"></a>
           
@@ -469,9 +471,9 @@
           
           <a class="album-item lazy" id="5"
             name="DSCF4938" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4938.webp"
-            desc=" FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4938.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:17:27","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4938","path":"GuGong2023/DSCF4938.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:17:27","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4938","path":"GuGong2023/DSCF4938.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4938.webp"
             aria-label="the photo 5"></a>
           
@@ -485,9 +487,9 @@
           
           <a class="album-item lazy" id="6"
             name="DSCF4965" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4965.webp"
-            desc=" FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4965.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:24:08","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4965","path":"GuGong2023/DSCF4965.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:24:08","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4965","path":"GuGong2023/DSCF4965.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4965.webp"
             aria-label="the photo 6"></a>
           
@@ -501,9 +503,9 @@
           
           <a class="album-item lazy" id="7"
             name="DSCF4971" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4971.webp"
-            desc=" FUJIFILM X-S20 1/1900s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4971.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/1900s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1900s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:26:34","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4971","path":"GuGong2023/DSCF4971.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/1900s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:26:34","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4971","path":"GuGong2023/DSCF4971.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4971.webp"
             aria-label="the photo 7"></a>
           
@@ -517,9 +519,9 @@
           
           <a class="album-item lazy" id="8"
             name="DSCF4977" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF4977.webp"
-            desc=" FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF4977.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:28:00","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4977","path":"GuGong2023/DSCF4977.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:28:00","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF4977","path":"GuGong2023/DSCF4977.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF4977.webp"
             aria-label="the photo 8"></a>
           
@@ -533,9 +535,9 @@
           
           <a class="album-item lazy" id="9"
             name="DSCF5027" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5027.webp"
-            desc=" FUJIFILM X-S20 1/400s F9 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5027.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/400s F9 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/400s F9 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:41:32","EXIF ExposureTime":"1/400s","EXIF FNumber":"F9","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5027","path":"GuGong2023/DSCF5027.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/400s F9 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:41:32","EXIF ExposureTime":"1/400s","EXIF FNumber":"F9","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5027","path":"GuGong2023/DSCF5027.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5027.webp"
             aria-label="the photo 9"></a>
           
@@ -549,9 +551,9 @@
           
           <a class="album-item lazy" id="10"
             name="DSCF5035" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5035.webp"
-            desc=" FUJIFILM X-S20 1/2500s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5035.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/2500s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/2500s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:43:49","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5035","path":"GuGong2023/DSCF5035.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/2500s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:43:49","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5035","path":"GuGong2023/DSCF5035.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5035.webp"
             aria-label="the photo 10"></a>
           
@@ -565,9 +567,9 @@
           
           <a class="album-item lazy" id="11"
             name="DSCF5039" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5039.webp"
-            desc=" FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5039.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:44:48","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5039","path":"GuGong2023/DSCF5039.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:44:48","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5039","path":"GuGong2023/DSCF5039.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5039.webp"
             aria-label="the photo 11"></a>
           
@@ -581,9 +583,9 @@
           
           <a class="album-item lazy" id="12"
             name="DSCF5041" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5041.webp"
-            desc=" FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5041.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:45:39","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5041","path":"GuGong2023/DSCF5041.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:45:39","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5041","path":"GuGong2023/DSCF5041.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5041.webp"
             aria-label="the photo 12"></a>
           
@@ -597,9 +599,9 @@
           
           <a class="album-item lazy" id="13"
             name="DSCF5042" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5042.webp"
-            desc=" FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5042.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:45:58","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5042","path":"GuGong2023/DSCF5042.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:45:58","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5042","path":"GuGong2023/DSCF5042.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5042.webp"
             aria-label="the photo 13"></a>
           
@@ -613,9 +615,9 @@
           
           <a class="album-item lazy" id="14"
             name="DSCF5048" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5048.webp"
-            desc=" FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5048.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:47:32","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5048","path":"GuGong2023/DSCF5048.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/4000s F3.6 ISO 640 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:47:32","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5048","path":"GuGong2023/DSCF5048.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5048.webp"
             aria-label="the photo 14"></a>
           
@@ -629,9 +631,9 @@
           
           <a class="album-item lazy" id="15"
             name="DSCF5057" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5057.webp"
-            desc=" FUJIFILM X-S20 1/300s F3.6 ISO 1250 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5057.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/300s F3.6 ISO 1250 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/300s F3.6 ISO 1250 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:50:41","EXIF ExposureTime":"1/300s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5057","path":"GuGong2023/DSCF5057.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/300s F3.6 ISO 1250 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:50:41","EXIF ExposureTime":"1/300s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5057","path":"GuGong2023/DSCF5057.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5057.webp"
             aria-label="the photo 15"></a>
           
@@ -645,9 +647,9 @@
           
           <a class="album-item lazy" id="16"
             name="DSCF5065" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5065.webp"
-            desc=" FUJIFILM X-S20 1/75s F4 ISO 12800 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5065.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/75s F4 ISO 12800 XF16-80mmF4 R OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/75s F4 ISO 12800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:55:05","EXIF ExposureTime":"1/75s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5065","path":"GuGong2023/DSCF5065.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/75s F4 ISO 12800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 15:55:05","EXIF ExposureTime":"1/75s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5065","path":"GuGong2023/DSCF5065.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5065.webp"
             aria-label="the photo 16"></a>
           
@@ -661,9 +663,9 @@
           
           <a class="album-item lazy" id="17"
             name="DSCF5126" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5126.webp"
-            desc=" FUJIFILM X-S20 1/34s F4 ISO 12800 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5126.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/34s F4 ISO 12800 XF16-80mmF4 R OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/34s F4 ISO 12800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:18:08","EXIF ExposureTime":"1/34s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5126","path":"GuGong2023/DSCF5126.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/34s F4 ISO 12800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:18:08","EXIF ExposureTime":"1/34s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5126","path":"GuGong2023/DSCF5126.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5126.webp"
             aria-label="the photo 17"></a>
           
@@ -677,9 +679,9 @@
           
           <a class="album-item lazy" id="18"
             name="DSCF5141" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5141.webp"
-            desc=" FUJIFILM X-S20 1/70s F4 ISO 12800 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5141.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/70s F4 ISO 12800 XF16-80mmF4 R OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/70s F4 ISO 12800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:20:47","EXIF ExposureTime":"1/70s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5141","path":"GuGong2023/DSCF5141.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/70s F4 ISO 12800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:20:47","EXIF ExposureTime":"1/70s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5141","path":"GuGong2023/DSCF5141.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5141.webp"
             aria-label="the photo 18"></a>
           
@@ -693,9 +695,9 @@
           
           <a class="album-item lazy" id="19"
             name="DSCF5163" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5163.webp"
-            desc=" FUJIFILM X-S20 1/320s F3.6 ISO 320 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5163.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/320s F3.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/320s F3.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:30:12","EXIF ExposureTime":"1/320s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5163","path":"GuGong2023/DSCF5163.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/320s F3.6 ISO 320 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:30:12","EXIF ExposureTime":"1/320s","EXIF FNumber":"F3.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5163","path":"GuGong2023/DSCF5163.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5163.webp"
             aria-label="the photo 19"></a>
           
@@ -709,9 +711,9 @@
           
           <a class="album-item lazy" id="20"
             name="DSCF5201" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/GuGong2023/DSCF5201.webp"
-            desc=" FUJIFILM X-S20 1/420s F2.8 ISO 800 XF50-140mmF2.8 R LM OIS WR  "
+            desc="  - · -  "
             share="GuGong2023/DSCF5201.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/420s F2.8 ISO 800 XF50-140mmF2.8 R LM OIS WR ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 800 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:40:04","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5201","path":"GuGong2023/DSCF5201.webp"}'
+            extra='{"desc":" - · - ","dir":"GuGong2023","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 800 XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:14 16:40:04","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.91361944444444,116.39391111111112],"name":"DSCF5201","path":"GuGong2023/DSCF5201.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//GuGong2023/DSCF5201.webp"
             aria-label="the photo 20"></a>
           
@@ -723,11 +725,14 @@
         <div class="album-info-btm">
           
             <div class="album-location album-tool">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=GuGong2023">MAP</a>
+              <iconpark-icon name="local-two"></iconpark-icon><a href="/gallery/location?album=GuGong2023">MAP</a>
             </div>
           
           <div class="album-share album-tool">
-            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+            <iconpark-icon name="share-three"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link </a>
+          </div>
+          <div class="album-share album-tool">
+            <iconpark-icon name="down-picture"></iconpark-icon><a id="download" href="javascript:void(0)"> Download </a>
           </div>
         </div>        
         <div class="album-title">旧宫掠影</div>
@@ -890,16 +895,28 @@
           var value = $(`[name='${name}']`)[0];
           changeImageWith(value)
         };
-        const name = getParam('name')
+        var name = getParam('name')
         const len = +'21'
-        if (name !== "" && name !== null) {
+        if (name !== "" && name !== null && name !== 'null') {
           changeImageWithName(name)
         } else {
           var value = $(`#0`)[0];
+          name = value.getAttribute('name');
           var v = JSON.parse(value.getAttribute('extra'));
           changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
         }
+        $('#download').click(function () {
+          var node = document.getElementById('all-pic');
+          html2canvas(node, {
+            useCORS: true,
+            allowTaint: true,
+            scrollX: 0,
+            scrollY: 0,
+          }).then(function (canvas) {                  
+            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          });
+        });        
         // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -936,6 +953,14 @@
         body {
           background-color: #fff;
         }
+
+        .fullscreen-pic {
+          grid-column: span 3 / span 3;
+        }
+
+        .fullscreen-info {
+          grid-column: span 3 / span 3;
+        }        
 
         .album-comment {
           max-width: 800px;
@@ -1110,14 +1135,6 @@
           .album-item {
             background-color: black;
           }
-        }
-
-        .fullscreen-pic {
-          grid-column: span 3 / span 3;
-        }
-
-        .fullscreen-info {
-          grid-column: span 3 / span 3;
         }
       </style>
 </section>

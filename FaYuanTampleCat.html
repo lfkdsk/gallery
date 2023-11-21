@@ -53,7 +53,7 @@
   <link rel="apple-touch-icon" sizes="114x114" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_iPhoneHD" />
   <link rel="apple-touch-icon" sizes="144x144" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_RetinaiPad" />
   <!-- 添加 RSS 订阅 -->
-  <link rel="alternate" type="application/rss+xml" title="照片集" href="/atom.xml" />
+  <link rel="alternate" type="application/rss+xml" title="照片集" href="/rss" />
   <!-- uc强制竖屏 -->
   <meta name="screen-orientation" content="portrait">
   <!-- QQ强制竖屏 -->
@@ -68,7 +68,8 @@
   <meta name="x5-page-mode" content="app">
   <!-- https://material.io/resources/icons/?style=outline -->
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_20213_18.4a5f87dae8e6f9e336b9ad6fa00f8e8f.js"></script>
+  
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_14.95e63f49ecd5a866541aee0cf8ec0fac.js"></script>
   
   
 <style>
@@ -265,11 +266,12 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  <script src="js/html2canvas.js"></script>
+<section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
-        <div class="pic-area">
+        <div id="all-pic" class="pic-area">
           <div class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/1.美丽黑猫.webp" />
         </div>
@@ -300,7 +302,7 @@
     #exif-maker-logo {
         text-align: center;
         vertical-align: baseline;
-        height: 60px;
+        height: 40px;
     }
 
     #exif-param {
@@ -376,7 +378,7 @@
     }
 </style>  
       </div>
-      <p id="descbox" class="text-center text-xs hint-text" hidden> FUJIFILM X-S20 1/120s F4 ISO 2500 XF16-80mmF4 R OIS WR  </p>
+      <p id="descbox" class="text-center text-xs hint-text" hidden>  - · -  </p>
       <div class="album-list flex gap-2">
         
           
@@ -389,9 +391,9 @@
           
           <a class="album-item lazy" id="0"
             name="1.美丽黑猫" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/1.美丽黑猫.webp"
-            desc=" FUJIFILM X-S20 1/120s F4 ISO 2500 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/1.美丽黑猫.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/120s F4 ISO 2500 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4 ISO 2500 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:21:41","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"1.美丽黑猫","path":"FaYuanTampleCat/1.美丽黑猫.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4 ISO 2500 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:21:41","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"1.美丽黑猫","path":"FaYuanTampleCat/1.美丽黑猫.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/1.美丽黑猫.webp"
             aria-label="the photo 0"></a>
           
@@ -405,9 +407,9 @@
           
           <a class="album-item lazy" id="1"
             name="2.黑猫吃草" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/2.黑猫吃草.webp"
-            desc=" FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/2.黑猫吃草.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:20:09","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"2.黑猫吃草","path":"FaYuanTampleCat/2.黑猫吃草.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:20:09","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"2.黑猫吃草","path":"FaYuanTampleCat/2.黑猫吃草.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/2.黑猫吃草.webp"
             aria-label="the photo 1"></a>
           
@@ -421,9 +423,9 @@
           
           <a class="album-item lazy" id="2"
             name="3.优雅" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/3.优雅.webp"
-            desc=" FUJIFILM X-S20 1/240s F4 ISO 5000 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/3.优雅.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/240s F4 ISO 5000 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 5000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:21:30","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"3.优雅","path":"FaYuanTampleCat/3.优雅.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 5000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:21:30","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"3.优雅","path":"FaYuanTampleCat/3.优雅.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/3.优雅.webp"
             aria-label="the photo 2"></a>
           
@@ -437,9 +439,9 @@
           
           <a class="album-item lazy" id="3"
             name="4.呆" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/4.呆.webp"
-            desc=" FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/4.呆.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:23:07","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"4.呆","path":"FaYuanTampleCat/4.呆.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4 ISO 2000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:23:07","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"4.呆","path":"FaYuanTampleCat/4.呆.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/4.呆.webp"
             aria-label="the photo 3"></a>
           
@@ -453,9 +455,9 @@
           
           <a class="album-item lazy" id="4"
             name="5.猫球" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/5.猫球.webp"
-            desc=" FUJIFILM X-S20 1/52s F4 ISO 800 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/5.猫球.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/52s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/52s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:30:04","EXIF ExposureTime":"1/52s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"5.猫球","path":"FaYuanTampleCat/5.猫球.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/52s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:30:04","EXIF ExposureTime":"1/52s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"5.猫球","path":"FaYuanTampleCat/5.猫球.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/5.猫球.webp"
             aria-label="the photo 4"></a>
           
@@ -469,9 +471,9 @@
           
           <a class="album-item lazy" id="5"
             name="6.大佬" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/6.大佬.webp"
-            desc=" FUJIFILM X-S20 1/250s F4 ISO 320 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/6.大佬.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/250s F4 ISO 320 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:03:44","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"6.大佬","path":"FaYuanTampleCat/6.大佬.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:03:44","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"6.大佬","path":"FaYuanTampleCat/6.大佬.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/6.大佬.webp"
             aria-label="the photo 5"></a>
           
@@ -485,9 +487,9 @@
           
           <a class="album-item lazy" id="6"
             name="7.看看" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/7.看看.webp"
-            desc=" FUJIFILM X-S20 1/240s F4 ISO 640 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/7.看看.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/240s F4 ISO 640 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:29:44","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"7.看看","path":"FaYuanTampleCat/7.看看.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:29:44","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"7.看看","path":"FaYuanTampleCat/7.看看.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/7.看看.webp"
             aria-label="the photo 6"></a>
           
@@ -501,9 +503,9 @@
           
           <a class="album-item lazy" id="7"
             name="8.另一个BRO" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/8.另一个BRO.webp"
-            desc=" FUJIFILM X-S20 1/45s F4.5 ISO 800 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/8.另一个BRO.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/45s F4.5 ISO 800 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/45s F4.5 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:37:39","EXIF ExposureTime":"1/45s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"8.另一个BRO","path":"FaYuanTampleCat/8.另一个BRO.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/45s F4.5 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:37:39","EXIF ExposureTime":"1/45s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"8.另一个BRO","path":"FaYuanTampleCat/8.另一个BRO.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/8.另一个BRO.webp"
             aria-label="the photo 7"></a>
           
@@ -517,9 +519,9 @@
           
           <a class="album-item lazy" id="8"
             name="9.左右野马分鬃" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/9.左右野马分鬃.webp"
-            desc=" FUJIFILM X-S20 1/240s F4 ISO 4000 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/9.左右野马分鬃.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/240s F4 ISO 4000 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 4000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:29:08","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"9.左右野马分鬃","path":"FaYuanTampleCat/9.左右野马分鬃.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 4000 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:29:08","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"9.左右野马分鬃","path":"FaYuanTampleCat/9.左右野马分鬃.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/9.左右野马分鬃.webp"
             aria-label="the photo 8"></a>
           
@@ -533,9 +535,9 @@
           
           <a class="album-item lazy" id="9"
             name="10.😳" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/10.😳.webp"
-            desc=" FUJIFILM X-S20 1/100s F4.5 ISO 320 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/10.😳.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/100s F4.5 ISO 320 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/100s F4.5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:30:18","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"10.😳","path":"FaYuanTampleCat/10.😳.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/100s F4.5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:30:18","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"10.😳","path":"FaYuanTampleCat/10.😳.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/10.😳.webp"
             aria-label="the photo 9"></a>
           
@@ -549,9 +551,9 @@
           
           <a class="album-item lazy" id="10"
             name="11.小王子" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/11.小王子.webp"
-            desc=" FUJIFILM X-S20 1/150s F4.5 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/11.小王子.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/150s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/150s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:49:13","EXIF ExposureTime":"1/150s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"11.小王子","path":"FaYuanTampleCat/11.小王子.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/150s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:49:13","EXIF ExposureTime":"1/150s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"11.小王子","path":"FaYuanTampleCat/11.小王子.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/11.小王子.webp"
             aria-label="the photo 10"></a>
           
@@ -565,9 +567,9 @@
           
           <a class="album-item lazy" id="11"
             name="12.法源寺山门" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/12.法源寺山门.webp"
-            desc=" FUJIFILM X-S20 1/105s F4.5 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/12.法源寺山门.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/105s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/105s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:43:55","EXIF ExposureTime":"1/105s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"12.法源寺山门","path":"FaYuanTampleCat/12.法源寺山门.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/105s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:43:55","EXIF ExposureTime":"1/105s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"12.法源寺山门","path":"FaYuanTampleCat/12.法源寺山门.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/12.法源寺山门.webp"
             aria-label="the photo 11"></a>
           
@@ -581,9 +583,9 @@
           
           <a class="album-item lazy" id="12"
             name="13.钟楼" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/13.钟楼.webp"
-            desc=" FUJIFILM X-S20 1/120s F5 ISO 320 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/13.钟楼.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/120s F5 ISO 320 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:42:46","EXIF ExposureTime":"1/120s","EXIF FNumber":"F5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"13.钟楼","path":"FaYuanTampleCat/13.钟楼.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:42:46","EXIF ExposureTime":"1/120s","EXIF FNumber":"F5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"13.钟楼","path":"FaYuanTampleCat/13.钟楼.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/13.钟楼.webp"
             aria-label="the photo 12"></a>
           
@@ -597,9 +599,9 @@
           
           <a class="album-item lazy" id="13"
             name="14.脊兽" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/14.脊兽.webp"
-            desc=" FUJIFILM X-S20 1/450s F5.6 ISO 320 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/14.脊兽.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/450s F5.6 ISO 320 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/450s F5.6 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:33:53","EXIF ExposureTime":"1/450s","EXIF FNumber":"F5.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"14.脊兽","path":"FaYuanTampleCat/14.脊兽.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/450s F5.6 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:33:53","EXIF ExposureTime":"1/450s","EXIF FNumber":"F5.6","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"14.脊兽","path":"FaYuanTampleCat/14.脊兽.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/14.脊兽.webp"
             aria-label="the photo 13"></a>
           
@@ -613,9 +615,9 @@
           
           <a class="album-item lazy" id="14"
             name="15.廊角" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/15.廊角.webp"
-            desc=" FUJIFILM X-S20 1/160s F4 ISO 640 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/15.廊角.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/160s F4 ISO 640 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/160s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:09:00","EXIF ExposureTime":"1/160s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"15.廊角","path":"FaYuanTampleCat/15.廊角.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/160s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:09:00","EXIF ExposureTime":"1/160s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"15.廊角","path":"FaYuanTampleCat/15.廊角.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/15.廊角.webp"
             aria-label="the photo 14"></a>
           
@@ -629,9 +631,9 @@
           
           <a class="album-item lazy" id="15"
             name="16.廊角2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/16.廊角2.webp"
-            desc=" FUJIFILM X-S20 1/250s F4 ISO 640 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/16.廊角2.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/250s F4 ISO 640 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:09:59","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"16.廊角2","path":"FaYuanTampleCat/16.廊角2.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:09:59","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"16.廊角2","path":"FaYuanTampleCat/16.廊角2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/16.廊角2.webp"
             aria-label="the photo 15"></a>
           
@@ -645,9 +647,9 @@
           
           <a class="album-item lazy" id="16"
             name="17.廊角3" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/17.廊角3.webp"
-            desc=" FUJIFILM X-S20 1/340s F4.5 ISO 640 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/17.廊角3.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/340s F4.5 ISO 640 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/340s F4.5 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:11:16","EXIF ExposureTime":"1/340s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"17.廊角3","path":"FaYuanTampleCat/17.廊角3.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/340s F4.5 ISO 640 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:11:16","EXIF ExposureTime":"1/340s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"17.廊角3","path":"FaYuanTampleCat/17.廊角3.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/17.廊角3.webp"
             aria-label="the photo 16"></a>
           
@@ -661,9 +663,9 @@
           
           <a class="album-item lazy" id="17"
             name="18.脊兽2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/18.脊兽2.webp"
-            desc=" FUJIFILM X-S20 1/500s F4.5 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/18.脊兽2.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/500s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/500s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:15:27","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"18.脊兽2","path":"FaYuanTampleCat/18.脊兽2.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/500s F4.5 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:15:27","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"18.脊兽2","path":"FaYuanTampleCat/18.脊兽2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/18.脊兽2.webp"
             aria-label="the photo 17"></a>
           
@@ -677,9 +679,9 @@
           
           <a class="album-item lazy" id="18"
             name="19.脊兽3" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/19.脊兽3.webp"
-            desc=" FUJIFILM X-S20 1/250s F4 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/19.脊兽3.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/250s F4 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:27:59","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"19.脊兽3","path":"FaYuanTampleCat/19.脊兽3.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:27:59","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"19.脊兽3","path":"FaYuanTampleCat/19.脊兽3.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/19.脊兽3.webp"
             aria-label="the photo 18"></a>
           
@@ -693,9 +695,9 @@
           
           <a class="album-item lazy" id="19"
             name="20.初荷" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/20.初荷.webp"
-            desc=" FUJIFILM X-S20 1/120s F4.5 ISO 320 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/20.初荷.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/120s F4.5 ISO 320 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4.5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:36:20","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"20.初荷","path":"FaYuanTampleCat/20.初荷.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/120s F4.5 ISO 320 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:36:20","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"20.初荷","path":"FaYuanTampleCat/20.初荷.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/20.初荷.webp"
             aria-label="the photo 19"></a>
           
@@ -709,9 +711,9 @@
           
           <a class="album-item lazy" id="20"
             name="21.鼓楼" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/21.鼓楼.webp"
-            desc=" FUJIFILM X-S20 1/100s F4.5 ISO 200 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/21.鼓楼.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/100s F4.5 ISO 200 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/100s F4.5 ISO 200 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:41:00","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 200","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"21.鼓楼","path":"FaYuanTampleCat/21.鼓楼.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/100s F4.5 ISO 200 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 15:41:00","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4.5","EXIF ISOSpeedRatings":"ISO 200","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"21.鼓楼","path":"FaYuanTampleCat/21.鼓楼.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/21.鼓楼.webp"
             aria-label="the photo 20"></a>
           
@@ -725,9 +727,9 @@
           
           <a class="album-item lazy" id="21"
             name="22.陶然亭荷花JPG" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/22.陶然亭荷花JPG.webp"
-            desc=" FUJIFILM X-S20 1/500s F4 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/22.陶然亭荷花JPG.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/500s F4 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 16:48:05","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"22.陶然亭荷花JPG","path":"FaYuanTampleCat/22.陶然亭荷花JPG.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 16:48:05","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"22.陶然亭荷花JPG","path":"FaYuanTampleCat/22.陶然亭荷花JPG.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/22.陶然亭荷花JPG.webp"
             aria-label="the photo 21"></a>
           
@@ -741,9 +743,9 @@
           
           <a class="album-item lazy" id="22"
             name="23.陶然亭一角" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/23.陶然亭一角.webp"
-            desc=" FUJIFILM X-S20 1/140s F4 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/23.陶然亭一角.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/140s F4 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/140s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 16:53:06","EXIF ExposureTime":"1/140s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"23.陶然亭一角","path":"FaYuanTampleCat/23.陶然亭一角.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/140s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 16:53:06","EXIF ExposureTime":"1/140s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"23.陶然亭一角","path":"FaYuanTampleCat/23.陶然亭一角.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/23.陶然亭一角.webp"
             aria-label="the photo 22"></a>
           
@@ -757,9 +759,9 @@
           
           <a class="album-item lazy" id="23"
             name="24.陶然亭" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/24.陶然亭.webp"
-            desc=" FUJIFILM X-S20 1/210s F4 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/24.陶然亭.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/210s F4 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/210s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 16:56:44","EXIF ExposureTime":"1/210s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"24.陶然亭","path":"FaYuanTampleCat/24.陶然亭.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/210s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 16:56:44","EXIF ExposureTime":"1/210s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"24.陶然亭","path":"FaYuanTampleCat/24.陶然亭.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/24.陶然亭.webp"
             aria-label="the photo 23"></a>
           
@@ -773,9 +775,9 @@
           
           <a class="album-item lazy" id="24"
             name="25.浸月亭" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/25.浸月亭.webp"
-            desc=" FUJIFILM X-S20 1/110s F4 ISO 160 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/25.浸月亭.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/110s F4 ISO 160 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/110s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:02:44","EXIF ExposureTime":"1/110s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"25.浸月亭","path":"FaYuanTampleCat/25.浸月亭.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/110s F4 ISO 160 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:02:44","EXIF ExposureTime":"1/110s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"25.浸月亭","path":"FaYuanTampleCat/25.浸月亭.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/25.浸月亭.webp"
             aria-label="the photo 24"></a>
           
@@ -789,9 +791,9 @@
           
           <a class="album-item lazy" id="25"
             name="26.猫头鹰isWatchingYou" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FaYuanTampleCat/26.猫头鹰isWatchingYou.webp"
-            desc=" FUJIFILM X-S20 1/90s F4 ISO 800 XF16-80mmF4 R OIS WR  "
+            desc="  - · -  "
             share="FaYuanTampleCat/26.猫头鹰isWatchingYou.webp"
-            extra='{"desc":"FUJIFILM X-S20 1/90s F4 ISO 800 XF16-80mmF4 R OIS WR ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/90s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:36:14","EXIF ExposureTime":"1/90s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"26.猫头鹰isWatchingYou","path":"FaYuanTampleCat/26.猫头鹰isWatchingYou.webp"}'
+            extra='{"desc":" - · - ","dir":"FaYuanTampleCat","exif":"FUJIFILM X-S20 1/90s F4 ISO 800 XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:08:26 17:36:14","EXIF ExposureTime":"1/90s","EXIF FNumber":"F4","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"26.猫头鹰isWatchingYou","path":"FaYuanTampleCat/26.猫头鹰isWatchingYou.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaYuanTampleCat/26.猫头鹰isWatchingYou.webp"
             aria-label="the photo 25"></a>
           
@@ -803,11 +805,14 @@
         <div class="album-info-btm">
           
             <div class="album-location album-tool">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=FaYuanTampleCat">MAP</a>
+              <iconpark-icon name="local-two"></iconpark-icon><a href="/gallery/location?album=FaYuanTampleCat">MAP</a>
             </div>
           
           <div class="album-share album-tool">
-            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+            <iconpark-icon name="share-three"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link </a>
+          </div>
+          <div class="album-share album-tool">
+            <iconpark-icon name="down-picture"></iconpark-icon><a id="download" href="javascript:void(0)"> Download </a>
           </div>
         </div>        
         <div class="album-title">北京 · 法源寺 · 陶然亭 · 拍猫</div>
@@ -1008,16 +1013,28 @@
           var value = $(`[name='${name}']`)[0];
           changeImageWith(value)
         };
-        const name = getParam('name')
+        var name = getParam('name')
         const len = +'26'
-        if (name !== "" && name !== null) {
+        if (name !== "" && name !== null && name !== 'null') {
           changeImageWithName(name)
         } else {
           var value = $(`#0`)[0];
+          name = value.getAttribute('name');
           var v = JSON.parse(value.getAttribute('extra'));
           changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
         }
+        $('#download').click(function () {
+          var node = document.getElementById('all-pic');
+          html2canvas(node, {
+            useCORS: true,
+            allowTaint: true,
+            scrollX: 0,
+            scrollY: 0,
+          }).then(function (canvas) {                  
+            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          });
+        });        
         // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -1054,6 +1071,14 @@
         body {
           background-color: #fff;
         }
+
+        .fullscreen-pic {
+          grid-column: span 3 / span 3;
+        }
+
+        .fullscreen-info {
+          grid-column: span 3 / span 3;
+        }        
 
         .album-comment {
           max-width: 800px;
@@ -1228,14 +1253,6 @@
           .album-item {
             background-color: black;
           }
-        }
-
-        .fullscreen-pic {
-          grid-column: span 3 / span 3;
-        }
-
-        .fullscreen-info {
-          grid-column: span 3 / span 3;
         }
       </style>
 </section>

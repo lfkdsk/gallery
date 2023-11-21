@@ -53,7 +53,7 @@
   <link rel="apple-touch-icon" sizes="114x114" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_iPhoneHD" />
   <link rel="apple-touch-icon" sizes="144x144" href="https://imgur.lzmun.com/picgo/after2022/tripper2color.png_RetinaiPad" />
   <!-- 添加 RSS 订阅 -->
-  <link rel="alternate" type="application/rss+xml" title="照片集" href="/atom.xml" />
+  <link rel="alternate" type="application/rss+xml" title="照片集" href="/rss" />
   <!-- uc强制竖屏 -->
   <meta name="screen-orientation" content="portrait">
   <!-- QQ强制竖屏 -->
@@ -68,7 +68,8 @@
   <meta name="x5-page-mode" content="app">
   <!-- https://material.io/resources/icons/?style=outline -->
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_20213_18.4a5f87dae8e6f9e336b9ad6fa00f8e8f.js"></script>
+  
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_14.95e63f49ecd5a866541aee0cf8ec0fac.js"></script>
   
   
 <style>
@@ -265,11 +266,12 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
+  <script src="js/html2canvas.js"></script>
+<section class="pjax-area">
   <div class="content-area post-album default-content-area">
     <div class="grid grid-cols-3">
       <div class="default-pic gap-2 wrapper">
-        <div class="pic-area">
+        <div id="all-pic" class="pic-area">
           <div class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/B17870D6-3FE2-413E-941E-856120428D46_1_102_o.2d7uy3ncwxc0.webp" />
         </div>
@@ -300,7 +302,7 @@
     #exif-maker-logo {
         text-align: center;
         vertical-align: baseline;
-        height: 60px;
+        height: 40px;
     }
 
     #exif-param {
@@ -421,9 +423,9 @@
           
           <a class="album-item lazy" id="2"
             name="IMG_7586.4e91my1ve140" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7586.4e91my1ve140.JPG"
-            desc=" Apple iPhone 12 Pro 1/14s F2.4 ISO 1600 iPhone 12 Pro back camera 1.54mm f/2.4  "
+            desc="  - · -  "
             share="Japan202307/IMG_7586.4e91my1ve140.JPG"
-            extra='{"desc":"Apple iPhone 12 Pro 1/14s F2.4 ISO 1600 iPhone 12 Pro back camera 1.54mm f/2.4 ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/14s F2.4 ISO 1600 iPhone 12 Pro back camera 1.54mm f/2.4 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:21 19:48:57","EXIF ExposureTime":"1/14s","EXIF FNumber":"F2.4","EXIF ISOSpeedRatings":"ISO 1600","EXIF LensModel":"iPhone 12 Pro back camera 1.54mm f/2.4","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[34.96975555555556,138.9260861111111],"name":"IMG_7586.4e91my1ve140","path":"Japan202307/IMG_7586.4e91my1ve140.JPG"}'
+            extra='{"desc":" - · - ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/14s F2.4 ISO 1600 iPhone 12 Pro back camera 1.54mm f/2.4 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:21 19:48:57","EXIF ExposureTime":"1/14s","EXIF FNumber":"F2.4","EXIF ISOSpeedRatings":"ISO 1600","EXIF LensModel":"iPhone 12 Pro back camera 1.54mm f/2.4","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[34.96975555555556,138.9260861111111],"name":"IMG_7586.4e91my1ve140","path":"Japan202307/IMG_7586.4e91my1ve140.JPG"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7586.4e91my1ve140.webp"
             aria-label="the photo 2"></a>
           
@@ -453,9 +455,9 @@
           
           <a class="album-item lazy" id="4"
             name="IMG_7628.6hru0awc98s0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7628.6hru0awc98s0.JPG"
-            desc=" Apple iPhone 12 Pro 1/121s F1.6 ISO 40 iPhone 12 Pro back camera 4.2mm f/1.6  "
+            desc="  - · -  "
             share="Japan202307/IMG_7628.6hru0awc98s0.JPG"
-            extra='{"desc":"Apple iPhone 12 Pro 1/121s F1.6 ISO 40 iPhone 12 Pro back camera 4.2mm f/1.6 ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/121s F1.6 ISO 40 iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 07:54:06","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[34.970305555555555,138.92620833333334],"name":"IMG_7628.6hru0awc98s0","path":"Japan202307/IMG_7628.6hru0awc98s0.JPG"}'
+            extra='{"desc":" - · - ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/121s F1.6 ISO 40 iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 07:54:06","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[34.970305555555555,138.92620833333334],"name":"IMG_7628.6hru0awc98s0","path":"Japan202307/IMG_7628.6hru0awc98s0.JPG"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7628.6hru0awc98s0.webp"
             aria-label="the photo 4"></a>
           
@@ -469,9 +471,9 @@
           
           <a class="album-item lazy" id="5"
             name="IMG_7643.2nv6halko6w0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7643.2nv6halko6w0.JPG"
-            desc=" Apple iPhone 12 Pro 1/121s F1.6 ISO 100 iPhone 12 Pro back camera 4.2mm f/1.6  "
+            desc="  - · -  "
             share="Japan202307/IMG_7643.2nv6halko6w0.JPG"
-            extra='{"desc":"Apple iPhone 12 Pro 1/121s F1.6 ISO 100 iPhone 12 Pro back camera 4.2mm f/1.6 ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/121s F1.6 ISO 100 iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 08:05:24","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[34.97027777777778,138.92681944444445],"name":"IMG_7643.2nv6halko6w0","path":"Japan202307/IMG_7643.2nv6halko6w0.JPG"}'
+            extra='{"desc":" - · - ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/121s F1.6 ISO 100 iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 08:05:24","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[34.97027777777778,138.92681944444445],"name":"IMG_7643.2nv6halko6w0","path":"Japan202307/IMG_7643.2nv6halko6w0.JPG"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7643.2nv6halko6w0.webp"
             aria-label="the photo 5"></a>
           
@@ -565,9 +567,9 @@
           
           <a class="album-item lazy" id="11"
             name="IMG_7899.6chi3fhm2eo0" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7899.6chi3fhm2eo0.JPG"
-            desc=" Apple iPhone 12 Pro 1/17s F1.6 ISO 1000 iPhone 12 Pro back camera 4.2mm f/1.6  "
+            desc="  - · -  "
             share="Japan202307/IMG_7899.6chi3fhm2eo0.JPG"
-            extra='{"desc":"Apple iPhone 12 Pro 1/17s F1.6 ISO 1000 iPhone 12 Pro back camera 4.2mm f/1.6 ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/17s F1.6 ISO 1000 iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 21:49:00","EXIF ExposureTime":"1/17s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[35.63229444444445,139.77708611111112],"name":"IMG_7899.6chi3fhm2eo0","path":"Japan202307/IMG_7899.6chi3fhm2eo0.JPG"}'
+            extra='{"desc":" - · - ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/17s F1.6 ISO 1000 iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 21:49:00","EXIF ExposureTime":"1/17s","EXIF FNumber":"F1.6","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[35.63229444444445,139.77708611111112],"name":"IMG_7899.6chi3fhm2eo0","path":"Japan202307/IMG_7899.6chi3fhm2eo0.JPG"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7899.6chi3fhm2eo0.webp"
             aria-label="the photo 11"></a>
           
@@ -581,9 +583,9 @@
           
           <a class="album-item lazy" id="12"
             name="IMG_7931.1s5e3a0n5bnk" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Japan202307/IMG_7931.1s5e3a0n5bnk.JPG"
-            desc=" Apple iPhone 12 Pro 1/14s F2 ISO 400 iPhone 12 Pro back camera 6mm f/2  "
+            desc="  - · -  "
             share="Japan202307/IMG_7931.1s5e3a0n5bnk.JPG"
-            extra='{"desc":"Apple iPhone 12 Pro 1/14s F2 ISO 400 iPhone 12 Pro back camera 6mm f/2 ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/14s F2 ISO 400 iPhone 12 Pro back camera 6mm f/2 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 22:55:40","EXIF ExposureTime":"1/14s","EXIF FNumber":"F2","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"iPhone 12 Pro back camera 6mm f/2","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[35.627808333333334,139.77119444444446],"name":"IMG_7931.1s5e3a0n5bnk","path":"Japan202307/IMG_7931.1s5e3a0n5bnk.JPG"}'
+            extra='{"desc":" - · - ","dir":"Japan202307","exif":"Apple iPhone 12 Pro 1/14s F2 ISO 400 iPhone 12 Pro back camera 6mm f/2 ","exif_data":{"EXIF DateTimeOriginal":"2023:06:22 22:55:40","EXIF ExposureTime":"1/14s","EXIF FNumber":"F2","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"iPhone 12 Pro back camera 6mm f/2","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[35.627808333333334,139.77119444444446],"name":"IMG_7931.1s5e3a0n5bnk","path":"Japan202307/IMG_7931.1s5e3a0n5bnk.JPG"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Japan202307/IMG_7931.1s5e3a0n5bnk.webp"
             aria-label="the photo 12"></a>
           
@@ -691,11 +693,14 @@
         <div class="album-info-btm">
           
             <div class="album-location album-tool">
-              <iconpark-icon name="aiming"></iconpark-icon><a href="/gallery/location?album=Japan202307">MAP</a>
+              <iconpark-icon name="local-two"></iconpark-icon><a href="/gallery/location?album=Japan202307">MAP</a>
             </div>
           
           <div class="album-share album-tool">
-            <iconpark-icon name="aiming"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link. </a>
+            <iconpark-icon name="share-three"></iconpark-icon><a id="share" href="javascript:void(0)"> Share Link </a>
+          </div>
+          <div class="album-share album-tool">
+            <iconpark-icon name="down-picture"></iconpark-icon><a id="download" href="javascript:void(0)"> Download </a>
           </div>
         </div>        
         <div class="album-title">日本旅行</div>
@@ -850,16 +855,28 @@
           var value = $(`[name='${name}']`)[0];
           changeImageWith(value)
         };
-        const name = getParam('name')
+        var name = getParam('name')
         const len = +'19'
-        if (name !== "" && name !== null) {
+        if (name !== "" && name !== null && name !== 'null') {
           changeImageWithName(name)
         } else {
           var value = $(`#0`)[0];
+          name = value.getAttribute('name');
           var v = JSON.parse(value.getAttribute('extra'));
           changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
         }
+        $('#download').click(function () {
+          var node = document.getElementById('all-pic');
+          html2canvas(node, {
+            useCORS: true,
+            allowTaint: true,
+            scrollX: 0,
+            scrollY: 0,
+          }).then(function (canvas) {                  
+            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          });
+        });        
         // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -896,6 +913,14 @@
         body {
           background-color: #fff;
         }
+
+        .fullscreen-pic {
+          grid-column: span 3 / span 3;
+        }
+
+        .fullscreen-info {
+          grid-column: span 3 / span 3;
+        }        
 
         .album-comment {
           max-width: 800px;
@@ -1070,14 +1095,6 @@
           .album-item {
             background-color: black;
           }
-        }
-
-        .fullscreen-pic {
-          grid-column: span 3 / span 3;
-        }
-
-        .fullscreen-info {
-          grid-column: span 3 / span 3;
         }
       </style>
 </section>
