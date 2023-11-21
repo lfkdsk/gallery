@@ -28,13 +28,13 @@ google_analytics:
 nav:
   地图:
     link: /gallery/location
-    icon: aiming
+    icon: local-two
   归档: 
     link: https://lfkdsk.github.io
     icon: inbox
   随机:
     link: /gallery/random
-    icon: unsplash
+    icon: pic
     
 thumbnail_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/
 base_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master
