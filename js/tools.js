@@ -73,7 +73,6 @@ function wrapperData(v, author) {
   switch (maker) {
     case 'Apple': {
       exifLogo.attr('src', 'img/apple.png');
-      exifLogo.attr('style', 'height: 40px;');
       break;
     }
     case 'RICOH IMAGING COMPANY, LTD.  ': {
