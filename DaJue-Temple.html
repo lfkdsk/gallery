@@ -991,7 +991,7 @@
         var exifAuthor = $("#exif-author");
         var normalWrapper = $("#normal-wrapper");
         var normalData = $("#no-exif-data");
-
+        var name = getParam('name');
         imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
         function changeExifData(v) {
           console.log(Object.keys(v.exif_data))
@@ -1008,7 +1008,7 @@
         function changeImageWith(target) {
           imgno = target.getAttribute('id'); 
           var imgLink = target.getAttribute('rel');
-          var name = target.getAttribute('name');
+          name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = '';
@@ -1035,7 +1035,6 @@
           var value = $(`[name='${name}']`)[0];
           changeImageWith(value)
         };
-        var name = getParam('name')
         const len = +'28'
         if (name !== "" && name !== null && name !== 'null') {
           changeImageWithName(name)
