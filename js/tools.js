@@ -68,6 +68,13 @@ function accountForFirefox(click) { // wrapper function
 }
 
 function wrapperData(v, author) {
+  var exifParam = $("#exif-param");
+  var exifMaker = $("#exif-maker");
+  var exifDate = $("#exif-date");
+  var exifLens = $("#exif-lens");
+  var exifLogo = $("#exif-maker-logo");
+  var exifAuthor = $("#exif-author");
+
   const maker = v.exif_data['Image Make'];
   console.log(maker);
   switch (maker) {
