@@ -79,6 +79,10 @@ function wrapperData(v, author) {
       exifLogo.attr('src', 'img/384_ricoh.jpg');
       break;
     }
+    case 'Canon': {
+      exifLogo.attr('src', 'img/canon.png');
+      break;
+    }
     default: {
       break;
     }
