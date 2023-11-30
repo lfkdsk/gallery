@@ -379,9 +379,10 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
             text-align: center;
         }
 
-
         #table-wrapper {
             margin-top: 20px;
+            max-width: 100%;
+            overflow-x: auto;
         }
 
         ln-table {
@@ -397,16 +398,20 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
             width: 100%;
             min-height: 200px;
             margin: 0 auto;
-            margin-top: 130px;
-            font-size: 18px;
+            font-size: 14px;
+        }
+
+        @media (min-width: 769px) {
+            #editor {
+                margin-top: 130px;
+                font-size: 18px;
+            }
         }
 
         #querybox {
             margin: 0 auto;
             margin-top: 10px;
         }
-
-        th {}
 
         .album-next-one {
             margin-top: 10px;
