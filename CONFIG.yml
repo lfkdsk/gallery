@@ -38,3 +38,5 @@ nav:
     
 thumbnail_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/
 base_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master
+backup_base_url: https://raw.githubusercontent.com/lfkdsk/gallery/master
+backup_thumbnail_url: https://raw.githubusercontent.com/lfkdsk/gallery/thumbnail
