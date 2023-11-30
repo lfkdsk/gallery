@@ -608,55 +608,6 @@
       </div>
     </div>
   </div>
-  <!-- 
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_0002.3hsdjks7mew0.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_0003.20qo08tc8534.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_6222.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_6722.7rnk5cvgxc4.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_6738.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_6827.3kccapjryvq0.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_6953.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_7089.4cskb5ur5o00.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_7191.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_7193.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_7196.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BeiJingGangster/IMG_7214.webp" as="image" />  
-   -->
   
       </div>
       <script>
@@ -993,9 +944,13 @@
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js" async></script>
+<script src="/gallery/js/highlight.min.js"></script>
+<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<script>window.addEventListener('load', () => hljs.initHighlighting());</script>
+<!-- <script>window.addEventListener('load', () => {
+  hljs.highlightAll(); // initialize highlighting
+  hljs.initLineNumbersOnLoad(); // apply line numbering 
+});</script> -->
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");

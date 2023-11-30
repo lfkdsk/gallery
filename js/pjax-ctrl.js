@@ -52,9 +52,6 @@ document.addEventListener('pjax:complete', function () {
     script.src = url;
     document.getElementsByTagName('head')[0].appendChild(script);
   }
-  loadscript('/js/highlight.min.js', function () {
-    hljs.initHighlighting();
-  });
   NProgress.set(0.9);
   NProgress.done();
 });

@@ -832,111 +832,6 @@
       </div>
     </div>
   </div>
-  <!-- 
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/1.山门.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/2.智化门.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/3.鼓楼.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/4.往来成古今.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/5.智化殿牌匾.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/6.浮图.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/7.雕刻.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/8.浮雕全景.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/9.脊.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/10.藻井.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/11.藻井.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/12.全景.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/13.韦陀.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/14.仰拍万佛阁三层.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/15.帝释天.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/16.帝释天侧拍.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/17.全景.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/18.大梵天.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/19.如来佛.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/20.帝释天头部细节.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/21.万佛阁内饰.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/22.梵天衣决.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/23.基座细节.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/24.大梵天头部细节.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/25.房内藻井.jpeg" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/ZhiHuaTample/26.万佛阁二层.jpeg" as="image" />  
-   -->
   
       </div>
       <script>
@@ -1273,9 +1168,13 @@
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js" async></script>
+<script src="/gallery/js/highlight.min.js"></script>
+<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<script>window.addEventListener('load', () => hljs.initHighlighting());</script>
+<!-- <script>window.addEventListener('load', () => {
+  hljs.highlightAll(); // initialize highlighting
+  hljs.initLineNumbersOnLoad(); // apply line numbering 
+});</script> -->
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");

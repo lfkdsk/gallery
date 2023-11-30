@@ -18,6 +18,13 @@ function updateParams(name) {
   window.history.replaceState(null, null, url); // or pushState
 }
 
+function addBackUp(ele, url, name) {
+  ele.onerror = function() {
+    ele.onerror = null;
+    ele.src = url + name;
+  }
+}
+
 function copyToClipboard(content) {
   toastr.options = {
     "closeButton": true,

@@ -22,7 +22,7 @@
   <meta name="author" content="lfkdsk">
   
   <!--Open Graph Title-->
-  <meta property="og:title" content="搜索" />
+  <meta property="og:title" content="数据查询" />
   <!--Open Graph Description-->
   <meta property="og:description" content="拿起相机，认真思考" />
   <!--Open Graph Site Name-->
@@ -38,7 +38,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Title -->
   
-  <title>搜索 - 照片集</title>
+  <title>数据查询 - 照片集</title>
   <!-- 添加到主屏后的标题（iOS 6 新增） -->
   <meta name="apple-mobile-web-app-title" content="照片集">
   <!-- 是否启用 WebApp 全屏模式 -->
@@ -266,152 +266,172 @@
   }
 </style>
   <!-- Main Content -->
-  
+  <script src="js/sql-wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ace-builds@1.31.2/src-min-noconflict/ace.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/ace-builds@1.31.2/css/ace.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
 <section class="pjax-area">
-  <div class="content-area search-area pt-[100px] max-w-[90%] md:max-w-[800px]">
+    <div id="editor"></div>
+    <button id="querybox" class="album-next-one">QUERY</button>
+    <div id="info"></div>
+    <div id="table-wrapper"></div>
+    <div id="error"></div>
+    <script type="module">
+        const initSqlJs = window.initSqlJs;
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/sql");
+        editor.session.setUseWrapMode(true);
+        editor.setValue(`/* tables(album, photo, location, exifdata) */
+SELECT photo.*, exifdata.maker
+FROM photo
+LEFT OUTER JOIN exifdata
+ON photo.exif_data_id = exifdata.id
+WHERE photo.location_id NOT NULL AND
+exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
+        const SQL = await initSqlJs({
+            locateFile: file => `/gallery/js/sql-wasm.wasm`
+        });
+        // Create a database
+        const sqlite = await fetch('sqlite.db');
+        const sqlite_buf = await sqlite.arrayBuffer();
+        const db = new SQL.Database(new Uint8Array(sqlite_buf));
+        function isImage(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            return ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'webp'].includes(ext);
+        }
+        function query() {
+            const wrapper = document.getElementById('table-wrapper')
+            wrapper.innerHTML = '';
+            $('#error').text('');
+            $('#info').text('');
+            const q = editor.getValue();
+            var data = null;
+            try {
+                const start = performance.now();
+                data = db.exec(q);
+                const duration = performance.now() - start;
+                $('#info').text('query: ' + duration + 'ms');
+            } catch (error) {
+                $('#error').text(error);
+                return;
+            }
+            // console.log(data);
+            for (const item of data) {
+                const table = document.createElement('table');
+                table.classList = 'ln-table table table-hover table-responsive';
+                const thead = table.createTHead();
+                thead.classList.add('thead-dark');
+                const row = thead.insertRow();
 
-    <div class="ais-InstantSearch">
-      <!--搜索框-->
-      <div id="searchbox"></div>
-      <div id="hits"></div>
-      <div id="pagination"></div>
-    </div>
+                wrapper.appendChild(table);
+                for (const column of item.columns) {
+                    const th = document.createElement('th');
+                    th.scope = 'col';
+                    const text = document.createTextNode(column);
+                    th.appendChild(text);
+                    row.appendChild(th);
+                }
 
-  </div>
-  <style>
-    input,
-    textarea {
-      outline: none;
-    }
+                // 添加数据行
+                const tbody = table.createTBody();
+                for (const row of item.values) {
+                    const tr = tbody.insertRow();
+                    for (const cell of row) {
+                        const td = tr.insertCell();
+                        if (isImage(cell + "")) {
+                            const a = document.createElement('a');
+                            a.text = cell
+                            a.setAttribute('href', 'photo?name=' + cell);
+                            td.appendChild(a);
+                            const img = document.createElement('img');
+                            img.style.width = '200px'
+                            img.src = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + cell.replace(/\.\w+$/, '.webp');
+                            addBackUp(img, 'https://raw.githubusercontent.com/lfkdsk/gallery/thumbnail/', cell.replace(/\.\w+$/, '.webp'))
+                            td.appendChild(img)
+                            continue
+                        }
+                        const text = document.createTextNode(cell);
+                        td.appendChild(text);
+                    }
+                }
+            }
+        }
+        $("#querybox").click(query)
+    </script>
+    <style>
+        #error {
+            color: red;
+            justify-content: center;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-    .ais-InstantSearch {
-      max-width: 100%;
-    }
-
-    .hits {
-      max-width: 100%;
-    }
-
-    .ais-SearchBox-form {
-      width: 100%;
-      height: 58px;
-      border-radius: 29px;
-      background-color: #fff;
-    }
-
-    .ais-SearchBox-form input {
-      width: calc(100% - 60px);
-      height: 100%;
-      display: block;
-      margin: 0 auto;
-      background-color: #ffffff00;
-    }
-
-    .ais-SearchBox-form button {
-      display: none;
-    }
+        #info {
+            color: greenyellow;
+            justify-content: center;
+            margin: 0 auto;
+            text-align: center;
+        }
 
 
-    #hits {
-      border-radius: 29px;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      margin-top: 30px;
-      padding: 30px 0;
-    }
+        #table-wrapper {
+            margin-top: 20px;
+        }
 
-    .ais-Hits--empty {
-      text-align: center;
-    }
+        ln-table {
+            width: auto;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 20px;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
 
-    .ais-Hits-item {
-      width: calc(100% - 60px);
-      padding: 8px 12px;
-      margin: 6px 0;
-      transition: .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      text-align: left;
-      margin: 0 auto;
-    }
+        #editor {
+            width: 100%;
+            min-height: 200px;
+            margin: 0 auto;
+            margin-top: 130px;
+            font-size: 18px;
+        }
 
-    .ais-Hits-item:hover {
-      background-color: rgb(229 231 235);
-      border-radius: 3px;
-    }
+        #querybox {
+            margin: 0 auto;
+            margin-top: 10px;
+        }
 
-    .result-text {
-      font-size: 14px;
-      line-height: 16px;
-      opacity: 0.6;
-      height: 16px;
-      overflow-y: clip;
-    }
+        th {}
 
-    @media (prefers-color-scheme: dark) {
+        .album-next-one {
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+            border-style: solid;
+            border-color: black;
+            background-color: white;
+            margin: 0 8px;
+            padding: 1em 1.5em;
+            border-width: 2px;
+            font-weight: bold;
+        }
 
-      #hits,
-      .search-result,
-      .search-box,
-      .ais-SearchBox-form,
-      .search-box input {
-        background-color: #424242;
-      }
+        .album-next-one:hover {
+            background-color: black;
+            color: white;
+        }
 
-      .result-text {
-        color: #bdbdbd;
-      }
-
-      input,
-      .ais-Hits--empty,
-      .title {
-        color: #fff
-      }
-
-      .ais-Hits-item:hover {
-        background-color: rgb(31 41 55 / 0.5);
-      }
-    }
-
-    mark {
-      background-color: #0000;
-      color: var(--main-black);
-    }
-
-    mark {
-      background: linear-gradient(104deg, #71afdd00 0.9%, #71afdd7c 2.4%, #71afdd80 5.8%, #71afdd1a 93%, #71afdd67 96%, #82ffff00 98%), linear-gradient(183deg, #71afdd00 0%, #71afdd4d 7.9%, #71afdd00 15%);
-      border-radius: 7.5px;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.46.2/dist/instantsearch.production.min.js"></script>
-  <script data-pjax>
-    
-      const searchClient = algoliasearch('5KD46FHE8V', 'fe3eb1d9aad1e948f177c0cca2ac98cc');
-      const search = instantsearch({
-        indexName: 'tripper-hexo',
-        searchClient,
-      });
-      search.addWidgets([
-        instantsearch.widgets.searchBox({
-          container: '#searchbox',
-        }),
-
-        instantsearch.widgets.hits({
-          container: '#hits',
-          templates: {
-            item: `
-        <a href="{{ permalink }}" target="_blank" class="search-result">
-          <div class="title">{{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}</div>
-        </a>
-      `,
-          },
-        })
-      ]);
-      search.start();
-    
-  </script>
+        .album-next-one:active {
+            background-color: white;
+            color: black;
+        }
+    </style>
 </section>
-
   <!-- Footer -->
   <!-- Footer -->
 <footer class="itp-footer text-center">

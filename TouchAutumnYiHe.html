@@ -784,99 +784,6 @@
       </div>
     </div>
   </div>
-  <!-- 
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4497.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4506.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4511.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4513.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4520.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4521.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4524.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4525.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4529.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4529_fix.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4535.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4536.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4537.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4539.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4548.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4552.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4571.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4589.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4598.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4614.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4625.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4631.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4635.webp" as="image" />  
-   -->
   
       </div>
       <script>
@@ -1213,9 +1120,13 @@
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js" async></script>
+<script src="/gallery/js/highlight.min.js"></script>
+<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<script>window.addEventListener('load', () => hljs.initHighlighting());</script>
+<!-- <script>window.addEventListener('load', () => {
+  hljs.highlightAll(); // initialize highlighting
+  hljs.initLineNumbersOnLoad(); // apply line numbering 
+});</script> -->
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");

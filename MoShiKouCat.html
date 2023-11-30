@@ -688,75 +688,6 @@
       </div>
     </div>
   </div>
-  <!-- 
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/1.布庄.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/2.门廊.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/3.猫头雕塑.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/4.猫猫.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/5.啵啵小猫.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/6.路边装饰.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/7.路边装饰.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/8.承恩寺山门.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/9.小猫装饰.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/10.躺了.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/11.吃手.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/12.继续吃手.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/13.吃.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/14.看什么看.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/15.打呼.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/16.着了.webp" as="image" />  
-  
-    
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/MoShiKouCat/17.我也睡了.webp" as="image" />  
-   -->
   
       </div>
       <script>
@@ -1093,9 +1024,13 @@
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js" async></script>
+<script src="/gallery/js/highlight.min.js"></script>
+<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<script>window.addEventListener('load', () => hljs.initHighlighting());</script>
+<!-- <script>window.addEventListener('load', () => {
+  hljs.highlightAll(); // initialize highlighting
+  hljs.initLineNumbersOnLoad(); // apply line numbering 
+});</script> -->
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");

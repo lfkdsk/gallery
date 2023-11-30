@@ -178,7 +178,7 @@
       "@type": "NewsArticle",
       "headline": "照片集",
       "image": "https://imgur.lzmun.com/picgo/after2022/6DD1FBC3-AD8A-4340-842D-6ACF531F8291_1_105_c.jpeg_itp",
-      "datePublished": "Thu Nov 30 2023 20:59:41 GMT+0000",
+      "datePublished": "Thu Nov 30 2023 21:02:57 GMT+0000",
       "author": [{
         "@type": "Person",
         "name": "lfkdsk",
@@ -594,9 +594,13 @@
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js" async></script>
+<script src="/gallery/js/highlight.min.js"></script>
+<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<script>window.addEventListener('load', () => hljs.initHighlighting());</script>
+<!-- <script>window.addEventListener('load', () => {
+  hljs.highlightAll(); // initialize highlighting
+  hljs.initLineNumbersOnLoad(); // apply line numbering 
+});</script> -->
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");
