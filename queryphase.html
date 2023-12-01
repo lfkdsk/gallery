@@ -22,14 +22,14 @@
   <meta name="author" content="lfkdsk">
   
   <!--Open Graph Title-->
-  <meta property="og:title" content="照片集" />
+  <meta property="og:title" content="查询用例" />
   <!--Open Graph Description-->
   <meta property="og:description" content="拿起相机，认真思考" />
   <!--Open Graph Site Name-->
   <meta property="og:site_name" content="照片集" />
   <!--Type page-->
   
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   
   <!--Page Cover-->
   
@@ -38,7 +38,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Title -->
   
-  <title>归档：2023/11 - 照片集</title>
+  <title>查询用例 - 照片集</title>
   <!-- 添加到主屏后的标题（iOS 6 新增） -->
   <meta name="apple-mobile-web-app-title" content="照片集">
   <!-- 是否启用 WebApp 全屏模式 -->
@@ -252,7 +252,7 @@
         </div>
       </a>
     </div>
-    
+    <ol class="itp-layer-toc"><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-ALL-IMAGE-MAKER"><span class="itp-layer-toc-text">Group all image maker</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT"><span class="itp-layer-toc-text">Group by focal length and order by count.</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GIVE-ME-RANDOM-5-FUJIFILM-PICTURE"><span class="itp-layer-toc-text">Give me random 5 fujifilm picture</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GET-N-GROUP-BY-F-NUMBER"><span class="itp-layer-toc-text">Get N group by F Number</span></a></li></ol>
   </div>
   <div class="itp-float-layer-bg layer-bg-nodisplay" id="close_layer"></div>
 </div>
@@ -269,57 +269,117 @@
   
 
 <section class="pjax-area">
-  <div class="content-area p-4 container max-w-[1280px]">
-    <div class="index-achieve-title title">2023/11</div>
-    <div class="text-2xl leading-10 py-2 col-span-1 md:col-span-3 text-tblack dark:text-white">分类</div>
-    <section class="itp-article-categories" style="list-style-type: none;">
-      <div class="itp-m3-chip-color-list">
-        
+  <div class="content-area post-content-area">
+    <div class=" left-area"></div>
+    <div class="main-area">
+      <div class="itp-m3-card post-cover">
+        <div class="itp-m3-card-cover">
+          <div class="itp-m3-cover-bg" style="
+          /* background-image: url(https://imgur.lzmun.com/picgo/after2022/6DD1FBC3-AD8A-4340-842D-6ACF531F8291_1_105_c.jpeg_itp); */
+          background-size: cover;
+          background-position: center center;
+        ">
+            <div class="itp-m3-card-cover-layer ">
+              <div class="info-area pjax-area">
+                <div class="itp-m3-cover-avatar">
+                  <img src="https://imgur.lzmun.com/picgo/after2022/tripper2colorfull.png_avatar" class="nofancy">
+                </div>
+                <div class="itp-m3-cover-title" style="opacity: 1;">
+                  查询用例
+                </div>
+                <div class="itp-m3-cover-subtitle" style="opacity: 0.8;">
+                  
+拿起相机，认真思考
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="article">
+          <h2 id="GROUP-ALL-IMAGE-MAKER">Group all image maker</h2>
+<pre><code class="language-sql">SELECT IFNULL(EXIFData.maker, 'NONE') AS maker, COUNT(*) AS count
+FROM Photo
+LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
+GROUP BY maker
+ORDER BY maker
+</code></pre>
+<p><a href="query?sql=SELECT%20IFNULL(EXIFData.maker,%20%27NONE%27)%20AS%20maker,%20COUNT(*)%20AS%20count%20FROM%20Photo%20LEFT%20OUTER%20JOIN%20EXIFData%20ON%20Photo.exif_data_id%20=%20EXIFData.id%20GROUP%20BY%20maker%20ORDER%20BY%20maker">TRY IT</a></p>
+<h2 id="GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT">Group by focal length and order by count.</h2>
+<pre><code class="language-sql">SELECT EXIFData.focal_length, COUNT(*) AS count
+FROM Photo
+LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
+WHERE Photo.exif_data_id IS NOT NULL OR Photo.exif &lt;&gt; ''
+GROUP BY EXIFData.focal_length
+ORDER BY CAST(EXIFData.focal_length as DOUBLE) DESC
+</code></pre>
+<p><a href="query?sql=%22SELECT%20EXIFData.focal_length,%20COUNT(*)%20AS%20count%20FROM%20Photo%20LEFT%20OUTER%20JOIN%20EXIFData%20ON%20Photo.exif_data_id%20=%20EXIFData.id%20WHERE%20Photo.exif_data_id%20IS%20NOT%20NULL%20OR%20Photo.exif%20%3C%3E%20%27%27%20GROUP%20BY%20EXIFData.focal_length%20ORDER%20BY%20CAST(EXIFData.focal_length%20as%20DOUBLE)%20DESC%22">TRY IT</a></p>
+<h2 id="GIVE-ME-RANDOM-5-FUJIFILM-PICTURE">Give me random 5 fujifilm picture</h2>
+<pre><code class="language-sql">SELECT photo.*, exifdata.maker
+FROM photo
+LEFT OUTER JOIN exifdata
+ON photo.exif_data_id = exifdata.id
+WHERE photo.location_id NOT NULL AND
+exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;
+</code></pre>
+<p><a href="query?sql=%22SELECT%20photo.*,%20exifdata.maker%20FROM%20photo%20LEFT%20OUTER%20JOIN%20exifdata%20ON%20photo.exif_data_id%20=%20exifdata.id%20WHERE%20photo.location_id%20NOT%20NULL%20AND%20exifdata.maker%20=%20%27FUJIFILM%27%20ORDER%20BY%20RANDOM()%20LIMIT%205;%22">TRY IT</a></p>
+<h2 id="GET-N-GROUP-BY-F-NUMBER">Get N group by F Number</h2>
+<pre><code class="language-sql">SELECT id, path, name, desc, f_number, lo, hi
+FROM (
+  SELECT p.id, p.path, p.name, p.desc, e.f_number, l.lo, l.hi,
+         ROW_NUMBER() OVER (PARTITION BY e.f_number ORDER BY p.id) AS row_num
+  FROM photo p
+  JOIN exifdata e ON p.exif_data_id = e.id
+  LEFT JOIN location l ON p.location_id = l.id
+) subquery
+WHERE row_num &lt;= 10;
+</code></pre>
+<p><a href="query?sql=%22SELECT%20id,%20path,%20name,%20desc,%20f_number,%20lo,%20hi%20FROM%20(%20SELECT%20p.id,%20p.path,%20p.name,%20p.desc,%20e.f_number,%20l.lo,%20l.hi,%20ROW_NUMBER()%20OVER%20(PARTITION%20BY%20e.f_number%20ORDER%20BY%20p.id)%20AS%20row_num%20FROM%20photo%20p%20JOIN%20exifdata%20e%20ON%20p.exif_data_id%20=%20e.id%20LEFT%20JOIN%20location%20l%20ON%20p.location_id%20=%20l.id%20)%20subquery%20WHERE%20row_num%20%3C=%2010;%22">TRY IT</a></p>
+
+        </div>
+        <div class="itp-m3-post-info_area">
+          <div class="info_area-category">
+            
+            
+          </div>
+          <div class="info_area-copyright">
+            <p>本文著作权归作者&nbsplfkdsk&nbsp所有，转载或引用请联系作者获得授权。</p>
+          </div>
+        </div>
       </div>
-    </section>
-    <div class="text-2xl leading-10 py-2 col-span-1 md:col-span-3 text-tblack dark:text-white">标签</div>
-    <section class="itp-article-categories" style="list-style-type: none;">
-      <div class="itp-m3-chip-normal-list">
-        
-      </div>
-    </section>
-    <!-- learn from https://hughsite.com/post/hexo-modify-theme.html -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-  
-  
-  
-  
-  <p class="text-2xl leading-10 py-2 col-span-1 md:col-span-2 lg:col-span-3 gap-1 text-tblack dark:text-white">2023</p>
-  
-  
-  <div class="h-auto px-3 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-all">
-    <a href="/gallery/2023/undefined/" class="flex items-center">
-      <div class="px-1">
-        <div class="post-title text-tblack dark:text-white">照片集</div>
-        <span class="text-sm leading-4 text-gray-400">2023-11-30</span>
-        
-      </div>
-    </a>
-  </div>
-  
-  
+      
+    </div>
+    <!-- <div class="right-area">
+      
+      
+
+<div id="column-toc-m3" class="noprn column-toc-m3 itp-toc-m3-sidetop">
+  <ol class="itp-toc"><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-ALL-IMAGE-MAKER"><span class="itp-toc-text">Group all image maker</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT"><span class="itp-toc-text">Group by focal length and order by count.</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GIVE-ME-RANDOM-5-FUJIFILM-PICTURE"><span class="itp-toc-text">Give me random 5 fujifilm picture</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GET-N-GROUP-BY-F-NUMBER"><span class="itp-toc-text">Get N group by F Number</span></a></li></ol>
 </div>
-<style>
-  .post-title {
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-  }
-  .post-icon {
-    font-size: 1.2em;
-    color: #9DA3AE;
-  }
-</style>
+
+      
+    </div> -->
   </div>
+  
+  <!--
+<div class="mdui-dialog" id="shareDialogText" style="text-align: center;">
+  <div class="itp-share-card" id="shareInfo">
+    <div class="itp-share-cover" style="background: url('https://imgur.lzmun.com/picgo/after2022/6DD1FBC3-AD8A-4340-842D-6ACF531F8291_1_105_c.jpeg_itp');">
+      <div class="itp-share-layer">
+        <div class="itp-share-info">
+          <div class="itp-share-avatar">
+            <img src="https://imgur.lzmun.com/picgo/after2022/tripper2colorfull.png_avatar" class="nofancy">
+          </div>
+          <div class="itp-share-title">查询用例</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mdui-dialog" id="shareDialogImg" style="text-align: center;">
+  分享图已生成
+</div>-->
 </section>
-<!--learn from https://github.com/fluid-dev/hexo-theme-fluid/blob/master/layout/archive.ejs-->
   <!-- Footer -->
   <!-- Footer -->
 <footer class="itp-footer text-center">
@@ -357,12 +417,10 @@
 
 
 <script src="/gallery/js/highlight.min.js"></script>
-<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<!-- <script>window.addEventListener('load', () => {
+<script>window.addEventListener('load', () => {
   hljs.highlightAll(); // initialize highlighting
-  hljs.initLineNumbersOnLoad(); // apply line numbering 
-});</script> -->
+});</script>
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");

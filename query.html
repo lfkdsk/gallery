@@ -287,16 +287,23 @@
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/sql");
         editor.session.setUseWrapMode(true);
-        editor.setValue(`/* tables(album, photo, location, exifdata) */
+        editor.setAutoScrollEditorIntoView(true);
+        editor.setOption("maxLines", 100); 
+        const SQL = await initSqlJs({
+            locateFile: file => `/gallery/js/sql-wasm.wasm`
+        });
+        const sqlph = getParam('sql');
+        if (sqlph !== null && sqlph != "") {
+            editor.setValue(`/* tables(album, photo, location, exifdata) */\n` + sqlph.replace(/^"|"$/g, '').trim());
+        } else {
+            editor.setValue(`/* tables(album, photo, location, exifdata) */
 SELECT photo.*, exifdata.maker
 FROM photo
 LEFT OUTER JOIN exifdata
 ON photo.exif_data_id = exifdata.id
 WHERE photo.location_id NOT NULL AND
-exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
-        const SQL = await initSqlJs({
-            locateFile: file => `/gallery/js/sql-wasm.wasm`
-        });
+exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);            
+        }
         // Create a database
         const sqlite = await fetch('sqlite.db');
         const sqlite_buf = await sqlite.arrayBuffer();
@@ -363,6 +370,7 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
             }
         }
         $("#querybox").click(query)
+        $("#querybox").click()
     </script>
     <style>
         #error {
@@ -396,6 +404,7 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
 
         #editor {
             width: 100%;
+            height: auto;
             min-height: 200px;
             margin: 0 auto;
             font-size: 14px;
@@ -474,12 +483,10 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
 
 
 <script src="/gallery/js/highlight.min.js"></script>
-<script src="/gallery/js/highlightjs-line-numbers.min.js"></script>
 
-<!-- <script>window.addEventListener('load', () => {
+<script>window.addEventListener('load', () => {
   hljs.highlightAll(); // initialize highlighting
-  hljs.initLineNumbersOnLoad(); // apply line numbering 
-});</script> -->
+});</script>
 <script>
   $("pre.code").each(function() {
     $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");
