@@ -252,7 +252,7 @@
         </div>
       </a>
     </div>
-    <ol class="itp-layer-toc"><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-ALL-IMAGE-MAKER"><span class="itp-layer-toc-text">Group all image maker</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT"><span class="itp-layer-toc-text">Group by focal length and order by count.</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GIVE-ME-RANDOM-5-FUJIFILM-PICTURE"><span class="itp-layer-toc-text">Give me random 5 fujifilm picture</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GET-N-GROUP-BY-F-NUMBER"><span class="itp-layer-toc-text">Get N group by F Number</span></a></li></ol>
+    <ol class="itp-layer-toc"><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-ALL-IMAGE-MAKER"><span class="itp-layer-toc-text">Group all image maker</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT"><span class="itp-layer-toc-text">Group by focal length and order by count.</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GIVE-ME-RANDOM-5-FUJIFILM-PICTURE"><span class="itp-layer-toc-text">Give me random 5 fujifilm picture</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GET-N-GROUP-BY-F-NUMBER"><span class="itp-layer-toc-text">Get N group by F Number</span></a></li><li class="itp-layer-toc-item itp-layer-toc-level-2"><a class="itp-layer-toc-link" href="#GROUP-BY-COUNTRY"><span class="itp-layer-toc-text">Group by country</span></a></li></ol>
   </div>
   <div class="itp-float-layer-bg layer-bg-nodisplay" id="close_layer"></div>
 </div>
@@ -335,6 +335,12 @@ FROM (
 WHERE row_num &lt;= 10;
 </code></pre>
 <p><a href="query?sql=%22SELECT%20id,%20path,%20name,%20desc,%20f_number,%20lo,%20hi%20FROM%20(%20SELECT%20p.id,%20p.path,%20p.name,%20p.desc,%20e.f_number,%20l.lo,%20l.hi,%20ROW_NUMBER()%20OVER%20(PARTITION%20BY%20e.f_number%20ORDER%20BY%20p.id)%20AS%20row_num%20FROM%20photo%20p%20JOIN%20exifdata%20e%20ON%20p.exif_data_id%20=%20e.id%20LEFT%20JOIN%20location%20l%20ON%20p.location_id%20=%20l.id%20)%20subquery%20WHERE%20row_num%20%3C=%2010;%22">TRY IT</a></p>
+<h2 id="GROUP-BY-COUNTRY">Group by country</h2>
+<pre><code class="language-sql">SELECT country, COUNT(*) as count 
+FROM location 
+GROUP BY country
+</code></pre>
+<p><a href="query?sql=%22SELECT%20country,%20COUNT(*)%20as%20count%20FROM%20location%20GROUP%20BY%20country%22">TRY IT</a></p>
 
         </div>
         <div class="itp-m3-post-info_area">
@@ -354,7 +360,7 @@ WHERE row_num &lt;= 10;
       
 
 <div id="column-toc-m3" class="noprn column-toc-m3 itp-toc-m3-sidetop">
-  <ol class="itp-toc"><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-ALL-IMAGE-MAKER"><span class="itp-toc-text">Group all image maker</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT"><span class="itp-toc-text">Group by focal length and order by count.</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GIVE-ME-RANDOM-5-FUJIFILM-PICTURE"><span class="itp-toc-text">Give me random 5 fujifilm picture</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GET-N-GROUP-BY-F-NUMBER"><span class="itp-toc-text">Get N group by F Number</span></a></li></ol>
+  <ol class="itp-toc"><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-ALL-IMAGE-MAKER"><span class="itp-toc-text">Group all image maker</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-BY-FOCAL-LENGTH-AND-ORDER-BY-COUNT"><span class="itp-toc-text">Group by focal length and order by count.</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GIVE-ME-RANDOM-5-FUJIFILM-PICTURE"><span class="itp-toc-text">Give me random 5 fujifilm picture</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GET-N-GROUP-BY-F-NUMBER"><span class="itp-toc-text">Get N group by F Number</span></a></li><li class="itp-toc-item itp-toc-level-2"><a class="itp-toc-link" href="#GROUP-BY-COUNTRY"><span class="itp-toc-text">Group by country</span></a></li></ol>
 </div>
 
       
