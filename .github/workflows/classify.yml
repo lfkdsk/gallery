@@ -22,7 +22,13 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: ${{ env.TEMPLATE_REPO }}
-        ref: ${{ env.TEMPLATE_BRANCE }}        
+        ref: ${{ env.TEMPLATE_BRANCE }}      
+    - name: Checkout public repo
+      uses: actions/checkout@v2
+      continue-on-error: true # allow error.      
+      with:
+        ref: gh-pages
+        path: public        
     - name: Checkout thumbnail repo
       uses: actions/checkout@v2
       continue-on-error: true # allow error.      
@@ -50,3 +56,11 @@ jobs:
         user_name: ${{ env.GIT_USER }}
         user_email: ${{ env.GIT_EMAIL }}
         commit_msg: ${{ github.event.head_commit.message }}          
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./public
+        github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+        user_name: ${{ env.GIT_USER }}
+        user_email: ${{ env.GIT_EMAIL }}
+        commit_msg: ${{ github.event.head_commit.message }}  
