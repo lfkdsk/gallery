@@ -1,0 +1,52 @@
+name: image classify
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * *'
+
+env:
+  GIT_USER: lfkdsk # change to yourself
+  GIT_EMAIL: lfkdsk@gmail.com # change to yourself
+  THEME_REPO: lfkdsk/hexo-theme-type
+  THEME_BRANCH: main
+  TEMPLATE_REPO: lfkdsk/album_template
+  TEMPLATE_BRANCE: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: secrets
+    steps:
+    - name: Checkout template repo
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ env.TEMPLATE_REPO }}
+        ref: ${{ env.TEMPLATE_BRANCE }}        
+    - name: Checkout thumbnail repo
+      uses: actions/checkout@v2
+      continue-on-error: true # allow error.      
+      with:
+        ref: thumbnail
+        path: thumbnail_public        
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
+    - uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requires_tf.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - run: pip install -r requires_tf.txt
+      continue-on-error: true
+    - run: python analysis.py
+    - name: Deploy Thumbnail
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./thumbnail_public
+        publish_branch: thumbnail
+        github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+        user_name: ${{ env.GIT_USER }}
+        user_email: ${{ env.GIT_EMAIL }}
+        commit_msg: ${{ github.event.head_commit.message }}          
