@@ -1,0 +1,202 @@
+紫玉庄园:
+  url: ZiYuHouse
+  date: 2023-11-25
+  style: fullscreen
+  cover: ZiYuHouse/DSCF5646.webp
+  location: [40.012316530859515, 116.40339054137779]
+
+禮 · 運東方:
+  url: LiYunDongFangThu
+  date: 2023-11-22
+  style: fullscreen
+  cover: LiYunDongFangThu/DSCF5478.webp
+  location: [39.999653660824286, 116.33567064137728]
+  
+玉渊潭 · 秋:
+  url: Yuyuantan2023
+  date: 2023-11-18
+  style: fullscreen
+  cover: Yuyuantan2023/DSCF5285.webp
+  location: [39.91701643286557, 116.31381444120733]
+
+旧宫掠影:
+  url: GuGong2023
+  date: 2023-11-12
+  style: fullscreen
+  cover: GuGong2023/DSCF4906.webp
+  location: [39.916477852425956, 116.39706035787013]
+  
+紫竹院 · 赏秋:
+  url: ZiZHuYuanTouchAutumn
+  date: 2023-11-11
+  style: fullscreen
+  cover: ZiZHuYuanTouchAutumn/DSCF4656.webp
+  location: [39.941722413806396, 116.31974406686889]
+
+颐和访秋:
+  url: TouchAutumnYiHe
+  date: 2023-11-07
+  style: fullscreen
+  cover: TouchAutumnYiHe/DSCF4521.webp
+  location: [39.99998634836399, 116.27549010918474]
+
+黄叶 · 大觉寺 · 白家瞳:
+  url: YellowLeafDaJue
+  date: 2023-11-03
+  style: fullscreen
+  cover: YellowLeafDaJue/DSCF4481.webp
+  location: [40.044745, 116.168023]
+  
+颐和园 · 再探:
+  url: YuanMingYuanSec
+  date: 2023-10-28
+  style: fullscreen
+  cover: YuanMingYuanSec/DSCF3422.webp
+  location: [39.99998634836399, 116.27549010918474]
+
+中关村街头:
+  url: BeiJingZhongGuanCun
+  style: fullscreen
+  date: 2023-10-26
+  cover: BeiJingZhongGuanCun/DSCF3289.webp
+  location: [39.97861540629632, 116.31538726842278]
+  
+刻舟求猫:
+  url: KeZhouQiuCat
+  date: 2023-10-23
+  cover: KeZhouQiuCat/DSCF3250.webp
+  style: fullscreen
+  location: [31.317452777777778, 121.49242777777778]
+
+雄安 · 见闻:
+  url: XiongAnView
+  date: 2023-10-15
+  cover: XiongAnView/DSCF2369.webp
+  style: fullscreen
+  location: [39.06193192499559, 115.92055083268593]
+
+颐和园 · 拍猫:
+  url: YiHeYuan-Cat
+  date: 2023-10-12
+  cover: YiHeYuan-Cat/DSCF2260.webp
+  style: fullscreen
+  location: [40.00013020916257, 116.27549278433995]
+
+奥森南园 · 拍猫:
+  url: OlympicsCat
+  date: 2023-09-27
+  cover: OlympicsCat/DSCF1996.webp
+  location: [40.01168259545705, 116.3930106606849]
+
+考古博物馆:
+  url: Archaeology-Museum
+  date: 2023-09-27
+  cover: Archaeology-Museum/DSCF1745.webp
+  style: fullscreen
+  location: [39.99885544291326, 116.39889832362664]
+
+大觉寺:
+  url: DaJue-Temple
+  date: 2023-09-23
+  cover: DaJue-Temple/DSCF1614.webp
+  style: fullscreen
+  location: [40.05227808497262, 116.10656799783511]
+
+大觉寺 · 拍猫:
+  url: DaJue-Temple-Cats
+  date: 2023-09-23
+  cover: DaJue-Temple-Cats/DSCF1589.webp
+  style: fullscreen
+  location: [40.05227808497262, 116.10656799783511]
+
+模式口 · 拍猫:
+  url: MoShiKouCat
+  date: 2023-09-01
+  cover: MoShiKouCat/15.打呼.jpg
+  location: [39.934556122413355, 116.15926839071217]
+
+北京 · 法海寺:
+  url: FaHaiTample
+  date: 2023-09-01
+  cover: FaHaiTample/DSCF0680.jpg
+  location: [39.94114003690045, 116.15986645550316]
+
+北京 · 慈寿寺:
+  url: CiShouTower
+  date: 2023-08-28
+  cover: CiShouTower/DSCF0603.jpg
+  location: [39.92822506484559, 116.29527872666742]
+  
+北京 · 法源寺 · 陶然亭 · 拍猫:
+  url: FaYuanTampleCat
+  date: 2023-08-26
+  style: fullscreen
+  cover: FaYuanTampleCat/1.美丽黑猫.jpg
+  location: [39.88426667153332, 116.37003452666642]
+
+北京 · 智化寺:
+  url: ZhiHuaTample
+  date: 2023-08-25
+  cover: ZhiHuaTample/22.梵天衣决.jpeg
+  location: [39.91721676953545, 116.43230954016073]
+
+富士看展 · 晚上遛弯:
+  url: FUJIFILM-CITYWALK-2023
+  date: 2023-10-22
+  style: fullscreen  
+  cover: FUJIFILM-CITYWALK-2023/DSCF2920.webp
+  location: [31.224035937723464, 121.4532145342587]
+
+摸鱼一日 · 公园拍猫:
+  url: ShangHaiParkCat
+  date: 2023-10-22
+  cover: ShangHaiParkCat/DSCF2841.webp
+  style: fullscreen
+  location: [31.3198181780916, 121.55153084835517]
+
+Inamuragasaki:
+  url: JAPAN-Inamuragasaki
+  date: 2023-09-15
+  style: fullscreen
+  cover: JAPAN-Inamuragasaki/DSCF1437.webp
+  location: [35.302147470364964, 139.52532325690734]
+
+KAMAKURA:
+  url: JAPAN-KAMAKURA
+  date: 2023-09-15
+  style: fullscreen
+  cover: JAPAN-KAMAKURA/DSCF1408.webp
+  location: [35.31680571832347, 139.53608752046165]
+
+YOKOHAMA:
+  url: JAPAN-YOKOHAMA
+  date: 2023-09-15
+  style: fullscreen
+  cover: JAPAN-YOKOHAMA/DSCF1296.webp
+  location: [35.45307576603131, 139.64422609358917]
+
+We Are Tokyo:
+  url: JapanTokyo
+  date: 2023-09-15
+  style: fullscreen
+  cover: JapanTokyo/DSCF0758.webp
+  location: [35.658510734691674, 139.7454328977352]
+
+日本旅行:
+  url: Japan202307
+  date: 2023-07-12
+  cover: Japan202307/IMG_7586.4e91my1ve140.JPG
+  location: [34.97037388872075, 138.9266645400499]
+  
+北京暴徒:
+  url: BeiJingGangster
+  date: 2023-03-26
+  cover: BeiJingGangster/IMG_7089.4cskb5ur5o00.webp
+  location: [39.94510077201904, 116.33033386289503]
+
+2022 · 大理:
+  url: DaLi2022
+  date: 2022-10-01
+  cover: DaLi2022/20230818-033845.6obr4awlbf40.webp
+  location: [25.752030170382785, 100.15397359842969]
+
