@@ -22,7 +22,7 @@
   <meta name="author" content="lfkdsk">
   
   <!--Open Graph Title-->
-  <meta property="og:title" content="友情链接" />
+  <meta property="og:title" content="Tags" />
   <!--Open Graph Description-->
   <meta property="og:description" content="拿起相机，认真思考" />
   <!--Open Graph Site Name-->
@@ -38,7 +38,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Title -->
   
-  <title>友情链接 - 照片集</title>
+  <title>Tags - 照片集</title>
   <!-- 添加到主屏后的标题（iOS 6 新增） -->
   <meta name="apple-mobile-web-app-title" content="照片集">
   <!-- 是否启用 WebApp 全屏模式 -->
@@ -266,55 +266,106 @@
   }
 </style>
   <!-- Main Content -->
-  <section class="pjax-area">
-  <div class="content-area links-content-area">
-    <div class="container max-w-[1000px]">
-      <div class="p-4 itp-index" style="padding-top: 118px;">
-        <!--链接-->
-        
-      </div>
-      <!--正文-->
-      <section class="mdui-card-content itp-page-content article" role="article">
-        
-      </section>
-      <!--评论-->
-      
-    </div>
-    
-    <style>
-      body {
-        background-color: #fff;
-      }
+  <script src="js/sql-wasm.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-      @media (prefers-color-scheme: dark) {
-        body {
-          background-color: #121212;
+<section class="pjax-area">
+  <div id="wrapper"></div>
+  <div id="result" class="container gpro-container grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  </div>
+
+  <script type="module">
+    const initSqlJs = window.initSqlJs;
+
+    const SQL = await initSqlJs({
+      locateFile: file => `/gallery/js/sql-wasm.wasm`
+    });
+    const q = `
+SELECT tag.name FROM tag;
+    `
+    const sqlite = await fetch('sqlite.db');
+    const sqlite_buf = await sqlite.arrayBuffer();
+    const db = new SQL.Database(new Uint8Array(sqlite_buf));
+    const data = db.exec(q);
+    const wrapper = document.getElementById("wrapper");
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    function select(event) {
+      var tag = event.target.innerText;
+      var search = `
+SELECT photo.path FROM photo LEFT JOIN tag on 
+photo.tag_id = tag.id
+WHERE tag.name = "` + tag + "\"";
+      var result = db.exec(search);
+      console.log(result)
+      var res = document.getElementById("result");
+      res.innerHTML = "";
+      for (const item of result) {
+        for(const column of item.values) {
+          for (const imgpath of column) {
+            const ele = document.createElement("a");
+            // ele.href = "/gallery/tags.html"
+            const d = document.createElement("div");
+            d.classList = "gpro-tile lazy"
+            d.setAttribute("style", 'background-image: url("https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + imgpath.substr(0, imgpath.lastIndexOf(".")) + '.webp")')
+            ele.appendChild(d);
+            res.appendChild(ele);
+          }
         }
       }
-
-      .links-item {
-        display: flex;
-        height: 68px;
-        border-radius: 34px;
+    }
+    for (const item of data) {
+      for (const column of item.values) {
+        const ele = document.createElement('button');
+        ele.classList = 'btn ibtn'
+        if (isDarkMode) {
+          ele.classList.add("btn-light")
+        } else {
+          ele.classList.add("btn-dark")
+        }
+        ele.innerText = column;
+        ele.onclick = (e) => select(e);
+        wrapper.appendChild(ele);
       }
+    }
 
-      .links-title,
-      .links-desrc {
-        display: -webkit-box;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-      }
+  </script>
+  <style>
+    .ibtn {
+      margin: 4px;
+    }
 
-      .links-avatar {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+    .container {
+      width: 100%;
+    max-width: 90%;
+    }
+
+    .gpro-tile {
+      aspect-ratio: 3 / 2;
+      background-position: center;
+      background-size: cover;
+      transition: all .15s ease-in-out;
+      min-height: 211px;
+    }
+
+    .gpro-tile:hover {
+      box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+      transition: all .15s ease-in-out;
+    }
+
+    #result {
+      margin-top: 100px;
+      gap: 12px;
+    }
+
+    @media (min-width: 769px) {
+      #wrapper {
+        padding-top: 130px;
       }
-    </style>
-    
-  </div>
+    }
+  </style>
 </section>
   <!-- Footer -->
   <!-- Footer -->
