@@ -276,11 +276,14 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
 <section class="pjax-area">
     <div id="editor"></div>
     <button id="querybox" class="album-next-one">QUERY</button>
     <div id="info"></div>
     <div id="table-wrapper"></div>
+    <div id="chart-wrapper" style="overflow:auto"></div>
     <div id="error"></div>
     <script type="module">
         const initSqlJs = window.initSqlJs;
@@ -289,21 +292,21 @@
         editor.session.setMode("ace/mode/sql");
         editor.session.setUseWrapMode(true);
         editor.setAutoScrollEditorIntoView(true);
-        editor.setOption("maxLines", 100); 
+        editor.setOption("maxLines", 100);
         const SQL = await initSqlJs({
             locateFile: file => `/gallery/js/sql-wasm.wasm`
         });
         const sqlph = getParam('sql');
         if (sqlph !== null && sqlph != "") {
-            editor.setValue(`/* tables(album, photo, location, exifdata) */\n` + sqlph.replace(/^"|"$/g, '').trim());
+            editor.setValue(sqlph.replace(/^"|"$/g, '').trim());
         } else {
-        editor.setValue(`/* tables(album, photo, location, exifdata) */
+            editor.setValue(`/* tables(album, photo, location, exifdata) */
 SELECT photo.*, exifdata.maker
 FROM photo
 LEFT OUTER JOIN exifdata
 ON photo.exif_data_id = exifdata.id
 WHERE photo.location_id NOT NULL AND
-exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);            
+exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
         }
         // Create a database
         const sqlite = await fetch('sqlite.db');
@@ -314,11 +317,16 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
             return ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'webp'].includes(ext);
         }
         function query() {
-            const wrapper = document.getElementById('table-wrapper')
+            const wrapper = document.getElementById('table-wrapper');
+            const chart = document.getElementById('chart-wrapper');
             wrapper.innerHTML = '';
+            chart.innerHTML = '';
             $('#error').text('');
             $('#info').text('');
             const q = editor.getValue();
+            if (command(q, db)) {
+                return;
+            }
             var data = null;
             try {
                 const start = performance.now();
@@ -444,6 +452,34 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
         .album-next-one:active {
             background-color: white;
             color: black;
+        }
+
+        /* for heatmap */
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .chart-title {
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #chart-wrapper {
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            margin-top: 20px;
         }
     </style>
 </section>
