@@ -69,7 +69,7 @@
   <!-- https://material.io/resources/icons/?style=outline -->
   
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_14.95e63f49ecd5a866541aee0cf8ec0fac.js"></script>
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_15.1db132b40ba7d80527dfe48e3af5a3d4.js"></script>
   
   
 <style>
@@ -236,6 +236,12 @@
     
   </a>
   
+  <a class="itp-float-bar-item rounded" href="/gallery/query" title="查询">
+    
+    <iconpark-icon class="navicon" name="history-query"></iconpark-icon>
+    
+  </a>
+  
   <a class="itp-float-bar-item rounded" href="/gallery/random" title="随机">
     
     <iconpark-icon class="navicon" name="pic"></iconpark-icon>
@@ -312,10 +318,6 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
         const sqlite = await fetch('sqlite.db');
         const sqlite_buf = await sqlite.arrayBuffer();
         const db = new SQL.Database(new Uint8Array(sqlite_buf));
-        function isImage(filename) {
-            const ext = filename.split('.').pop().toLowerCase();
-            return ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'webp'].includes(ext);
-        }
         function query() {
             const wrapper = document.getElementById('table-wrapper');
             const chart = document.getElementById('chart-wrapper');
@@ -337,46 +339,7 @@ exifdata.maker = 'FUJIFILM' ORDER BY RANDOM() LIMIT 5;`);
                 $('#error').text(error);
                 return;
             }
-            // console.log(data);
-            for (const item of data) {
-                const table = document.createElement('table');
-                table.classList = 'ln-table table table-hover table-responsive';
-                const thead = table.createTHead();
-                thead.classList.add('thead-dark');
-                const row = thead.insertRow();
-
-                wrapper.appendChild(table);
-                for (const column of item.columns) {
-                    const th = document.createElement('th');
-                    th.scope = 'col';
-                    const text = document.createTextNode(column);
-                    th.appendChild(text);
-                    row.appendChild(th);
-                }
-
-                // 添加数据行
-                const tbody = table.createTBody();
-                for (const row of item.values) {
-                    const tr = tbody.insertRow();
-                    for (const cell of row) {
-                        const td = tr.insertCell();
-                        if (isImage(cell + "")) {
-                            const a = document.createElement('a');
-                            a.text = cell
-                            a.setAttribute('href', 'photo?name=' + cell);
-                            td.appendChild(a);
-                            const img = document.createElement('img');
-                            img.style.width = '200px'
-                            img.src = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + cell.replace(/\.\w+$/, '.webp');
-                            addBackUp(img, 'https://raw.githubusercontent.com/lfkdsk/gallery/thumbnail/', cell.replace(/\.\w+$/, '.webp'))
-                            td.appendChild(img)
-                            continue
-                        }
-                        const text = document.createTextNode(cell);
-                        td.appendChild(text);
-                    }
-                }
-            }
+            fillTable(data, '', 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/', 'https://raw.githubusercontent.com/lfkdsk/gallery/thumbnail')
         }
         $("#querybox").click(query)
         $("#querybox").click()

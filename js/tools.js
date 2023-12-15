@@ -144,8 +144,9 @@ GROUP BY SUBSTR(exifdate, 1, 4);
       arr[i] = arr[i].split(":");
     }
     var subDom = document.createElement("div");
+    subDom.classList = "status";
     subDom.style.width = '1200px';
-    subDom.style.height = '300px';
+    subDom.style.height = '250px';
     chartDom.appendChild(subDom);
     var myChart = echarts.init(subDom);
     option = {
@@ -230,4 +231,65 @@ function addBackUp(ele, url, name) {
     ele.onerror = null;
     ele.src = url + name;
   }
+}
+
+function isImage(filename) {
+  const ext = filename.split('.').pop().toLowerCase();
+  return ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'webp'].includes(ext);
+}
+
+function fillTable(data, name, thumbnail_url, backup_thumbnail_url) {
+  const wrapper = document.getElementById('table-wrapper');
+  var i = 0;
+  for (const item of data) {
+    const table = document.createElement('table');
+    table.classList = 'ln-table table table-hover table-responsive';
+    const thead = table.createTHead();
+    thead.classList.add('thead-dark');
+    const row = thead.insertRow();
+
+    if (name !== null && name !== "" && name[i] !== "") {
+      const caption = document.createElement('caption');
+      caption.innerText = name[i];
+      table.appendChild(caption);
+      i++;
+    }
+
+    wrapper.appendChild(table);
+    for (const column of item.columns) {
+        const th = document.createElement('th');
+        th.scope = 'col';
+        const text = document.createTextNode(column);
+        th.appendChild(text);
+        row.appendChild(th);
+    }
+
+    // 添加数据行
+    const tbody = table.createTBody();
+    for (const row of item.values) {
+        const tr = tbody.insertRow();
+        for (const cell of row) {
+            const td = tr.insertCell();
+            if (isImage(cell + "")) {
+                const a = document.createElement('a');
+                a.text = cell
+                a.setAttribute('href', 'photo?name=' + cell);
+                td.appendChild(a);
+                const img = document.createElement('img');
+                img.style.width = '200px'
+                img.src = thumbnail_url + cell.replace(/\.\w+$/, '.webp');
+                addBackUp(img, backup_thumbnail_url + '/', cell.replace(/\.\w+$/, '.webp'))
+                td.appendChild(img)
+                continue
+            }
+            const text = document.createTextNode(cell);
+            td.appendChild(text);
+        }
+    }
+  }
+}
+
+function queryTable(name, sql, db, thumbnail_url, backup_thumbnail_url) {
+  var data = db.exec(sql);
+  fillTable(data, name, thumbnail_url, backup_thumbnail_url);
 }
