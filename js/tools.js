@@ -252,8 +252,8 @@ function fillTable(data, name, thumbnail_url, backup_thumbnail_url) {
       const caption = document.createElement('caption');
       caption.innerText = name[i];
       table.appendChild(caption);
-      i++;
     }
+    i++;
 
     wrapper.appendChild(table);
     for (const column of item.columns) {

@@ -300,19 +300,29 @@
         const start = performance.now();
         const params = [db, 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/', 'https://raw.githubusercontent.com/lfkdsk/gallery/thumbnail'];
         queryTable(
-            ['Image Maker', 'Location', 'Group by focal length and order by count.'],
+            ['Image Maker'],
             `
 SELECT IFNULL(EXIFData.maker, 'NONE') AS maker, COUNT(*) AS count
 FROM Photo
 LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
 GROUP BY maker
 ORDER BY maker;
-
+`,
+            ...params,
+        );
+        queryTable(
+            ['Location'],
+`
 SELECT country, COUNT(*) as count 
 FROM location 
 GROUP BY country;
-
-SELECT EXIFData.focal_length as F_Number, COUNT(*) AS Count
+`,
+        ...params,       
+        );
+        queryTable(
+            ['Group by focal length and order by count.'],
+`
+SELECT EXIFData.focal_length as FocalLength, COUNT(*) AS Count
 FROM Photo
 LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
 WHERE Photo.exif_data_id IS NOT NULL OR Photo.exif <> ''
@@ -320,8 +330,8 @@ GROUP BY EXIFData.focal_length
 ORDER BY COUNT(*) DESC
 LIMIT 5;
 `,
-            ...params,
-        );
+        ...params,
+        )
         // add heatmap into wrapper.
         heatmap(db);
         const duration = performance.now() - start;
