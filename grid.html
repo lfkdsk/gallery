@@ -291,7 +291,7 @@
       const all = await response.json();
       for (const key of Object.keys(all)) {
         var v = all[key];
-        if (v.dir !== name) {
+        if ((name !== null) && v.dir !== name) {
           continue
         }
         var d = document.createElement('div');
