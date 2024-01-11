@@ -133,7 +133,8 @@ SELECT
 SUBSTR(exifdate, 1, 4) AS year, 
 GROUP_CONCAT(exifdate || ':' || cnt) AS dates_and_counts
 FROM daily_counts
-GROUP BY SUBSTR(exifdate, 1, 4);
+GROUP BY SUBSTR(exifdate, 1, 4)
+ORDER BY SUBSTR(exifdate, 1, 4) DESC;
 `
   );
   for (const item of result[0].values) {

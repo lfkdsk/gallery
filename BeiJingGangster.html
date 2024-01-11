@@ -707,7 +707,7 @@
           });
         });   
         editor.click(function () {
-          window.open('/gallery/editor?file=' + imgLink);
+          window.open('/gallery/editor?file=' + encodeURIComponent(imgLink));
         })     
         // key
         window.onkeydown = function album_hotkey() {
@@ -741,7 +741,7 @@
           copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
         });
         $("#grid").on('click', function() {
-          window.open('/gallery/grid?name=BeiJingGangster');
+          window.open('/gallery/grid?name=' + encodeURIComponent('BeiJingGangster'));
         });
       </script>
       <style>

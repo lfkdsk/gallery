@@ -306,7 +306,7 @@ WHERE album.dir = '` + name + "'"
     for (const v of result) {
       var d = document.createElement('div');
       d.classList = 'gpro-tile lazy';
-      d.setAttribute('data-src', 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + v[0]);
+      d.setAttribute('data-src', 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + v[0].replace(/\.\w+$/, '.webp'));
       var a = document.createElement('a');
       a.setAttribute('data-fancybox', 'gallery');
       a.href = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + v[0];
