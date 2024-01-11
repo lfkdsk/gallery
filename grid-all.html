@@ -290,6 +290,7 @@
         const sqlite_buf = await sqlite.arrayBuffer();
         const db = new SQL.Database(new Uint8Array(sqlite_buf));
         const start = performance.now();
+        const filter = getParam('filter');
         var gridAll = document.getElementById("grid-all");
         var result = db.exec(
             `
@@ -304,12 +305,23 @@ GROUP BY
     photo_date
 ORDER BY
     photo_date DESC;
+SELECT
+    "#",
+    json_group_array(json_object('id', Photo.id, 'path', Photo.path, 'name', Photo.name)) AS photos
+FROM
+    Photo
+WHERE
+    Photo.exif_data_id is null;
 `
         );
-        console.log(result);
         var values = result[0].values;
+        values.push(...result[1].values);
+        console.log(values);
         for (const key of Object.keys(values)) {
             const v = values[key];
+            if (filter !== null && filter !== v[0]) {
+                continue;
+            }
             var grid = document.createElement("div");
             var sec = document.createElement('h2');
             sec.classList = 'date-sec'

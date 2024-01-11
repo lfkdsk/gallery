@@ -306,14 +306,20 @@
         const start = performance.now();
         const params = [db, 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/', 'https://raw.githubusercontent.com/lfkdsk/gallery/thumbnail'];
         queryTable(
+            ['Total Count'],
+            `
+SELECT count(*) as count from photo;            
+`,
+            ...params,
+        );        
+        queryTable(
             ['Image Maker'],
             `
 SELECT IFNULL(EXIFData.maker, 'NONE') AS maker, COUNT(*) AS count
 FROM Photo
 LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
 GROUP BY maker
-ORDER BY maker;
-`,
+ORDER BY maker;`,
             ...params,
         );
         queryTable(
@@ -339,7 +345,7 @@ LIMIT 5;
         ...params,
         )
         // add heatmap into wrapper.
-        heatmap(db);
+        heatmap(db, '/gallery/');
         const duration = performance.now() - start;
         console.log(duration + 'ms');
     </script>

@@ -115,7 +115,7 @@ function wrapperData(v, author) {
   exifAuthor.text("By " + author);
 }
 
-function heatmap(db) {
+function heatmap(db, root) {
   var chartDom = document.getElementById("chart-wrapper");
   var option;
   var result = db.exec(
@@ -210,6 +210,13 @@ GROUP BY SUBSTR(exifdate, 1, 4);
         data: arr,
       },
     };
+    myChart.on('click', function (params) {
+      if (params === undefined || params.value.length !== 2) {
+        return;
+      }
+      window.open(root + 'grid-all?filter='+ params.value[0]);
+    });
+  
 
     option && myChart.setOption(option);
   }
