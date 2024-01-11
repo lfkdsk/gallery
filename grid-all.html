@@ -282,6 +282,7 @@
 
 <section class="pjax-area">
     <div id="grid-all" class="content-area album-area"></div>
+    <div id="sentinel" style="height: 1px; opacity: 0;"></div>
     <script type="module">
         const SQL = await initSqlJs({
             locateFile: (file) => `/gallery/js/sql-wasm.wasm`,
@@ -291,60 +292,77 @@
         const db = new SQL.Database(new Uint8Array(sqlite_buf));
         const start = performance.now();
         const filter = getParam('filter');
+        var loadAll = getParam('all') !== null;
+        var page = 1;
+        var pageSize = 5;
         var gridAll = document.getElementById("grid-all");
-        var result = db.exec(
-            `
+        if (filter !== null) {
+            loadAll = true;
+        }
+        if (!loadAll) {
+            const observer = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    page += 1;
+                    fetchData();
+                }
+            }, {
+                root: null, // 使用浏览器视口作为根容器
+                rootMargin: '0px', // 边界设为 0
+                threshold: 0.1 // 当至少 10% 的哨兵元素可见时触发回调
+            });
+
+            observer.observe(sentinel);
+        }
+        function fetchData() {
+            var result = db.exec(
+                `
 SELECT
-    DATE(EXIFData.date) AS photo_date,
+    IFNULL(DATE(EXIFData.date), "###") AS photo_date,
     json_group_array(json_object('id', Photo.id, 'path', Photo.path, 'name', Photo.name)) AS photos
 FROM
     Photo
-INNER JOIN
+LEFT JOIN
     EXIFData ON Photo.exif_data_id = EXIFData.id
 GROUP BY
     photo_date
 ORDER BY
-    photo_date DESC;
-SELECT
-    "#",
-    json_group_array(json_object('id', Photo.id, 'path', Photo.path, 'name', Photo.name)) AS photos
-FROM
-    Photo
-WHERE
-    Photo.exif_data_id is null;
-`
-        );
-        var values = result[0].values;
-        values.push(...result[1].values);
-        console.log(values);
-        for (const key of Object.keys(values)) {
-            const v = values[key];
-            if (filter !== null && filter !== v[0]) {
-                continue;
+    photo_date DESC ` +
+                (loadAll ? ';' : (`LIMIT ` + pageSize + ' OFFSET ' + (page - 1) * pageSize + ";"))
+            );
+            if (result.length === 0) {
+                return;
             }
-            var grid = document.createElement("div");
-            var sec = document.createElement('h2');
-            sec.classList = 'date-sec'
-            var images = JSON.parse(v[1]);
-            grid.classList =
-                "container gpro-container grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
-            for (const image of images) {
-                var d = document.createElement("div");
-                d.classList = "gpro-tile lazy";
-                d.setAttribute("data-src", 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + image.path.replace(/\.\w+$/, '.webp'));
-                var a = document.createElement("a");
-                a.setAttribute("data-fancybox", "gallery");
-                a.href = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/' + image.path;
-                a.appendChild(d);
-                grid.appendChild(a);
+            var values = result[0].values;
+            for (const key of Object.keys(values)) {
+                const v = values[key];
+                if (filter !== null && filter !== v[0]) {
+                    continue;
+                }
+                var grid = document.createElement("div");
+                var sec = document.createElement('h2');
+                sec.classList = 'date-sec'
+                var images = JSON.parse(v[1]);
+                grid.classList =
+                    "container gpro-container grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
+                for (const image of images) {
+                    var d = document.createElement("div");
+                    d.classList = "gpro-tile lazy";
+                    d.setAttribute("data-src", 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + image.path.replace(/\.\w+$/, '.webp'));
+                    var a = document.createElement("a");
+                    a.setAttribute("data-fancybox", "gallery");
+                    a.href = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/' + image.path;
+                    a.appendChild(d);
+                    grid.appendChild(a);
+                }
+                sec.innerText = v[0];
+                gridAll.appendChild(sec);
+                gridAll.appendChild(grid);
             }
-            sec.innerText = v[0];
-            gridAll.appendChild(sec);
-            gridAll.appendChild(grid);
+            $(function () {
+                $("div.lazy").lazyload();
+            });
         }
-        $(function () {
-            $("div.lazy").lazyload();
-        });
+        fetchData();    
     </script>
     <style>
         body {
