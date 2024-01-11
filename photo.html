@@ -278,7 +278,8 @@
   }
 </style>
   <!-- Main Content -->
-  <script src="js/html2canvas.js"></script>
+  <script src="js/sql-wasm.js"></script>
+<script src="js/html2canvas.js"></script>
 <section class="pjax-area">
     <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
@@ -719,10 +720,11 @@
             var exifDate = $("#exif-date");
             var exifLens = $("#exif-lens");
             var exifLogo = $("#exif-maker-logo");
-            var exifAuthor = $("#exif-author");            
+            var exifAuthor = $("#exif-author");
             var normalWrapper = $("#normal-wrapper");
             var normalData = $("#no-exif-data");
             const name = getParam('name');
+            const start = performance.now();
             var imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + name;
             // hide useless button
             $("#tools-wrapper").show();
@@ -735,45 +737,73 @@
                     allowTaint: true,
                     scrollX: 0,
                     scrollY: 0,
-                }).then(function (canvas) {              
-                    simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+                }).then(function (canvas) {
+                    simulateDownloadImageClick(canvas.toDataURL('image/png'), name + '.png');
                 });
             });
-            const response = await fetch('photos.json');
-            const all = await response.json();
+            const SQL = await initSqlJs({
+                locateFile: (file) => `/gallery/js/sql-wasm.wasm`,
+            });
+            const sqlite = await fetch("sqlite.db");
+            const sqlite_buf = await sqlite.arrayBuffer();
+            const db = new SQL.Database(new Uint8Array(sqlite_buf));
             function searchPhoto() {
-                if (name === "" || name == null) {
+                var result = db.exec(
+                `
+SELECT json_object(
+'path', photo.path, 
+'dir', album.dir, 
+'exif', photo.exif,
+'name', photo.name,
+'exif_data', json_object(
+        'EXIF FNumber', CONCAT('F', exifdata.f_number),
+        'EXIF ISOSpeedRatings', CONCAT('ISO ', exifdata.iso),
+        'EXIF ExposureTime', CONCAT(exifdata.exposure_time, 's'),
+        'EXIF DateTimeOriginal', exifdata.date,
+        'EXIF FocalLength', CONCAT(exifdata.focal_length, 'mm'),
+        'Image Make', exifdata.maker,
+        'Image Model', exifdata.model,
+        'EXIF LensModel', exifdata.lens_model
+    ),
+'location', json_array(location.lo, location.hi)
+)
+FROM photo
+LEFT OUTER JOIN exifdata
+ON photo.exif_data_id = exifdata.id
+LEFT OUTER JOIN album
+ON photo.dir_id = album.id
+LEFT OUTER JOIN location
+ON photo.location_id = location.id
+WHERE photo.path ='` + name + "'"
+                );
+                if (result.length === 0) {
                     return;
                 }
+                const v = JSON.parse(result[0].values[0]);
+                console.log(v)
                 imageBox.src = imgLink; //替换图片
-                addBackUp(imageBox,"https://raw.githubusercontent.com/lfkdsk/gallery/master/", name);
-                for (const key of Object.keys(all)) {
-                    var v = all[key];
-                    if (v.path !== name || v.exif_data.length === 0) {
-                        continue;
-                    }
-
-                    var imageFancy = imageBox.parentElement;
-                    imageFancy.setAttribute("href", imgLink);
-                    var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
-                    if (fancyBoxImage !== undefined) {
-                        fancyBoxImage.src = imgLink;
-                    }
-                    $("#wrapper").show();
-                    if (v.exif === "" || v.exif_data.length === 0) {
-                        wrapper.hide();
-                        normalWrapper.show();
-                        normalData.text("Shot By " + "lfkdsk");
-                        break;
-                    } else {
-                        wrapper.show();
-                        normalWrapper.hide();
-                    }
-                    wrapperData(v, "lfkdsk");
+                addBackUp(imageBox, "https://raw.githubusercontent.com/lfkdsk/gallery/master/", name);
+                var imageFancy = imageBox.parentElement;
+                imageFancy.setAttribute("href", imgLink);
+                var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
+                if (fancyBoxImage !== undefined) {
+                    fancyBoxImage.src = imgLink;
                 }
+                $("#wrapper").show();
+                if (v.exif === "" || v.exif_data.length === 0) {
+                    wrapper.hide();
+                    normalWrapper.show();
+                    normalData.text("Shot By " + "lfkdsk");
+                    return;
+                } else {
+                    wrapper.show();
+                    normalWrapper.hide();
+                }
+                wrapperData(v, "lfkdsk");
             }
-
             searchPhoto();
+            const duration = performance.now() - start;
+            console.log(duration);
         </script>
 </section>
   <!-- Footer -->
