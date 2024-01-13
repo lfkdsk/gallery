@@ -297,21 +297,26 @@
     const db = new SQL.Database(new Uint8Array(sqlite_buf));
     const result = db.exec(
 `
-SELECT photo.path
+SELECT photo.path, album.dir
 FROM photo
 LEFT OUTER JOIN album
 ON photo.dir_id = album.id
 WHERE album.dir = '` + name + "'"
     )[0].values;
+    var setTitle = true;
     for (const v of result) {
       var d = document.createElement('div');
       d.classList = 'gpro-tile lazy';
       d.setAttribute('data-src', 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + v[0].replace(/\.\w+$/, '.webp'));
       var a = document.createElement('a');
       a.setAttribute('data-fancybox', 'gallery');
-      a.href = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + v[0];
+      a.href = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/' + v[0];
       a.appendChild(d);
       grid.appendChild(a);
+      if (setTitle) {
+        setTitle = false;
+        document.title = v[1] + ' ' + document.title; 
+      }
     }
     $(function () {
       $("div.lazy").lazyload();
@@ -392,11 +397,11 @@ WHERE album.dir = '` + name + "'"
       }
 
       .content-area {
-        margin-top: 80px;
+        margin-top: 0px;
       }
 
       .gpro-container {
-        margin-top: 60px;
+        margin-top: 40px;
       }
     }
   </style>
