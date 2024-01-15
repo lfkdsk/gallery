@@ -107,6 +107,8 @@ function wrapperData(v, author) {
       " " +
       v.exif_data["EXIF FNumber"] +
       " " +
+      v.exif_data['EXIF FocalLength'] +
+      " " +
       v.exif_data["EXIF ExposureTime"]
   );
   exifLens.text(v.exif_data["EXIF LensModel"]);
