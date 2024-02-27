@@ -323,6 +323,17 @@ ORDER BY maker;`,
             ...params,
         );
         queryTable(
+            ['Image Lens Maker'],
+            `
+SELECT lens_model, count(*) as lens_count
+from exifdata
+group by lens_model
+order by lens_count DESC
+limit 10;
+`,
+            ...params,
+        );        
+        queryTable(
             ['Location'],
 `
 SELECT country, COUNT(*) as count 
