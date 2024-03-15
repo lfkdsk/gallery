@@ -1,15 +1,27 @@
-Bay Animals:
-  url: BayAnim
-  date: 2024-02-23
-  style: fullscreen
-  cover: BayAnim/DSCF8455.webp
-
 San Jose ReLife:
   url: ReLiveSanJose
   date: 2024-02-20
   style: fullscreen
   cover: ReLiveSanJose/DSCF8221.webp
   location: [37.34361909229288, -121.88391245381254]
+
+Chiikawa:
+  url: Chiikawa
+  date: 2024-03-13
+  style: fullscreen
+  cover: Chiikawa/DSCF0425.webp
+
+CA 蝾螈:
+  url: CA-Newt
+  date: 2024-03-16
+  style: fullscreen
+  cover: CA-Newt/DSCF0627.webp
+  
+Bay Animals:
+  url: BayAnim
+  date: 2024-02-23
+  style: fullscreen
+  cover: BayAnim/DSCF8455.webp
 
 冬日颐和园:
   url: WinterYHY
