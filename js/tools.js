@@ -139,6 +139,7 @@ GROUP BY SUBSTR(exifdate, 1, 4)
 ORDER BY SUBSTR(exifdate, 1, 4) DESC;
 `
   );
+  var index = 0;
   for (const item of result[0].values) {
     const year = item[0];
     const data = item[1];
@@ -148,6 +149,7 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
     }
     var subDom = document.createElement("div");
     subDom.classList = "status";
+    subDom.id = "year" + index;
     subDom.style.width = '1200px';
     subDom.style.height = '250px';
     chartDom.appendChild(subDom);
@@ -222,6 +224,7 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
   
 
     option && myChart.setOption(option);
+    index += 1;
   }
 }
 
