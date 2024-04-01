@@ -1,15 +1,8 @@
-San Jose ReLife:
-  url: ReLiveSanJose
-  date: 2024-02-20
+SF城市初探:
+  url: SF-First
+  date: 2024-03-23
   style: fullscreen
-  cover: ReLiveSanJose/DSCF8221.webp
-  location: [37.34361909229288, -121.88391245381254]
-
-Chiikawa:
-  url: Chiikawa
-  date: 2024-03-13
-  style: fullscreen
-  cover: Chiikawa/DSCF0425.webp
+  cover: SF-First/DSCF1667.webp
 
 CHM:
   url: Computer-History-Museum
@@ -17,17 +10,36 @@ CHM:
   style: fullscreen
   cover: Computer-History-Museum/1.webp
 
+Chiikawa:
+  url: Chiikawa
+  date: 2024-03-13
+  style: fullscreen
+  cover: Chiikawa/DSCF0425.webp
+
 CA 蝾螈:
   url: CA-Newt
   date: 2024-03-16
   style: fullscreen
   cover: CA-Newt/DSCF0627.webp
-  
+
+RedFox:
+  url: FoxFox
+  date: 2024-02-26
+  style: fullscreen
+  cover: FoxFox/5G4A0262.webp
+
 Bay Animals:
   url: BayAnim
   date: 2024-02-23
   style: fullscreen
   cover: BayAnim/DSCF8455.webp
+
+San Jose ReLife:
+  url: ReLiveSanJose
+  date: 2024-02-20
+  style: fullscreen
+  cover: ReLiveSanJose/DSCF8221.webp
+  location: [37.34361909229288, -121.88391245381254]
 
 冬日颐和园:
   url: WinterYHY
