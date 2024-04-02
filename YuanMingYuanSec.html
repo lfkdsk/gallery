@@ -297,7 +297,7 @@
             <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
         </div>
         <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
-        <div style="padding-left: 10px; position: relative;">
+        <div style="padding-left: 10px; position: relative; max-width: calc(30vw);">
             <div style="display: flex; flex-direction: column; justify-content: center;">
                 <div id="exif-maker"></div>
                 <div id="exif-lens"></div>
@@ -338,6 +338,12 @@
         font-weight: lighter;
         color: gray;
         font-size: 80%;
+    }
+
+    #exif-lens {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     .pic-wrapper {
