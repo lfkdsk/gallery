@@ -1,8 +1,16 @@
+湾区的打工日常:
+  url: BayAreaDaily
+  date: 2024-04-29
+  style: fullscreen
+  cover: BayAreaDaily/e5f70f7eeeabc3e2bc14367af7b0e8d7.webp
+  location: [37.35029407698915, -121.94534275721888]
+
 到海里去:
   url: Ocean-Whale
   date: 2024-04-15
   style: fullscreen
   cover: Ocean-Whale/whale.webp
+  location: [36.799582502422965, -121.90660083628696]
   
 SF城市初探:
   url: SF-First
@@ -15,12 +23,14 @@ CHM:
   date: 2024-03-17
   style: fullscreen
   cover: Computer-History-Museum/1.webp
+  location: [37.41441923778863, -122.07743046041404]
 
 Chiikawa:
   url: Chiikawa
   date: 2024-03-13
   style: fullscreen
   cover: Chiikawa/DSCF0425.webp
+  location: [37.54867377147183, -122.04970648924598]
 
 CA 蝾螈:
   url: CA-Newt
