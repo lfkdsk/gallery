@@ -297,7 +297,7 @@
             <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
         </div>
         <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
-        <div style="padding-left: 10px; position: relative; max-width: calc(30vw);">
+        <div id="exif-text" style="padding-left: 10px; position: relative;">
             <div style="display: flex; flex-direction: column; justify-content: center;">
                 <div id="exif-maker"></div>
                 <div id="exif-lens"></div>
@@ -311,10 +311,13 @@
     </div>
 </div>
 <style>
+    #exif-text {
+        max-width: calc(20vw);
+    }
+
     #exif-maker-logo {
         text-align: center;
         vertical-align: baseline;
-        height: 40px;
     }
 
     #exif-param {
@@ -382,8 +385,36 @@
         }
 
         #exif-maker-logo {
+        }
+
+        #exif-text {
+            max-width: calc(30vw);
+        }
+    }
+
+    .apple-logo, 
+    .ricoh-logo, 
+    .fujifilm-logo {
+        height: 40px;
+    }
+
+    .sony-logo,
+    .canon-logo {
+        width: 80px;
+    }
+
+    @media (max-width: 768px) {
+        .apple-logo, 
+        .ricoh-logo, 
+        .fujifilm-logo {
             height: 30px;
         }
+
+        .sony-logo,
+        .canon-logo {
+            width: 40px;
+        }
+
     }
 
     @media (prefers-color-scheme: dark) {
@@ -603,7 +634,7 @@
             name="IMG_4680" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_4680.webp"
             desc="  - · -  "
             share="DaLi2022/IMG_4680.webp"
-            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 15356/34428153s F2.2 ISO 32 2.7mm iPhone 12 Pro front camera 2.71mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2022:09:25 14:27:34","EXIF ExposureTime":"15356/34428153s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 12 Pro front camera 2.71mm f/2.2","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[25.71521111111111,100.1960138888889],"name":"IMG_4680","path":"DaLi2022/IMG_4680.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_4680.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_4680.webp"}'
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 1/2242s F2.2 ISO 32 2.7mm iPhone 12 Pro front camera 2.71mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2022:09:25 14:27:34","EXIF ExposureTime":"1/2242s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 12 Pro front camera 2.71mm f/2.2","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[25.71521111111111,100.1960138888889],"name":"IMG_4680","path":"DaLi2022/IMG_4680.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_4680.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_4680.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_4680.webp"
             aria-label="the photo 12"></a>
           
@@ -683,7 +714,7 @@
             name="IMG_5007" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_5007.webp"
             desc="  - · -  "
             share="DaLi2022/IMG_5007.webp"
-            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 16912/33553409s F1.6 ISO 50 4.2mm iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2022:10:05 18:31:28","EXIF ExposureTime":"16912/33553409s","EXIF FNumber":"F1.6","EXIF FocalLength":"4.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[25.71803333333333,100.19397777777777],"name":"IMG_5007","path":"DaLi2022/IMG_5007.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_5007.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_5007.webp"}'
+            extra='{"desc":" - · - ","dir":"DaLi2022","exif":"Apple iPhone 12 Pro 1/1984s F1.6 ISO 50 4.2mm iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2022:10:05 18:31:28","EXIF ExposureTime":"1/1984s","EXIF FNumber":"F1.6","EXIF FocalLength":"4.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[25.71803333333333,100.19397777777777],"name":"IMG_5007","path":"DaLi2022/IMG_5007.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_5007.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/DaLi2022/IMG_5007.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//DaLi2022/IMG_5007.webp"
             aria-label="the photo 17"></a>
           
@@ -1063,10 +1094,6 @@
     照片集 &copy; 2017 - 2024
     
     
-    
-    <span> / </span>
-    <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
-    <span id="busuanzi_container_site_uv">UV <span id="busuanzi_value_site_uv"></span></span>
     
     <span> / Template</span>
     <a href="https://github.com/lfkdsk/album_template" target="_blank">Type

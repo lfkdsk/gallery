@@ -297,7 +297,7 @@
             <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
         </div>
         <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
-        <div style="padding-left: 10px; position: relative; max-width: calc(30vw);">
+        <div id="exif-text" style="padding-left: 10px; position: relative;">
             <div style="display: flex; flex-direction: column; justify-content: center;">
                 <div id="exif-maker"></div>
                 <div id="exif-lens"></div>
@@ -311,10 +311,13 @@
     </div>
 </div>
 <style>
+    #exif-text {
+        max-width: calc(20vw);
+    }
+
     #exif-maker-logo {
         text-align: center;
         vertical-align: baseline;
-        height: 40px;
     }
 
     #exif-param {
@@ -382,8 +385,36 @@
         }
 
         #exif-maker-logo {
+        }
+
+        #exif-text {
+            max-width: calc(30vw);
+        }
+    }
+
+    .apple-logo, 
+    .ricoh-logo, 
+    .fujifilm-logo {
+        height: 40px;
+    }
+
+    .sony-logo,
+    .canon-logo {
+        width: 80px;
+    }
+
+    @media (max-width: 768px) {
+        .apple-logo, 
+        .ricoh-logo, 
+        .fujifilm-logo {
             height: 30px;
         }
+
+        .sony-logo,
+        .canon-logo {
+            width: 40px;
+        }
+
     }
 
     @media (prefers-color-scheme: dark) {
@@ -683,7 +714,7 @@
             name="IMG_4725" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Ocean-Whale/IMG_4725.webp"
             desc="  - · -  "
             share="Ocean-Whale/IMG_4725.webp"
-            extra='{"desc":" - · - ","dir":"Ocean-Whale","exif":"Apple iPhone 15 Pro Max 1/20000s F1.78 ISO 50 6.9mm iPhone 15 Pro Max back triple camera 6.86mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2024:04:14 18:34:51","EXIF ExposureTime":"1/20000s","EXIF FNumber":"F1.78","EXIF FocalLength":"6.9mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.86mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.81033333333333,-121.78608055555556],"name":"IMG_4725","path":"Ocean-Whale/IMG_4725.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Ocean-Whale/IMG_4725.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Ocean-Whale/IMG_4725.webp"}'
+            extra='{"desc":" - · - ","dir":"Ocean-Whale","exif":"Apple iPhone 15 Pro Max 1/20000s F1.8 ISO 50 6.9mm iPhone 15 Pro Max back triple camera 6.86mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2024:04:14 18:34:51","EXIF ExposureTime":"1/20000s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.9mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.86mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.81033333333333,-121.78608055555556],"name":"IMG_4725","path":"Ocean-Whale/IMG_4725.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Ocean-Whale/IMG_4725.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Ocean-Whale/IMG_4725.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Ocean-Whale/IMG_4725.webp"
             aria-label="the photo 17"></a>
           
@@ -1060,10 +1091,6 @@
     照片集 &copy; 2017 - 2024
     
     
-    
-    <span> / </span>
-    <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
-    <span id="busuanzi_container_site_uv">UV <span id="busuanzi_value_site_uv"></span></span>
     
     <span> / Template</span>
     <a href="https://github.com/lfkdsk/album_template" target="_blank">Type

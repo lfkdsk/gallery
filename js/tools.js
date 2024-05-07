@@ -81,17 +81,26 @@ function wrapperData(v, author) {
 
   const maker = v.exif_data["Image Make"];
   console.log(maker);
+  exifLogo.attr("class", 'nofancy')
   switch (maker) {
     case "Apple": {
       exifLogo.attr("src", "img/apple.png");
+      exifLogo.addClass("apple-logo");
       break;
     }
     case "RICOH IMAGING COMPANY, LTD.  ": {
       exifLogo.attr("src", "img/384_ricoh.jpg");
+      exifLogo.addClass("ricoh-logo");
       break;
     }
     case "Canon": {
       exifLogo.attr("src", "img/canon.png");
+      exifLogo.addClass("canon-logo");
+      break;
+    }
+    case "SONY": {
+      exifLogo.attr("src", "img/sony.png");
+      exifLogo.addClass("sony-logo");
       break;
     }
     default: {
@@ -99,6 +108,7 @@ function wrapperData(v, author) {
     }
     case "FUJIFILM": {
       exifLogo.attr("src", "img/fujifilm.png");
+      exifLogo.addClass("fujifilm-logo");
       break;
     }
   }
