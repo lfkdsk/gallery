@@ -296,6 +296,7 @@
         const db = new SQL.Database(new Uint8Array(sqlite_buf));
         const start = performance.now();
         const filter = getParam('filter');
+        const album = getParam('album');
         var loadAll = getParam('all') !== null;
         var page = 1;
         var pageSize = 5;
@@ -326,12 +327,14 @@ SELECT
 FROM
     Photo
 LEFT JOIN
-    EXIFData ON Photo.exif_data_id = EXIFData.id
-GROUP BY
+    EXIFData ON Photo.exif_data_id = EXIFData.id` 
+    + (album !== null ? ' WHERE Photo.dir_id = (SELECT Album.id FROM Album WHERE Album.dir = "' + album + '")' : ' ')                
+    +
+`GROUP BY
     photo_date
 ORDER BY
-    photo_date DESC ` +
-                (loadAll ? ';' : (`LIMIT ` + pageSize + ' OFFSET ' + (page - 1) * pageSize + ";"))
+    photo_date DESC ` 
+    + (loadAll ? ';' : (`LIMIT ` + pageSize + ' OFFSET ' + (page - 1) * pageSize + ";"))
             );
             if (result.length === 0) {
                 return;
