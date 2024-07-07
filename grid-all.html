@@ -333,7 +333,8 @@ LEFT JOIN
 `GROUP BY
     photo_date
 ORDER BY
-    photo_date DESC ` 
+    photo_date ` 
+    + (album !== null ? ' ASC ' : ' DESC ')
     + (loadAll ? ';' : (`LIMIT ` + pageSize + ' OFFSET ' + (page - 1) * pageSize + ";"))
             );
             if (result.length === 0) {
