@@ -296,16 +296,18 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction:row; justify-content: start;">
-        <div style="display: flex; justify-content: center; flex-direction: column;">
-            <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
-        </div>
-        <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
-        <div id="exif-text" style="padding-left: 10px; position: relative;">
-            <div style="display: flex; flex-direction: column; justify-content: center;">
-                <div id="exif-maker"></div>
-                <div id="exif-lens"></div>
-                <div id="exif-author"></div>
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+        <div style="display: flex; flex-direction:row; justify-content: start;">
+            <div style="display: flex; justify-content: center; flex-direction: column;">
+                <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
+            </div>
+            <div style="margin-left: 10px; width: 1px; background-color: black;"></div>
+            <div id="exif-text" style="padding-left: 10px; position: relative;">
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <div id="exif-maker"></div>
+                    <div id="exif-lens"></div>
+                    <div id="exif-author"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -363,7 +365,7 @@
     .pic-area {
         border-style: solid;
         border-width: thin;
-        border-color: rgb(22, 22, 22);
+        border-color: rgb(22 22 22 / 48%);
     }
 
     @media (max-width: 768px) {
@@ -1235,6 +1237,11 @@
 
           .pic-area {
             grid-column: span 2 / span 2;
+            padding: 12px 12px 4px 12px;
+          }
+
+          #exif-wrapper {
+            margin-top: 4px;
           }
 
           .default-pic {
