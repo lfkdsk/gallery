@@ -370,7 +370,7 @@ FROM Photo
 LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
 WHERE Photo.exif_data_id IS NOT NULL OR Photo.exif <> ''
 GROUP BY EXIFData.exposure_time
-ORDER BY COUNT(*) DESC;
+ORDER BY COUNT(*) DESC
 LIMIT 5;
 `,
         ...params,
