@@ -282,7 +282,8 @@
   }
 </style>
   <!-- Main Content -->
-  <script src="js/html2canvas.js"></script>
+  <script src="js/sql-wasm.js"></script>
+<script src="js/html2canvas.js"></script>
 <section class="pjax-area">
     <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
@@ -766,22 +767,48 @@
             var normalWrapper = $("#normal-wrapper");
             var normalData = $("#no-exif-data");
             var download = $("#downloadbox");
-            console.time('json')
-            const response = await fetch('photos.json');
-            const all = await response.json();
-            console.timeEnd('json')
-            const keys = Object.keys(all);
-            const max = keys.length;
+            const SQL = await initSqlJs({
+                locateFile: (file) => `/gallery/js/sql-wasm.wasm`,
+            });            
+            const sqlite = await fetch("sqlite.db");
+            const sqlite_buf = await sqlite.arrayBuffer();
+            const db = new SQL.Database(new Uint8Array(sqlite_buf));
             var value = null;
             var name = null;
             function nextImage() {
-                var random = Math.floor(Math.random() * max);
-                var key = keys[random];
-                var v = all[key];
-                value = v;
-                if (v === null) {
+                var result = db.exec(
+                `
+SELECT json_object(
+'path', photo.path, 
+'dir', album.dir, 
+'exif', photo.exif,
+'name', photo.name,
+'exif_data', json_object(
+        'EXIF FNumber', CONCAT('F', exifdata.f_number),
+        'EXIF ISOSpeedRatings', CONCAT('ISO ', exifdata.iso),
+        'EXIF ExposureTime', CONCAT(exifdata.exposure_time, 's'),
+        'EXIF DateTimeOriginal', exifdata.date,
+        'EXIF FocalLength', CONCAT(exifdata.focal_length, 'mm'),
+        'Image Make', exifdata.maker,
+        'Image Model', exifdata.model,
+        'EXIF LensModel', exifdata.lens_model
+    ),
+'location', json_array(location.lo, location.hi)
+)
+FROM photo
+LEFT OUTER JOIN exifdata
+ON photo.exif_data_id = exifdata.id
+LEFT OUTER JOIN album
+ON photo.dir_id = album.id
+LEFT OUTER JOIN location
+ON photo.location_id = location.id
+ORDER BY random() LIMIT 1;`
+                );
+                if (result.length === 0) {
                     return;
                 }
+                const v = JSON.parse(result[0].values[0]);
+                value = v;
                 var imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + v.path;
                 imageBox.src = '';
                 imageBox.src = imgLink;
