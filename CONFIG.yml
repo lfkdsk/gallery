@@ -25,6 +25,10 @@ google_analytics:
   ga_api: 
   gtag_id: G-8TMSDJG47Q
 
+follow_challenge:
+  feedId: 55889147392629760
+  userId: 41784388753060864
+
 nav:
   地图:
     link: /gallery/location
