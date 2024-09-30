@@ -324,7 +324,7 @@ SELECT IFNULL(EXIFData.maker, 'NONE') AS maker, COUNT(*) AS count
 FROM Photo
 LEFT OUTER JOIN EXIFData ON Photo.exif_data_id = EXIFData.id
 GROUP BY maker
-ORDER BY COUNT(*) DESC;
+ORDER BY count DESC;
 `,
             ...params,
         );
@@ -342,7 +342,7 @@ limit 10;
         queryTable(
             ['Location'],
 `
-SELECT country, COUNT(*) as count 
+SELECT IFNULL(country, 'NONE') as country, COUNT(*) as count 
 FROM location 
 GROUP BY country
 ORDER BY COUNT(*) DESC;
