@@ -1114,14 +1114,23 @@ In the foreground, there are trees that add a touch of nature to the scene. The 
             wrapperData(v, "lfkdsk");
           }
         }
+
         function changeImageWith(target) {
           imgno = target.getAttribute('id');
           imgLink = target.getAttribute('rel');
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
+          var thum = target.getAttribute('data-src');
           var v = JSON.parse(target.getAttribute('extra'));
-          imageBox.src = '';
-          imageBox.src = imgLink; //替换图片
+          imageBox.src = thum;
+          imageBox.classList.add('blur');
+          // load the original img.
+          const highResImage = new Image();
+          highResImage.src = imgLink;
+            highResImage.onload = function() {
+              imageBox.src = highResImage.src;
+              imageBox.classList.remove('blur');
+          };
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
@@ -1243,9 +1252,14 @@ In the foreground, there are trees that add a touch of nature to the scene. The 
           aspect-ratio: 3 / 2;
         }
 
+        .blur {
+          filter: blur(50px);
+        }
+
         .pic-item > a {
           width: 100%;
           height: 100%;
+          overflow: hidden;
           display: inline-block;
         }
 
