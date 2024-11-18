@@ -327,3 +327,10 @@ We Are Tokyo:
   style: fullscreen
   location: [39.85305648347282, 116.6610978968284]
 
+Daily:
+  url: Daily
+  date: 1996-02-06
+  cover: Daily/PhotonCam_OSK_20241115_140022.webp
+  style: fullscreen
+  
+
