@@ -4,7 +4,14 @@
   style: fullscreen
   cover: Fuji/DSCF7341.webp
   location: [35.473251370740684, 138.57475528254415]
-  
+
+墨田水族馆:
+  url: SumidaAquarium
+  date: 2024-11-05
+  style: fullscreen
+  cover: SumidaAquarium/DSCF7002.webp
+  location: [35.710095593299336, 139.80960695433328]
+
 屋久岛:
   url: Yakushima
   date: 2024-09-15
