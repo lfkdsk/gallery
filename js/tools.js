@@ -309,10 +309,12 @@ function fillTable(data, name, callback, thumbnail_url, backup_thumbnail_url) {
             const td = tr.insertCell();
             if (callback !== null) {
               td.appendChild(callback(td, cell, index));
+              index++;
               continue;
             }
             if (isImage(cell + "")) {
                 resolveImg(td, cell)
+                index++;
                 continue
             }
             const result = document.createTextNode(cell);
