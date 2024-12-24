@@ -261,9 +261,10 @@ function isImage(filename) {
   return ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'webp'].includes(ext);
 }
 
-function fillTable(data, name, thumbnail_url, backup_thumbnail_url) {
+function fillTable(data, name, callback, thumbnail_url, backup_thumbnail_url) {
   const wrapper = document.getElementById('table-wrapper');
   var i = 0;
+  console.log(data)
   for (const item of data) {
     const table = document.createElement('table');
     table.classList = 'ln-table table table-hover table-responsive';
@@ -287,32 +288,92 @@ function fillTable(data, name, thumbnail_url, backup_thumbnail_url) {
         row.appendChild(th);
     }
 
+    const resolveImg = (td, cell) => {
+      const a = document.createElement('a');
+      a.text = cell
+      a.setAttribute('href', 'photo?name=' + cell);
+      td.appendChild(a);
+      const img = document.createElement('img');
+      img.style.width = '200px'
+      img.src = thumbnail_url + cell.replace(/\.\w+$/, '.webp');
+      addBackUp(img, backup_thumbnail_url + '/', cell.replace(/\.\w+$/, '.webp'))
+      td.appendChild(img)
+    }
+
     // 添加数据行
     const tbody = table.createTBody();
     for (const row of item.values) {
         const tr = tbody.insertRow();
+        var index = 0
         for (const cell of row) {
             const td = tr.insertCell();
+            if (callback !== null) {
+              td.appendChild(callback(td, cell, index));
+              continue;
+            }
             if (isImage(cell + "")) {
-                const a = document.createElement('a');
-                a.text = cell
-                a.setAttribute('href', 'photo?name=' + cell);
-                td.appendChild(a);
-                const img = document.createElement('img');
-                img.style.width = '200px'
-                img.src = thumbnail_url + cell.replace(/\.\w+$/, '.webp');
-                addBackUp(img, backup_thumbnail_url + '/', cell.replace(/\.\w+$/, '.webp'))
-                td.appendChild(img)
+                resolveImg(td, cell)
                 continue
             }
-            const text = document.createTextNode(cell);
-            td.appendChild(text);
+            const result = document.createTextNode(cell);
+            td.appendChild(result);
+            index++;
         }
     }
   }
 }
 
-function queryTable(name, sql, db, thumbnail_url, backup_thumbnail_url) {
+function queryTable(name, sql, callback, db, thumbnail_url, backup_thumbnail_url) {
   var data = db.exec(sql);
-  fillTable(data, name, thumbnail_url, backup_thumbnail_url);
+  fillTable(data, name, callback, thumbnail_url, backup_thumbnail_url);
 }
+
+const getTodayPhotos = () => {
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  
+  const query = `
+    WITH photo_list AS (
+      SELECT 
+        path,
+        (
+          SELECT COUNT(*) 
+          FROM Photo p2 
+          JOIN EXIFData e2 ON p2.exif_data_id = e2.id 
+          WHERE strftime('%m', e2.date) = '${month}' 
+          AND strftime('%d', e2.date) = '${day}'
+        ) as total,
+        ROW_NUMBER() OVER (ORDER BY e.date DESC) - 1 as rn
+      FROM Photo p
+      JOIN EXIFData e ON p.exif_data_id = e.id
+      WHERE strftime('%m', e.date) = '${month}' 
+      AND strftime('%d', e.date) = '${day}'
+      ORDER BY e.date DESC
+    )
+    SELECT 
+      GROUP_CONCAT(
+        CASE WHEN rn = row_num * cols + 0 THEN path ELSE NULL END
+      ) as column0,
+      GROUP_CONCAT(
+        CASE WHEN rn = row_num * cols + 1 THEN path ELSE NULL END
+      ) as column1,
+      GROUP_CONCAT(
+        CASE WHEN rn = row_num * cols + 2 THEN path ELSE NULL END
+      ) as column2,
+      GROUP_CONCAT(
+        CASE WHEN rn = row_num * cols + 3 AND cols = 4 THEN path ELSE NULL END
+      ) as column3
+    FROM (
+      SELECT 
+        *,
+        CASE WHEN total > 9 THEN 4 ELSE 3 END as cols,
+        CAST(rn / CASE WHEN total > 9 THEN 4 ELSE 3 END AS INTEGER) as row_num
+      FROM photo_list
+    )
+    GROUP BY row_num
+    ORDER BY row_num;
+  `;
+  
+  return query;
+};

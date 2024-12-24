@@ -295,14 +295,23 @@
         const sqlite_buf = await sqlite.arrayBuffer();
         const db = new SQL.Database(new Uint8Array(sqlite_buf));
         const start = performance.now();
-        const filter = getParam('filter');
         const album = getParam('album');
+        var filter = getParam('filter');
+        const maker = getParam('maker');
+        const lens_model = getParam('lens_model');
+        const country = getParam('country');
+        const focal_length = getParam('focal_length');
         var loadAll = getParam('all') !== null;
         var page = 1;
         var pageSize = 5;
+        var historyToday = false;
         var gridAll = document.getElementById("grid-all");
         if (filter !== null) {
             loadAll = true;
+        }
+        if (filter === "historytoday") {
+            historyToday = true;
+            filter = new Date().toISOString().split('T')[0];
         }
         if (!loadAll) {
             const observer = new IntersectionObserver(entries => {
@@ -328,7 +337,13 @@ FROM
     Photo
 LEFT JOIN
     EXIFData ON Photo.exif_data_id = EXIFData.id` 
+    + ((country !== null) ? ' LEFT JOIN Location ON Photo.location_id = Location.id ' : ' ')
     + (album !== null ? ' WHERE Photo.dir_id = (SELECT Album.id FROM Album WHERE Album.dir = "' + album + '")' : ' ')                
+    + ((maker !== null && maker !== "NONE") ? ' WHERE EXIFData.maker = "' + maker + '"' : ' ')                
+    + ((maker !== null && maker === "NONE") ? ' WHERE EXIFData.maker IS NULL ': '')                
+    + ((lens_model !== null) ? ' WHERE EXIFData.lens_model = "' + lens_model + '"' : ' ')                
+    + ((focal_length !== null) ? ' WHERE EXIFData.focal_length = "' + focal_length + '"' : ' ')                
+    + ((country !== null) ? ' WHERE Location.country = "' + country + '"' : ' ')                
     +
 `GROUP BY
     photo_date
@@ -343,8 +358,14 @@ ORDER BY
             var values = result[0].values;
             for (const key of Object.keys(values)) {
                 const v = values[key];
-                if (filter !== null && filter !== v[0]) {
-                    continue;
+                if (historyToday) {
+                    if (filter !== null && filter.substring(5) !== v[0].substring(5)) {
+                        continue;
+                    }
+                } else {
+                    if (filter !== null && filter !== v[0]) {
+                        continue;
+                    }
                 }
                 var grid = document.createElement("div");
                 var sec = document.createElement('h2');
