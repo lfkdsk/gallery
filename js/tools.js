@@ -379,3 +379,71 @@ const getTodayPhotos = () => {
   
   return query;
 };
+
+function checkShowYearEndSummary() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const lastDay = new Date(year, 11, 31);
+  const twoWeeksBefore = new Date(lastDay);
+  twoWeeksBefore.setDate(lastDay.getDate() - 14);
+
+  return now >= twoWeeksBefore && now <= lastDay;
+}
+
+function addYearEndSummaryLink(container, root) {
+  // 添加样式
+  const style = document.createElement('style');
+  style.textContent = `
+    .year-end-summary {
+      color: #000;
+      text-decoration: none;
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-top: 1rem;
+      pointer-events: none;
+    }
+
+    .year-end-summary.visible {
+      opacity: 0.7;
+      pointer-events: auto;
+    }
+
+    .year-end-summary.visible:hover {
+      opacity: 1;
+    }
+
+    .year-end-summary::after {
+      content: '→';
+      transition: transform 0.3s ease;
+    }
+
+    .year-end-summary.visible:hover::after {
+      transform: translateX(6px);
+    }
+    @media (prefers-color-scheme: dark) {
+      .year-end-summary {
+        color: #fff;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  const now = new Date();
+  const year = now.getFullYear();
+  const link = document.createElement('a');
+  link.href = root + '/summary?year=' + year;
+  link.className = 'year-end-summary';
+  link.textContent = year + ' 年度回顾';
+  container.appendChild(link)
+  if (checkShowYearEndSummary()) {
+    // 使用 requestAnimationFrame 确保过渡动画正常工作
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        link.classList.add('visible');
+      });
+    });
+  }
+}
