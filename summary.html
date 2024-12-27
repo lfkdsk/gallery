@@ -726,7 +726,7 @@
     )
 ) as data;    
 `.replaceAll(":year", year)
-            .replaceAll(":thum", '"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/"');
+ .replaceAll(":thum", '"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/"');
     console.log(sql)
     var data = db.exec(sql);
     const DATA = JSON.parse(data[0].values[0][0])
@@ -891,7 +891,7 @@
     <div class="photo-grid">
       ${data.photos.map(photo => `
         <div class="photo-item">
-          <img src="${photo.url}" alt="${photo.month}月印象" loading="lazy">
+          <img src="${photo.url.replace(/\.\w+$/, '.webp')}" alt="${photo.month}月印象" loading="lazy">
           <div class="photo-info">
             <span class="photo-month">${photo.month}月</span>
             <span class="photo-date">${photo.date}</span>
