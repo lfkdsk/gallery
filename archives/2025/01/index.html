@@ -22,14 +22,14 @@
   <meta name="author" content="lfkdsk">
   
   <!--Open Graph Title-->
-  <meta property="og:title" content="搜索" />
+  <meta property="og:title" content="照片集" />
   <!--Open Graph Description-->
   <meta property="og:description" content="拿起相机，认真思考" />
   <!--Open Graph Site Name-->
   <meta property="og:site_name" content="照片集" />
   <!--Type page-->
   
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="website" />
   
   <!--Page Cover-->
   
@@ -38,7 +38,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Title -->
   
-  <title>搜索 - 照片集</title>
+  <title>归档：2025/1 - 照片集</title>
   <!-- 添加到主屏后的标题（iOS 6 新增） -->
   <meta name="apple-mobile-web-app-title" content="照片集">
   <!-- 是否启用 WebApp 全屏模式 -->
@@ -283,151 +283,59 @@
 </style>
   <!-- Main Content -->
   
+
 <section class="pjax-area">
-  <div class="content-area search-area pt-[100px] max-w-[90%] md:max-w-[800px]">
-
-    <div class="ais-InstantSearch">
-      <!--搜索框-->
-      <div id="searchbox"></div>
-      <div id="hits"></div>
-      <div id="pagination"></div>
-    </div>
-
+  <div class="content-area p-4 container max-w-[1280px]">
+    <div class="index-achieve-title title">2025/1</div>
+    <div class="text-2xl leading-10 py-2 col-span-1 md:col-span-3 text-tblack dark:text-white">分类</div>
+    <section class="itp-article-categories" style="list-style-type: none;">
+      <div class="itp-m3-chip-color-list">
+        
+      </div>
+    </section>
+    <div class="text-2xl leading-10 py-2 col-span-1 md:col-span-3 text-tblack dark:text-white">标签</div>
+    <section class="itp-article-categories" style="list-style-type: none;">
+      <div class="itp-m3-chip-normal-list">
+        
+      </div>
+    </section>
+    <!-- learn from https://hughsite.com/post/hexo-modify-theme.html -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  
+  
+  
+  
+  <p class="text-2xl leading-10 py-2 col-span-1 md:col-span-2 lg:col-span-3 gap-1 text-tblack dark:text-white">2025</p>
+  
+  
+  <div class="h-auto px-3 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-all">
+    <a href="/gallery/2025/undefined/" class="flex items-center">
+      <div class="px-1">
+        <div class="post-title text-tblack dark:text-white">照片集</div>
+        <span class="text-sm leading-4 text-gray-400">2025-01-01</span>
+        
+      </div>
+    </a>
   </div>
-  <style>
-    input,
-    textarea {
-      outline: none;
-    }
-
-    .ais-InstantSearch {
-      max-width: 100%;
-    }
-
-    .hits {
-      max-width: 100%;
-    }
-
-    .ais-SearchBox-form {
-      width: 100%;
-      height: 58px;
-      border-radius: 29px;
-      background-color: #fff;
-    }
-
-    .ais-SearchBox-form input {
-      width: calc(100% - 60px);
-      height: 100%;
-      display: block;
-      margin: 0 auto;
-      background-color: #ffffff00;
-    }
-
-    .ais-SearchBox-form button {
-      display: none;
-    }
-
-
-    #hits {
-      border-radius: 29px;
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      margin-top: 30px;
-      padding: 30px 0;
-    }
-
-    .ais-Hits--empty {
-      text-align: center;
-    }
-
-    .ais-Hits-item {
-      width: calc(100% - 60px);
-      padding: 8px 12px;
-      margin: 6px 0;
-      transition: .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      text-align: left;
-      margin: 0 auto;
-    }
-
-    .ais-Hits-item:hover {
-      background-color: rgb(229 231 235);
-      border-radius: 3px;
-    }
-
-    .result-text {
-      font-size: 14px;
-      line-height: 16px;
-      opacity: 0.6;
-      height: 16px;
-      overflow-y: clip;
-    }
-
-    @media (prefers-color-scheme: dark) {
-
-      #hits,
-      .search-result,
-      .search-box,
-      .ais-SearchBox-form,
-      .search-box input {
-        background-color: #424242;
-      }
-
-      .result-text {
-        color: #bdbdbd;
-      }
-
-      input,
-      .ais-Hits--empty,
-      .title {
-        color: #fff
-      }
-
-      .ais-Hits-item:hover {
-        background-color: rgb(31 41 55 / 0.5);
-      }
-    }
-
-    mark {
-      background-color: #0000;
-      color: var(--main-black);
-    }
-
-    mark {
-      background: linear-gradient(104deg, #71afdd00 0.9%, #71afdd7c 2.4%, #71afdd80 5.8%, #71afdd1a 93%, #71afdd67 96%, #82ffff00 98%), linear-gradient(183deg, #71afdd00 0%, #71afdd4d 7.9%, #71afdd00 15%);
-      border-radius: 7.5px;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.2/dist/algoliasearch-lite.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.46.2/dist/instantsearch.production.min.js"></script>
-  <script data-pjax>
-    
-      const searchClient = algoliasearch('5KD46FHE8V', 'fe3eb1d9aad1e948f177c0cca2ac98cc');
-      const search = instantsearch({
-        indexName: 'tripper-hexo',
-        searchClient,
-      });
-      search.addWidgets([
-        instantsearch.widgets.searchBox({
-          container: '#searchbox',
-        }),
-
-        instantsearch.widgets.hits({
-          container: '#hits',
-          templates: {
-            item: `
-        <a href="{{ permalink }}" target="_blank" class="search-result">
-          <div class="title">{{#helpers.highlight}}{ "attribute": "title" }{{/helpers.highlight}}</div>
-        </a>
-      `,
-          },
-        })
-      ]);
-      search.start();
-    
-  </script>
+  
+  
+</div>
+<style>
+  .post-title {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .post-icon {
+    font-size: 1.2em;
+    color: #9DA3AE;
+  }
+</style>
+  </div>
 </section>
-
+<!--learn from https://github.com/fluid-dev/hexo-theme-fluid/blob/master/layout/archive.ejs-->
   <!-- Footer -->
   <!-- Footer -->
 <footer class="itp-footer text-center">

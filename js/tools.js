@@ -388,15 +388,13 @@ const getTodayPhotos = () => {
 function checkShowYearEndSummary() {
   const now = new Date();
   const year = now.getFullYear();
-  const lastDay = new Date(year, 11, 31);
+  const lastDay = new Date(year + 1, 1, 31);
   const twoWeeksBefore = new Date(lastDay);
-  twoWeeksBefore.setDate(lastDay.getDate() - 14);
-
+  twoWeeksBefore.setDate(lastDay.getDate() - 64);
   return now >= twoWeeksBefore && now <= lastDay;
 }
 
 function addYearEndSummaryLink(container, root) {
-  // 添加样式
   const style = document.createElement('style');
   style.textContent = `
     .year-end-summary {
