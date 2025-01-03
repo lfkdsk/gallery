@@ -105,7 +105,7 @@ function wrapperData(v, author) {
     }
     case "DJI": {
       exifLogo.attr("src", "img/dajiang.png");
-      exifLogo.addClass("sony-logo");
+      exifLogo.addClass("dji-logo");
       break;
     }
     default: {
