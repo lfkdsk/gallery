@@ -343,7 +343,8 @@ LEFT JOIN
     + ((maker !== null && maker === "NONE") ? ' WHERE EXIFData.maker IS NULL ': '')                
     + ((lens_model !== null) ? ' WHERE EXIFData.lens_model = "' + lens_model + '"' : ' ')                
     + ((focal_length !== null) ? ' WHERE EXIFData.focal_length = "' + focal_length + '"' : ' ')                
-    + ((country !== null) ? ' WHERE Location.country = "' + country + '"' : ' ')                
+    + ((country !== null && country !== "NONE") ? ' WHERE Location.country = "' + country + '"' : ' ')                
+    + ((country !== null && country === "NONE") ? ' WHERE Location.country = "" ' : ' ')                    
     +
 `GROUP BY
     photo_date
