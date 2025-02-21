@@ -437,7 +437,7 @@
             border-color: white;
         }        
     }
-</style>  
+</style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
       <div class="album-list flex gap-2">
@@ -961,11 +961,11 @@ In addition to the main box, there are two other smaller boxes visible in the sc
           </div>
           <div class="album-share album-tool">
             <iconpark-icon name="save"></iconpark-icon><a id="editor" href="javascript:void(0)"> Editor </a>
-          </div>     
+          </div>
           <div class="album-share album-tool">
             <iconpark-icon name="grid-nine"></iconpark-icon><a id="grid" href="javascript:void(0)"> Grid </a>
-          </div>        
-        </div>        
+          </div>
+        </div>
         <div class="album-title">旧金山亚洲博物馆</div>
         <span class="album-subtitle">
           
@@ -1071,13 +1071,13 @@ In addition to the main box, there are two other smaller boxes visible in the sc
             allowTaint: true,
             scrollX: 0,
             scrollY: 0,
-          }).then(function (canvas) {                  
+          }).then(function (canvas) {
             simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
           });
-        });   
+        });
         editor.click(function () {
           window.open('https://lfkdsk.github.io/gallery/editor?file=' + encodeURIComponent(imgLink));
-        })     
+        })
         // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -1106,7 +1106,7 @@ In addition to the main box, there are two other smaller boxes visible in the sc
           };
         };
         $("#share").on('click', function() {
-          var imageBox = document.getElementById("imgbox"); 
+          var imageBox = document.getElementById("imgbox");
           copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
         });
         $("#grid").on('click', function() {
@@ -1124,7 +1124,7 @@ In addition to the main box, there are two other smaller boxes visible in the sc
 
         .fullscreen-info {
           grid-column: span 3 / span 3;
-        }        
+        }
 
         .album-comment {
           max-width: 800px;
@@ -1239,6 +1239,10 @@ In addition to the main box, there are two other smaller boxes visible in the sc
 
           .wrapper {
             padding: 8px;
+          }
+
+          iframe {
+            max-width: 100%;
           }
         }
 

@@ -437,7 +437,7 @@
             border-color: white;
         }        
     }
-</style>  
+</style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
       <div class="album-list flex gap-2">
@@ -949,11 +949,11 @@ In the background, there is a wall with a carved design, adding to the overall a
           </div>
           <div class="album-share album-tool">
             <iconpark-icon name="save"></iconpark-icon><a id="editor" href="javascript:void(0)"> Editor </a>
-          </div>     
+          </div>
           <div class="album-share album-tool">
             <iconpark-icon name="grid-nine"></iconpark-icon><a id="grid" href="javascript:void(0)"> Grid </a>
-          </div>        
-        </div>        
+          </div>
+        </div>
         <div class="album-title">北京 · 智化寺</div>
         <span class="album-subtitle">
           
@@ -1059,13 +1059,13 @@ In the background, there is a wall with a carved design, adding to the overall a
             allowTaint: true,
             scrollX: 0,
             scrollY: 0,
-          }).then(function (canvas) {                  
+          }).then(function (canvas) {
             simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
           });
-        });   
+        });
         editor.click(function () {
           window.open('https://lfkdsk.github.io/gallery/editor?file=' + encodeURIComponent(imgLink));
-        })     
+        })
         // key
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
@@ -1094,7 +1094,7 @@ In the background, there is a wall with a carved design, adding to the overall a
           };
         };
         $("#share").on('click', function() {
-          var imageBox = document.getElementById("imgbox"); 
+          var imageBox = document.getElementById("imgbox");
           copyToClipboard('https://lfkdsk.github.io/gallery/' + "photo?name=" + imageBox.getAttribute('share'));
         });
         $("#grid").on('click', function() {
@@ -1112,7 +1112,7 @@ In the background, there is a wall with a carved design, adding to the overall a
 
         .fullscreen-info {
           grid-column: span 3 / span 3;
-        }        
+        }
 
         .album-comment {
           max-width: 800px;
@@ -1227,6 +1227,10 @@ In the background, there is a wall with a carved design, adding to the overall a
 
           .wrapper {
             padding: 8px;
+          }
+
+          iframe {
+            max-width: 100%;
           }
         }
 
