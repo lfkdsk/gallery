@@ -7,11 +7,11 @@ author: lfkdsk
 footer_logo: 
   use: self
   self:
-    link: 'https://lfkdsk.github.io/'
+    link: 'https://gallery.lfkdsk.org/'
     src: 'https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp'
 
-url: https://lfkdsk.github.io/gallery
-root: /gallery
+url: https://gallery.lfkdsk.org
+root: /
 
 photography_page:
   slogan: true
