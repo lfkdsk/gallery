@@ -107,15 +107,15 @@
 
   <!-- Custom CSS/Sass -->
   
-<link rel="stylesheet" href="/gallery/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
   
-<link rel="stylesheet" href="/gallery/css/fancybox.css">
+<link rel="stylesheet" href="/css/fancybox.css">
 
   <!--样式切换-->
   
   
-<link rel="stylesheet" href="/gallery/css/material3.css">
+<link rel="stylesheet" href="/css/material3.css">
 
   
   
@@ -132,7 +132,7 @@
   <!--highlight.js CSS-->
   
   
-<link rel="stylesheet" href="/gallery/css/highlight/github.css">
+<link rel="stylesheet" href="/css/highlight/github.css">
 
   
   
@@ -141,7 +141,7 @@
 
   <!-- jquery -->
   
-  <script src="/gallery/js/jquery.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
@@ -173,7 +173,7 @@
   
   
   
-  <link rel="manifest" href="/gallery/manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#71afdd">
   
   <!-- Google Search Advanced
@@ -211,7 +211,7 @@
   }
 </script>-->
 
-<link rel="stylesheet" href="/gallery/css/tailwind.css">
+<link rel="stylesheet" href="/css/tailwind.css">
 
 <meta name="generator" content="Hexo 6.0.0"></head>
 
@@ -227,7 +227,7 @@
 
 <div class="itp-float-bar">
   <!--所有页面都显示-->
-  <a class="itp-float-bar-item rounded" href="/gallery/" title="照片集">
+  <a class="itp-float-bar-item rounded" href="/" title="照片集">
     
     <iconpark-icon class="navicon" name="home"></iconpark-icon>
     
@@ -241,7 +241,7 @@
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="https://lfkdsk.github.io" title="归档">
+  <a class="itp-float-bar-item rounded" target="_blank" rel="noopener" href="https://lfkdsk.github.io" title="归档">
     
     <iconpark-icon class="navicon" name="inbox"></iconpark-icon>
     
@@ -462,7 +462,7 @@
       if (v.hasOwnProperty('location') && v.location.length !== 0) {
         // add marker
         var marker = L.marker(v.location).addTo(map);
-        marker.bindPopup(`<a href="/gallery/${v.dir}?name=${v.name}">LINK</a>` + `<img class="gmarker nofancy" src=${cover} style="margin-top:4px;" />`);
+        marker.bindPopup(`<a href="/${v.dir}?name=${v.name}">LINK</a>` + `<img class="gmarker nofancy" src=${cover} style="margin-top:4px;" />`);
       }
     }
     // album data
@@ -493,7 +493,7 @@
         });
         // add marker
         var marker = L.marker(v.location, {icon: icon}).addTo(map);
-        marker.bindPopup(`<a href="/gallery//${v.url}">${key}</a>` + `<img class="gmarker nofancy" src=${cover} style="margin-top:4px;" />`);
+        marker.bindPopup(`<a target="_blank" rel="noopener" href="//${v.url}">${key}</a>` + `<img class="gmarker nofancy" src=${cover} style="margin-top:4px;" />`);
         if (firstMark === null) {
           firstMark = marker;
         }
@@ -522,7 +522,7 @@
   </section>
   
     <section class="footer-logo">
-      <a href="https://lfkdsk.github.io/" target="_blank">
+      <a href="https://gallery.lfkdsk.org/" target="_blank">
         <img width="80px" height="80px" style="padding-top: 12px; display: block; margin: 0 auto;" src="https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp" alt="footer logo"></a>
     </section>
   
@@ -532,7 +532,7 @@
   <!-- fancybox -->
 
 <link rel="stylesheet" href="" />
-<script src="/gallery/js/fancybox.umd.js" defer></script>
+<script src="/js/fancybox.umd.js" defer></script>
 
 <!-- mdui -->
 
@@ -543,7 +543,7 @@
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js"></script>
+<script src="/js/highlight.min.js"></script>
 
 <script>window.addEventListener('load', () => {
   hljs.highlightAll(); // initialize highlighting
@@ -556,23 +556,23 @@
 
 
 
-<script src="/gallery/js/app.js"></script>
+<script src="/js/app.js"></script>
 
 
 
 <!--
 
-<script src="/gallery/js/canvas2image.js"></script>
+<script src="/js/canvas2image.js"></script>
 
 
-<script src="/gallery/js/shareimg.js"></script>
+<script src="/js/shareimg.js"></script>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
 -->
 <!--lazyload-->
 
 
-<script src="/gallery/js/lazyload.js"></script>
+<script src="/js/lazyload.js"></script>
 
 
 <!--PJAX-->
