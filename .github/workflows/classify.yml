@@ -2,8 +2,8 @@ name: image classify
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 11 * * *'
+  # schedule:
+  #   - cron: '0 11 * * *'
 
 env:
   GIT_USER: lfkdsk # change to yourself
