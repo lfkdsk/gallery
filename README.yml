@@ -4,6 +4,13 @@ Walden Pond:
   style: fullscreen
   cover: Walden-Pond/DSCF8438.webp
   location: [42.43886539397696, -71.34011811000813]
+
+Niagara Falls:
+  url: Niagara-Falls
+  date: 2025-07-19
+  style: fullscreen
+  cover: Niagara-Falls/DSCF8268-2.webp
+  location: [43.07865903762666, -79.07534307510618]
   
 Solo Hiking:
   url: solo-hiking
