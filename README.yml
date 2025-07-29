@@ -11,6 +11,13 @@ Niagara Falls:
   style: fullscreen
   cover: Niagara-Falls/DSCF8268-2.webp
   location: [43.07865903762666, -79.07534307510618]
+
+波士顿 · 自由之路:
+  url: Boston-Freeway
+  date: 2025-07-11
+  style: fullscreen
+  cover: Boston-Freeway/IMG_1043.webp
+  location: [42.367057975173616, -71.05854361851638]
   
 Solo Hiking:
   url: solo-hiking
