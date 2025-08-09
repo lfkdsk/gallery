@@ -1,9 +1,9 @@
-Santa Clara 云海:
-  url: SantaClara-CloudSea
-  date: 2025-06-27
+Shark Fin Cove:
+  url: SharkFinCove
+  date: 2025-08-02
+  cover: SharkFinCove/DSCF8515.webp
   style: fullscreen
-  cover: SantaClara-CloudSea/DSCF6807.webp
-  location: [37.32591404701111, -122.2114222560854]
+  location: [37.0046682747698, -122.18524219298213]
 
 Walden Pond:
   url: Walden-Pond
@@ -31,6 +31,13 @@ Solo Hiking:
   date: 2025-07-02
   style: fullscreen
   cover: solo-hiking/DSCF6864.webp
+
+Santa Clara 云海:
+  url: SantaClara-CloudSea
+  date: 2025-06-27
+  style: fullscreen
+  cover: SantaClara-CloudSea/DSCF6807.webp
+  location: [37.32591404701111, -122.2114222560854]
 
 Tahoe Summer:
   url: tahoe-summer
