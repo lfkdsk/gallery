@@ -1,3 +1,17 @@
+Newyork Day2:
+  url: NY2
+  date: 2025-07-15
+  style: fullscreen  
+  cover: NY2/DSCF7855-.webp
+  location: [40.77958280666447, -73.96316890081887]
+
+Newyork Day1:
+  url: NY1
+  date: 2025-07-14
+  style: fullscreen  
+  cover: NY1/PhotonCam_HK_20250714_202510.webp
+  location: [40.76154644078755, -73.97752504314778]
+
 Newport - Yale: 
   url: Newport2Yale
   date: 2025-07-13
