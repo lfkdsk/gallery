@@ -18,6 +18,7 @@
 
   // 注入基础样式（包含 iOS 风格 LIVE 胶囊角标 + 放大命中区域）
   const BASE_CSS = `
+
   .mlp-wrap{position:relative;width:100%;height:100%;overflow:hidden;border-radius:inherit}
   .mlp-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s ease,transform .25s ease;pointer-events:none}
   .mlp-wrap.is-ready .mlp-video{opacity:1}
@@ -87,7 +88,7 @@
       }
 
       // 角落触发：生成角标（支持 data-label）
-      if (this.opts.hotspot === 'corner') {
+      // if (this.opts.hotspot === 'corner') {
         this.badge = el.querySelector('.mlp-badge') || create('div','mlp-badge');
         if (!this.badge.parentNode) {
           this.badge.innerHTML = `
@@ -105,7 +106,7 @@
         txt.textContent = this.opts.label || 'LIVE';
         if (!txt.parentNode) this.badge.appendChild(txt);
         this._applyCorner();
-      }
+      //}
 
       // 媒体属性
       this.video.playsInline = true;

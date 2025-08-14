@@ -470,6 +470,15 @@ function attachLivePhoto(wrap, hasLive, videoUrl) {
     wrap.setAttribute('data-corner', 'tl');
     wrap.dataset.video = videoUrl;
 
+    const isMobile = matchMedia('(any-pointer: coarse)').matches;
+    if (isMobile) {
+      wrap.setAttribute('data-trigger', 'hold');
+      wrap.setAttribute('data-hotspot', 'full');
+    } else {
+      wrap.setAttribute('data-trigger', 'hover'); // 桌面端仍是 hover
+      wrap.setAttribute('data-hotspot', 'corner');
+    }
+
     wrap.classList.remove('no-video');
     if (wrap.__mlp) wrap.__mlp.destroy();
     wrap.__mlp = MiniLivePhoto.mount(wrap);
