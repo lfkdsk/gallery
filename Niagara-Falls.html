@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8200.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF8200" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8200.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8200.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/2s F4 ISO 800 35.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:18 22:20:50","EXIF ExposureTime":"1/2s","EXIF FNumber":"F4","EXIF FocalLength":"35.8mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8200","path":"Niagara-Falls/DSCF8200.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8200.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8200.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8200.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF8215" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8215.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8215.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/1000s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 12:50:39","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8215","path":"Niagara-Falls/DSCF8215.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8215.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8215.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8215.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF8218" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8218.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8218.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/1000s F4.5 ISO 160 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 13:14:38","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F4.5","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8218","path":"Niagara-Falls/DSCF8218.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8218.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8218.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8218.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF8224" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8224.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8224.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/3000s F4 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 13:30:29","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8224","path":"Niagara-Falls/DSCF8224.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8224.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8224.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8224.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF8234" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8234.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8234.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/1900s F5.6 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 13:33:40","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F5.6","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8234","path":"Niagara-Falls/DSCF8234.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8234.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8234.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8234.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF8250" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8250.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8250.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/3800s F9 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 13:34:19","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F9","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8250","path":"Niagara-Falls/DSCF8250.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8250.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8250.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8250.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF8268-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8268-2.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8268-2.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/1000s F6.4 ISO 160 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 13:35:15","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F6.4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8268-2","path":"Niagara-Falls/DSCF8268-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8268-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8268-2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8268-2.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF8399" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8399.webp"
             desc=" - · - "
             share="Niagara-Falls/DSCF8399.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"FUJIFILM X-S20 1/1800s F5.6 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 14:10:33","EXIF ExposureTime":"1/1800s","EXIF FNumber":"F5.6","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8399","path":"Niagara-Falls/DSCF8399.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8399.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/DSCF8399.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/DSCF8399.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="IMG_2489" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/IMG_2489.webp"
             desc=" - · - "
             share="Niagara-Falls/IMG_2489.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"Apple iPhone 15 Pro Max 1/12s F1.8 ISO 1250 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:18 21:51:12","EXIF ExposureTime":"1/12s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[43.086394444444444,-79.06861944444444],"name":"IMG_2489","path":"Niagara-Falls/IMG_2489.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/IMG_2489.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/IMG_2489.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/IMG_2489.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="PhotonCam_20250719_120514-denoise-sharpen" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp"
             desc=" - · - "
             share="Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"Apple iPhone 15 Pro Max 1/12500s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 12:05:13","EXIF ExposureTime":"1/12500s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[43.083625000000005,-79.07155555555555],"name":"PhotonCam_20250719_120514-denoise-sharpen","path":"Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="PhotonCam_20250719_120706" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/PhotonCam_20250719_120706.webp"
             desc=" - · - "
             share="Niagara-Falls/PhotonCam_20250719_120706.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"Apple iPhone 15 Pro Max 1/6135s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 12:07:04","EXIF ExposureTime":"1/6135s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[43.08391944444445,-79.07136388888888],"name":"PhotonCam_20250719_120706","path":"Niagara-Falls/PhotonCam_20250719_120706.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/PhotonCam_20250719_120706.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/PhotonCam_20250719_120706.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/PhotonCam_20250719_120706.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,6 +705,7 @@
             name="PhotonCam_20250719_121650" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/PhotonCam_20250719_121650.webp"
             desc=" - · - "
             share="Niagara-Falls/PhotonCam_20250719_121650.webp"
+            video=""
             extra='{"desc":null,"dir":"Niagara-Falls","exif":"Apple iPhone 15 Pro Max 1/11628s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:19 12:16:49","EXIF ExposureTime":"1/11628s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[43.083533333333335,-79.07099722222222],"name":"PhotonCam_20250719_121650","path":"Niagara-Falls/PhotonCam_20250719_121650.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/PhotonCam_20250719_121650.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Niagara-Falls/PhotonCam_20250719_121650.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Niagara-Falls/PhotonCam_20250719_121650.webp"
             aria-label="the photo 11"></a>
@@ -735,6 +787,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -748,6 +801,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

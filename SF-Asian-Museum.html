@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7575.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF7575" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7575.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7575.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/100s F3.6 ISO 2500 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:21:34","EXIF ExposureTime":"1/100s","EXIF FNumber":"F3.6","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7575","path":"SF-Asian-Museum/DSCF7575.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7575.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7575.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7575.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF7578" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7578.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7578.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/240s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:23:30","EXIF ExposureTime":"1/240s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7578","path":"SF-Asian-Museum/DSCF7578.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7578.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7578.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7578.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF7588" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7588.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7588.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/100s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:31:10","EXIF ExposureTime":"1/100s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7588","path":"SF-Asian-Museum/DSCF7588.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7588.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7588.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7588.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF7590" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7590.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7590.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/85s F2.8 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:32:26","EXIF ExposureTime":"1/85s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7590","path":"SF-Asian-Museum/DSCF7590.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7590.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7590.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7590.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF7591" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7591.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7591.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/120s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:33:06","EXIF ExposureTime":"1/120s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7591","path":"SF-Asian-Museum/DSCF7591.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7591.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7591.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7591.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF7594" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7594.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7594.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/300s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:34:51","EXIF ExposureTime":"1/300s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7594","path":"SF-Asian-Museum/DSCF7594.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7594.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7594.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7594.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF7597" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7597.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7597.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/160s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:38:24","EXIF ExposureTime":"1/160s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7597","path":"SF-Asian-Museum/DSCF7597.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7597.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7597.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7597.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF7599" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7599.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7599.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/220s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:39:24","EXIF ExposureTime":"1/220s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7599","path":"SF-Asian-Museum/DSCF7599.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7599.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7599.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7599.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF7600" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7600.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7600.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/420s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:40:00","EXIF ExposureTime":"1/420s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7600","path":"SF-Asian-Museum/DSCF7600.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7600.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7600.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7600.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF7602" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7602.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7602.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/60s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:41:01","EXIF ExposureTime":"1/60s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7602","path":"SF-Asian-Museum/DSCF7602.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7602.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7602.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7602.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF7614" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7614.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7614.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/13s F2.8 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:49:13","EXIF ExposureTime":"1/13s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7614","path":"SF-Asian-Museum/DSCF7614.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7614.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7614.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7614.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF7617" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7617.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7617.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/30s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:50:55","EXIF ExposureTime":"1/30s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7617","path":"SF-Asian-Museum/DSCF7617.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7617.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7617.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7617.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF7618" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7618.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7618.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/50s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:51:30","EXIF ExposureTime":"1/50s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7618","path":"SF-Asian-Museum/DSCF7618.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7618.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7618.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7618.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF7619" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7619.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7619.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/38s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:52:14","EXIF ExposureTime":"1/38s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7619","path":"SF-Asian-Museum/DSCF7619.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7619.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7619.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7619.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF7620" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7620.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7620.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/42s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:52:24","EXIF ExposureTime":"1/42s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7620","path":"SF-Asian-Museum/DSCF7620.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7620.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7620.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7620.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF7621" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7621.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7621.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/28s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:52:35","EXIF ExposureTime":"1/28s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7621","path":"SF-Asian-Museum/DSCF7621.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7621.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7621.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7621.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF7626" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7626.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7626.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/30s F2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:55:34","EXIF ExposureTime":"1/30s","EXIF FNumber":"F2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7626","path":"SF-Asian-Museum/DSCF7626.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7626.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7626.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7626.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF7629" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7629.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7629.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/280s F2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 03:59:19","EXIF ExposureTime":"1/280s","EXIF FNumber":"F2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7629","path":"SF-Asian-Museum/DSCF7629.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7629.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7629.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7629.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF7633" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7633.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7633.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/100s F1.8 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:01:36","EXIF ExposureTime":"1/100s","EXIF FNumber":"F1.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7633","path":"SF-Asian-Museum/DSCF7633.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7633.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7633.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7633.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="DSCF7634" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7634.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7634.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/100s F1.8 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:02:20","EXIF ExposureTime":"1/100s","EXIF FNumber":"F1.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7634","path":"SF-Asian-Museum/DSCF7634.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7634.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7634.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7634.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="DSCF7644" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7644.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7644.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/480s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:07:28","EXIF ExposureTime":"1/480s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7644","path":"SF-Asian-Museum/DSCF7644.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7644.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7644.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7644.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="DSCF7646" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7646.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7646.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/170s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:08:19","EXIF ExposureTime":"1/170s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7646","path":"SF-Asian-Museum/DSCF7646.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7646.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7646.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7646.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,9 +925,11 @@
             name="DSCF7647" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7647.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7647.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/90s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:08:37","EXIF ExposureTime":"1/90s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7647","path":"SF-Asian-Museum/DSCF7647.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7647.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7647.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7647.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -870,9 +945,11 @@
             name="DSCF7653" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7653.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7653.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/80s F1.2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:11:24","EXIF ExposureTime":"1/80s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7653","path":"SF-Asian-Museum/DSCF7653.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7653.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7653.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7653.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -888,9 +965,11 @@
             name="DSCF7655" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7655.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7655.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/100s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:11:35","EXIF ExposureTime":"1/100s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7655","path":"SF-Asian-Museum/DSCF7655.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7655.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7655.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7655.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -906,9 +985,11 @@
             name="DSCF7679" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7679.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7679.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/20s F2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:31:18","EXIF ExposureTime":"1/20s","EXIF FNumber":"F2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7679","path":"SF-Asian-Museum/DSCF7679.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7679.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7679.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7679.webp"
             aria-label="the photo 25"></a>
+          
           
           
           
@@ -924,6 +1005,7 @@
             name="DSCF7681" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7681.webp"
             desc=" - · - "
             share="SF-Asian-Museum/DSCF7681.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-Asian-Museum","exif":"FUJIFILM X-S20 1/20s F2 ISO 800 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:12:08 04:33:51","EXIF ExposureTime":"1/20s","EXIF FNumber":"F2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7681","path":"SF-Asian-Museum/DSCF7681.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7681.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-Asian-Museum/DSCF7681.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-Asian-Museum/DSCF7681.webp"
             aria-label="the photo 26"></a>
@@ -1005,6 +1087,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -1018,6 +1101,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

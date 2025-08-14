@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7146.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF7146" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7146.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7146.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/2500s F4 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 08:06:26","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7146","path":"Newport2Yale/DSCF7146.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7146.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7146.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7146.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF7148" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7148.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7148.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/2900s F4 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 08:09:15","EXIF ExposureTime":"1/2900s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7148","path":"Newport2Yale/DSCF7148.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7148.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7148.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7148.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF7156" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7156.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7156.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/3200s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 08:24:14","EXIF ExposureTime":"1/3200s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7156","path":"Newport2Yale/DSCF7156.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7156.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7156.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7156.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF7175" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7175.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7175.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/2700s F4 ISO 320 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 08:55:01","EXIF ExposureTime":"1/2700s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7175","path":"Newport2Yale/DSCF7175.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7175.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7175.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7175.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF7181" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7181.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7181.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/450s F4 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:33:04","EXIF ExposureTime":"1/450s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7181","path":"Newport2Yale/DSCF7181.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7181.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7181.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7181.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF7183" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7183.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7183.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/27s F4 ISO 800 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:35:14","EXIF ExposureTime":"1/27s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7183","path":"Newport2Yale/DSCF7183.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7183.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7183.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7183.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF7186" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7186.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7186.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/34s F4 ISO 800 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:35:57","EXIF ExposureTime":"1/34s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7186","path":"Newport2Yale/DSCF7186.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7186.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7186.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7186.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF7198" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7198.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7198.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/34s F4 ISO 800 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:39:59","EXIF ExposureTime":"1/34s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7198","path":"Newport2Yale/DSCF7198.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7198.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7198.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7198.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF7212" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7212.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7212.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/240s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:48:06","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7212","path":"Newport2Yale/DSCF7212.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7212.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7212.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7212.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF7228" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7228.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7228.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/800s F4 ISO 320 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:52:58","EXIF ExposureTime":"1/800s","EXIF FNumber":"F4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7228","path":"Newport2Yale/DSCF7228.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7228.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7228.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7228.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF7231" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7231.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7231.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/20s F4 ISO 800 37.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:54:57","EXIF ExposureTime":"1/20s","EXIF FNumber":"F4","EXIF FocalLength":"37.6mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7231","path":"Newport2Yale/DSCF7231.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7231.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7231.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7231.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF7233" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7233.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7233.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/20s F4 ISO 800 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 13:55:18","EXIF ExposureTime":"1/20s","EXIF FNumber":"F4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7233","path":"Newport2Yale/DSCF7233.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7233.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7233.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7233.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF7235" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7235.jpeg"
             desc=" - · - "
             share="Newport2Yale/DSCF7235.jpeg"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/28s F4 ISO 800 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:12:41","EXIF ExposureTime":"1/28s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7235","path":"Newport2Yale/DSCF7235.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7235.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7235.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7235.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF7243" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7243.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7243.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/680s F4 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:17:05","EXIF ExposureTime":"1/680s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7243","path":"Newport2Yale/DSCF7243.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7243.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7243.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7243.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF7252" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7252.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7252.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/1000s F4 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:31:30","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7252","path":"Newport2Yale/DSCF7252.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7252.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7252.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7252.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF7306" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7306.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7306.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/240s F4 ISO 500 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:37:48","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7306","path":"Newport2Yale/DSCF7306.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7306.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7306.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7306.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF7318" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7318.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7318.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/220s F4 ISO 800 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:48:48","EXIF ExposureTime":"1/220s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7318","path":"Newport2Yale/DSCF7318.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7318.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7318.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7318.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF7320" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7320.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7320.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/400s F4 ISO 320 23.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:55:32","EXIF ExposureTime":"1/400s","EXIF FNumber":"F4","EXIF FocalLength":"23.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7320","path":"Newport2Yale/DSCF7320.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7320.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7320.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7320.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF7321" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7321.webp"
             desc=" - · - "
             share="Newport2Yale/DSCF7321.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"FUJIFILM X-S20 1/150s F4 ISO 800 63mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:56:03","EXIF ExposureTime":"1/150s","EXIF FNumber":"F4","EXIF FocalLength":"63mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7321","path":"Newport2Yale/DSCF7321.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7321.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/DSCF7321.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/DSCF7321.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="IMG_1211" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1211.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1211.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/7092s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 14:12:49","EXIF ExposureTime":"1/7092s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.500277777777775,-71.32773611111111],"name":"IMG_1211","path":"Newport2Yale/IMG_1211.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1211.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1211.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1211.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="IMG_1216" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1216.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1216.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/60s F2.2 ISO 400 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 16:34:40","EXIF ExposureTime":"1/60s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.31578888888889,-72.92108888888889],"name":"IMG_1216","path":"Newport2Yale/IMG_1216.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1216.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1216.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1216.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="IMG_1224" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1224.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1224.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/1456s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 17:00:59","EXIF ExposureTime":"1/1456s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.31148888888889,-72.92671944444444],"name":"IMG_1224","path":"Newport2Yale/IMG_1224.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1224.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1224.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1224.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,9 +925,11 @@
             name="IMG_1228" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1228.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1228.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/1152s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 17:01:44","EXIF ExposureTime":"1/1152s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.31156111111111,-72.92668888888889],"name":"IMG_1228","path":"Newport2Yale/IMG_1228.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1228.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1228.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1228.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -870,9 +945,11 @@
             name="IMG_1234" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1234.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1234.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/304s F2.2 ISO 40 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 17:05:42","EXIF ExposureTime":"1/304s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.31158333333333,-72.92819166666668],"name":"IMG_1234","path":"Newport2Yale/IMG_1234.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1234.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1234.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1234.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -888,9 +965,11 @@
             name="IMG_1248" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1248.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1248.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/436s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 17:11:01","EXIF ExposureTime":"1/436s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.31133611111111,-72.92850555555556],"name":"IMG_1248","path":"Newport2Yale/IMG_1248.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1248.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1248.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1248.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -906,6 +985,7 @@
             name="IMG_1250" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1250.webp"
             desc=" - · - "
             share="Newport2Yale/IMG_1250.webp"
+            video=""
             extra='{"desc":null,"dir":"Newport2Yale","exif":"Apple iPhone 15 Pro Max 1/358s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:13 17:11:10","EXIF ExposureTime":"1/358s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[41.311305555555556,-72.92852777777779],"name":"IMG_1250","path":"Newport2Yale/IMG_1250.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1250.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Newport2Yale/IMG_1250.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Newport2Yale/IMG_1250.webp"
             aria-label="the photo 25"></a>
@@ -987,6 +1067,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -1000,6 +1081,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

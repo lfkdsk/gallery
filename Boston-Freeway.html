@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6870.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF6870" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6870.webp"
             desc=" - · - "
             share="Boston-Freeway/DSCF6870.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"FUJIFILM X-S20 1/170s F8 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 06:36:31","EXIF ExposureTime":"1/170s","EXIF FNumber":"F8","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6870","path":"Boston-Freeway/DSCF6870.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/DSCF6870.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6870.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/DSCF6870.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF6881" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6881.webp"
             desc=" - · - "
             share="Boston-Freeway/DSCF6881.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"FUJIFILM X-S20 1/120s F4 ISO 800 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 07:01:47","EXIF ExposureTime":"1/120s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6881","path":"Boston-Freeway/DSCF6881.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/DSCF6881.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6881.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/DSCF6881.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF6888" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6888.webp"
             desc=" - · - "
             share="Boston-Freeway/DSCF6888.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"FUJIFILM X-S20 1/160s F5 ISO 250 54.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 07:12:28","EXIF ExposureTime":"1/160s","EXIF FNumber":"F5","EXIF FocalLength":"54.5mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6888","path":"Boston-Freeway/DSCF6888.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/DSCF6888.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/DSCF6888.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/DSCF6888.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="IMG_0990" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_0990.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_0990.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/4310s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 09:53:49","EXIF ExposureTime":"1/4310s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.351191666666665,-71.0729361111111],"name":"IMG_0990","path":"Boston-Freeway/IMG_0990.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_0990.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_0990.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_0990.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="IMG_0999" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_0999.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_0999.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/7092s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 10:51:42","EXIF ExposureTime":"1/7092s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.357525,-71.06361388888888],"name":"IMG_0999","path":"Boston-Freeway/IMG_0999.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_0999.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_0999.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_0999.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="IMG_1008" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1008.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1008.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/2513s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 11:19:06","EXIF ExposureTime":"1/2513s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.35811666666667,-71.0604861111111],"name":"IMG_1008","path":"Boston-Freeway/IMG_1008.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1008.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1008.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1008.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="IMG_1014" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1014.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1014.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/4950s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 11:29:08","EXIF ExposureTime":"1/4950s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.35750277777778,-71.05853333333333],"name":"IMG_1014","path":"Boston-Freeway/IMG_1014.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1014.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1014.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1014.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="IMG_1022" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1022.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1022.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/4049s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 11:45:32","EXIF ExposureTime":"1/4049s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.35926944444444,-71.05711388888889],"name":"IMG_1022","path":"Boston-Freeway/IMG_1022.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1022.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1022.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1022.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="IMG_1031" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1031.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1031.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/120s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 12:37:52","EXIF ExposureTime":"1/120s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.359436111111116,-71.05095555555555],"name":"IMG_1031","path":"Boston-Freeway/IMG_1031.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1031.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1031.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1031.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="IMG_1034" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1034.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1034.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/120s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 12:38:03","EXIF ExposureTime":"1/120s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.35946388888889,-71.0509111111111],"name":"IMG_1034","path":"Boston-Freeway/IMG_1034.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1034.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1034.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1034.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="IMG_1038" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1038.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1038.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/2415s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 13:35:51","EXIF ExposureTime":"1/2415s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.36267222222222,-71.05581666666666],"name":"IMG_1038","path":"Boston-Freeway/IMG_1038.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1038.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1038.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1038.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="IMG_1043" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1043.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1043.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/4310s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 13:47:54","EXIF ExposureTime":"1/4310s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.36380277777778,-71.05355],"name":"IMG_1043","path":"Boston-Freeway/IMG_1043.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1043.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1043.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1043.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="IMG_1057" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1057.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1057.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/4310s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 14:52:58","EXIF ExposureTime":"1/4310s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.37521388888889,-71.06037222222221],"name":"IMG_1057","path":"Boston-Freeway/IMG_1057.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1057.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1057.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1057.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,6 +745,7 @@
             name="IMG_1059" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1059.webp"
             desc=" - · - "
             share="Boston-Freeway/IMG_1059.webp"
+            video=""
             extra='{"desc":null,"dir":"Boston-Freeway","exif":"Apple iPhone 15 Pro Max 1/12346s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:07:11 14:55:57","EXIF ExposureTime":"1/12346s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[42.37591944444444,-71.06106666666666],"name":"IMG_1059","path":"Boston-Freeway/IMG_1059.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1059.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/Boston-Freeway/IMG_1059.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Boston-Freeway/IMG_1059.webp"
             aria-label="the photo 13"></a>
@@ -771,6 +827,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -784,6 +841,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

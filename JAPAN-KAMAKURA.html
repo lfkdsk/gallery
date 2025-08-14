@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1329.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF1329" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1329.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1329.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1329","path":"JAPAN-KAMAKURA/DSCF1329.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1329.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1329.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1329.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF1330" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1330.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1330.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1330","path":"JAPAN-KAMAKURA/DSCF1330.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1330.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1330.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1330.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF1345" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1345.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1345.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1345","path":"JAPAN-KAMAKURA/DSCF1345.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1345.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1345.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1345.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF1350" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1350.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1350.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1350","path":"JAPAN-KAMAKURA/DSCF1350.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1350.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1350.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1350.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF1355" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1355.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1355.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1355","path":"JAPAN-KAMAKURA/DSCF1355.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1355.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1355.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1355.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF1359" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1359.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1359.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1359","path":"JAPAN-KAMAKURA/DSCF1359.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1359.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1359.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1359.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF1362" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1362.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1362.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1362","path":"JAPAN-KAMAKURA/DSCF1362.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1362.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1362.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1362.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF1365" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1365.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1365.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1365","path":"JAPAN-KAMAKURA/DSCF1365.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1365.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1365.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1365.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF1374" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1374.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1374.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1374","path":"JAPAN-KAMAKURA/DSCF1374.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1374.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1374.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1374.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF1377" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1377.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1377.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1377","path":"JAPAN-KAMAKURA/DSCF1377.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1377.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1377.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1377.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF1378" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1378.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1378.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1378","path":"JAPAN-KAMAKURA/DSCF1378.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1378.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1378.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1378.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF1379" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1379.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1379.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1379","path":"JAPAN-KAMAKURA/DSCF1379.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1379.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1379.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1379.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF1385" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1385.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1385.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1385","path":"JAPAN-KAMAKURA/DSCF1385.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1385.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1385.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1385.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF1389" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1389.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1389.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1389","path":"JAPAN-KAMAKURA/DSCF1389.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1389.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1389.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1389.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF1404" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1404.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1404.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1404","path":"JAPAN-KAMAKURA/DSCF1404.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1404.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1404.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1404.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF1408" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1408.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1408.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1408","path":"JAPAN-KAMAKURA/DSCF1408.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1408.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1408.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1408.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF1413" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1413.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1413.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1413","path":"JAPAN-KAMAKURA/DSCF1413.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1413.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1413.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1413.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF1416" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1416.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1416.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1416","path":"JAPAN-KAMAKURA/DSCF1416.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1416.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1416.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1416.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF1421" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1421.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1421.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1421","path":"JAPAN-KAMAKURA/DSCF1421.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1421.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1421.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1421.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,6 +865,7 @@
             name="DSCF1428" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1428.webp"
             desc=" - · - "
             share="JAPAN-KAMAKURA/DSCF1428.webp"
+            video=""
             extra='{"desc":null,"dir":"JAPAN-KAMAKURA","exif":"","exif_data":{},"location":[],"name":"DSCF1428","path":"JAPAN-KAMAKURA/DSCF1428.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1428.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1428.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1428.webp"
             aria-label="the photo 19"></a>
@@ -879,6 +947,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -892,6 +961,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

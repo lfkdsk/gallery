@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1531.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF1531" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1531.webp"
             desc=" - · - "
             share="SF-First/DSCF1531.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/950s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 16:31:20","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1531","path":"SF-First/DSCF1531.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1531.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1531.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1531.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF1536" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1536.webp"
             desc=" - · - "
             share="SF-First/DSCF1536.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/680s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 16:34:08","EXIF ExposureTime":"1/680s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1536","path":"SF-First/DSCF1536.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1536.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1536.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1536.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF1539" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1539.webp"
             desc=" - · - "
             share="SF-First/DSCF1539.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 16:36:24","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1539","path":"SF-First/DSCF1539.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1539.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1539.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1539.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF1545" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1545.webp"
             desc=" - · - "
             share="SF-First/DSCF1545.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/950s F8 ISO 320 58.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 16:41:17","EXIF ExposureTime":"1/950s","EXIF FNumber":"F8","EXIF FocalLength":"58.6mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1545","path":"SF-First/DSCF1545.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1545.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1545.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1545.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF1566" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1566.webp"
             desc=" - · - "
             share="SF-First/DSCF1566.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/350s F6.3 ISO 3200 600mm TAMRON SP 150-600mm F/5-6.3 Di VC USD G2 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 16:59:26","EXIF ExposureTime":"1/350s","EXIF FNumber":"F6.3","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"TAMRON SP 150-600mm F/5-6.3 Di VC USD G2","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1566","path":"SF-First/DSCF1566.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1566.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1566.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1566.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF1582" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1582.webp"
             desc=" - · - "
             share="SF-First/DSCF1582.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/3800s F5 ISO 640 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 17:17:08","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F5","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1582","path":"SF-First/DSCF1582.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1582.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1582.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1582.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF1585" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1585.webp"
             desc=" - · - "
             share="SF-First/DSCF1585.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/2700s F2.8 ISO 640 110.6mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 17:20:53","EXIF ExposureTime":"1/2700s","EXIF FNumber":"F2.8","EXIF FocalLength":"110.6mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1585","path":"SF-First/DSCF1585.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1585.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1585.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1585.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF1617" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1617.webp"
             desc=" - · - "
             share="SF-First/DSCF1617.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/25s F9 ISO 800 600mm TAMRON SP 150-600mm F/5-6.3 Di VC USD G2 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 18:29:24","EXIF ExposureTime":"1/25s","EXIF FNumber":"F9","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"TAMRON SP 150-600mm F/5-6.3 Di VC USD G2","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.79769722222222,-122.44981666666666],"name":"DSCF1617","path":"SF-First/DSCF1617.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1617.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1617.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1617.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF1635" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1635.webp"
             desc=" - · - "
             share="SF-First/DSCF1635.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/25s F6.3 ISO 640 600mm TAMRON SP 150-600mm F/5-6.3 Di VC USD G2 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 18:45:19","EXIF ExposureTime":"1/25s","EXIF FNumber":"F6.3","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"TAMRON SP 150-600mm F/5-6.3 Di VC USD G2","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.797752777777774,-122.44984444444445],"name":"DSCF1635","path":"SF-First/DSCF1635.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1635.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1635.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1635.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF1640" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1640.webp"
             desc=" - · - "
             share="SF-First/DSCF1640.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/25s F6.3 ISO 640 600mm TAMRON SP 150-600mm F/5-6.3 Di VC USD G2 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 18:45:52","EXIF ExposureTime":"1/25s","EXIF FNumber":"F6.3","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"TAMRON SP 150-600mm F/5-6.3 Di VC USD G2","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.797752777777774,-122.44984444444445],"name":"DSCF1640","path":"SF-First/DSCF1640.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1640.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1640.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1640.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF1646" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1646.webp"
             desc=" - · - "
             share="SF-First/DSCF1646.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 1/15s F4 ISO 3200 69.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 20:07:15","EXIF ExposureTime":"1/15s","EXIF FNumber":"F4","EXIF FocalLength":"69.8mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.79772777777777,-122.44982222222222],"name":"DSCF1646","path":"SF-First/DSCF1646.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1646.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1646.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1646.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF1666" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1666.webp"
             desc=" - · - "
             share="SF-First/DSCF1666.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 5s F8 ISO 160 67.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 20:28:44","EXIF ExposureTime":"5s","EXIF FNumber":"F8","EXIF FocalLength":"67.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.832572222222225,-122.48000277777778],"name":"DSCF1666","path":"SF-First/DSCF1666.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1666.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1666.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1666.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF1667" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1667.webp"
             desc=" - · - "
             share="SF-First/DSCF1667.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 8s F7.1 ISO 160 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 20:43:59","EXIF ExposureTime":"8s","EXIF FNumber":"F7.1","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.83388333333333,-122.47556388888889],"name":"DSCF1667","path":"SF-First/DSCF1667.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1667.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1667.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1667.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF1668" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1668.webp"
             desc=" - · - "
             share="SF-First/DSCF1668.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"FUJIFILM X-S20 40s F7.1 ISO 80 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 20:48:20","EXIF ExposureTime":"40s","EXIF FNumber":"F7.1","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.83388333333333,-122.47556388888889],"name":"DSCF1668","path":"SF-First/DSCF1668.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1668.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/DSCF1668.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/DSCF1668.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="IMG_4073" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/IMG_4073.webp"
             desc=" - · - "
             share="SF-First/IMG_4073.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"Apple iPhone 12 Pro 1/99s F2.4 ISO 50 1.5mm iPhone 12 Pro back triple camera 1.54mm f/2.4 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 17:14:07","EXIF ExposureTime":"1/99s","EXIF FNumber":"F2.4","EXIF FocalLength":"1.5mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 12 Pro back triple camera 1.54mm f/2.4","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[37.80309166666667,-122.44849444444445],"name":"IMG_4073","path":"SF-First/IMG_4073.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/IMG_4073.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/IMG_4073.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/IMG_4073.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="IMG_4075" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/IMG_4075.webp"
             desc=" - · - "
             share="SF-First/IMG_4075.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"Apple iPhone 12 Pro 1/1825s F1.6 ISO 32 4.2mm iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 17:23:53","EXIF ExposureTime":"1/1825s","EXIF FNumber":"F1.6","EXIF FocalLength":"4.2mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[37.80233888888888,-122.44824166666668],"name":"IMG_4075","path":"SF-First/IMG_4075.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/IMG_4075.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/IMG_4075.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/IMG_4075.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,6 +805,7 @@
             name="IMG_4082" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/IMG_4082.webp"
             desc=" - · - "
             share="SF-First/IMG_4082.webp"
+            video=""
             extra='{"desc":null,"dir":"SF-First","exif":"Apple iPhone 12 Pro 1/2304s F1.6 ISO 32 4.2mm iPhone 12 Pro back triple camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2024:03:23 18:04:30","EXIF ExposureTime":"1/2304s","EXIF FNumber":"F1.6","EXIF FocalLength":"4.2mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 12 Pro back triple camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[37.799483333333335,-122.44966944444445],"name":"IMG_4082","path":"SF-First/IMG_4082.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/IMG_4082.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/SF-First/IMG_4082.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SF-First/IMG_4082.webp"
             aria-label="the photo 16"></a>
@@ -821,6 +883,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -834,6 +897,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2920.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF2920" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2920.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2920.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/2500s F4 ISO 320 21.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 14:45:50","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F4","EXIF FocalLength":"21.2mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2920","path":"FUJIFILM-CITYWALK-2023/DSCF2920.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2920.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2920.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2920.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF2922" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2922.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2922.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/1800s F5.6 ISO 320 18.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 14:47:02","EXIF ExposureTime":"1/1800s","EXIF FNumber":"F5.6","EXIF FocalLength":"18.4mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2922","path":"FUJIFILM-CITYWALK-2023/DSCF2922.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2922.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2922.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2922.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF2924" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2924.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2924.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/420s F5.6 ISO 320 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 14:50:37","EXIF ExposureTime":"1/420s","EXIF FNumber":"F5.6","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2924","path":"FUJIFILM-CITYWALK-2023/DSCF2924.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2924.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2924.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2924.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF2930" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2930.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2930.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/105s F4 ISO 800 35.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:07:25","EXIF ExposureTime":"1/105s","EXIF FNumber":"F4","EXIF FocalLength":"35.8mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2930","path":"FUJIFILM-CITYWALK-2023/DSCF2930.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2930.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2930.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2930.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF2940" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2940.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2940.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 250 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:13:51","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2940","path":"FUJIFILM-CITYWALK-2023/DSCF2940.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2940.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2940.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2940.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF2945" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2945.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2945.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/125s F4.5 ISO 320 30.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:21:32","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4.5","EXIF FocalLength":"30.8mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2945","path":"FUJIFILM-CITYWALK-2023/DSCF2945.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2945.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2945.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2945.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF2949" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2949.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2949.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/170s F4 ISO 320 52.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:26:32","EXIF ExposureTime":"1/170s","EXIF FNumber":"F4","EXIF FocalLength":"52.4mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2949","path":"FUJIFILM-CITYWALK-2023/DSCF2949.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2949.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2949.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2949.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF2959" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2959.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2959.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/125s F4.5 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:36:28","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4.5","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.226913888888888,121.44784722222222],"name":"DSCF2959","path":"FUJIFILM-CITYWALK-2023/DSCF2959.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2959.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2959.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2959.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF2961" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2961.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2961.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/150s F4.5 ISO 320 21.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:38:02","EXIF ExposureTime":"1/150s","EXIF FNumber":"F4.5","EXIF FocalLength":"21.2mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22693888888889,121.44786666666667],"name":"DSCF2961","path":"FUJIFILM-CITYWALK-2023/DSCF2961.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2961.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2961.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2961.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF2963" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2963.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2963.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 800 17.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:46:44","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"17.1mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.226952777777775,121.44798611111112],"name":"DSCF2963","path":"FUJIFILM-CITYWALK-2023/DSCF2963.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2963.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2963.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2963.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF2966" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2966.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2966.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 1000 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:48:07","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22704444444444,121.44795833333333],"name":"DSCF2966","path":"FUJIFILM-CITYWALK-2023/DSCF2966.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2966.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2966.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2966.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF2967" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2967.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2967.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4.5 ISO 320 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:49:14","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4.5","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22704444444444,121.44795833333333],"name":"DSCF2967","path":"FUJIFILM-CITYWALK-2023/DSCF2967.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2967.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2967.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2967.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF2971" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2971.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2971.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/240s F4 ISO 1000 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:52:27","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.226955555555556,121.44792222222223],"name":"DSCF2971","path":"FUJIFILM-CITYWALK-2023/DSCF2971.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2971.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2971.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2971.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF2974" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2974.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2974.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/240s F4 ISO 1000 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:52:48","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.226955555555556,121.44792222222223],"name":"DSCF2974","path":"FUJIFILM-CITYWALK-2023/DSCF2974.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2974.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2974.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2974.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF2976" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2976.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2976.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/240s F4 ISO 1000 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:52:59","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.226955555555556,121.44792222222223],"name":"DSCF2976","path":"FUJIFILM-CITYWALK-2023/DSCF2976.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2976.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2976.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2976.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF2983" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2983.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2983.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/450s F5.6 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 15:57:01","EXIF ExposureTime":"1/450s","EXIF FNumber":"F5.6","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.227130555555554,121.44836111111111],"name":"DSCF2983","path":"FUJIFILM-CITYWALK-2023/DSCF2983.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2983.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2983.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2983.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF2989" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2989.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2989.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/250s F4 ISO 320 30.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 16:01:34","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF FocalLength":"30.8mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.227727777777776,121.44806944444444],"name":"DSCF2989","path":"FUJIFILM-CITYWALK-2023/DSCF2989.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2989.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2989.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2989.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF2990" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2990.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF2990.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/420s F5.6 ISO 320 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 16:01:58","EXIF ExposureTime":"1/420s","EXIF FNumber":"F5.6","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.227713888888886,121.44807222222222],"name":"DSCF2990","path":"FUJIFILM-CITYWALK-2023/DSCF2990.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2990.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF2990.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF2990.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF3075" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3075.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3075.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/110s F4 ISO 5000 37.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 17:30:24","EXIF ExposureTime":"1/110s","EXIF FNumber":"F4","EXIF FocalLength":"37.6mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3075","path":"FUJIFILM-CITYWALK-2023/DSCF3075.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3075.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3075.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3075.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="DSCF3077" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3077.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3077.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/200s F4 ISO 10000 67.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 17:35:07","EXIF ExposureTime":"1/200s","EXIF FNumber":"F4","EXIF FocalLength":"67.5mm","EXIF ISOSpeedRatings":"ISO 10000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3077","path":"FUJIFILM-CITYWALK-2023/DSCF3077.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3077.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3077.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3077.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="DSCF3079" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3079.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3079.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/90s F4 ISO 4000 60.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 17:35:12","EXIF ExposureTime":"1/90s","EXIF FNumber":"F4","EXIF FocalLength":"60.8mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3079","path":"FUJIFILM-CITYWALK-2023/DSCF3079.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3079.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3079.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3079.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="DSCF3089" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3089.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3089.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/60s F4 ISO 5000 26mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 18:16:44","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"26mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3089","path":"FUJIFILM-CITYWALK-2023/DSCF3089.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3089.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3089.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3089.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,9 +925,11 @@
             name="DSCF3092" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3092.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3092.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/60s F4 ISO 3200 21.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 18:26:36","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"21.2mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3092","path":"FUJIFILM-CITYWALK-2023/DSCF3092.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3092.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3092.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3092.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -870,9 +945,11 @@
             name="DSCF3096" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3096.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3096.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/50s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 18:33:56","EXIF ExposureTime":"1/50s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3096","path":"FUJIFILM-CITYWALK-2023/DSCF3096.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3096.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3096.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3096.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -888,9 +965,11 @@
             name="DSCF3098" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3098.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3098.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/80s F4 ISO 12800 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 18:39:26","EXIF ExposureTime":"1/80s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3098","path":"FUJIFILM-CITYWALK-2023/DSCF3098.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3098.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3098.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3098.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -906,9 +985,11 @@
             name="DSCF3102" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3102.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3102.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/200s F4 ISO 6400 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 18:39:38","EXIF ExposureTime":"1/200s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3102","path":"FUJIFILM-CITYWALK-2023/DSCF3102.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3102.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3102.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3102.webp"
             aria-label="the photo 25"></a>
+          
           
           
           
@@ -924,9 +1005,11 @@
             name="DSCF3106" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3106.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3106.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/125s F4 ISO 10000 21.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 18:42:36","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"21.2mm","EXIF ISOSpeedRatings":"ISO 10000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3106","path":"FUJIFILM-CITYWALK-2023/DSCF3106.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3106.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3106.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3106.webp"
             aria-label="the photo 26"></a>
+          
           
           
           
@@ -942,9 +1025,11 @@
             name="DSCF3109" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3109.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3109.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 2000 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:02:40","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3109","path":"FUJIFILM-CITYWALK-2023/DSCF3109.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3109.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3109.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3109.webp"
             aria-label="the photo 27"></a>
+          
           
           
           
@@ -960,9 +1045,11 @@
             name="DSCF3117" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3117.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3117.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 1000 21.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:03:38","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"21.2mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3117","path":"FUJIFILM-CITYWALK-2023/DSCF3117.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3117.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3117.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3117.webp"
             aria-label="the photo 28"></a>
+          
           
           
           
@@ -978,9 +1065,11 @@
             name="DSCF3119" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3119.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3119.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/60s F4 ISO 4000 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:04:01","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3119","path":"FUJIFILM-CITYWALK-2023/DSCF3119.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3119.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3119.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3119.webp"
             aria-label="the photo 29"></a>
+          
           
           
           
@@ -996,9 +1085,11 @@
             name="DSCF3122" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3122.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3122.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/75s F4 ISO 6400 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:05:24","EXIF ExposureTime":"1/75s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3122","path":"FUJIFILM-CITYWALK-2023/DSCF3122.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3122.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3122.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3122.webp"
             aria-label="the photo 30"></a>
+          
           
           
           
@@ -1014,9 +1105,11 @@
             name="DSCF3128" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3128.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3128.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/110s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:08:02","EXIF ExposureTime":"1/110s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3128","path":"FUJIFILM-CITYWALK-2023/DSCF3128.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3128.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3128.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3128.webp"
             aria-label="the photo 31"></a>
+          
           
           
           
@@ -1032,9 +1125,11 @@
             name="DSCF3135" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3135.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3135.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/80s F4 ISO 4000 54.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:10:12","EXIF ExposureTime":"1/80s","EXIF FNumber":"F4","EXIF FocalLength":"54.5mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3135","path":"FUJIFILM-CITYWALK-2023/DSCF3135.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3135.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3135.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3135.webp"
             aria-label="the photo 32"></a>
+          
           
           
           
@@ -1050,9 +1145,11 @@
             name="DSCF3139" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3139.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3139.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/90s F4 ISO 3200 54.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:25:07","EXIF ExposureTime":"1/90s","EXIF FNumber":"F4","EXIF FocalLength":"54.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3139","path":"FUJIFILM-CITYWALK-2023/DSCF3139.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3139.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3139.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3139.webp"
             aria-label="the photo 33"></a>
+          
           
           
           
@@ -1068,9 +1165,11 @@
             name="DSCF3153" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3153.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3153.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/60s F4 ISO 4000 37.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:34:05","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"37.6mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3153","path":"FUJIFILM-CITYWALK-2023/DSCF3153.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3153.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3153.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3153.webp"
             aria-label="the photo 34"></a>
+          
           
           
           
@@ -1086,9 +1185,11 @@
             name="DSCF3156" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3156.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3156.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/60s F4 ISO 5000 24.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:34:15","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"24.7mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3156","path":"FUJIFILM-CITYWALK-2023/DSCF3156.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3156.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3156.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3156.webp"
             aria-label="the photo 35"></a>
+          
           
           
           
@@ -1104,9 +1205,11 @@
             name="DSCF3165" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3165.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3165.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/125s F4 ISO 4000 42.9mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:35:42","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"42.9mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3165","path":"FUJIFILM-CITYWALK-2023/DSCF3165.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3165.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3165.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3165.webp"
             aria-label="the photo 36"></a>
+          
           
           
           
@@ -1122,9 +1225,11 @@
             name="DSCF3168" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3168.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3168.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/105s F4 ISO 5000 34.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:36:44","EXIF ExposureTime":"1/105s","EXIF FNumber":"F4","EXIF FocalLength":"34.2mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3168","path":"FUJIFILM-CITYWALK-2023/DSCF3168.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3168.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3168.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3168.webp"
             aria-label="the photo 37"></a>
+          
           
           
           
@@ -1140,9 +1245,11 @@
             name="DSCF3172" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3172.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3172.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 2000 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:39:47","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3172","path":"FUJIFILM-CITYWALK-2023/DSCF3172.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3172.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3172.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3172.webp"
             aria-label="the photo 38"></a>
+          
           
           
           
@@ -1158,9 +1265,11 @@
             name="DSCF3177" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3177.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3177.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/105s F4 ISO 2000 35.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:42:03","EXIF ExposureTime":"1/105s","EXIF FNumber":"F4","EXIF FocalLength":"35.8mm","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3177","path":"FUJIFILM-CITYWALK-2023/DSCF3177.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3177.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3177.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3177.webp"
             aria-label="the photo 39"></a>
+          
           
           
           
@@ -1176,9 +1285,11 @@
             name="DSCF3186" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3186.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3186.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/100s F4 ISO 4000 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:44:23","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3186","path":"FUJIFILM-CITYWALK-2023/DSCF3186.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3186.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3186.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3186.webp"
             aria-label="the photo 40"></a>
+          
           
           
           
@@ -1194,6 +1305,7 @@
             name="DSCF3192" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3192.webp"
             desc=" - · - "
             share="FUJIFILM-CITYWALK-2023/DSCF3192.webp"
+            video=""
             extra='{"desc":null,"dir":"FUJIFILM-CITYWALK-2023","exif":"FUJIFILM X-S20 1/125s F4 ISO 6400 26mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:10:22 19:56:10","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"26mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[31.22477222222222,121.43912222222222],"name":"DSCF3192","path":"FUJIFILM-CITYWALK-2023/DSCF3192.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3192.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/FUJIFILM-CITYWALK-2023/DSCF3192.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FUJIFILM-CITYWALK-2023/DSCF3192.webp"
             aria-label="the photo 41"></a>
@@ -1275,6 +1387,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -1288,6 +1401,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

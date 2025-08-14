@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/2025-03-12-10-58-51.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="2025-03-12-10-58-51" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/2025-03-12-10-58-51.webp"
             desc=" - · - "
             share="BayArea-Hiking/2025-03-12-10-58-51.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"","exif_data":{},"location":[],"name":"2025-03-12-10-58-51","path":"BayArea-Hiking/2025-03-12-10-58-51.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/2025-03-12-10-58-51.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/2025-03-12-10-58-51.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/2025-03-12-10-58-51.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="2025-03-12-11-00-02" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/2025-03-12-11-00-02.webp"
             desc=" - · - "
             share="BayArea-Hiking/2025-03-12-11-00-02.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"","exif_data":{},"location":[],"name":"2025-03-12-11-00-02","path":"BayArea-Hiking/2025-03-12-11-00-02.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/2025-03-12-11-00-02.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/2025-03-12-11-00-02.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/2025-03-12-11-00-02.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF0019" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF0019.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF0019.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F6.3 ISO 320 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:04:05 14:25:53","EXIF ExposureTime":"1/900s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0019","path":"BayArea-Hiking/DSCF0019.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF0019.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF0019.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF0019.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF2841" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2841.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF2841.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/680s F5.6 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2025:04:22 09:09:12","EXIF ExposureTime":"1/680s","EXIF FNumber":"F5.6","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2841","path":"BayArea-Hiking/DSCF2841.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2841.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2841.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2841.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF2857" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2857.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF2857.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/2900s F2.8 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2025:04:22 09:21:52","EXIF ExposureTime":"1/2900s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2857","path":"BayArea-Hiking/DSCF2857.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2857.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2857.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2857.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF2859" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2859.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF2859.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/2700s F2.8 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2025:04:22 09:26:48","EXIF ExposureTime":"1/2700s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2859","path":"BayArea-Hiking/DSCF2859.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2859.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2859.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2859.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF2865" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2865.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF2865.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/3000s F2.8 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2025:04:22 09:45:51","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2865","path":"BayArea-Hiking/DSCF2865.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2865.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF2865.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF2865.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF9223" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9223.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9223.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/85s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:03:15 12:40:40","EXIF ExposureTime":"1/85s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9223","path":"BayArea-Hiking/DSCF9223.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9223.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9223.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9223.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF9224" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9224.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9224.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/10s F4 ISO 160 30.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:03:15 12:44:02","EXIF ExposureTime":"1/10s","EXIF FNumber":"F4","EXIF FocalLength":"30.8mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9224","path":"BayArea-Hiking/DSCF9224.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9224.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9224.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9224.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF9240" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9240.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9240.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/27s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:03:15 14:49:13","EXIF ExposureTime":"1/27s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9240","path":"BayArea-Hiking/DSCF9240.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9240.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9240.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9240.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF9242" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9242.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9242.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/240s F4 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:03:15 14:59:59","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9242","path":"BayArea-Hiking/DSCF9242.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9242.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9242.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9242.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF9254" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9254.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9254.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/2700s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:00:21","EXIF ExposureTime":"1/2700s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9254","path":"BayArea-Hiking/DSCF9254.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9254.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9254.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9254.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF9301-denoiseraw-sharpen-denoise" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F6.3 ISO 320 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:11:33","EXIF ExposureTime":"1/900s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9301-denoiseraw-sharpen-denoise","path":"BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF9351" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9351.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9351.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F7.1 ISO 500 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:22:31","EXIF ExposureTime":"1/900s","EXIF FNumber":"F7.1","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9351","path":"BayArea-Hiking/DSCF9351.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9351.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9351.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9351.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF9357" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9357.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9357.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F7.1 ISO 320 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:23:00","EXIF ExposureTime":"1/900s","EXIF FNumber":"F7.1","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9357","path":"BayArea-Hiking/DSCF9357.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9357.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9357.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9357.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF9380" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9380.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9380.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F7.1 ISO 320 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:23:01","EXIF ExposureTime":"1/900s","EXIF FNumber":"F7.1","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9380","path":"BayArea-Hiking/DSCF9380.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9380.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9380.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9380.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF9396-denoiseraw-sharpen-denoise" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F7.1 ISO 500 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:23:47","EXIF ExposureTime":"1/900s","EXIF FNumber":"F7.1","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9396-denoiseraw-sharpen-denoise","path":"BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF9426" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9426.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9426.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/900s F7.1 ISO 160 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:24:31","EXIF ExposureTime":"1/900s","EXIF FNumber":"F7.1","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9426","path":"BayArea-Hiking/DSCF9426.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9426.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9426.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9426.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF9518" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9518.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9518.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/500s F8 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 13:49:26","EXIF ExposureTime":"1/500s","EXIF FNumber":"F8","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9518","path":"BayArea-Hiking/DSCF9518.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9518.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9518.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9518.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="DSCF9521" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9521.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9521.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/420s F14 ISO 320 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:22 14:18:51","EXIF ExposureTime":"1/420s","EXIF FNumber":"F14","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9521","path":"BayArea-Hiking/DSCF9521.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9521.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9521.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9521.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="DSCF9732-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9732-Enhanced-NR.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9732-Enhanced-NR.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/850s F8 ISO 12800 539mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:03 18:10:18","EXIF ExposureTime":"1/850s","EXIF FNumber":"F8","EXIF FocalLength":"539mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9732-Enhanced-NR","path":"BayArea-Hiking/DSCF9732-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9732-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9732-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9732-Enhanced-NR.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="DSCF9833" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9833.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9833.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/600s F5.6 ISO 800 161mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:03 18:17:16","EXIF ExposureTime":"1/600s","EXIF FNumber":"F5.6","EXIF FocalLength":"161mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9833","path":"BayArea-Hiking/DSCF9833.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9833.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9833.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9833.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,9 +925,11 @@
             name="DSCF9921" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9921.webp"
             desc=" - · - "
             share="BayArea-Hiking/DSCF9921.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"FUJIFILM X-S20 1/500s F8 ISO 12800 600mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:03 18:48:24","EXIF ExposureTime":"1/500s","EXIF FNumber":"F8","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF9921","path":"BayArea-Hiking/DSCF9921.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9921.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/DSCF9921.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/DSCF9921.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -870,9 +945,11 @@
             name="IMG_8664" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8664.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_8664.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/1597s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 17:21:04","EXIF ExposureTime":"1/1597s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.61954166666667,-121.74363055555555],"name":"IMG_8664","path":"BayArea-Hiking/IMG_8664.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8664.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8664.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8664.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -888,9 +965,11 @@
             name="IMG_8674" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8674.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_8674.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/1002s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 17:36:03","EXIF ExposureTime":"1/1002s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.61785,-121.74134166666667],"name":"IMG_8674","path":"BayArea-Hiking/IMG_8674.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8674.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8674.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8674.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -906,9 +985,11 @@
             name="IMG_8682" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8682.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_8682.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/151s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 17:50:40","EXIF ExposureTime":"1/151s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.62081944444444,-121.74407222222223],"name":"IMG_8682","path":"BayArea-Hiking/IMG_8682.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8682.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8682.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8682.webp"
             aria-label="the photo 25"></a>
+          
           
           
           
@@ -924,9 +1005,11 @@
             name="IMG_8684" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8684.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_8684.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/281s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 17:51:41","EXIF ExposureTime":"1/281s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.620983333333335,-121.74424722222223],"name":"IMG_8684","path":"BayArea-Hiking/IMG_8684.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8684.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8684.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8684.webp"
             aria-label="the photo 26"></a>
+          
           
           
           
@@ -942,9 +1025,11 @@
             name="IMG_8690" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8690.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_8690.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/121s F1.8 ISO 125 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 18:00:18","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 125","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.62222222222222,-121.74675833333333],"name":"IMG_8690","path":"BayArea-Hiking/IMG_8690.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8690.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8690.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8690.webp"
             aria-label="the photo 27"></a>
+          
           
           
           
@@ -960,9 +1045,11 @@
             name="IMG_8879" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8879.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_8879.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/3425s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:15 15:36:19","EXIF ExposureTime":"1/3425s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.173030555555556,-122.23107222222222],"name":"IMG_8879","path":"BayArea-Hiking/IMG_8879.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8879.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_8879.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_8879.webp"
             aria-label="the photo 28"></a>
+          
           
           
           
@@ -978,9 +1065,11 @@
             name="IMG_9136" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_9136.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_9136.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/6410s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:04:05 12:38:40","EXIF ExposureTime":"1/6410s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.51411944444445,-121.88902222222222],"name":"IMG_9136","path":"BayArea-Hiking/IMG_9136.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_9136.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_9136.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_9136.webp"
             aria-label="the photo 29"></a>
+          
           
           
           
@@ -996,9 +1085,11 @@
             name="IMG_9145" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_9145.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_9145.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/9009s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:04:05 14:00:45","EXIF ExposureTime":"1/9009s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.512838888888886,-121.88143888888888],"name":"IMG_9145","path":"BayArea-Hiking/IMG_9145.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_9145.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_9145.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_9145.webp"
             aria-label="the photo 30"></a>
+          
           
           
           
@@ -1014,9 +1105,11 @@
             name="IMG_9329" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_9329.webp"
             desc=" - · - "
             share="BayArea-Hiking/IMG_9329.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/1513s F2.8 ISO 50 15.7mm iPhone 15 Pro Max back triple camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:04:21 18:09:26","EXIF ExposureTime":"1/1513s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.75590833333333,-121.69913611111112],"name":"IMG_9329","path":"BayArea-Hiking/IMG_9329.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_9329.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/IMG_9329.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/IMG_9329.webp"
             aria-label="the photo 31"></a>
+          
           
           
           
@@ -1032,9 +1125,11 @@
             name="PhotonCam_OSK_20250301_152405" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/PhotonCam_OSK_20250301_152405.webp"
             desc=" - · - "
             share="BayArea-Hiking/PhotonCam_OSK_20250301_152405.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/1011s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 15:24:05","EXIF ExposureTime":"1/1011s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.815036111111105,-121.94197777777778],"name":"PhotonCam_OSK_20250301_152405","path":"BayArea-Hiking/PhotonCam_OSK_20250301_152405.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/PhotonCam_OSK_20250301_152405.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/PhotonCam_OSK_20250301_152405.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/PhotonCam_OSK_20250301_152405.webp"
             aria-label="the photo 32"></a>
+          
           
           
           
@@ -1050,9 +1145,11 @@
             name="PhotonCam_OSK_20250301_172701" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/PhotonCam_OSK_20250301_172701.webp"
             desc=" - · - "
             share="BayArea-Hiking/PhotonCam_OSK_20250301_172701.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/980s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 17:27:01","EXIF ExposureTime":"1/980s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.61788611111111,-121.74273611111111],"name":"PhotonCam_OSK_20250301_172701","path":"BayArea-Hiking/PhotonCam_OSK_20250301_172701.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/PhotonCam_OSK_20250301_172701.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/PhotonCam_OSK_20250301_172701.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/PhotonCam_OSK_20250301_172701.webp"
             aria-label="the photo 33"></a>
+          
           
           
           
@@ -1068,6 +1165,7 @@
             name="PhotonCam_OSK_20250315_155258" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/PhotonCam_OSK_20250315_155258.webp"
             desc=" - · - "
             share="BayArea-Hiking/PhotonCam_OSK_20250315_155258.webp"
+            video=""
             extra='{"desc":null,"dir":"BayArea-Hiking","exif":"Apple iPhone 15 Pro Max 1/150s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:03:15 15:52:57","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.17636944444444,-122.22830833333333],"name":"PhotonCam_OSK_20250315_155258","path":"BayArea-Hiking/PhotonCam_OSK_20250315_155258.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/PhotonCam_OSK_20250315_155258.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayArea-Hiking/PhotonCam_OSK_20250315_155258.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayArea-Hiking/PhotonCam_OSK_20250315_155258.webp"
             aria-label="the photo 34"></a>
@@ -1149,6 +1247,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -1162,6 +1261,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

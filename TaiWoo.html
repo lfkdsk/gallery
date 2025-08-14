@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7835.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF7835" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7835.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7835.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/4000s F4 ISO 320 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 13:54:13","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.91276388888889,115.44196111111111],"name":"DSCF7835","path":"TaiWoo/DSCF7835.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7835.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7835.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7835.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF7844" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7844.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7844.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/3200s F4 ISO 320 54.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:21:51","EXIF ExposureTime":"1/3200s","EXIF FNumber":"F4","EXIF FocalLength":"54.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.91276388888889,115.44196111111111],"name":"DSCF7844","path":"TaiWoo/DSCF7844.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7844.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7844.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7844.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF7856" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7856.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7856.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/4000s F4 ISO 320 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:30:43","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.91276388888889,115.44196111111111],"name":"DSCF7856","path":"TaiWoo/DSCF7856.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7856.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7856.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7856.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF7866" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7866.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7866.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/950s F9 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:43:09","EXIF ExposureTime":"1/950s","EXIF FNumber":"F9","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7866","path":"TaiWoo/DSCF7866.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7866.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7866.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7866.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF7879" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7879.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7879.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/4000s F4 ISO 320 17.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:50:09","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F4","EXIF FocalLength":"17.7mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7879","path":"TaiWoo/DSCF7879.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7879.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7879.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7879.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF7886" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7886.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7886.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/800s F9 ISO 320 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:51:01","EXIF ExposureTime":"1/800s","EXIF FNumber":"F9","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7886","path":"TaiWoo/DSCF7886.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7886.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7886.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7886.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF7892" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7892.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7892.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/280s F9 ISO 320 24.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:52:46","EXIF ExposureTime":"1/280s","EXIF FNumber":"F9","EXIF FocalLength":"24.7mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7892","path":"TaiWoo/DSCF7892.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7892.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7892.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7892.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF7904" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7904.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7904.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/1800s F9 ISO 320 18.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:56:25","EXIF ExposureTime":"1/1800s","EXIF FNumber":"F9","EXIF FocalLength":"18.4mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7904","path":"TaiWoo/DSCF7904.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7904.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7904.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7904.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF7911" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7911.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7911.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/1600s F9 ISO 320 42.9mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:57:37","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F9","EXIF FocalLength":"42.9mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7911","path":"TaiWoo/DSCF7911.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7911.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7911.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7911.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF7935" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7935.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7935.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/2400s F9 ISO 320 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 14:59:48","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F9","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7935","path":"TaiWoo/DSCF7935.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7935.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7935.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7935.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF7952" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7952.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7952.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/210s F9 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:04:54","EXIF ExposureTime":"1/210s","EXIF FNumber":"F9","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.88873611111111,115.44254444444445],"name":"DSCF7952","path":"TaiWoo/DSCF7952.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7952.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7952.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7952.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF7959" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7959.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7959.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/1700s F5.6 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:26:40","EXIF ExposureTime":"1/1700s","EXIF FNumber":"F5.6","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573611111111,115.42941944444445],"name":"DSCF7959","path":"TaiWoo/DSCF7959.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7959.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7959.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7959.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF7963" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7963.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7963.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/2500s F6.4 ISO 320 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:29:49","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F6.4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7963","path":"TaiWoo/DSCF7963.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7963.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7963.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7963.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF7968" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7968.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7968.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/3500s F13 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:30:16","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F13","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7968","path":"TaiWoo/DSCF7968.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7968.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7968.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7968.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF7970" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7970.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7970.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/3500s F11 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:30:25","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F11","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7970","path":"TaiWoo/DSCF7970.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7970.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7970.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7970.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF7973" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7973.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7973.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/3000s F7.1 ISO 640 46.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:31:57","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F7.1","EXIF FocalLength":"46.6mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7973","path":"TaiWoo/DSCF7973.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7973.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7973.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7973.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF7980" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7980.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7980.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/3500s F9 ISO 640 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:33:07","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F9","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7980","path":"TaiWoo/DSCF7980.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7980.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7980.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7980.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF7983" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7983.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7983.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/3500s F8 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:35:23","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F8","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7983","path":"TaiWoo/DSCF7983.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7983.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7983.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7983.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF7990" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7990.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7990.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/1000s F5.6 ISO 320 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 15:36:45","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F5.6","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87573888888889,115.42900555555556],"name":"DSCF7990","path":"TaiWoo/DSCF7990.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7990.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7990.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7990.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="DSCF7996" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7996.webp"
             desc=" - · - "
             share="TaiWoo/DSCF7996.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/100s F4 ISO 1000 30.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 16:19:18","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"30.8mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.87703055555556,115.43085833333333],"name":"DSCF7996","path":"TaiWoo/DSCF7996.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7996.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF7996.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF7996.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="DSCF8004" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF8004.webp"
             desc=" - · - "
             share="TaiWoo/DSCF8004.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/220s F5 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:13 09:26:13","EXIF ExposureTime":"1/220s","EXIF FNumber":"F5","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8004","path":"TaiWoo/DSCF8004.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF8004.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF8004.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF8004.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="DSCF8007" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF8007.webp"
             desc=" - · - "
             share="TaiWoo/DSCF8007.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"FUJIFILM X-S20 1/1900s F4 ISO 160 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:01:13 12:04:58","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8007","path":"TaiWoo/DSCF8007.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF8007.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/DSCF8007.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/DSCF8007.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,6 +925,7 @@
             name="IMG_2877-JPEG" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/IMG_2877-JPEG.webp"
             desc=" - · - "
             share="TaiWoo/IMG_2877-JPEG.webp"
+            video=""
             extra='{"desc":null,"dir":"TaiWoo","exif":"Apple iPhone 12 Pro 1/50s F1.6 ISO 160 4.2mm iPhone 12 Pro back camera 4.2mm f/1.6 ","exif_data":{"EXIF DateTimeOriginal":"2024:01:12 19:16:13","EXIF ExposureTime":"1/50s","EXIF FNumber":"F1.6","EXIF FocalLength":"4.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"iPhone 12 Pro back camera 4.2mm f/1.6","Image Make":"Apple","Image Model":"iPhone 12 Pro"},"location":[40.88574166666667,115.44644166666667],"name":"IMG_2877-JPEG","path":"TaiWoo/IMG_2877-JPEG.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/IMG_2877-JPEG.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TaiWoo/IMG_2877-JPEG.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TaiWoo/IMG_2877-JPEG.webp"
             aria-label="the photo 22"></a>
@@ -933,6 +1007,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -946,6 +1021,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

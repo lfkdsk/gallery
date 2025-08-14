@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4497.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF4497" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4497.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4497.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 2500 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:26:19","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.99946111111111,116.27531944444445],"name":"DSCF4497","path":"TouchAutumnYiHe/DSCF4497.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4497.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4497.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4497.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF4506" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4506.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4506.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 3200 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:30:55","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.99946111111111,116.27531944444445],"name":"DSCF4506","path":"TouchAutumnYiHe/DSCF4506.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4506.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4506.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4506.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF4511" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4511.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4511.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 2000 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:36:27","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4511","path":"TouchAutumnYiHe/DSCF4511.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4511.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4511.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4511.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF4513" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4513.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4513.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 4000 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:37:35","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4513","path":"TouchAutumnYiHe/DSCF4513.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4513.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4513.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4513.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF4520" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4520.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4520.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 3200 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:39:05","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4520","path":"TouchAutumnYiHe/DSCF4520.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4520.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4520.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4520.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF4521" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4521.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4521.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 4000 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:39:06","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4521","path":"TouchAutumnYiHe/DSCF4521.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4521.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4521.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4521.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF4524" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4524.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4524.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/250s F2.8 ISO 12800 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:39:50","EXIF ExposureTime":"1/250s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4524","path":"TouchAutumnYiHe/DSCF4524.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4524.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4524.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4524.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF4525" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4525.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4525.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 5000 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:40:20","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4525","path":"TouchAutumnYiHe/DSCF4525.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4525.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4525.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4525.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF4529" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4529.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4529.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/240s F2.8 ISO 640 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:45:29","EXIF ExposureTime":"1/240s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4529","path":"TouchAutumnYiHe/DSCF4529.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4529.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4529.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4529.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF4529_fix" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4529_fix.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4529_fix.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/240s F2.8 ISO 640 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:45:29","EXIF ExposureTime":"1/240s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4529_fix","path":"TouchAutumnYiHe/DSCF4529_fix.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4529_fix.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4529_fix.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4529_fix.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF4535" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4535.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4535.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 5000 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:47:29","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4535","path":"TouchAutumnYiHe/DSCF4535.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4535.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4535.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4535.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF4536" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4536.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4536.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 2500 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:48:08","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4536","path":"TouchAutumnYiHe/DSCF4536.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4536.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4536.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4536.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF4537" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4537.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4537.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 1600 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:48:55","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 1600","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4537","path":"TouchAutumnYiHe/DSCF4537.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4537.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4537.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4537.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF4539" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4539.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4539.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 1250 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:50:06","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4539","path":"TouchAutumnYiHe/DSCF4539.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4539.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4539.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4539.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF4548" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4548.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4548.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 6400 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:53:17","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4548","path":"TouchAutumnYiHe/DSCF4548.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4548.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4548.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4548.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF4552" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4552.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4552.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 5000 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 16:54:29","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4552","path":"TouchAutumnYiHe/DSCF4552.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4552.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4552.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4552.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF4571" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4571.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4571.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/240s F2.8 ISO 12800 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:02:50","EXIF ExposureTime":"1/240s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4571","path":"TouchAutumnYiHe/DSCF4571.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4571.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4571.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4571.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF4589" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4589.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4589.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/5s F2.8 ISO 1250 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:10:14","EXIF ExposureTime":"1/5s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4589","path":"TouchAutumnYiHe/DSCF4589.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4589.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4589.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4589.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF4598" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4598.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4598.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 640 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:16:55","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4598","path":"TouchAutumnYiHe/DSCF4598.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4598.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4598.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4598.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="DSCF4614" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4614.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4614.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/170s F2.8 ISO 10000 56.3mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:26:40","EXIF ExposureTime":"1/170s","EXIF FNumber":"F2.8","EXIF FocalLength":"56.3mm","EXIF ISOSpeedRatings":"ISO 10000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4614","path":"TouchAutumnYiHe/DSCF4614.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4614.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4614.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4614.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="DSCF4625" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4625.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4625.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/25s F2.8 ISO 12800 56.3mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:33:11","EXIF ExposureTime":"1/25s","EXIF FNumber":"F2.8","EXIF FocalLength":"56.3mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4625","path":"TouchAutumnYiHe/DSCF4625.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4625.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4625.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4625.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="DSCF4631" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4631.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4631.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 10000 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:34:55","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 10000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4631","path":"TouchAutumnYiHe/DSCF4631.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4631.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4631.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4631.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,6 +925,7 @@
             name="DSCF4635" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4635.webp"
             desc=" - · - "
             share="TouchAutumnYiHe/DSCF4635.webp"
+            video=""
             extra='{"desc":null,"dir":"TouchAutumnYiHe","exif":"FUJIFILM X-S20 1/150s F2.8 ISO 10000 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:07 17:35:34","EXIF ExposureTime":"1/150s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 10000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[39.999722222222225,116.2756],"name":"DSCF4635","path":"TouchAutumnYiHe/DSCF4635.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4635.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/TouchAutumnYiHe/DSCF4635.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//TouchAutumnYiHe/DSCF4635.webp"
             aria-label="the photo 22"></a>
@@ -933,6 +1007,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -946,6 +1021,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

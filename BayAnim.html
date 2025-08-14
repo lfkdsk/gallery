@@ -283,12 +283,13 @@
 </style>
   <!-- Main Content -->
   <script src="js/html2canvas.js"></script>
+<script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
-          <div class="pic-item" />
+          <div id="pic-g" class="pic-item" />
           <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF1411.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
@@ -371,7 +372,7 @@
     @media (max-width: 768px) {
         .pic-wrapper {
             padding: 4px 0px;
-        }        
+        }
 
         #exif-param {
             font-size: .5rem;
@@ -395,12 +396,12 @@
         }
     }
 
-    .apple-logo, 
-    .ricoh-logo, 
+    .apple-logo,
+    .ricoh-logo,
     .fujifilm-logo {
         height: 40px;
     }
-    
+
     .nikon-logo {
         height: 50px;
     }
@@ -413,10 +414,10 @@
     .dji-logo {
         width: 60px;
     }
-    
+
     @media (max-width: 768px) {
-        .apple-logo, 
-        .ricoh-logo, 
+        .apple-logo,
+        .ricoh-logo,
         .nikon-logo,
         .fujifilm-logo {
             height: 30px;
@@ -435,8 +436,35 @@
             border-width: thin;
             background-color: white;
             border-color: white;
-        }        
+        }
     }
+
+.mlp-wrap {
+    overflow: hidden;
+    border-radius: inherit;    /* 如果父级有圆角，继承一下更自然 */
+}
+
+.mlp-wrap, [data-livephoto] { position: relative; overflow: hidden; border-radius: inherit; }
+
+/* 初始隐藏视频，启用硬件合成避免闪烁 */
+.mlp-wrap .mlp-video, [data-livephoto] .mlp-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  opacity:0; transition:opacity .18s ease, transform .25s ease;
+  will-change: opacity, transform; pointer-events:none;
+}
+
+/* “首帧就绪”后，允许显示（只把不透明度交给 JS 控） */
+.mlp-wrap.is-prepped .mlp-video,
+[data-livephoto].is-prepped .mlp-video{ opacity:0; }
+
+/* 开始播放时再交叉淡入 */
+.mlp-wrap.is-playing .mlp-video,
+[data-livephoto].is-playing .mlp-video{ opacity:1; }
+
+/* （可选）缩放动画 */
+.mlp-wrap.is-zoom .mlp-video,
+[data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
+
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -452,13 +480,16 @@
           
           
           
+          
           <a class="album-item lazy" id="0"
             name="DSCF1411" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF1411.webp"
             desc=" - · - "
             share="BayAnim/DSCF1411.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 1000 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:22 18:44:18","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 1000","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.438849999999995,-121.95984722222222],"name":"DSCF1411","path":"BayAnim/DSCF1411.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF1411.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF1411.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF1411.webp"
             aria-label="the photo 0"></a>
+          
           
           
           
@@ -474,9 +505,11 @@
             name="DSCF8320" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8320.webp"
             desc=" - · - "
             share="BayAnim/DSCF8320.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1400s F5.6 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 15:09:51","EXIF ExposureTime":"1/1400s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8320","path":"BayAnim/DSCF8320.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8320.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8320.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8320.webp"
             aria-label="the photo 1"></a>
+          
           
           
           
@@ -492,9 +525,11 @@
             name="DSCF8343" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8343.webp"
             desc=" - · - "
             share="BayAnim/DSCF8343.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1000s F5.6 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 15:12:08","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8343","path":"BayAnim/DSCF8343.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8343.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8343.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8343.webp"
             aria-label="the photo 2"></a>
+          
           
           
           
@@ -510,9 +545,11 @@
             name="DSCF8378" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8378.webp"
             desc=" - · - "
             share="BayAnim/DSCF8378.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/480s F4.8 ISO 640 164.6mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 15:55:45","EXIF ExposureTime":"1/480s","EXIF FNumber":"F4.8","EXIF FocalLength":"164.6mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8378","path":"BayAnim/DSCF8378.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8378.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8378.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8378.webp"
             aria-label="the photo 3"></a>
+          
           
           
           
@@ -528,9 +565,11 @@
             name="DSCF8383" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8383.webp"
             desc=" - · - "
             share="BayAnim/DSCF8383.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1000s F5.6 ISO 800 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 15:59:13","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8383","path":"BayAnim/DSCF8383.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8383.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8383.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8383.webp"
             aria-label="the photo 4"></a>
+          
           
           
           
@@ -546,9 +585,11 @@
             name="DSCF8400" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8400.webp"
             desc=" - · - "
             share="BayAnim/DSCF8400.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1000s F5.6 ISO 800 386mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 16:05:33","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F5.6","EXIF FocalLength":"386mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8400","path":"BayAnim/DSCF8400.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8400.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8400.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8400.webp"
             aria-label="the photo 5"></a>
+          
           
           
           
@@ -564,9 +605,11 @@
             name="DSCF8421" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8421.webp"
             desc=" - · - "
             share="BayAnim/DSCF8421.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1000s F5.6 ISO 1250 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 16:12:59","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8421","path":"BayAnim/DSCF8421.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8421.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8421.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8421.webp"
             aria-label="the photo 6"></a>
+          
           
           
           
@@ -582,9 +625,11 @@
             name="DSCF8422" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8422.webp"
             desc=" - · - "
             share="BayAnim/DSCF8422.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1100s F5.6 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 16:17:03","EXIF ExposureTime":"1/1100s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8422","path":"BayAnim/DSCF8422.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8422.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8422.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8422.webp"
             aria-label="the photo 7"></a>
+          
           
           
           
@@ -600,9 +645,11 @@
             name="DSCF8455" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8455.webp"
             desc=" - · - "
             share="BayAnim/DSCF8455.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/320s F5.6 ISO 3200 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 17:46:02","EXIF ExposureTime":"1/320s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8455","path":"BayAnim/DSCF8455.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8455.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8455.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8455.webp"
             aria-label="the photo 8"></a>
+          
           
           
           
@@ -618,9 +665,11 @@
             name="DSCF8457" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8457.webp"
             desc=" - · - "
             share="BayAnim/DSCF8457.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/240s F5.6 ISO 3200 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:23 17:46:11","EXIF ExposureTime":"1/240s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8457","path":"BayAnim/DSCF8457.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8457.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8457.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8457.webp"
             aria-label="the photo 9"></a>
+          
           
           
           
@@ -636,9 +685,11 @@
             name="DSCF8477" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8477.webp"
             desc=" - · - "
             share="BayAnim/DSCF8477.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/480s F7.1 ISO 3200 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 16:32:57","EXIF ExposureTime":"1/480s","EXIF FNumber":"F7.1","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8477","path":"BayAnim/DSCF8477.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8477.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8477.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8477.webp"
             aria-label="the photo 10"></a>
+          
           
           
           
@@ -654,9 +705,11 @@
             name="DSCF8524" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8524.webp"
             desc=" - · - "
             share="BayAnim/DSCF8524.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/750s F6.3 ISO 1250 248.6mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 16:41:18","EXIF ExposureTime":"1/750s","EXIF FNumber":"F6.3","EXIF FocalLength":"248.6mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8524","path":"BayAnim/DSCF8524.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8524.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8524.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8524.webp"
             aria-label="the photo 11"></a>
+          
           
           
           
@@ -672,9 +725,11 @@
             name="DSCF8572" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8572.webp"
             desc=" - · - "
             share="BayAnim/DSCF8572.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/600s F5.6 ISO 400 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 15:51:09","EXIF ExposureTime":"1/600s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8572","path":"BayAnim/DSCF8572.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8572.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8572.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8572.webp"
             aria-label="the photo 12"></a>
+          
           
           
           
@@ -690,9 +745,11 @@
             name="DSCF8592" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8592.webp"
             desc=" - · - "
             share="BayAnim/DSCF8592.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/900s F6.3 ISO 640 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:04:16","EXIF ExposureTime":"1/900s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8592","path":"BayAnim/DSCF8592.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8592.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8592.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8592.webp"
             aria-label="the photo 13"></a>
+          
           
           
           
@@ -708,9 +765,11 @@
             name="DSCF8615-Enhanced-NR-sharpen" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8615-Enhanced-NR-sharpen.webp"
             desc=" - · - "
             share="BayAnim/DSCF8615-Enhanced-NR-sharpen.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/900s F6.3 ISO 1250 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:04:31","EXIF ExposureTime":"1/900s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8615-Enhanced-NR-sharpen","path":"BayAnim/DSCF8615-Enhanced-NR-sharpen.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8615-Enhanced-NR-sharpen.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8615-Enhanced-NR-sharpen.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8615-Enhanced-NR-sharpen.webp"
             aria-label="the photo 14"></a>
+          
           
           
           
@@ -726,9 +785,11 @@
             name="DSCF8629" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8629.webp"
             desc=" - · - "
             share="BayAnim/DSCF8629.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/800s F5.6 ISO 160 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 16:03:48","EXIF ExposureTime":"1/800s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8629","path":"BayAnim/DSCF8629.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8629.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8629.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8629.webp"
             aria-label="the photo 15"></a>
+          
           
           
           
@@ -744,9 +805,11 @@
             name="DSCF8648" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8648.webp"
             desc=" - · - "
             share="BayAnim/DSCF8648.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/900s F5.2 ISO 160 312mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 16:04:09","EXIF ExposureTime":"1/900s","EXIF FNumber":"F5.2","EXIF FocalLength":"312mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8648","path":"BayAnim/DSCF8648.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8648.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8648.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8648.webp"
             aria-label="the photo 16"></a>
+          
           
           
           
@@ -762,9 +825,11 @@
             name="DSCF8670" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8670.webp"
             desc=" - · - "
             share="BayAnim/DSCF8670.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1600s F6.3 ISO 640 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:05:38","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8670","path":"BayAnim/DSCF8670.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8670.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8670.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8670.webp"
             aria-label="the photo 17"></a>
+          
           
           
           
@@ -780,9 +845,11 @@
             name="DSCF8695-denoiseraw-sharpen-denoise" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp"
             desc=" - · - "
             share="BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/170s F6.3 ISO 3200 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:19:47","EXIF ExposureTime":"1/170s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8695-denoiseraw-sharpen-denoise","path":"BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp"
             aria-label="the photo 18"></a>
+          
           
           
           
@@ -798,9 +865,11 @@
             name="DSCF8746" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8746.webp"
             desc=" - · - "
             share="BayAnim/DSCF8746.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/200s F7.1 ISO 2000 69.2mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:23:44","EXIF ExposureTime":"1/200s","EXIF FNumber":"F7.1","EXIF FocalLength":"69.2mm","EXIF ISOSpeedRatings":"ISO 2000","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8746","path":"BayAnim/DSCF8746.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8746.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8746.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8746.webp"
             aria-label="the photo 19"></a>
+          
           
           
           
@@ -816,9 +885,11 @@
             name="DSCF8824-Sharpen" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8824-Sharpen.webp"
             desc=" - · - "
             share="BayAnim/DSCF8824-Sharpen.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/140s F6.3 ISO 3200 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:30:33","EXIF ExposureTime":"1/140s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8824-Sharpen","path":"BayAnim/DSCF8824-Sharpen.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8824-Sharpen.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8824-Sharpen.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8824-Sharpen.webp"
             aria-label="the photo 20"></a>
+          
           
           
           
@@ -834,9 +905,11 @@
             name="DSCF8880" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8880.webp"
             desc=" - · - "
             share="BayAnim/DSCF8880.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/900s F6.3 ISO 400 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 14:37:18","EXIF ExposureTime":"1/900s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8880","path":"BayAnim/DSCF8880.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8880.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8880.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8880.webp"
             aria-label="the photo 21"></a>
+          
           
           
           
@@ -852,9 +925,11 @@
             name="DSCF8910" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8910.webp"
             desc=" - · - "
             share="BayAnim/DSCF8910.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/900s F6.3 ISO 800 300mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 14:48:46","EXIF ExposureTime":"1/900s","EXIF FNumber":"F6.3","EXIF FocalLength":"300mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8910","path":"BayAnim/DSCF8910.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8910.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8910.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8910.webp"
             aria-label="the photo 22"></a>
+          
           
           
           
@@ -870,9 +945,11 @@
             name="DSCF8945" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8945.webp"
             desc=" - · - "
             share="BayAnim/DSCF8945.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1100s F7.1 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 16:36:17","EXIF ExposureTime":"1/1100s","EXIF FNumber":"F7.1","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.18745,-121.77849444444445],"name":"DSCF8945","path":"BayAnim/DSCF8945.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8945.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8945.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8945.webp"
             aria-label="the photo 23"></a>
+          
           
           
           
@@ -888,9 +965,11 @@
             name="DSCF8963" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8963.webp"
             desc=" - · - "
             share="BayAnim/DSCF8963.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1000s F7.1 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 16:38:21","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F7.1","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.18745,-121.77849444444445],"name":"DSCF8963","path":"BayAnim/DSCF8963.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8963.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8963.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8963.webp"
             aria-label="the photo 24"></a>
+          
           
           
           
@@ -906,9 +985,11 @@
             name="DSCF8974" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8974.webp"
             desc=" - · - "
             share="BayAnim/DSCF8974.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/75s F6.3 ISO 160 263.2mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 15:37:15","EXIF ExposureTime":"1/75s","EXIF FNumber":"F6.3","EXIF FocalLength":"263.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8974","path":"BayAnim/DSCF8974.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8974.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8974.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8974.webp"
             aria-label="the photo 25"></a>
+          
           
           
           
@@ -924,9 +1005,11 @@
             name="DSCF8976" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8976.webp"
             desc=" - · - "
             share="BayAnim/DSCF8976.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/70s F6.3 ISO 160 263.2mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:03:01 15:37:37","EXIF ExposureTime":"1/70s","EXIF FNumber":"F6.3","EXIF FocalLength":"263.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8976","path":"BayAnim/DSCF8976.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8976.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8976.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8976.webp"
             aria-label="the photo 26"></a>
+          
           
           
           
@@ -942,9 +1025,11 @@
             name="DSCF8982" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8982.webp"
             desc=" - · - "
             share="BayAnim/DSCF8982.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1100s F7.1 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 16:41:38","EXIF ExposureTime":"1/1100s","EXIF FNumber":"F7.1","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.18745,-121.77849444444445],"name":"DSCF8982","path":"BayAnim/DSCF8982.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8982.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8982.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8982.webp"
             aria-label="the photo 27"></a>
+          
           
           
           
@@ -960,9 +1045,11 @@
             name="DSCF8983" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8983.webp"
             desc=" - · - "
             share="BayAnim/DSCF8983.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/1250s F7.1 ISO 320 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 16:41:40","EXIF ExposureTime":"1/1250s","EXIF FNumber":"F7.1","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.18745,-121.77849444444445],"name":"DSCF8983","path":"BayAnim/DSCF8983.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8983.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF8983.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF8983.webp"
             aria-label="the photo 28"></a>
+          
           
           
           
@@ -978,9 +1065,11 @@
             name="DSCF9023" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9023.webp"
             desc=" - · - "
             share="BayAnim/DSCF9023.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/680s F5.6 ISO 12800 400mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 17:51:08","EXIF ExposureTime":"1/680s","EXIF FNumber":"F5.6","EXIF FocalLength":"400mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.3061,-121.83793888888889],"name":"DSCF9023","path":"BayAnim/DSCF9023.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9023.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9023.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9023.webp"
             aria-label="the photo 29"></a>
+          
           
           
           
@@ -996,9 +1085,11 @@
             name="DSCF9027" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9027.webp"
             desc=" - · - "
             share="BayAnim/DSCF9027.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/550s F5.2 ISO 12800 290.6mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 17:51:35","EXIF ExposureTime":"1/550s","EXIF FNumber":"F5.2","EXIF FocalLength":"290.6mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.3061,-121.83793888888889],"name":"DSCF9027","path":"BayAnim/DSCF9027.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9027.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9027.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9027.webp"
             aria-label="the photo 30"></a>
+          
           
           
           
@@ -1014,9 +1105,11 @@
             name="DSCF9255-light-adjust-" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9255-light-adjust-.webp"
             desc=" - · - "
             share="BayAnim/DSCF9255-light-adjust-.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/20s F4.5 ISO 6400 100mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 18:15:33","EXIF ExposureTime":"1/20s","EXIF FNumber":"F4.5","EXIF FocalLength":"100mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.30360833333333,-121.83683055555555],"name":"DSCF9255-light-adjust-","path":"BayAnim/DSCF9255-light-adjust-.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9255-light-adjust-.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9255-light-adjust-.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9255-light-adjust-.webp"
             aria-label="the photo 31"></a>
+          
           
           
           
@@ -1032,9 +1125,11 @@
             name="DSCF9259" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9259.webp"
             desc=" - · - "
             share="BayAnim/DSCF9259.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"FUJIFILM X-S20 1/27s F4.5 ISO 12800 100mm XF100-400mmF4.5-5.6 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 18:15:59","EXIF ExposureTime":"1/27s","EXIF FNumber":"F4.5","EXIF FocalLength":"100mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF100-400mmF4.5-5.6 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.30360833333333,-121.83683055555555],"name":"DSCF9259","path":"BayAnim/DSCF9259.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9259.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/DSCF9259.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/DSCF9259.webp"
             aria-label="the photo 32"></a>
+          
           
           
           
@@ -1050,6 +1145,7 @@
             name="PhotonCam_OSK_20250216_171700" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/PhotonCam_OSK_20250216_171700.webp"
             desc=" - · - "
             share="BayAnim/PhotonCam_OSK_20250216_171700.webp"
+            video=""
             extra='{"desc":null,"dir":"BayAnim","exif":"Apple iPhone 15 Pro Max 1/291s F2.2 ISO 40 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:02:16 17:17:00","EXIF ExposureTime":"1/291s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.36537222222223,-122.15825000000001],"name":"PhotonCam_OSK_20250216_171700","path":"BayAnim/PhotonCam_OSK_20250216_171700.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/PhotonCam_OSK_20250216_171700.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/BayAnim/PhotonCam_OSK_20250216_171700.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//BayAnim/PhotonCam_OSK_20250216_171700.webp"
             aria-label="the photo 33"></a>
@@ -1128,6 +1224,7 @@
           name = target.getAttribute('name');
           var desc = target.getAttribute('desc');
           var thum = target.getAttribute('data-src');
+          var video = target.getAttribute('video');
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
@@ -1141,6 +1238,9 @@
           imageBox.setAttribute("share", target.getAttribute('share'));
           var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
           imageFancy.setAttribute("href", imgLink);
+
+          var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
             fancyBoxImage.src = imgLink;

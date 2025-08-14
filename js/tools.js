@@ -143,16 +143,16 @@ function heatmap(db, root) {
   var result = db.exec(
     `
 WITH daily_counts AS (
-SELECT 
-strftime('%Y-%m-%d', exifdata.date) AS exifdate, 
+SELECT
+strftime('%Y-%m-%d', exifdata.date) AS exifdate,
 count(*) AS cnt
-FROM photo 
+FROM photo
 LEFT JOIN exifdata ON exifdata.id = photo.exif_data_id
 WHERE photo.exif_data_id IS NOT NULL
 GROUP BY strftime('%Y-%m-%d', exifdata.date)
 )
-SELECT 
-SUBSTR(exifdate, 1, 4) AS year, 
+SELECT
+SUBSTR(exifdate, 1, 4) AS year,
 GROUP_CONCAT(exifdate || ':' || cnt) AS dates_and_counts
 FROM daily_counts
 GROUP BY SUBSTR(exifdate, 1, 4)
@@ -241,7 +241,7 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
       }
       window.open(root + 'grid-all?filter='+ params.value[0]);
     });
-  
+
 
     option && myChart.setOption(option);
     index += 1;
@@ -344,26 +344,26 @@ const getTodayPhotos = () => {
   const today = new Date();
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
-  
+
   const query = `
     WITH photo_list AS (
-      SELECT 
+      SELECT
         path,
         (
-          SELECT COUNT(*) 
-          FROM Photo p2 
-          JOIN EXIFData e2 ON p2.exif_data_id = e2.id 
-          WHERE strftime('%m', e2.date) = '${month}' 
+          SELECT COUNT(*)
+          FROM Photo p2
+          JOIN EXIFData e2 ON p2.exif_data_id = e2.id
+          WHERE strftime('%m', e2.date) = '${month}'
           AND strftime('%d', e2.date) = '${day}'
         ) as total,
         ROW_NUMBER() OVER (ORDER BY e.date DESC) - 1 as rn
       FROM Photo p
       JOIN EXIFData e ON p.exif_data_id = e.id
-      WHERE strftime('%m', e.date) = '${month}' 
+      WHERE strftime('%m', e.date) = '${month}'
       AND strftime('%d', e.date) = '${day}'
       ORDER BY e.date DESC
     )
-    SELECT 
+    SELECT
       GROUP_CONCAT(
         CASE WHEN rn = row_num * cols + 0 THEN path ELSE NULL END
       ) as column0,
@@ -377,7 +377,7 @@ const getTodayPhotos = () => {
         CASE WHEN rn = row_num * cols + 3 AND cols = 4 THEN path ELSE NULL END
       ) as column3
     FROM (
-      SELECT 
+      SELECT
         *,
         CASE WHEN total > 9 THEN 4 ELSE 3 END as cols,
         CAST(rn / CASE WHEN total > 9 THEN 4 ELSE 3 END AS INTEGER) as row_num
@@ -386,7 +386,7 @@ const getTodayPhotos = () => {
     GROUP BY row_num
     ORDER BY row_num;
   `;
-  
+
   return query;
 };
 
@@ -453,5 +453,44 @@ function addYearEndSummaryLink(container, root) {
         link.classList.add('visible');
       });
     });
+  }
+}
+
+function attachLivePhoto(wrap, hasLive, videoUrl) {
+  if (hasLive) {
+    // data-livephoto
+    // data-autoload="visible"
+    // data-label="LIVE"
+    // data-hotspot="corner"
+    // data-corner="tl"
+    // data-trigger="hover"
+    wrap.setAttribute('data-livephoto', '');
+    wrap.setAttribute('data-label', 'LIVE');
+    wrap.setAttribute('data-hotspot', 'corner');
+    wrap.setAttribute('data-corner', 'tl');
+    wrap.dataset.video = videoUrl;
+
+    wrap.classList.remove('no-video');
+    if (wrap.__mlp) wrap.__mlp.destroy();
+    wrap.__mlp = MiniLivePhoto.mount(wrap);
+
+} else {
+    // 移除 data-* 属性
+    wrap.removeAttribute('data-livephoto');
+    wrap.removeAttribute('data-label');
+    wrap.removeAttribute('data-hotspot');
+    wrap.removeAttribute('data-corner');
+    wrap.removeAttribute('data-video');
+    delete wrap.dataset.video;
+
+    // 删除角标和 video 元素
+    wrap.querySelectorAll('.mlp-badge, .mlp-video').forEach(el => el.remove());
+
+    // 恢复 no-video 状态
+    wrap.classList.add('no-video');
+    if (wrap.__mlp) {
+        wrap.__mlp.destroy();
+        delete wrap.__mlp;
+    }
   }
 }
