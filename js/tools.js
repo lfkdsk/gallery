@@ -468,11 +468,12 @@ function attachLivePhoto(wrap, hasLive, videoUrl) {
     wrap.setAttribute('data-label', 'LIVE');
     wrap.setAttribute('data-hotspot', 'corner');
     wrap.setAttribute('data-corner', 'tl');
+    wrap.setAttribute('data-sound', 'off');
     wrap.dataset.video = videoUrl;
 
     const isMobile = matchMedia('(any-pointer: coarse)').matches;
     if (isMobile) {
-      wrap.setAttribute('data-trigger', 'hold');
+      wrap.setAttribute('data-trigger', 'hover');
       wrap.setAttribute('data-hotspot', 'full');
     } else {
       wrap.setAttribute('data-trigger', 'hover'); // 桌面端仍是 hover
@@ -502,4 +503,9 @@ function attachLivePhoto(wrap, hasLive, videoUrl) {
         delete wrap.__mlp;
     }
   }
+
+  document.querySelectorAll('[data-livephoto]').forEach(el => {
+    el.addEventListener('contextmenu', e => e.preventDefault());
+    el.addEventListener('dragstart', e => e.preventDefault());
+  });
 }

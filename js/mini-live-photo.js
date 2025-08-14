@@ -163,11 +163,13 @@
         if (!this.opts.video) return;
         try {
           if (this.opts.sound === 'hold') this.video.muted = false;
-          if (this.video.readyState < 2) await once(this.video,'canplay');
+          // if (this.video.readyState < 2) await once(this.video,'canplay');
           this.video.currentTime = 0;
           await this.video.play();
           this.el.classList.add('is-playing','is-zoom');
-        } catch (e) { this._emitError(e); }
+        } catch (e) {
+          this._emitError(e);
+        }
       };
 
       const stop = () => {

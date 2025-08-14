@@ -290,7 +290,7 @@
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
           <div id="pic-g" class="pic-item" />
-          <img id="imgbox" draggable="false" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/YellowLeafDaJue/DSCF4062.webp" />
+          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/YellowLeafDaJue/DSCF4062.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
     <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
@@ -465,6 +465,18 @@
 .mlp-wrap.is-zoom .mlp-video,
 [data-livephoto].is-zoom .mlp-video{ transform: scale(1.04); }
 
+[data-livephoto].is-playing {
+  -webkit-touch-callout: none;
+  user-select: none;
+  touch-action: none;
+}
+
+/* 禁止浏览器把 img/video 当成可拖拽对象 */
+[data-livephoto] img,
+[data-livephoto] video {
+  -webkit-user-drag: none;
+  user-drag: none; /* 非标准，但部分浏览器支持 */
+}
 </style>
       </div>
       <p id="descbox" class="text-center text-xs hint-text" hidden>  </p>
@@ -1748,6 +1760,7 @@
             border: 0.8px solid white;
           }
         }
+
       </style>
 </section>
   <!-- Footer -->
