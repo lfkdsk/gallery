@@ -1,3 +1,38 @@
+Trojan Point:
+  url: Trojan-Point
+  date: 2025-08-09
+  style: fullscreen
+  cover: Trojan-Point/DSCF8699.webp
+  location: [37.914476927014434, -122.61168808849003]
+  
+Shark Fin Cove:
+  url: SharkFinCove
+  date: 2025-08-02
+  cover: SharkFinCove/DSCF8515.webp
+  style: fullscreen
+  location: [37.0046682747698, -122.18524219298213]
+
+Walden Pond:
+  url: Walden-Pond
+  date: 2025-07-20
+  style: fullscreen
+  cover: Walden-Pond/DSCF8438.webp
+  location: [42.43886539397696, -71.34011811000813]
+
+Niagara Falls:
+  url: Niagara-Falls
+  date: 2025-07-19
+  style: fullscreen
+  cover: Niagara-Falls/DSCF8268-2.webp
+  location: [43.07865903762666, -79.07534307510618]
+
+Washington DC:
+  url: Washington-DC
+  cover: Washington-DC/DSCF8159.webp
+  date: 2025-07-18
+  style: fullscreen
+  location: [38.897753070894, -77.0363354553612]
+
 联合国:
   url: UnitedNations
   cover: UnitedNations/PhotonCam_20250716_113825.webp
@@ -33,27 +68,6 @@ Boston - Gallery - University:
   cover: Boston-City/DSCF6957.webp
   location: [42.37462303175786, -71.11762653068064]
   
-Shark Fin Cove:
-  url: SharkFinCove
-  date: 2025-08-02
-  cover: SharkFinCove/DSCF8515.webp
-  style: fullscreen
-  location: [37.0046682747698, -122.18524219298213]
-
-Walden Pond:
-  url: Walden-Pond
-  date: 2025-07-20
-  style: fullscreen
-  cover: Walden-Pond/DSCF8438.webp
-  location: [42.43886539397696, -71.34011811000813]
-
-Niagara Falls:
-  url: Niagara-Falls
-  date: 2025-07-19
-  style: fullscreen
-  cover: Niagara-Falls/DSCF8268-2.webp
-  location: [43.07865903762666, -79.07534307510618]
-
 波士顿 · 自由之路:
   url: Boston-Freeway
   date: 2025-07-11
