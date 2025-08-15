@@ -1,3 +1,10 @@
+联合国:
+  url: UnitedNations
+  cover: UnitedNations/PhotonCam_20250716_113825.webp
+  date: 2025-07-16
+  style: fullscreen
+  location: [40.74940935006342, -73.9673769320407]
+
 Newyork Day2:
   url: NY2
   date: 2025-07-15
