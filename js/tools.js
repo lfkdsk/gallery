@@ -477,7 +477,7 @@ function attachLivePhoto(wrap, hasLive, videoUrl) {
       wrap.setAttribute('data-hotspot', 'full');
     } else {
       wrap.setAttribute('data-trigger', 'hover'); // 桌面端仍是 hover
-      wrap.setAttribute('data-hotspot', 'corner');
+      wrap.setAttribute('data-hotspot', 'full');
     }
 
     wrap.classList.remove('no-video');

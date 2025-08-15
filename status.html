@@ -313,10 +313,20 @@
         queryTable(
             ['Total Count'],
             `
-SELECT count(*) as Count from photo;            
+SELECT count(*) as Count from photo;
 `,
             ...params,
-        );        
+        );
+        queryTable(
+            ['LivePhoto Count'],
+            `
+SELECT count(*) as Count
+From photo
+Where photo.livephoto = 1;
+;
+`,
+            ...params,
+        );
         queryTable(
             ['Image Maker'],
             `
@@ -354,12 +364,12 @@ limit 10;
                 a.setAttribute('href', 'grid-all?lens_model=' + cell);
                 return a;
             }, ...params.slice(1)],
-        );        
+        );
         queryTable(
             ['Location'],
 `
-SELECT COALESCE(NULLIF(country, ''), 'NONE') as country, COUNT(*) as count 
-FROM location 
+SELECT COALESCE(NULLIF(country, ''), 'NONE') as country, COUNT(*) as count
+FROM location
 GROUP BY country
 ORDER BY COUNT(*) DESC;
 `,
@@ -392,7 +402,7 @@ LIMIT 5;
                 a.text = cell;
                 a.setAttribute('href', 'grid-all?focal_length=' + cell);
                 return a;
-            }, ...params.slice(1)],        
+            }, ...params.slice(1)],
         );
         queryTable(
             ['Group by exposure time and order by count.'],
@@ -406,12 +416,12 @@ ORDER BY COUNT(*) DESC
 LIMIT 5;
 `,
         ...params,
-        );      
+        );
         queryTable(
             ['History Today\'s Pictures.'],
         getTodayPhotos(),
-        ...params,        
-        );                  
+        ...params,
+        );
         // add heatmap into wrapper.
         heatmap(db, '/');
         const duration = performance.now() - start;
@@ -423,10 +433,10 @@ LIMIT 5;
             allowTaint: true,
             scrollX: 0,
             scrollY: 0,
-          }).then(function (canvas) {                  
+          }).then(function (canvas) {
             simulateDownloadImageClick(canvas.toDataURL('image/png'),  'year0.png');
           });
-        });          
+        });
     </script>
     <style>
         img {
