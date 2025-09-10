@@ -935,6 +935,7 @@
           imageFancy.setAttribute("href", imgLink);
 
           var picg = document.getElementById('pic-g');
+          attachLivePhoto(picg, false, '');
           attachLivePhoto(picg, video !== '', video);
           var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
           if (fancyBoxImage !== undefined) {
