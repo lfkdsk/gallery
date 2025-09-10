@@ -5,6 +5,20 @@ Ruby Lake:
   cover: RubyLakeTrail/IMG_3363.webp
   location: [37.41588277200025, -118.7716685680481]
 
+Big Sur:
+  url: Big-Sur
+  date: 2025-08-24
+  style: fullscreen
+  cover: Big-Sur/DSCF8826.webp
+  location: [36.357679608969896, -121.89622239329167]
+
+San Luis / Berkeley:
+  url: San-Luis-Berkeley
+  date: 2025-08-23
+  style: fullscreen
+  cover: San-Luis-Berkeley/DSCF8861-1.webp
+  location: [37.86915912178463, -122.2589853121428]
+
 Trojan Point:
   url: Trojan-Point
   date: 2025-08-09
