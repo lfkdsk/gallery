@@ -1,522 +1,581 @@
 Ruby Lake:
   url: RubyLakeTrail
-  date: 2025-08-31
-  style: fullscreen
+  date: "2025-08-31"
+  style: default
   cover: RubyLakeTrail/IMG_3363.webp
-  location: [37.41588277200025, -118.7716685680481]
-
+  location:
+    - 37.41588277200025
+    - -118.7716685680481
 Big Sur:
   url: Big-Sur
-  date: 2025-08-24
+  date: 2025-08-24T00:00:00.000Z
   style: fullscreen
   cover: Big-Sur/DSCF8826.webp
-  location: [36.357679608969896, -121.89622239329167]
-
+  location:
+    - 36.357679608969896
+    - -121.89622239329167
 San Luis / Berkeley:
   url: San-Luis-Berkeley
-  date: 2025-08-23
+  date: 2025-08-23T00:00:00.000Z
   style: fullscreen
   cover: San-Luis-Berkeley/DSCF8861-1.webp
-  location: [37.86915912178463, -122.2589853121428]
-
+  location:
+    - 37.86915912178463
+    - -122.2589853121428
 Trojan Point:
   url: Trojan-Point
-  date: 2025-08-09
+  date: 2025-08-09T00:00:00.000Z
   style: fullscreen
   cover: Trojan-Point/DSCF8699.webp
-  location: [37.914476927014434, -122.61168808849003]
-  
+  location:
+    - 37.914476927014434
+    - -122.61168808849003
 Shark Fin Cove:
   url: SharkFinCove
-  date: 2025-08-02
+  date: 2025-08-02T00:00:00.000Z
   cover: SharkFinCove/DSCF8515.webp
   style: fullscreen
-  location: [37.0046682747698, -122.18524219298213]
-
+  location:
+    - 37.0046682747698
+    - -122.18524219298213
 Walden Pond:
   url: Walden-Pond
-  date: 2025-07-20
+  date: 2025-07-20T00:00:00.000Z
   style: fullscreen
   cover: Walden-Pond/DSCF8438.webp
-  location: [42.43886539397696, -71.34011811000813]
-
+  location:
+    - 42.43886539397696
+    - -71.34011811000813
 Niagara Falls:
   url: Niagara-Falls
-  date: 2025-07-19
+  date: 2025-07-19T00:00:00.000Z
   style: fullscreen
   cover: Niagara-Falls/DSCF8268-2.webp
-  location: [43.07865903762666, -79.07534307510618]
-
+  location:
+    - 43.07865903762666
+    - -79.07534307510618
 Washington DC:
   url: Washington-DC
   cover: Washington-DC/DSCF8159.webp
-  date: 2025-07-18
+  date: 2025-07-18T00:00:00.000Z
   style: fullscreen
-  location: [38.897753070894, -77.0363354553612]
-
+  location:
+    - 38.897753070894
+    - -77.0363354553612
 联合国:
   url: UnitedNations
   cover: UnitedNations/PhotonCam_20250716_113825.webp
-  date: 2025-07-16
+  date: 2025-07-16T00:00:00.000Z
   style: fullscreen
-  location: [40.74940935006342, -73.9673769320407]
-
+  location:
+    - 40.74940935006342
+    - -73.9673769320407
 Newyork Day2:
   url: NY2
-  date: 2025-07-15
-  style: fullscreen  
+  date: 2025-07-15T00:00:00.000Z
+  style: fullscreen
   cover: NY2/DSCF7855-.webp
-  location: [40.77958280666447, -73.96316890081887]
-
+  location:
+    - 40.77958280666447
+    - -73.96316890081887
 Newyork Day1:
   url: NY1
-  date: 2025-07-14
-  style: fullscreen  
+  date: 2025-07-14T00:00:00.000Z
+  style: fullscreen
   cover: NY1/PhotonCam_HK_20250714_202510.webp
-  location: [40.76154644078755, -73.97752504314778]
-
-Newport - Yale: 
+  location:
+    - 40.76154644078755
+    - -73.97752504314778
+Newport - Yale:
   url: Newport2Yale
-  date: 2025-07-13
+  date: 2025-07-13T00:00:00.000Z
   style: fullscreen
   cover: Newport2Yale/DSCF7320.webp
-  location: [41.31646941824409, -72.92195686512086]
-
+  location:
+    - 41.31646941824409
+    - -72.92195686512086
 Boston - Gallery - University:
   url: Boston-City
-  date: 2025-07-12
+  date: 2025-07-12T00:00:00.000Z
   style: fullscreen
   cover: Boston-City/DSCF6957.webp
-  location: [42.37462303175786, -71.11762653068064]
-  
+  location:
+    - 42.37462303175786
+    - -71.11762653068064
 波士顿 · 自由之路:
   url: Boston-Freeway
-  date: 2025-07-11
+  date: 2025-07-11T00:00:00.000Z
   style: fullscreen
   cover: Boston-Freeway/IMG_1043.webp
-  location: [42.367057975173616, -71.05854361851638]
-
+  location:
+    - 42.367057975173616
+    - -71.05854361851638
 Solo Hiking:
   url: solo-hiking
-  date: 2025-07-02
+  date: 2025-07-02T00:00:00.000Z
   style: fullscreen
   cover: solo-hiking/DSCF6864.webp
-
 Santa Clara 云海:
   url: SantaClara-CloudSea
-  date: 2025-06-27
+  date: 2025-06-27T00:00:00.000Z
   style: fullscreen
   cover: SantaClara-CloudSea/DSCF6807.webp
-  location: [37.32591404701111, -122.2114222560854]
-
+  location:
+    - 37.32591404701111
+    - -122.2114222560854
 Tahoe Summer:
   url: tahoe-summer
-  date: 2025-06-19
+  date: 2025-06-19T00:00:00.000Z
   style: fullscreen
-  cover:  tahoe-summer/DSCF6665.webp
-  location: [39.05031187328131, -119.94616998116857]
-
+  cover: tahoe-summer/DSCF6665.webp
+  location:
+    - 39.05031187328131
+    - -119.94616998116857
 Point Reyes LightHouse:
   url: point-reyes
-  date: 2025-05-31
+  date: 2025-05-31T00:00:00.000Z
   style: fullscreen
   cover: point-reyes/DSCF6357.webp
-  location: [37.999815202646076, -123.02298473922271]
-
+  location:
+    - 37.999815202646076
+    - -123.02298473922271
 17-miles:
   url: 17-miles
-  date: 2025-05-04
+  date: 2025-05-04T00:00:00.000Z
   style: fullscreen
   cover: 17-miles/DSCF6070.webp
-  location: [36.60043389933852, -121.95451066133415]
-
-
+  location:
+    - 36.60043389933852
+    - -121.95451066133415
 🐑 来自 Sunnyvale 的羊:
   url: capra-cupertino
-  date: 2025-04-28
+  date: 2025-04-28T00:00:00.000Z
   style: fullscreen
   cover: capra-cupertino/DSCF4682.webp
-  location: [37.41939940944416, -122.02145118858022]
-
+  location:
+    - 37.41939940944416
+    - -122.02145118858022
 🐿 松鼠:
   url: Squirrel
-  date: 2025-04-10
+  date: 2025-04-10T00:00:00.000Z
   style: fullscreen
   cover: Squirrel/DSCF0915.webp
-  location: [37.34947330773105, -121.94572831884523]
-
+  location:
+    - 37.34947330773105
+    - -121.94572831884523
 湾区徒步:
   url: BayArea-Hiking
-  date: 2025-03-12
+  date: 2025-03-12T00:00:00.000Z
   style: fullscreen
   cover: BayArea-Hiking/IMG_8664.webp
-  location: [37.811453371168014, -121.93741521263587]
-
+  location:
+    - 37.811453371168014
+    - -121.93741521263587
 温哥华:
   url: Vancouver
-  date: 2024-12-20
+  date: 2024-12-20T00:00:00.000Z
   style: fullscreen
   cover: Vancouver/DSCF7930.webp
-  location: [49.280160532002434, -123.12745505680722]
-
+  location:
+    - 49.280160532002434
+    - -123.12745505680722
 旧金山亚洲博物馆:
   url: SF-Asian-Museum
-  date: 2024-12-07
+  date: 2024-12-07T00:00:00.000Z
   style: fullscreen
   cover: SF-Asian-Museum/DSCF7629.webp
-  location: [37.78059940012833, -122.41611758721238]
-
+  location:
+    - 37.78059940012833
+    - -122.41611758721238
 富士五湖:
   url: Fuji
-  date: 2024-11-05
+  date: 2024-11-05T00:00:00.000Z
   style: fullscreen
   cover: Fuji/DSCF7341.webp
-  location: [35.473251370740684, 138.57475528254415]
-
+  location:
+    - 35.473251370740684
+    - 138.57475528254415
 墨田水族馆:
   url: SumidaAquarium
-  date: 2024-11-05
+  date: 2024-11-05T00:00:00.000Z
   style: fullscreen
   cover: SumidaAquarium/DSCF7002.webp
-  location: [35.710095593299336, 139.80960695433328]
-
+  location:
+    - 35.710095593299336
+    - 139.80960695433328
 屋久岛:
   url: Yakushima
-  date: 2024-09-15
+  date: 2024-09-15T00:00:00.000Z
   style: fullscreen
   cover: Yakushima/IMG_6838-JPEG.webp
-  location: [30.361016980524493, 130.53351511906118]
-
+  location:
+    - 30.361016980524493
+    - 130.53351511906118
 阿拉斯加 · 与熊共舞:
   url: Alaska-Bear
-  date: 2024-07-08
+  date: 2024-07-08T00:00:00.000Z
   style: fullscreen
   cover: Alaska-Bear/DSCF4226-FIXED.webp
-  location: [58.72904871259235, -154.97613019358798]
-
+  location:
+    - 58.72904871259235
+    - -154.97613019358798
 世界尽头与冷酷仙境:
   url: Alaska
-  date: 2024-07-02
+  date: 2024-07-02T00:00:00.000Z
   style: fullscreen
   cover: Alaska/DSCF3189.webp
-  location: [60.1002017824315, -149.4508873967907]
-
+  location:
+    - 60.1002017824315
+    - -149.4508873967907
 天际线:
   url: SkyView
-  date: 2024-05-25
+  date: 2024-05-25T00:00:00.000Z
   style: fullscreen
   cover: SkyView/DSCF2897.webp
-  location: [37.367551666666664, -121.6754275]
-
+  location:
+    - 37.367551666666664
+    - -121.6754275
 湾区的打工日常:
   url: BayAreaDaily
-  date: 2024-04-29
+  date: 2024-04-29T00:00:00.000Z
   style: fullscreen
   cover: BayAreaDaily/e5f70f7eeeabc3e2bc14367af7b0e8d7.webp
-  location: [37.35029407698915, -121.94534275721888]
-
+  location:
+    - 37.35029407698915
+    - -121.94534275721888
 到海里去:
   url: Ocean-Whale
-  date: 2024-04-15
+  date: 2024-04-15T00:00:00.000Z
   style: fullscreen
   cover: Ocean-Whale/whale.webp
-  location: [36.799582502422965, -121.90660083628696]
-
+  location:
+    - 36.799582502422965
+    - -121.90660083628696
 SF城市初探:
   url: SF-First
-  date: 2024-03-23
+  date: 2024-03-23T00:00:00.000Z
   style: fullscreen
   cover: SF-First/DSCF1667.webp
-
 CHM:
   url: Computer-History-Museum
-  date: 2024-03-17
+  date: 2024-03-17T00:00:00.000Z
   style: fullscreen
   cover: Computer-History-Museum/1.webp
-  location: [37.41441923778863, -122.07743046041404]
-
+  location:
+    - 37.41441923778863
+    - -122.07743046041404
 Chiikawa:
   url: Chiikawa
-  date: 2024-03-13
+  date: 2024-03-13T00:00:00.000Z
   style: fullscreen
   cover: Chiikawa/DSCF0425.webp
-  location: [37.54867377147183, -122.04970648924598]
-
+  location:
+    - 37.54867377147183
+    - -122.04970648924598
 CA 蝾螈:
   url: CA-Newt
-  date: 2024-03-16
+  date: 2024-03-16T00:00:00.000Z
   style: fullscreen
   cover: CA-Newt/DSCF0627.webp
-
 RedFox:
   url: FoxFox
-  date: 2024-02-26
+  date: 2024-02-26T00:00:00.000Z
   style: fullscreen
   cover: FoxFox/DSCF2186-Enhanced-NR.jpg
-
 Bay Animals:
   url: BayAnim
-  date: 2024-02-23
+  date: 2024-02-23T00:00:00.000Z
   style: fullscreen
   cover: BayAnim/DSCF8455.webp
-
 San Jose ReLife:
   url: ReLiveSanJose
-  date: 2024-02-20
+  date: 2024-02-20T00:00:00.000Z
   style: fullscreen
   cover: ReLiveSanJose/DSCF8221.webp
-  location: [37.34361909229288, -121.88391245381254]
-
+  location:
+    - 37.34361909229288
+    - -121.88391245381254
 冬日颐和园:
   url: WinterYHY
-  date: 2024-01-20
+  date: 2024-01-20T00:00:00.000Z
   style: fullscreen
   cover: WinterYHY/DSCF8046.webp
-  location: [39.99998634836399, 116.27549010918474]
-
+  location:
+    - 39.99998634836399
+    - 116.27549010918474
 太舞 · TAIWOO:
   url: TaiWoo
-  date: 2024-01-12
+  date: 2024-01-12T00:00:00.000Z
   style: fullscreen
   cover: TaiWoo/DSCF7973.webp
-  location: [40.89036107751564, 115.45011040479257]
-
+  location:
+    - 40.89036107751564
+    - 115.45011040479257
 看！是猫宝:
   url: Catty
-  date: 2024-01-04
+  date: 2024-01-04T00:00:00.000Z
   style: fullscreen
   cover: Catty/DSCF7430.webp
-
 一夜鱼龙舞:
   url: YuLongWu
-  date: 2023-12-30
+  date: 2023-12-30T00:00:00.000Z
   style: fullscreen
   cover: YuLongWu/DSCF7657.webp
-
 巡礼 · 大会堂:
   url: DaHuiTang
-  date: 2023-12-09
+  date: 2023-12-09T00:00:00.000Z
   style: fullscreen
   cover: DaHuiTang/DSCF6003.webp
-  location: [39.90348611111111, 116.38884722222222]
-
+  location:
+    - 39.90348611111111
+    - 116.38884722222222
 紫玉庄园:
   url: ZiYuHouse
-  date: 2023-11-25
+  date: 2023-11-25T00:00:00.000Z
   style: fullscreen
   cover: ZiYuHouse/DSCF5646.webp
-  location: [40.012316530859515, 116.40339054137779]
-
+  location:
+    - 40.012316530859515
+    - 116.40339054137779
 禮 · 運東方:
   url: LiYunDongFangThu
-  date: 2023-11-22
+  date: 2023-11-22T00:00:00.000Z
   style: fullscreen
   cover: LiYunDongFangThu/DSCF5478.webp
-  location: [39.999653660824286, 116.33567064137728]
-
+  location:
+    - 39.999653660824286
+    - 116.33567064137728
 玉渊潭 · 秋:
   url: Yuyuantan2023
-  date: 2023-11-18
+  date: 2023-11-18T00:00:00.000Z
   style: fullscreen
   cover: Yuyuantan2023/DSCF5285.webp
-  location: [39.91701643286557, 116.31381444120733]
-
+  location:
+    - 39.91701643286557
+    - 116.31381444120733
 旧宫掠影:
   url: GuGong2023
-  date: 2023-11-12
+  date: 2023-11-12T00:00:00.000Z
   style: fullscreen
   cover: GuGong2023/DSCF4906.webp
-  location: [39.916477852425956, 116.39706035787013]
-
+  location:
+    - 39.916477852425956
+    - 116.39706035787013
 紫竹院 · 赏秋:
   url: ZiZHuYuanTouchAutumn
-  date: 2023-11-11
+  date: 2023-11-11T00:00:00.000Z
   style: fullscreen
   cover: ZiZHuYuanTouchAutumn/DSCF4656.webp
-  location: [39.941722413806396, 116.31974406686889]
-
+  location:
+    - 39.941722413806396
+    - 116.31974406686889
 颐和访秋:
   url: TouchAutumnYiHe
-  date: 2023-11-07
+  date: 2023-11-07T00:00:00.000Z
   style: fullscreen
   cover: TouchAutumnYiHe/DSCF4521.webp
-  location: [39.99998634836399, 116.27549010918474]
-
+  location:
+    - 39.99998634836399
+    - 116.27549010918474
 黄叶 · 大觉寺 · 白家瞳:
   url: YellowLeafDaJue
-  date: 2023-11-03
+  date: 2023-11-03T00:00:00.000Z
   style: fullscreen
   cover: YellowLeafDaJue/DSCF4481.webp
-  location: [40.044745, 116.168023]
-
+  location:
+    - 40.044745
+    - 116.168023
 颐和园 · 再探:
   url: YuanMingYuanSec
-  date: 2023-10-28
+  date: 2023-10-28T00:00:00.000Z
   style: fullscreen
   cover: YuanMingYuanSec/DSCF3422.webp
-  location: [39.99998634836399, 116.27549010918474]
-
+  location:
+    - 39.99998634836399
+    - 116.27549010918474
 中关村街头:
   url: BeiJingZhongGuanCun
   style: fullscreen
-  date: 2023-10-26
+  date: 2023-10-26T00:00:00.000Z
   cover: BeiJingZhongGuanCun/DSCF3289.webp
-  location: [39.97861540629632, 116.31538726842278]
-
+  location:
+    - 39.97861540629632
+    - 116.31538726842278
 刻舟求猫:
   url: KeZhouQiuCat
-  date: 2023-10-23
+  date: 2023-10-23T00:00:00.000Z
   cover: KeZhouQiuCat/DSCF3250.webp
   style: fullscreen
-  location: [31.317452777777778, 121.49242777777778]
-
+  location:
+    - 31.317452777777778
+    - 121.49242777777778
 雄安 · 见闻:
   url: XiongAnView
-  date: 2023-10-15
+  date: 2023-10-15T00:00:00.000Z
   cover: XiongAnView/DSCF2369.webp
   style: fullscreen
-  location: [39.06193192499559, 115.92055083268593]
-
+  location:
+    - 39.06193192499559
+    - 115.92055083268593
 颐和园 · 拍猫:
   url: YiHeYuan-Cat
-  date: 2023-10-12
+  date: 2023-10-12T00:00:00.000Z
   cover: YiHeYuan-Cat/DSCF2260.webp
   style: fullscreen
-  location: [40.00013020916257, 116.27549278433995]
-
+  location:
+    - 40.00013020916257
+    - 116.27549278433995
 奥森南园 · 拍猫:
   url: OlympicsCat
-  date: 2023-09-27
+  date: 2023-09-27T00:00:00.000Z
   cover: OlympicsCat/DSCF1996.webp
-  location: [40.01168259545705, 116.3930106606849]
-
+  location:
+    - 40.01168259545705
+    - 116.3930106606849
 考古博物馆:
   url: Archaeology-Museum
-  date: 2023-09-27
+  date: 2023-09-27T00:00:00.000Z
   cover: Archaeology-Museum/DSCF1745.webp
   style: fullscreen
-  location: [39.99885544291326, 116.39889832362664]
-
+  location:
+    - 39.99885544291326
+    - 116.39889832362664
 大觉寺:
   url: DaJue-Temple
-  date: 2023-09-23
+  date: 2023-09-23T00:00:00.000Z
   cover: DaJue-Temple/DSCF1614.webp
   style: fullscreen
-  location: [40.05227808497262, 116.10656799783511]
-
+  location:
+    - 40.05227808497262
+    - 116.10656799783511
 大觉寺 · 拍猫:
   url: DaJue-Temple-Cats
-  date: 2023-09-23
+  date: 2023-09-23T00:00:00.000Z
   cover: DaJue-Temple-Cats/DSCF1589.webp
   style: fullscreen
-  location: [40.05227808497262, 116.10656799783511]
-
+  location:
+    - 40.05227808497262
+    - 116.10656799783511
 模式口 · 拍猫:
   url: MoShiKouCat
-  date: 2023-09-01
+  date: 2023-09-01T00:00:00.000Z
   cover: MoShiKouCat/15.打呼.jpg
-  location: [39.934556122413355, 116.15926839071217]
-
+  location:
+    - 39.934556122413355
+    - 116.15926839071217
 北京 · 法海寺:
   url: FaHaiTample
-  date: 2023-09-01
+  date: 2023-09-01T00:00:00.000Z
   cover: FaHaiTample/DSCF0680.jpg
-  location: [39.94114003690045, 116.15986645550316]
-
+  location:
+    - 39.94114003690045
+    - 116.15986645550316
 北京 · 慈寿寺:
   url: CiShouTower
-  date: 2023-08-28
+  date: 2023-08-28T00:00:00.000Z
   cover: CiShouTower/DSCF0603.jpg
-  location: [39.92822506484559, 116.29527872666742]
-
+  location:
+    - 39.92822506484559
+    - 116.29527872666742
 北京 · 法源寺 · 陶然亭 · 拍猫:
   url: FaYuanTampleCat
-  date: 2023-08-26
+  date: 2023-08-26T00:00:00.000Z
   style: fullscreen
   cover: FaYuanTampleCat/1.美丽黑猫.jpg
-  location: [39.88426667153332, 116.37003452666642]
-
+  location:
+    - 39.88426667153332
+    - 116.37003452666642
 北京 · 智化寺:
   url: ZhiHuaTample
-  date: 2023-08-25
+  date: 2023-08-25T00:00:00.000Z
   cover: ZhiHuaTample/22.梵天衣决.jpeg
-  location: [39.91721676953545, 116.43230954016073]
-
+  location:
+    - 39.91721676953545
+    - 116.43230954016073
 富士看展 · 晚上遛弯:
   url: FUJIFILM-CITYWALK-2023
-  date: 2023-10-22
+  date: 2023-10-22T00:00:00.000Z
   style: fullscreen
   cover: FUJIFILM-CITYWALK-2023/DSCF2920.webp
-  location: [31.224035937723464, 121.4532145342587]
-
+  location:
+    - 31.224035937723464
+    - 121.4532145342587
 摸鱼一日 · 公园拍猫:
   url: ShangHaiParkCat
-  date: 2023-10-22
+  date: 2023-10-22T00:00:00.000Z
   cover: ShangHaiParkCat/DSCF2841.webp
   style: fullscreen
-  location: [31.3198181780916, 121.55153084835517]
-
+  location:
+    - 31.3198181780916
+    - 121.55153084835517
 Inamuragasaki:
   url: JAPAN-Inamuragasaki
-  date: 2023-09-15
+  date: 2023-09-15T00:00:00.000Z
   style: fullscreen
   cover: JAPAN-Inamuragasaki/DSCF1437.webp
-  location: [35.302147470364964, 139.52532325690734]
-
+  location:
+    - 35.302147470364964
+    - 139.52532325690734
 KAMAKURA:
   url: JAPAN-KAMAKURA
-  date: 2023-09-15
+  date: 2023-09-15T00:00:00.000Z
   style: fullscreen
   cover: JAPAN-KAMAKURA/DSCF1408.webp
-  location: [35.31680571832347, 139.53608752046165]
-
+  location:
+    - 35.31680571832347
+    - 139.53608752046165
 YOKOHAMA:
   url: JAPAN-YOKOHAMA
-  date: 2023-09-15
+  date: 2023-09-15T00:00:00.000Z
   style: fullscreen
   cover: JAPAN-YOKOHAMA/DSCF1296.webp
-  location: [35.45307576603131, 139.64422609358917]
-
+  location:
+    - 35.45307576603131
+    - 139.64422609358917
 We Are Tokyo:
   url: JapanTokyo
-  date: 2023-09-15
+  date: 2023-09-15T00:00:00.000Z
   style: fullscreen
   cover: JapanTokyo/DSCF0758.webp
-  location: [35.658510734691674, 139.7454328977352]
-
+  location:
+    - 35.658510734691674
+    - 139.7454328977352
 日本旅行:
   url: Japan202307
-  date: 2023-07-12
+  date: 2023-07-12T00:00:00.000Z
   cover: Japan202307/IMG_7586.4e91my1ve140.JPG
-  location: [34.97037388872075, 138.9266645400499]
-
+  location:
+    - 34.97037388872075
+    - 138.9266645400499
 北京暴徒:
   url: BeiJingGangster
-  date: 2023-03-26
+  date: 2023-03-26T00:00:00.000Z
   cover: BeiJingGangster/IMG_7089.4cskb5ur5o00.webp
-  location: [39.94510077201904, 116.33033386289503]
-
+  location:
+    - 39.94510077201904
+    - 116.33033386289503
 2022 · 大理:
   url: DaLi2022
-  date: 2022-10-01
+  date: 2022-10-01T00:00:00.000Z
   cover: DaLi2022/20230818-033845.6obr4awlbf40.webp
-  location: [25.752030170382785, 100.15397359842969]
-
+  location:
+    - 25.752030170382785
+    - 100.15397359842969
 北京环球影城:
   url: UniversalBJ
-  date: 2021-12-02
+  date: 2021-12-02T00:00:00.000Z
   cover: UniversalBJ/IMG_2405-JPEG.webp
   style: fullscreen
-  location: [39.85305648347282, 116.6610978968284]
-
+  location:
+    - 39.85305648347282
+    - 116.6610978968284
 Train:
   url: Train
-  date: 2024-12-20
+  date: 2024-12-20T00:00:00.000Z
   cover: Train/PhotonCam_20241221_123851.webp
   style: fullscreen
-
 Daily:
   url: Daily
-  date: 1996-02-06
+  date: 1996-02-06T00:00:00.000Z
   cover: Daily/PhotonCam_OSK_20241115_140022.webp
   style: fullscreen
