@@ -1,3 +1,11 @@
+Mt.Shasta:
+  url: Mt-Shasta
+  date: "2025-10-17"
+  style: fullscreen
+  cover: Mt-Shasta/DSCF9700.webp
+  location:
+    - 41.61732104240028
+    - -122.20092259199691
 CA 395 赏秋:
   url: CA395
   date: "2025-10-03"
