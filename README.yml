@@ -1,3 +1,11 @@
+Yosemite:
+  url: Yosemite
+  date: "2025-10-26"
+  style: fullscreen
+  cover: Yosemite/DSCF0132-4.webp
+  location:
+    - 37.72269491178789
+    - -119.67237265165953
 Mt.Shasta:
   url: Mt-Shasta
   date: "2025-10-17"
