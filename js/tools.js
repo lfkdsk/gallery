@@ -83,6 +83,11 @@ function wrapperData(v, author) {
   console.log(maker);
   exifLogo.attr("class", 'nofancy')
   switch (maker) {
+    case 'Hasselblad': {
+      exifLogo.attr("src", "img/hasselblad.jpg");
+      exifLogo.addClass("hasselblad-logo");
+      break;
+    }
     case "Apple": {
       exifLogo.attr("src", "img/apple.png");
       exifLogo.addClass("apple-logo");
@@ -113,23 +118,23 @@ function wrapperData(v, author) {
       exifLogo.addClass("dji-logo");
       break;
     }
-    default: {
-      break;
-    }
     case "FUJIFILM": {
       exifLogo.attr("src", "img/fujifilm.png");
       exifLogo.addClass("fujifilm-logo");
       break;
     }
-    case "OM Digital Solutions": {
+    case "OM Digital Solutions   ": {
       exifLogo.attr("src", "img/om-system.svg");
       exifLogo.addClass("om-system-logo");
       break;
     }
-    case "OLYMPUS CORPORATION": 
+    case "OLYMPUS CORPORATION    ":
     case "OLYMPUS IMAGING CORP.": {
       exifLogo.attr("src", "img/OlympusLogoBlueAndGoldRGB.png");
       exifLogo.addClass("olympus-logo");
+      break;
+    }
+    default: {
       break;
     }
   }
