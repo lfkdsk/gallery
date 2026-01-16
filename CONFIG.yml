@@ -46,7 +46,7 @@ nav:
     link: /status
     icon: list-view
   时间线:
-    link: /grid-all
+    link: /grid-lanes
     icon: grid-nine
 
 thumbnail_url: https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/
