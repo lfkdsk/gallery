@@ -1,10 +1,19 @@
+SantaRosa / Snoopy:
+  url: SantaRosa-Snoopy
+  date: "2026-04-12"
+  style: fullscreen
+  cover: SantaRosa-Snoopy/5.jpeg
+  location:
+    - 38.460330345782786
+    - -122.73619523868898
 395 雪景:
   url: 395-snow
   date: "2026-04-04"
   style: fullscreen
   cover: 395-snow/B0000726.webp
-  location: [37.243223100344004, -118.58232752472165]
-    
+  location:
+    - 37.243223100344004
+    - -118.58232752472165
 富士 · 山中湖:
   url: Fuji2
   date: "2026-01-22"
