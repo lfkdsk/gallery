@@ -1467,12 +1467,16 @@
                 const latN = Number(lat);
                 const lonN = Number(lon);
                 const hasLoc = Number.isFinite(latN) && Number.isFinite(lonN);
+                const locationSection = locationBody.parentElement;
 
                 if (!hasLoc) {
-                    renderKeyValue(locationKv, [{ key: '位置', value: '—' }]);
+                    locationKv.textContent = '';
                     locationMapWrap.textContent = '';
+                    if (locationSection) locationSection.hidden = true;
                     return;
                 }
+
+                if (locationSection) locationSection.hidden = false;
 
                 const rows = [
                     { key: '纬度', value: formatLat(latN) },
