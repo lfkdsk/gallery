@@ -11,7 +11,7 @@ env:
   GIT_USER: lfkdsk # change to yourself
   GIT_EMAIL: lfkdsk@gmail.com # change to yourself
   THEME_REPO: lfkdsk/hexo-theme-type
-  THEME_BRANCH: main
+  THEME_BRANCH: imporved-ui-design
   TEMPLATE_REPO: lfkdsk/album_template
   TEMPLATE_BRANCE: main
 
