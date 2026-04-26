@@ -274,17 +274,25 @@
 </div>
 
 
-<style>
-  .navicon {
-    font-size: 18px;
-    padding-top: 18px;
-    color: var(--main-black);
-  }
-</style>
+
   <!-- Main Content -->
   <script src="js/sql-wasm.js"></script>
 
-<section class="pjax-area">
+<section class="pjax-area grid-lanes-root">
+    
+    <style>
+        html:has(.grid-lanes-root) body { background-color: #0b0b0c; }
+        .grid-lanes-root .gpro-item {
+            background-color: #1a1a1c;
+        }
+        .grid-lanes-root .gpro-img {
+            opacity: 0;
+            transition: opacity 0.32s ease;
+        }
+        .grid-lanes-root .gpro-img.is-loaded {
+            opacity: 1;
+        }
+    </style>
     <div id="grid-all" class="content-area album-area">
         <div id="floating-date" class="floating-date"></div>
         <div id="masonry" class="gpro-masonry grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7"></div>
@@ -1912,6 +1920,10 @@
             if (chips.length) hover.appendChild(chipsWrap);
 
             img.addEventListener("load", () => {
+                // Skip the 1x1 placeholder load
+                if (img.src === PLACEHOLDER_IMG) return;
+                img.classList.add('is-loaded');
+                item.classList.add('is-loaded');
                 resizeMasonryItem(item);
                 scheduleFloatingDateUpdate();
             });
