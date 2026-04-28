@@ -1128,11 +1128,37 @@
                 render();
             };
 
+            const getFitDimensions = () => {
+                const padW = imgWrap.clientWidth - 24;
+                const padH = imgWrap.clientHeight - 24;
+                if (!img.naturalWidth || !img.naturalHeight) return { fitW: padW, fitH: padH, padW, padH };
+                const nat = img.naturalWidth / img.naturalHeight;
+                let fitW, fitH;
+                if (padW / padH > nat) { fitH = padH; fitW = fitH * nat; }
+                else { fitW = padW; fitH = fitW / nat; }
+                return { fitW, fitH, padW, padH };
+            };
+
             const applyZoom = () => {
-                const t = `translate3d(${viewerZoom.tx}px, ${viewerZoom.ty}px, 0) scale(${viewerZoom.scale})`;
-                img.style.transform = t;
-                if (liveVideoEl) liveVideoEl.style.transform = t;
-                btnZoom.textContent = `${viewerZoom.scale.toFixed(1)}×`;
+                const s = viewerZoom.scale;
+                btnZoom.textContent = `${s.toFixed(1)}×`;
+                const t = `translate3d(${viewerZoom.tx}px, ${viewerZoom.ty}px, 0)`;
+                if (s <= 1) {
+                    img.style.removeProperty('width');
+                    img.style.removeProperty('height');
+                    img.style.removeProperty('max-width');
+                    img.style.removeProperty('max-height');
+                    img.style.transform = '';
+                    if (liveVideoEl) liveVideoEl.style.transform = '';
+                } else {
+                    const { fitW, fitH } = getFitDimensions();
+                    img.style.maxWidth = 'none';
+                    img.style.maxHeight = 'none';
+                    img.style.width = `${fitW * s}px`;
+                    img.style.height = `${fitH * s}px`;
+                    img.style.transform = t;
+                    if (liveVideoEl) liveVideoEl.style.transform = `${t} scale(${s})`;
+                }
             };
 
             const resetZoom = () => {
@@ -1565,33 +1591,46 @@
                 }
             };
 
+            const makeThumb = (i) => {
+                const p = loadedPhotos[i];
+                const t = document.createElement('button');
+                t.type = 'button';
+                t.className = 'glv-thumb' + (i === viewerIndex ? ' active' : '');
+                const im = document.createElement('img');
+                im.draggable = false;
+                im.alt = p.name || '';
+                im.src = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + p.path.replace(/\.\w+$/, '.webp');
+                t.appendChild(im);
+                t.addEventListener('click', () => open(i));
+                return t;
+            };
+
+            const attachFilmLoadMore = () => {
+                if (!hasMore || !film.lastChild) return;
+                const obs = new IntersectionObserver((entries) => {
+                    if (!entries[0].isIntersecting || !hasMore || isFetching) return;
+                    obs.disconnect();
+                    const beforeLen = loadedPhotos.length;
+                    page += 1;
+                    fetchData();
+                    for (let i = beforeLen; i < loadedPhotos.length; i++) {
+                        film.appendChild(makeThumb(i));
+                    }
+                    attachFilmLoadMore();
+                }, { root: film, rootMargin: '0px', threshold: 0.1 });
+                obs.observe(film.lastChild);
+            };
+
             const renderFilm = (skipLoadMore) => {
                 film.textContent = '';
                 if (viewerIndex < 0) return;
                 const start = clamp(viewerIndex - 12, 0, loadedPhotos.length - 1);
-                const end = clamp(viewerIndex + 12, 0, loadedPhotos.length - 1);
+                const end = loadedPhotos.length - 1;
                 for (let i = start; i <= end; i++) {
-                    const p = loadedPhotos[i];
-                    const t = document.createElement('button');
-                    t.type = 'button';
-                    t.className = 'glv-thumb' + (i === viewerIndex ? ' active' : '');
-                    const im = document.createElement('img');
-                    im.draggable = false;
-                    im.alt = p.name || '';
-                    im.src = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail/' + p.path.replace(/\.\w+$/, '.webp');
-                    t.appendChild(im);
-                    t.addEventListener('click', () => open(i));
-                    film.appendChild(t);
+                    film.appendChild(makeThumb(i));
                 }
-
-                if (skipLoadMore) return;
-                if (hasMore && !isFetching && end === loadedPhotos.length - 1) {
-                    const before = loadedPhotos.length;
-                    page += 1;
-                    fetchData();
-                    if (loadedPhotos.length !== before && viewerIndex >= 0) {
-                        renderFilm(true);
-                    }
+                if (!skipLoadMore) {
+                    attachFilmLoadMore();
                 }
             };
 
@@ -1736,18 +1775,36 @@
                 });
             });
 
+            const clampPan = () => {
+                if (viewerZoom.scale <= 1) { viewerZoom.tx = 0; viewerZoom.ty = 0; return; }
+                const { fitW, fitH, padW, padH } = getFitDimensions();
+                const maxTx = Math.max(0, (fitW * viewerZoom.scale - padW) / 2);
+                const maxTy = Math.max(0, (fitH * viewerZoom.scale - padH) / 2);
+                viewerZoom.tx = clamp(viewerZoom.tx, -maxTx, maxTx);
+                viewerZoom.ty = clamp(viewerZoom.ty, -maxTy, maxTy);
+            };
+
             imgWrap.addEventListener(
                 'wheel',
                 (e) => {
                     if (root.hidden) return;
                     e.preventDefault();
+                    const oldScale = viewerZoom.scale;
                     const delta = e.deltaY > 0 ? -0.2 : 0.2;
-                    const next = clamp(viewerZoom.scale + delta, 1, 4);
-                    viewerZoom.scale = next;
+                    const next = clamp(oldScale + delta, 1, 4);
+                    if (next === oldScale) return;
                     if (next === 1) {
                         viewerZoom.tx = 0;
                         viewerZoom.ty = 0;
+                    } else {
+                        const rect = imgWrap.getBoundingClientRect();
+                        const mx = e.clientX - (rect.left + rect.width / 2);
+                        const my = e.clientY - (rect.top + rect.height / 2);
+                        viewerZoom.tx = mx - (mx - viewerZoom.tx) * next / oldScale;
+                        viewerZoom.ty = my - (my - viewerZoom.ty) * next / oldScale;
                     }
+                    viewerZoom.scale = next;
+                    clampPan();
                     applyZoom();
                 },
                 { passive: false }
@@ -1756,11 +1813,20 @@
             imgWrap.addEventListener('dblclick', (e) => {
                 if (root.hidden) return;
                 e.preventDefault();
-                viewerZoom.scale = viewerZoom.scale === 1 ? 2 : 1;
-                if (viewerZoom.scale === 1) {
+                const oldScale = viewerZoom.scale;
+                const next = oldScale === 1 ? 2 : 1;
+                if (next === 1) {
                     viewerZoom.tx = 0;
                     viewerZoom.ty = 0;
+                } else {
+                    const rect = imgWrap.getBoundingClientRect();
+                    const mx = e.clientX - (rect.left + rect.width / 2);
+                    const my = e.clientY - (rect.top + rect.height / 2);
+                    viewerZoom.tx = mx - (mx - viewerZoom.tx) * next / oldScale;
+                    viewerZoom.ty = my - (my - viewerZoom.ty) * next / oldScale;
                 }
+                viewerZoom.scale = next;
+                clampPan();
                 applyZoom();
             });
 
@@ -1777,8 +1843,11 @@
 
             imgWrap.addEventListener('pointermove', (e) => {
                 if (!viewerZoom.panning) return;
-                viewerZoom.tx = viewerZoom.baseTx + (e.clientX - viewerZoom.px);
-                viewerZoom.ty = viewerZoom.baseTy + (e.clientY - viewerZoom.py);
+                const { fitW, fitH, padW, padH } = getFitDimensions();
+                const maxTx = Math.max(0, (fitW * viewerZoom.scale - padW) / 2);
+                const maxTy = Math.max(0, (fitH * viewerZoom.scale - padH) / 2);
+                viewerZoom.tx = clamp(viewerZoom.baseTx + (e.clientX - viewerZoom.px), -maxTx, maxTx);
+                viewerZoom.ty = clamp(viewerZoom.baseTy + (e.clientY - viewerZoom.py), -maxTy, maxTy);
                 applyZoom();
             });
 
@@ -2447,7 +2516,6 @@
             object-fit: contain;
             image-orientation: from-image;
             transform-origin: center;
-            will-change: transform;
             user-select: none;
             transition: filter 0.18s ease, opacity 0.18s ease;
             box-shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
@@ -2466,7 +2534,6 @@
             height: calc(100% - 24px);
             object-fit: contain;
             transform-origin: center;
-            will-change: transform;
             user-select: none;
             box-shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
             outline: 1px solid rgba(255, 255, 255, 0.08);

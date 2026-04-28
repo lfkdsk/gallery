@@ -351,6 +351,7 @@ ORDER BY
                 return;
             }
             var values = result[0].values;
+            var newLazyElements = [];
             for (const key of Object.keys(values)) {
                 const v = values[key];
                 if (historyToday) {
@@ -376,15 +377,16 @@ ORDER BY
                     a.setAttribute("data-fancybox", "gallery");
                     a.href = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/' + image.path;
                     a.appendChild(d);
+                    newLazyElements.push(d);
                     grid.appendChild(a);
                 }
                 sec.innerText = v[0];
                 gridAll.appendChild(sec);
                 gridAll.appendChild(grid);
             }
-            $(function () {
-                $("div.lazy").lazyload();
-            });
+            if (newLazyElements.length > 0) {
+                lazyload(newLazyElements);
+            }
         }
         fetchData();    
     </script>
@@ -474,7 +476,6 @@ ORDER BY
         }
     </style>
 </section>
-
   <!-- Footer -->
   <!-- Footer -->
 <footer class="itp-footer text-center">

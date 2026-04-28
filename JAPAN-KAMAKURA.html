@@ -276,7 +276,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.js"></script>
+  <script src="js/html2canvas.min.js" defer></script>
 <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
@@ -284,7 +284,7 @@
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
           <div id="pic-g" class="pic-item" />
-          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master/JAPAN-KAMAKURA/DSCF1329.webp" />
+          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//JAPAN-KAMAKURA/DSCF1329.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
     <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
@@ -926,7 +926,7 @@
   
       </div>
       <script>
-        var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
+        var imageBox = document.getElementById("imgbox");
         var descBox = $("#descbox");
         var wrapper = $("#exif-wrapper");
         var exifParam = $("#exif-param");
@@ -939,7 +939,7 @@
         var normalData = $("#no-exif-data");
         var name = getParam('name');
         var editor = $("#editor");
-        imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
+        imgno = 0;
         imgLink = imageBox.src;
         function changeExifData(v) {
           if (Object.keys(v.exif_data).length === 0) {
@@ -963,15 +963,23 @@
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
-          // load the original img.
           const highResImage = new Image();
           highResImage.src = imgLink;
-            highResImage.onload = function() {
-              imageBox.src = highResImage.src;
-              imageBox.classList.remove('blur');
+          highResImage.onload = function() {
+            imageBox.src = highResImage.src;
+            imageBox.classList.remove('blur');
+            // preload next image into browser cache
+            var nextIdx = Number(imgno) + 1;
+            if (nextIdx < len) {
+              var nextEl = document.getElementById(nextIdx);
+              if (nextEl) {
+                var prefetch = new Image();
+                prefetch.src = nextEl.getAttribute('rel');
+              }
+            }
           };
           imageBox.setAttribute("share", target.getAttribute('share'));
-          var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
+          var imageFancy = imageBox.parentElement;
           imageFancy.setAttribute("href", imgLink);
 
           var picg = document.getElementById('pic-g');
@@ -1003,10 +1011,23 @@
         } else {
           var value = $(`#0`)[0];
           name = value.getAttribute('name');
+          imgLink = value.getAttribute('rel');
           imageBox.title = value.getAttribute('desc');
           var v = JSON.parse(value.getAttribute('extra'));
           changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
+          // progressively load full-res for initial image without blur flash
+          const initHighRes = new Image();
+          initHighRes.src = imgLink;
+          initHighRes.onload = function() {
+            imageBox.src = initHighRes.src;
+            // preload second image
+            var nextEl = document.getElementById(1);
+            if (nextEl) {
+              var prefetch = new Image();
+              prefetch.src = nextEl.getAttribute('rel');
+            }
+          };
         }
 
         $('#download').click(function () {
@@ -1027,7 +1048,7 @@
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
           if (event.keyCode === 37) {
-            imgno = imgno - 1; // 设置图片编号-1
+            imgno = imgno - 1;
             if (imgno < 0) {
               imgno = 0;
             }
@@ -1035,7 +1056,7 @@
           };
           //[键盘快捷键] 右箭头 下一张
           if (event.keyCode === 39) {
-            imgcount = len - 1 //获取图片数量
+            imgcount = len - 1
             imgno = Number(imgno) + 1;
             if (imgno > imgcount) {
               imgno = imgcount

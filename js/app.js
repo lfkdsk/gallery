@@ -63,11 +63,11 @@ cover = 240;
 window.onscroll = function () {
   var howFar = document.documentElement.scrollTop || document.body.scrollTop;
   if ((howFar > cover) & (whetherChange == 0)) {
-    $('#column-toc').addClass('itp-toc-pull-up'); //滚动影响toc菜单透明度
+    $('#column-toc').addClass('itp-toc-pull-up');
     whetherChange = 1;
   }
   if ((howFar <= cover) & (whetherChange == 1)) {
-    $('#column-toc').removeClass('itp-toc-pull-up'); //滚动影响toc菜单透明度
+    $('#column-toc').removeClass('itp-toc-pull-up');
     whetherChange = 0;
   }
 };
@@ -76,30 +76,14 @@ m3righttop = 470;
 window.onscroll = function () {
   var howFar = document.documentElement.scrollTop || document.body.scrollTop;
   if ((howFar > m3righttop) & (whetherChange == 0)) {
-    $('#column-toc-m3').removeClass('itp-toc-m3-sidetop'); //m3 样式中，滚动影响toc菜单定位方式
+    $('#column-toc-m3').removeClass('itp-toc-m3-sidetop');
     whetherChange = 1;
   }
   if ((howFar <= m3righttop) & (whetherChange == 1)) {
-    $('#column-toc-m3').addClass('itp-toc-m3-sidetop'); //m3 样式中，滚动影响toc菜单定位方式
+    $('#column-toc-m3').addClass('itp-toc-m3-sidetop');
     whetherChange = 0;
   }
 };
-
-/*
-
-$(".toc li").replaceWith(function () {
-  return "<li class='mdui-menu-item'>" + this.innerHTML + "</li>";
-});
-
-$(".toc-child li").replaceWith(function () {
-  return "<li class='mdui-menu-item'>" + this.innerHTML + "</li>";
-});
-
-$(".itp-column-toc ol").replaceWith(function () {
-  return "<ul class='mdui-menu mdui-menu-cascade itp-toc-menu' id='toc'>" + this.innerHTML + "</ul>";
-});
-
-*/
 
 $('img')
   .not(
@@ -109,7 +93,6 @@ $('img')
     '.nofancy'
   )
   .each(function () {
-    // $(this).attr("data-fancybox", "gallery"); 直接给img添加data-fancybox会导致点击图片后图片消失
     var element = document.createElement('a');
     $(element).attr('data-fancybox', 'gallery');
     $(element).attr('href', $(this).attr('src'));
@@ -117,18 +100,16 @@ $('img')
   });
 
 $('.itp-mag-content img').each(function () {
-  // $(this).attr("data-fancybox", "gallery"); 直接给img添加data-fancybox会导致点击图片后图片消失
   var element = document.createElement('div');
   $(element).attr('class', 'itp-mag-img');
   $(this).wrap(element);
 });
 
-//首次加载首页时，执行的脚本
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function () {
   $('div.lazy').lazyload();
   $('a.lazy').lazyload();
   $('img.lazy').lazyload();
-};
+});
 
 console.log(
   `${'\n'} %c  Hexo-Theme-Type  %c  https://github.com/aiokr/hexo-theme-type  ${'\n'}`,
