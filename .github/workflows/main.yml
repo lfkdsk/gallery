@@ -67,7 +67,28 @@ jobs:
         npm install hexo-cli -g
         hexo g --config new_config.yml
         ls ./public        
+    - name: Check for meaningful changes
+      id: check_changes
+      run: |
+        cd public
+        # Get all changed lines, strip diff headers, then remove lines whose
+        # only difference is a date/time value (ISO-8601 or RFC-822 formats).
+        MEANINGFUL=$(git diff HEAD -- . \
+          | grep -E '^[+-]' \
+          | grep -vE '^(\+\+\+|---)' \
+          | grep -vE '^[+-][[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}([T ][0-9]{2}:[0-9]{2}:[0-9]{2}[.0-9Z+-]*)?' \
+          | grep -vE '^[+-].*(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?[[:space:]]+[0-9]+(st|nd|rd|th)?[[:space:]]+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)' \
+          | grep -vE '^[+-][[:space:]]*$')
+        cd ..
+        if [ -z "$MEANINGFUL" ]; then
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          echo "Only date/time fields changed — skipping deploy"
+        else
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+          echo "Meaningful content changes detected — will deploy"
+        fi
     - name: Deploy Thumbnail
+      if: steps.check_changes.outputs.has_changes != 'false'
       uses: peaceiris/actions-gh-pages@v3
       with:
         publish_dir: ./thumbnail_public
@@ -77,6 +98,7 @@ jobs:
         user_email: ${{ env.GIT_EMAIL }}
         commit_msg: ${{ github.event.head_commit.message }}          
     - name: Deploy
+      if: steps.check_changes.outputs.has_changes != 'false'
       uses: peaceiris/actions-gh-pages@v3
       with:
         publish_dir: ./public
