@@ -1,0 +1,618 @@
+{
+  "_meta": {
+    "description": "动物图片索引 — 按动物种类归档，值为文件路径列表",
+    "format": "folder/filename.ext",
+    "generated": "2026-04-29",
+    "status": "partial — four previously partial folders completed 2026-04-29; see animal_index_guide.md for remaining folders"
+  },
+  "中华田园猫·三花 / Chinese Domestic Cat (Calico / Tricolor)": [
+    "KeZhouQiuCat/DSCF3196.webp",
+    "KeZhouQiuCat/DSCF3207.webp",
+    "KeZhouQiuCat/DSCF3218.webp",
+    "KeZhouQiuCat/DSCF3228.webp",
+    "KeZhouQiuCat/DSCF3235.webp",
+    "KeZhouQiuCat/DSCF3246.webp",
+    "KeZhouQiuCat/DSCF3250.webp",
+    "MoShiKouCat/10.躺了.webp",
+    "MoShiKouCat/15.打呼.webp",
+    "Catty/DSCF6181.webp",
+    "Catty/DSCF6188.webp",
+    "Catty/DSCF6198.webp",
+    "Catty/DSCF7429.webp",
+    "Catty/DSCF7430.webp",
+    "Catty/DSCF7437.webp",
+    "Catty/DSCF7450.webp",
+    "Catty/DSCF7451.webp",
+    "Catty/DSCF7455.webp",
+    "Catty/DSCF7463.webp",
+    "Catty/DSCF7557.webp",
+    "Catty/DSCF7794.webp",
+    "Catty/DSCF7797.webp",
+    "Catty/DSCF7809.webp",
+    "Catty/DSCF7817.webp",
+    "Catty/DSCF7827.webp",
+    "Catty/IMG_2546.webp",
+    "Catty/IMG_2665.webp",
+    "Catty/IMG_2708.webp",
+    "Catty/IMG_2752.webp",
+    "Catty/IMG_2795.webp",
+    "Catty/IMG_5453.webp",
+    "Catty/IMG_5644.webp",
+    "Catty/IMG_5646.webp",
+    "Catty/IMG_6526.webp",
+    "Catty/m.webp",
+    "Daily/DSCF7506.webp",
+    "TouchAutumnYiHe/DSCF4571.webp",
+    "YuanMingYuanSec/DSCF3445.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4668.webp",
+    "YellowLeafDaJue/DSCF4279.webp",
+    "YellowLeafDaJue/DSCF4282.webp"
+  ],
+  "中华田园猫·橘白 / Chinese Domestic Cat (Orange and White)": [
+    "YiHeYuan-Cat/DSCF2259.webp",
+    "YiHeYuan-Cat/DSCF2260.webp",
+    "YiHeYuan-Cat/DSCF2272.webp",
+    "YiHeYuan-Cat/DSCF2335.webp",
+    "YiHeYuan-Cat/DSCF2345.webp",
+    "YiHeYuan-Cat/DSCF2348.webp",
+    "DaJue-Temple-Cats/DSCF1585.webp",
+    "DaJue-Temple-Cats/DSCF1589.webp",
+    "DaJue-Temple-Cats/DSCF1596.webp",
+    "DaJue-Temple-Cats/DSCF1597.webp",
+    "MoShiKouCat/11.吃手.webp",
+    "MoShiKouCat/12.继续吃手.webp",
+    "MoShiKouCat/13.吃.webp",
+    "MoShiKouCat/14.看什么看.webp",
+    "MoShiKouCat/16.着了.webp",
+    "MoShiKouCat/17.我也睡了.webp",
+    "OlympicsCat/DSCF1992.webp",
+    "OlympicsCat/DSCF1996.webp",
+    "OlympicsCat/DSCF1999.webp",
+    "OlympicsCat/DSCF2003.webp",
+    "OlympicsCat/DSCF2045.webp",
+    "WinterYHY/DSCF8032.webp",
+    "WinterYHY/DSCF8051.webp",
+    "WinterYHY/DSCF8084.webp",
+    "TouchAutumnYiHe/DSCF4548.webp",
+    "TouchAutumnYiHe/DSCF4552.webp",
+    "YuanMingYuanSec/DSCF3427.webp",
+    "YuanMingYuanSec/DSCF3432.webp",
+    "YuanMingYuanSec/DSCF3434.webp",
+    "YuanMingYuanSec/DSCF3458.webp",
+    "YuanMingYuanSec/DSCF3463.webp",
+    "YuanMingYuanSec/DSCF3483.webp",
+    "YuanMingYuanSec/DSCF3503.webp",
+    "YuanMingYuanSec/DSCF3507.webp",
+    "YuanMingYuanSec/DSCF3519.webp",
+    "YuanMingYuanSec/DSCF3521.webp",
+    "YuanMingYuanSec/DSCF3522.webp",
+    "YuanMingYuanSec/DSCF3526.webp",
+    "YuanMingYuanSec/DSCF3533.webp",
+    "YuanMingYuanSec/DSCF3536.webp",
+    "YuanMingYuanSec/DSCF3542.webp",
+    "YuanMingYuanSec/DSCF3549.webp",
+    "YuanMingYuanSec/DSCF3557.webp",
+    "YuanMingYuanSec/DSCF3582.webp",
+    "YuanMingYuanSec/DSCF3585.webp",
+    "BeiJingGangster/IMG_7214.webp"
+  ],
+  "中华田园猫·纯黑 / Chinese Domestic Cat (Solid Black)": [
+    "YiHeYuan-Cat/DSCF2308.webp",
+    "YiHeYuan-Cat/DSCF2309.webp",
+    "FaYuanTampleCat/1.美丽黑猫.webp",
+    "FaYuanTampleCat/2.黑猫吃草.webp",
+    "FaYuanTampleCat/3.优雅.webp",
+    "FaYuanTampleCat/4.呆.webp",
+    "Daily/DSCF7745.webp",
+    "Daily/DSCF7751.webp",
+    "Daily/final-4.jpg",
+    "YuanMingYuanSec/DSCF3407.webp"
+  ],
+  "中华田园猫·玳瑁 / Chinese Domestic Cat (Tortoiseshell)": [
+    "ShangHaiParkCat/DSCF2817.webp",
+    "ShangHaiParkCat/DSCF2825.webp",
+    "ShangHaiParkCat/DSCF2829.webp",
+    "ShangHaiParkCat/DSCF2830.webp",
+    "ShangHaiParkCat/DSCF2834.webp",
+    "ShangHaiParkCat/DSCF2835.webp"
+  ],
+  "中华田园猫·橘色虎斑 / Chinese Domestic Cat (Orange Tabby)": [
+    "YiHeYuan-Cat/DSCF2306.webp",
+    "ShangHaiParkCat/DSCF2841.webp",
+    "ShangHaiParkCat/DSCF2847.webp",
+    "ShangHaiParkCat/DSCF2850.webp",
+    "ShangHaiParkCat/DSCF2852.webp",
+    "Boston-City/IMG_1061.webp",
+    "WinterYHY/DSCF8022.webp",
+    "WinterYHY/DSCF8038.webp",
+    "WinterYHY/DSCF8041.webp",
+    "WinterYHY/DSCF8046.webp",
+    "WinterYHY/DSCF8048.webp",
+    "WinterYHY/DSCF8098.webp",
+    "WinterYHY/DSCF8111.webp",
+    "TouchAutumnYiHe/DSCF4506.webp",
+    "TouchAutumnYiHe/DSCF4520.webp",
+    "TouchAutumnYiHe/DSCF4521.webp",
+    "TouchAutumnYiHe/DSCF4589.webp",
+    "YuanMingYuanSec/DSCF3364.webp",
+    "YuanMingYuanSec/DSCF3376.webp",
+    "YuanMingYuanSec/DSCF3377.webp",
+    "YuanMingYuanSec/DSCF3380.webp",
+    "YuanMingYuanSec/DSCF3401.webp",
+    "YuanMingYuanSec/DSCF3402.webp",
+    "YuanMingYuanSec/DSCF3404.webp",
+    "YuanMingYuanSec/DSCF3422.webp",
+    "Yuyuantan2023/DSCF5363.webp",
+    "Yuyuantan2023/DSCF5368.webp",
+    "Yuyuantan2023/DSCF5369.webp"
+  ],
+  "中华田园猫·黑白（礼服猫）/ Chinese Domestic Cat (Tuxedo / Black-White)": [
+    "DaJue-Temple-Cats/DSCF1640.webp",
+    "DaJue-Temple-Cats/DSCF1692.webp",
+    "DaJue-Temple-Cats/DSCF1701.webp",
+    "WinterYHY/DSCF8109.webp",
+    "WinterYHY/DSCF8142.webp",
+    "WinterYHY/DSCF8146.webp",
+    "Yuyuantan2023/DSCF5346.webp",
+    "Yuyuantan2023/DSCF5353.webp",
+    "YuanMingYuanSec/DSCF3627.webp",
+    "YuanMingYuanSec/DSCF3628.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4673.webp",
+    "XiongAnView/DSCF2549.webp",
+    "YellowLeafDaJue/DSCF4174.webp",
+    "YellowLeafDaJue/DSCF4187.webp",
+    "YellowLeafDaJue/DSCF4199.webp",
+    "Yakushima/DSCF6185.webp"
+  ],
+  "中华田园猫·虎斑加白 / Chinese Domestic Cat (Tabby and White)": [
+    "DaJue-Temple-Cats/DSCF1673.webp",
+    "DaJue-Temple-Cats/DSCF1680.webp",
+    "DaJue-Temple-Cats/DSCF1686.webp",
+    "KeZhouQiuCat/DSCF3200.webp"
+  ],
+  "中华田园猫·棕虎斑 / Chinese Domestic Cat (Brown Tabby)": [
+    "YiHeYuan-Cat/DSCF2263.webp",
+    "TouchAutumnYiHe/DSCF4511.webp",
+    "TouchAutumnYiHe/DSCF4513.webp",
+    "Yuyuantan2023/DSCF5307.webp"
+  ],
+  "中华田园猫·棕虎斑带玳瑁色调 / Chinese Domestic Cat (Brown Tabby with Tortoiseshell Tones)": [
+    "YiHeYuan-Cat/DSCF2270.webp"
+  ],
+  "长毛猫（疑似缅因猫/挪威森林猫混血）/ Long-haired Cat (Maine Coon / Norwegian Forest Mix)": [
+    "DaJue-Temple-Cats/DSCF1642.webp",
+    "DaJue-Temple-Cats/DSCF1643.webp"
+  ],
+  "中华田园猫·纯白 / Chinese Domestic Cat (Solid White)": [
+    "YiHeYuan-Cat/DSCF2330.webp",
+    "OlympicsCat/DSCF2056.webp",
+    "OlympicsCat/DSCF2067.webp",
+    "DaJue-Temple-Cats/DSCF1594.webp",
+    "TouchAutumnYiHe/DSCF4497.webp",
+    "YellowLeafDaJue/DSCF4215.webp"
+  ],
+  "中华田园猫·玳瑁色虎斑（Torbie）/ Chinese Domestic Cat (Tortoiseshell Tabby)": [
+    "FaYuanTampleCat/6.大佬.webp"
+  ],
+  "中华田园猫·灰虎斑 / Chinese Domestic Cat (Gray Mackerel Tabby)": [
+    "FaYuanTampleCat/7.看看.webp",
+    "BayAnim/DSCF9023.webp"
+  ],
+  "中华田园猫·银灰虎斑 / Chinese Domestic Cat (Silver Mackerel Tabby)": [
+    "FaYuanTampleCat/8.另一个BRO.webp"
+  ],
+  "中华田园猫·橘白幼猫 / Chinese Domestic Cat (Orange-White Tabby Kitten)": [
+    "FaYuanTampleCat/5.猫球.webp"
+  ],
+  "中华田园猫·黑白幼猫 / Chinese Domestic Cat (Black-White Bicolor Kitten)": [
+    "FaYuanTampleCat/9.左右野马分鬃.webp"
+  ],
+  "中华田园猫·双猫同框 / Chinese Domestic Cats (Two Cats, Mixed Colors)": [
+    "YiHeYuan-Cat/DSCF2281.webp",
+    "FaYuanTampleCat/10.😳.webp",
+    "ShangHaiParkCat/DSCF2810.webp",
+    "ShangHaiParkCat/DSCF2812.webp",
+    "ShangHaiParkCat/DSCF2815.webp",
+    "ShangHaiParkCat/DSCF2838.webp",
+    "ShangHaiParkCat/DSCF2844.webp",
+    "WinterYHY/DSCF8014.webp",
+    "WinterYHY/DSCF8083.webp",
+    "WinterYHY/DSCF8102.webp",
+    "YuanMingYuanSec/DSCF3394.webp",
+    "YuanMingYuanSec/DSCF3541.webp",
+    "YuanMingYuanSec/DSCF3562.webp",
+    "YuanMingYuanSec/DSCF3573.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4662.webp"
+  ],
+  "赤狐 / Red Fox (Vulpes vulpes)": [
+    "FoxFox/5G4A0172.webp",
+    "FoxFox/5G4A0176.webp",
+    "FoxFox/5G4A0179.webp",
+    "FoxFox/5G4A0181.webp",
+    "FoxFox/5G4A0262.webp",
+    "FoxFox/DSCF2186-Enhanced-NR.jpg",
+    "FoxFox/DSCF2554-Enhanced-NR.webp",
+    "FoxFox/DSCF2607-Enhanced-NR.webp",
+    "FoxFox/DSCF2757-Enhanced-NR.webp",
+    "FoxFox/DSCF2775-Enhanced-NR.webp",
+    "FoxFox/DSCF3835-Enhanced-NR.webp",
+    "FoxFox/DSCF4213-Enhanced-NR.webp",
+    "BayAnim/DSCF9255-light-adjust-.webp",
+    "BayAnim/DSCF9259.webp"
+  ],
+  "东部灰松鼠 / Eastern Gray Squirrel (Sciurus carolinensis)": [
+    "Squirrel/DSCF0542.webp",
+    "Squirrel/DSCF0915.webp",
+    "Squirrel/DSCF1045.webp",
+    "Squirrel/DSCF1195.webp",
+    "Squirrel/DSCF1240.webp",
+    "Squirrel/DSCF1297.webp",
+    "Squirrel/DSCF1333.webp",
+    "Squirrel/DSCF1455.webp",
+    "Daily/DSCF9539-denoiseraw-sharpen-denoise-Enhanced-NR.webp",
+    "Daily/DSCF9687-denoiseraw-sharpen-denoise_副本.webp",
+    "BayAreaDaily/IMG_5032.webp",
+    "Boston-Freeway/DSCF6881.webp",
+    "Newport2Yale/DSCF7212.webp",
+    "Newport2Yale/DSCF7306.webp",
+    "Yuyuantan2023/DSCF5307.webp"
+  ],
+  "加州地松鼠 / California Ground Squirrel (Otospermophilus beecheyi)": [
+    "BayArea-Hiking/DSCF9732-Enhanced-NR.webp",
+    "BayAnim/DSCF8629.webp",
+    "BayAnim/DSCF8648.webp"
+  ],
+  "灰旱獭 / Hoary Marmot (Marmota caligata)": [
+    "Alaska/DSCF3399.webp"
+  ],
+  "阿拉斯加海岸棕熊 / Alaska Coastal Brown Bear (Ursus arctos middendorffi)": [
+    "Alaska-Bear/DSCF4216.webp",
+    "Alaska-Bear/DSCF4226-FIXED.webp",
+    "Alaska-Bear/DSCF4258.webp",
+    "Alaska-Bear/DSCF4406-FIXED.webp",
+    "Alaska-Bear/DSCF4533.webp",
+    "Alaska-Bear/DSCF4565.webp",
+    "Alaska-Bear/DSCF4584.webp",
+    "Alaska-Bear/DSCF4596.webp",
+    "Alaska-Bear/DSCF4623.webp",
+    "Alaska-Bear/DSCF4687-FIXED.webp",
+    "Alaska-Bear/DSCF4813.webp",
+    "Alaska-Bear/DSCF4886.webp",
+    "Alaska-Bear/DSCF4952.webp",
+    "Alaska-Bear/DSCF4976-FIXED.webp",
+    "Alaska-Bear/DSCF4991.webp",
+    "Alaska-Bear/DSCF5070.webp",
+    "Alaska-Bear/DSCF5074.webp",
+    "Alaska-Bear/DSCF5213.webp",
+    "Alaska-Bear/DSCF5455-FIXED.webp"
+  ],
+  "美洲黑熊（肉桂色变体）/ American Black Bear, Cinnamon Phase (Ursus americanus)": [
+    "Tahoe-Bear/DSCF0246-2.webp",
+    "Tahoe-Bear/DSCF0277-3.webp",
+    "Tahoe-Bear/DSCF0429-2.webp",
+    "Tahoe-Bear/DSCF0439-2.webp",
+    "Tahoe-Bear/DSCF0466-denoise-sharpen-upscale-2x.webp",
+    "Tahoe-Bear/DSCF0473.webp",
+    "Tahoe-Bear/DSCF0656-2.webp",
+    "Tahoe-Bear/DSCF1003-2.webp"
+  ],
+  "图勒麋鹿 / Tule Elk (Cervus canadensis nannodes)": [
+    "PointReyesDeer/DSCF9175.webp",
+    "PointReyesDeer/DSCF9185.webp",
+    "PointReyesDeer/DSCF9200.webp",
+    "PointReyesDeer/DSCF9201.webp",
+    "PointReyesDeer/DSCF9238.webp",
+    "PointReyesDeer/DSCF9264.webp",
+    "PointReyesDeer/DSCF9286.webp",
+    "PointReyesDeer/DSCF9331.webp",
+    "PointReyesDeer/DSCF9378.webp",
+    "PointReyesDeer/DSCF9398.webp",
+    "PointReyesDeer/Z_IDG_20250927_183217_579.webp",
+    "PointReyesDeer/Z_IDG_20250927_193832_866.webp",
+    "BayArea-Hiking/DSCF9301-denoiseraw-sharpen-denoise.webp",
+    "BayArea-Hiking/DSCF9396-denoiseraw-sharpen-denoise.webp",
+    "BayArea-Hiking/DSCF9351.webp",
+    "BayArea-Hiking/DSCF9357.webp",
+    "BayArea-Hiking/DSCF9380.webp",
+    "BayArea-Hiking/DSCF9426.webp"
+  ],
+  "屋久鹿（屋久岛梅花鹿亚种）/ Yakushima Sika Deer (Cervus nippon yakushimae)": [
+    "Yakushima/DSCF6218-Enhanced-NR.webp"
+  ],
+  "绵羊 / Domestic Sheep (Ovis aries)": [
+    "TaiWoo/DSCF8004.webp"
+  ],
+  "加州蝾螈 / California Newt (Taricha torosa)": [
+    "CA-Newt/DSCF0462.webp",
+    "CA-Newt/DSCF0627.webp",
+    "CA-Newt/DSCF0628.webp",
+    "CA-Newt/DSCF0693.webp",
+    "CA-Newt/DSCF0717.webp",
+    "CA-Newt/DSCF0727.webp",
+    "CA-Newt/DSCF0736.webp",
+    "CA-Newt/DSCF0741.webp",
+    "CA-Newt/DSCF0757.webp",
+    "CA-Newt/DSCF0772.webp",
+    "CA-Newt/DSCF0808.webp"
+  ],
+  "安哥拉山羊 / Angora Goat (Capra hircus)": [
+    "capra-cupertino/DSCF4297.webp",
+    "capra-cupertino/DSCF4417.webp",
+    "capra-cupertino/DSCF4569.webp",
+    "capra-cupertino/DSCF4672.webp",
+    "capra-cupertino/DSCF4682.webp",
+    "capra-cupertino/DSCF4905.webp",
+    "capra-cupertino/DSCF5030.webp",
+    "capra-cupertino/DSCF5061.webp",
+    "capra-cupertino/DSCF5097.webp",
+    "capra-cupertino/DSCF5328.webp",
+    "capra-cupertino/DSCF5398.webp",
+    "capra-cupertino/DSCF5440.webp",
+    "capra-cupertino/DSCF5463.webp",
+    "capra-cupertino/DSCF5515.webp",
+    "capra-cupertino/DSCF5644.webp",
+    "capra-cupertino/DSCF5681.webp",
+    "capra-cupertino/DSCF5691.webp",
+    "capra-cupertino/DSCF5708.webp",
+    "capra-cupertino/DSCF5815.webp",
+    "capra-cupertino/DSCF5929.webp",
+    "capra-cupertino/DSCF5979.webp",
+    "capra-cupertino/DSCF6036.webp",
+    "capra-cupertino/DSCF6053.webp"
+  ],
+  "家牛（安格斯）/ Angus Cattle (Bos taurus)": [
+    "Daily/B0000696.webp",
+    "BayArea-Hiking/2025-03-12-10-58-51.webp",
+    "BayAnim/DSCF8378.webp",
+    "BayAnim/DSCF8974.webp",
+    "BayAnim/DSCF8976.webp"
+  ],
+  "马（家马）/ Domestic Horse (Equus caballus)": [
+    "BayAnim/PhotonCam_OSK_20250216_171700.webp",
+    "BayAnim/DSCF8477.webp",
+    "BayAnim/DSCF8524.webp",
+    "BayAnim/DSCF8746.webp"
+  ],
+  "灌丛棉尾兔 / Brush Rabbit (Sylvilagus bachmani)": [
+    "BayAnim/DSCF1411.webp",
+    "BayAnim/DSCF2654.webp",
+    "BayAnim/DSCF8400.webp",
+    "BayAnim/DSCF8422.webp"
+  ],
+  "太平洋海刺水母 / Pacific Sea Nettle (Chrysaora fuscescens)": [
+    "SumidaAquarium/DSCF6989-topaz-denoise-sharpen-exposure.webp",
+    "SumidaAquarium/DSCF6998-Enhanced-NR-topaz-denoiseraw-exposure-remove--sharpen.webp"
+  ],
+  "麦哲伦企鹅 / Magellanic Penguin (Spheniscus magellanicus)": [
+    "SumidaAquarium/DSCF7065.webp",
+    "SumidaAquarium/DSCF7161-Enhanced-NR-topaz-denoiseraw-denoise-sharpen.webp"
+  ],
+  "座头鲸 / Humpback Whale (Megaptera novaeangliae)": [
+    "Ocean-Whale/whale.jpeg"
+  ],
+  "港海豹 / Harbor Seal (Phoca vitulina)": [
+    "Ocean-Whale/DSCF1756.webp"
+  ],
+  "锦鲤 / Koi (Cyprinus rubrofuscus)": [
+    "Japan202307/IMG_7621.webp"
+  ],
+  "大蓝鹭 / Great Blue Heron (Ardea herodias)": [
+    "BayAnim/DSCF8320.webp",
+    "BayAnim/DSCF2731.webp",
+    "BayAnim/DSCF8343.webp"
+  ],
+  "北扑翅鴷 / Northern Flicker (Colaptes auratus)": [
+    "BayAnim/DSCF8421.webp"
+  ],
+  "红翅黑鹂（雄）/ Red-winged Blackbird, Male (Agelaius phoeniceus)": [
+    "BayAnim/DSCF8572.webp",
+    "BayAnim/DSCF2654.webp"
+  ],
+  "西部蓝鸲（雄）/ Western Bluebird, Male (Sialia mexicana)": [
+    "BayAnim/DSCF8695-denoiseraw-sharpen-denoise.webp",
+    "BayAnim/DSCF8824-Sharpen.webp"
+  ],
+  "黄腰林莺 / Yellow-rumped Warbler (Setophaga coronata)": [
+    "BayAnim/DSCF8880.webp"
+  ],
+  "家朱雀 / House Finch (Haemorhous mexicanus)": [
+    "Ocean-Whale/DSCF1726.webp"
+  ],
+  "褐鹈鹕 / Brown Pelican (Pelecanus occidentalis)": [
+    "Ocean-Whale/IMG_4725.webp"
+  ],
+  "西方鸥 / Western Gull (Larus occidentalis)": [
+    "Ocean-Whale/IMG_4701.webp"
+  ],
+  "环嘴鸥 / Ring-billed Gull (Larus delawarensis)": [
+    "Niagara-Falls/PhotonCam_20250719_120514-denoise-sharpen.webp"
+  ],
+  "海鸥（属）/ Gull sp. (Larus sp.)": [
+    "BayAreaDaily/IMG_4718.webp"
+  ],
+  "双冠鸬鹚 / Double-crested Cormorant (Nannopterum auritum)": [
+    "SF-First/DSCF1566.webp",
+    "Newport2Yale/DSCF7146.webp",
+    "Newport2Yale/DSCF7148.webp",
+    "Newport2Yale/DSCF7175.webp"
+  ],
+  "大角鸮（雏鸟）/ Great Horned Owl Chick (Bubo virginianus)": [
+    "SF-First/DSCF1617.webp"
+  ],
+  "黑蛎鹬 / Black Oystercatcher (Haematopus bachmani)": [
+    "Vancouver/DSCF8013.webp"
+  ],
+  "岩雷鸟 / Rock Ptarmigan (Lagopus muta)": [
+    "Alaska/DSCF3322.webp",
+    "Alaska/DSCF3332.webp"
+  ],
+  "野鸽（原鸽）/ Rock Pigeon (Columba livia)": [
+    "Japan202307/B17870D6-3FE2-413E-941E-856120428D46_1_102_o.2d7uy3ncwxc0.webp",
+    "NY2/IMG_1877.webp"
+  ],
+  "长毛猫·黑白 / Long-haired Cat (Black and White)": [
+    "Yuyuantan2023/DSCF5348.webp",
+    "Yuyuantan2023/DSCF5354.webp",
+    "Yuyuantan2023/DSCF5357.webp"
+  ],
+  "中华田园猫·灰白虎斑 / Chinese Domestic Cat (Gray Tabby and White)": [
+    "DaLi2022/IMG_5034.jpeg",
+    "BayAnim/DSCF9027.webp"
+  ],
+  "东方喜鹊 / Oriental Magpie (Pica serica)": [
+    "WinterYHY/DSCF8095.webp",
+    "WinterYHY/DSCF8112.webp",
+    "WinterYHY/DSCF8121.webp"
+  ],
+  "绿头鸭 / Mallard (Anas platyrhynchos)": [
+    "Yuyuantan2023/DSCF5248.webp",
+    "Yuyuantan2023/DSCF5249.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4701.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4770.webp"
+  ],
+  "家鹅·白色 / Domestic Goose, White (Anser anser domesticus)": [
+    "Yuyuantan2023/DSCF5274.webp",
+    "Yuyuantan2023/DSCF5280.webp",
+    "Yuyuantan2023/DSCF5285.webp",
+    "Yuyuantan2023/DSCF5286.webp",
+    "Yuyuantan2023/DSCF5297.webp"
+  ],
+  "家鸭·白色 / Domestic Duck, White (Anas platyrhynchos domesticus)": [
+    "Yuyuantan2023/DSCF5376.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4770.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4820.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4822.webp",
+    "BeiJingGangster/IMG_0003.20qo08tc8534.webp"
+  ],
+  "疣鼻天鹅 / Mute Swan (Cygnus olor)": [
+    "ZiYuHouse/DSCF5646.webp",
+    "ZiYuHouse/DSCF5834.webp",
+    "ZiYuHouse/DSCF5842.webp",
+    "ZiYuHouse/DSCF5844.webp",
+    "ZiYuHouse/DSCF5885.webp",
+    "ZiYuHouse/DSCF5894.webp"
+  ],
+  "赤麻鸭 / Ruddy Shelduck (Tadorna ferruginea)": [
+    "ZiYuHouse/DSCF5677.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4794.webp"
+  ],
+  "家鸽 / Domestic Pigeon (Columba livia domestica)": [
+    "ZiYuHouse/DSCF5679.webp",
+    "ZiYuHouse/DSCF5701.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4734.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4750.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4753.webp"
+  ],
+  "黑天鹅 / Black Swan (Cygnus atratus)": [
+    "ZiYuHouse/DSCF5685.webp"
+  ],
+  "家鹅·灰色 / Domestic Goose, Gray (Anser anser domesticus)": [
+    "ZiYuHouse/DSCF5693.webp",
+    "ZiYuHouse/DSCF5694.webp",
+    "ZiYuHouse/DSCF5695.webp",
+    "ZiYuHouse/DSCF5742.webp"
+  ],
+  "印度孔雀 / Indian Peafowl (Pavo cristatus)": [
+    "ZiYuHouse/DSCF5718.webp",
+    "ZiYuHouse/DSCF5754.webp",
+    "ZiYuHouse/DSCF5769.webp",
+    "ZiYuHouse/DSCF5787.webp",
+    "ZiYuHouse/DSCF5788.webp",
+    "ZiYuHouse/DSCF5804.webp"
+  ],
+  "水豚 / Capybara (Hydrochoerus hydrochaeris)": [
+    "ZiYuHouse/DSCF5794.webp",
+    "ZiYuHouse/DSCF5802.webp",
+    "BeiJingGangster/IMG_7193.webp",
+    "BeiJingGangster/IMG_7196.webp"
+  ],
+  "羊驼 / Alpaca (Vicugna pacos)": [
+    "ZiYuHouse/DSCF5917.webp",
+    "ZiYuHouse/DSCF5954.webp",
+    "ZiYuHouse/DSCF5960.webp",
+    "ZiYuHouse/DSCF5968.webp"
+  ],
+  "骨顶鸡 / Eurasian Coot (Fulica atra)": [
+    "ZiZHuYuanTouchAutumn/DSCF4705.webp"
+  ],
+  "红嘴鸥 / Black-headed Gull (Chroicocephalus ridibundus)": [
+    "ZiZHuYuanTouchAutumn/DSCF4769.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4770.webp"
+  ],
+  "鸳鸯 / Mandarin Duck (Aix galericulata)": [
+    "ZiZHuYuanTouchAutumn/DSCF4774.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4775.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4776.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4779.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4804.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4805.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4807.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4808.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4812.webp",
+    "ZiZHuYuanTouchAutumn/DSCF4816.webp"
+  ],
+  "大白鹭 / Great Egret (Ardea alba)": [
+    "BayAnim/DSCF2946.webp",
+    "BayAnim/DSCF2966.webp"
+  ],
+  "郊狼 / Coyote (Canis latrans)": [
+    "BayAnim/DSCF8383.webp",
+    "BayAnim/DSCF8592.webp",
+    "BayAnim/DSCF8615-Enhanced-NR-sharpen.webp",
+    "BayAnim/DSCF8670.webp"
+  ],
+  "短尾猫 / Bobcat (Lynx rufus)": [
+    "BayAnim/DSCF8455.webp",
+    "BayAnim/DSCF8457.webp"
+  ],
+  "暗眼灯草鹀 / Dark-eyed Junco (Junco hyemalis)": [
+    "BayAnim/DSCF8910.webp"
+  ],
+  "西䴙䴘 / Western Grebe (Aechmophorus occidentalis)": [
+    "BayAnim/DSCF8945.webp",
+    "BayAnim/DSCF8983.webp"
+  ],
+  "克氏䴙䴘 / Clark's Grebe (Aechmophorus clarkii)": [
+    "BayAnim/DSCF8963.webp",
+    "BayAnim/DSCF8982.webp"
+  ],
+  "野火鸡 / Wild Turkey (Meleagris gallopavo)": [
+    "BayArea-Hiking/DSCF9833.webp"
+  ],
+  "加州鹌鹑 / California Quail (Callipepla californica)": [
+    "BayArea-Hiking/DSCF9921.webp"
+  ],
+  "苏格兰高地牛 / Scottish Highland Cattle (Bos taurus)": [
+    "Alaska/DSCF3431.webp",
+    "Alaska/DSCF3439.webp",
+    "Alaska/DSCF3448.webp",
+    "Alaska/DSCF3461.webp",
+    "Alaska/DSCF3470.webp",
+    "Alaska/DSCF3479.webp",
+    "Alaska/IMG_5938.webp"
+  ],
+  "白头海雕 / Bald Eagle (Haliaeetus leucocephalus)": [
+    "Alaska/DSCF3669.webp",
+    "Alaska/DSCF3681.webp",
+    "Alaska/DSCF3725.webp",
+    "Alaska/DSCF3808.webp",
+    "Alaska/DSCF3829.webp",
+    "Alaska/DSCF3830.webp"
+  ],
+  "北海狮 / Steller Sea Lion (Eumetopias jubatus)": [
+    "Alaska/DSCF3858.webp",
+    "Alaska/DSCF3879.webp",
+    "Alaska/DSCF3912.webp",
+    "Alaska/DSCF3919.webp"
+  ],
+  "海獭 / Sea Otter (Enhydra lutris)": [
+    "Alaska/DSCF3925.webp"
+  ],
+  "日本猕猴 / Japanese Macaque (Macaca fuscata)": [
+    "Yakushima/DSCF6230-Enhanced-NR.webp",
+    "Yakushima/DSCF6235.webp",
+    "Yakushima/DSCF6265-Enhanced-SR.webp",
+    "Yakushima/DSCF6281.webp",
+    "Yakushima/DSCF6285-Enhanced-NR.webp"
+  ]
+}
