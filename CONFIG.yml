@@ -4,7 +4,7 @@ description: 拿起相机，认真思考
 cover: 'https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/IMG_7586.4e91my1ve140.17iz0sa56gik.webp'
 author: lfkdsk
 
-footer_logo: 
+footer_logo:
   use: self
   self:
     link: 'https://gallery.lfkdsk.org/'
@@ -19,10 +19,10 @@ photography_page:
   travel_slogan: true
   travel_slogan_descr: 'Travel all over the world ~'
 
-google_analytics: 
+google_analytics:
   use: gtag
-  ga_id: 
-  ga_api: 
+  ga_id:
+  ga_api:
   gtag_id: G-8TMSDJG47Q
 
 follow_challenge:
@@ -33,9 +33,12 @@ nav:
   地图:
     link: /location
     icon: local-two
-  归档: 
+  归档:
     link: https://lfkdsk.github.io/blog
     icon: inbox
+  动物:
+    link: /animals
+    icon: cat
   随机:
     link: /random
     icon: pic
