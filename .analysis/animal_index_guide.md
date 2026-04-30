@@ -34,7 +34,7 @@
 | NY2/ | ✅ 完成 | 野鸽 |
 | Ocean-Whale/ | ✅ 完成 | 座头鲸、港海豹、褐鹈鹕、西方鸥、家朱雀 |
 | OlympicsCat/ | ✅ 完成 | 橘白猫×5、纯白猫×2 |
-| PointReyesDeer/ | ✅ 完成 | 图勒麋鹿 12 张 |
+| PointReyesDeer/ | ✅ 完成 | 图勒麋鹿 10 张 |
 | SF-First/ | ✅ 完成 | 双冠鸬鹚、大角鸮雏鸟 |
 | ShangHaiParkCat/ | ✅ 完成 | 玳瑁×6、橘虎斑×4、双猫×7、多张无猫 |
 | Squirrel/ | ✅ 完成 | 东部灰松鼠 8 张 |
