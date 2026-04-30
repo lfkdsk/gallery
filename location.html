@@ -236,27 +236,27 @@
   <!--只在 **非文章** 页面显示-->
   
   
-  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-0" href="/animals" title="动物">
-    
-    <iconpark-icon class="navicon" name="cat"></iconpark-icon>
-    
-  </a>
-  
-  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-1" href="/location" title="地图">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-0" href="/location" title="地图">
     
     <iconpark-icon class="navicon" name="local-two"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-2" target="_blank" rel="noopener" href="https://lfkdsk.github.io/blog" title="归档">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-1" target="_blank" rel="noopener" href="https://lfkdsk.github.io/blog" title="归档">
     
     <iconpark-icon class="navicon" name="inbox"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-3" href="/grid-lanes" title="时间线">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-2" href="/animals" title="动物">
     
-    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    <iconpark-icon class="navicon" name="cat"></iconpark-icon>
+    
+  </a>
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-3" href="/random" title="随机">
+    
+    <iconpark-icon class="navicon" name="pic"></iconpark-icon>
     
   </a>
   
@@ -266,9 +266,9 @@
     
   </a>
   
-  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-5" href="/random" title="随机">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-5" href="/grid-lanes" title="时间线">
     
-    <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
     
   </a>
   
@@ -298,9 +298,9 @@
   <div class="itp-nav-sheet-handle"></div>
   <div class="itp-nav-sheet-grid">
     
-    <a class="itp-nav-sheet-item" href="/grid-lanes">
-      <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
-      <span>时间线</span>
+    <a class="itp-nav-sheet-item" href="/random">
+      <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+      <span>随机</span>
     </a>
     
     <a class="itp-nav-sheet-item" href="/status">
@@ -308,16 +308,18 @@
       <span>状态监控</span>
     </a>
     
-    <a class="itp-nav-sheet-item" href="/random">
-      <iconpark-icon class="navicon" name="pic"></iconpark-icon>
-      <span>随机</span>
+    <a class="itp-nav-sheet-item" href="/grid-lanes">
+      <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+      <span>时间线</span>
     </a>
     
   </div>
 </div>
 <div class="itp-nav-sheet-bg" id="itp_nav_sheet_bg"></div>
 <style>
-  .itp-nav-more { display: none; }
+  /* the SCSS .itp-float-bar .itp-float-bar-item rule is 2-class specificity,
+     so we have to match it here or `display: inline-flex` wins on desktop */
+  .itp-float-bar .itp-nav-more { display: none; }
   .itp-nav-sheet, .itp-nav-sheet-bg { display: none; }
   @media (max-width: 768px) {
     /* hide overflow nav items in the floatbar; sheet shows them all */
