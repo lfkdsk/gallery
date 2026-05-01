@@ -72,15 +72,15 @@ jobs:
       with:
         publish_dir: ./thumbnail_public
         publish_branch: thumbnail
-        github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         user_name: ${{ env.GIT_USER }}
         user_email: ${{ env.GIT_EMAIL }}
-        commit_msg: ${{ github.event.head_commit.message }}          
+        commit_msg: ${{ github.event.head_commit.message }}
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         publish_dir: ./public
-        github_token: ${{ secrets.GH_PAGES_DEPLOY }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         user_name: ${{ env.GIT_USER }}
         user_email: ${{ env.GIT_EMAIL }}
         commit_msg: ${{ github.event.head_commit.message }}  
