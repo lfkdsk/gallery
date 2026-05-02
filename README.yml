@@ -531,7 +531,8 @@ San Jose ReLife:
 北京 · 法海寺:
   url: FaHaiTample
   date: "2023-09-01"
-  cover: FaHaiTample/DSCF0680.jpg
+  style: fullscreen
+  cover: FaHaiTample/DSCF0680.webp
   location:
     - 39.94114003690045
     - 116.15986645550316
