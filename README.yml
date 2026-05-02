@@ -303,7 +303,7 @@ Point Reyes LightHouse:
   url: BayAreaDaily
   date: "2024-04-29"
   style: fullscreen
-  cover: BayAreaDaily/e5f70f7eeeabc3e2bc14367af7b0e8d7.webp
+  cover: BayAreaDaily/0.webp
   location:
     - 37.35029407698915
     - -121.94534275721888
@@ -311,7 +311,7 @@ Point Reyes LightHouse:
   url: Ocean-Whale
   date: "2024-04-15"
   style: fullscreen
-  cover: Ocean-Whale/whale.webp
+  cover: Ocean-Whale/whale.jpeg
   location:
     - 36.799582502422965
     - -121.90660083628696
@@ -523,14 +523,16 @@ San Jose ReLife:
 模式口 · 拍猫:
   url: MoShiKouCat
   date: "2023-09-01"
-  cover: MoShiKouCat/15.打呼.jpg
+  style: fullscreen
+  cover: MoShiKouCat/15.打呼.webp
   location:
     - 39.934556122413355
     - 116.15926839071217
 北京 · 法海寺:
   url: FaHaiTample
   date: "2023-09-01"
-  cover: FaHaiTample/DSCF0680.jpg
+  style: fullscreen
+  cover: FaHaiTample/DSCF0680.webp
   location:
     - 39.94114003690045
     - 116.15986645550316
@@ -545,7 +547,7 @@ San Jose ReLife:
   url: FaYuanTampleCat
   date: "2023-08-26"
   style: fullscreen
-  cover: FaYuanTampleCat/1.美丽黑猫.jpg
+  cover: FaYuanTampleCat/1.美丽黑猫.webp
   location:
     - 39.88426667153332
     - 116.37003452666642
