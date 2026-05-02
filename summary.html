@@ -530,6 +530,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 12px;
         padding: 12px 16px;
         background: rgba(255, 255, 255, 0.05);
         margin-bottom: 8px;
@@ -538,12 +539,19 @@
 
     .stat-label {
         color: rgba(255, 255, 255, 0.8);
-        max-width: 200px;
+        flex: 1;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        line-height: 1.4;
     }
 
     .stat-value {
         color: #007AFF;
         font-weight: 500;
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
     }
 
     .scroll-indicator {
