@@ -1,3 +1,11 @@
+Crater Lake/ Redwood:
+  url: CL-RW
+  date: "2026-05-03"
+  style: fullscreen
+  cover: CL-RW/B0001328.webp
+  location:
+    - 42.93874587197507
+    - -122.10467109346389
 Sequoia National Park:
   url: Sequoia
   date: "2026-04-28"
