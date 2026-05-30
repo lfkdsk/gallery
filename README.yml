@@ -1,3 +1,11 @@
+Death Valley:
+  url: Death-Valley
+  date: "2026-05-23"
+  style: fullscreen
+  cover: Death-Valley/B0001540.webp
+  location:
+    - 36.538589131399924
+    - -116.96466925021372
 Crater Lake/ Redwood:
   url: CL-RW
   date: "2026-05-03"
