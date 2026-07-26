@@ -220,6 +220,87 @@ Key 格式：`中文种名·颜色变体 / English Species (Scientific Name)`
 
 ---
 
+## 增量扫描记录（2026-07-26）
+
+本次按 `gallery-analysis-skill` 流程，使用 `origin/thumbnail` 生成临时联系表，扫描 `2026-04-29` 之后新增到当前主树、且尚未在 `animal_index.json` 中收录的 116 张图片。联系表已在校验后删除；增量缓存写入 `.analysis/animal_scan_results/`。未来增量运行应以该目录中的 `processed` 列表为准，旧的 `.animal_scan_results/` 仅作为历史中间结果参考。
+
+### CL-RW
+
+- Last scanned: 2026-07-26
+- Processed: 15 images
+- Animals: none
+- Notes: 完整扫描当前文件夹；警示牌动物图案不收录。
+
+### Daily
+
+- Last scanned: 2026-07-26
+- Processed: 2 new images
+- Animals: `中华田园猫·纯黑 / Chinese Domestic Cat (Solid Black)`
+- Notes: `Daily/final-4.jpg` 已在主树中变为 `Daily/final-4.webp`，索引已修正；食物照片不收录。
+
+### Death-Valley
+
+- Last scanned: 2026-07-26
+- Processed: 18 images
+- Animals: none
+- Notes: 完整扫描当前文件夹。
+
+### H-Oahu
+
+- Last scanned: 2026-07-26
+- Processed: 45 images
+- Animals: `中华田园猫·三花 / Chinese Domestic Cat (Calico / Tricolor)`, `绣眼鸟属雏鸟 / White-eye Chick (Zosterops sp.)`, `虎 / Tiger (Panthera tigris)`, `中华田园猫·黑白（礼服猫）/ Chinese Domestic Cat (Tuxedo / Black-White)`, `中华田园猫·橘白 / Chinese Domestic Cat (Orange and White)`
+- Notes: 完整扫描当前文件夹；餐食和远处不可辨小点不收录。
+
+### Japan202307
+
+- Last scanned: 2026-07-26
+- Processed: 2 new images
+- Animals: none
+- Notes: 放大后未见可辨动物。
+
+### SF-First
+
+- Last scanned: 2026-07-26
+- Processed: 2 new images
+- Animals: none
+- Notes: 新增图片为金门桥夜景。
+
+### SantaClara-CloudSea
+
+- Last scanned: 2026-07-26
+- Processed: 3 new images
+- Animals: none
+- Notes: 仅处理新增图片；该文件夹的旧图片仍在历史“尚未扫描”清单中。
+
+### Sequoia
+
+- Last scanned: 2026-07-26
+- Processed: 28 images
+- Animals: none
+- Notes: 完整扫描当前文件夹。
+
+### Yosemite
+
+- Last scanned: 2026-07-26
+- Processed: 1 new image
+- Animals: none
+- Notes: 仅处理新增图片；旧路径 `Yosemite/B0001583.webp` 已不在主树，当前保留的是 `Yosemite/B0001583_denoised_p_1780132753651.webp`。
+
+### 跳过的历史新增路径
+
+以下 `2026-04-29` 之后的新增路径在当前主树中已不存在，未写入索引：
+
+- `Yosemite/B0001583.webp`
+- `CL-RW/B0001289.webp`
+- `CL-RW/B0001301.webp`
+- `CL-RW/B0001356.webp`
+- `CL-RW/B0001378.webp`
+- `CL-RW/B0001387.webp`
+- `CL-RW/IMG_8161.webp`
+
+---
+
 ## 暂存目录
 
-`.animal_scan_results/` 目录下的 JSON 文件为 agent 扫描的中间结果，合并后可保留备查，无需删除。
+`.analysis/animal_scan_results/` 目录下的 JSON 文件为当前增量扫描缓存；`.animal_scan_results/` 是历史中间结果目录，可保留备查。

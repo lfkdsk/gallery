@@ -2,8 +2,8 @@
   "_meta": {
     "description": "动物图片索引 — 按动物种类归档，值为文件路径列表",
     "format": "folder/filename.ext",
-    "generated": "2026-04-29",
-    "status": "partial — four previously partial folders completed 2026-04-29; see animal_index_guide.md for remaining folders"
+    "generated": "2026-07-26",
+    "status": "incremental — processed current image additions after 2026-04-29; see animal_index_guide.md and animal_scan_results/"
   },
   "中华田园猫·三花 / Chinese Domestic Cat (Calico / Tricolor)": [
     "KeZhouQiuCat/DSCF3196.webp",
@@ -46,7 +46,8 @@
     "YuanMingYuanSec/DSCF3445.webp",
     "ZiZHuYuanTouchAutumn/DSCF4668.webp",
     "YellowLeafDaJue/DSCF4279.webp",
-    "YellowLeafDaJue/DSCF4282.webp"
+    "YellowLeafDaJue/DSCF4282.webp",
+    "H-Oahu/B0001780.jpg"
   ],
   "中华田园猫·橘白 / Chinese Domestic Cat (Orange and White)": [
     "YiHeYuan-Cat/DSCF2259.webp",
@@ -94,7 +95,8 @@
     "YuanMingYuanSec/DSCF3557.webp",
     "YuanMingYuanSec/DSCF3582.webp",
     "YuanMingYuanSec/DSCF3585.webp",
-    "BeiJingGangster/IMG_7214.webp"
+    "BeiJingGangster/IMG_7214.webp",
+    "H-Oahu/R0005875.jpg"
   ],
   "中华田园猫·纯黑 / Chinese Domestic Cat (Solid Black)": [
     "YiHeYuan-Cat/DSCF2308.webp",
@@ -105,7 +107,7 @@
     "FaYuanTampleCat/4.呆.webp",
     "Daily/DSCF7745.webp",
     "Daily/DSCF7751.webp",
-    "Daily/final-4.jpg",
+    "Daily/final-4.webp",
     "YuanMingYuanSec/DSCF3407.webp"
   ],
   "中华田园猫·玳瑁 / Chinese Domestic Cat (Tortoiseshell)": [
@@ -162,7 +164,8 @@
     "YellowLeafDaJue/DSCF4174.webp",
     "YellowLeafDaJue/DSCF4187.webp",
     "YellowLeafDaJue/DSCF4199.webp",
-    "Yakushima/DSCF6185.webp"
+    "Yakushima/DSCF6185.webp",
+    "H-Oahu/R0005873.jpg"
   ],
   "中华田园猫·虎斑加白 / Chinese Domestic Cat (Tabby and White)": [
     "DaJue-Temple-Cats/DSCF1673.webp",
@@ -251,7 +254,7 @@
     "Squirrel/DSCF1455.webp",
     "Daily/DSCF9539-denoiseraw-sharpen-denoise-Enhanced-NR.webp",
     "Daily/DSCF9687-denoiseraw-sharpen-denoise_副本.webp",
-    "BayAreaDaily/IMG_5032.webp",
+    "BayAreaDaily/IMG_5032.jpeg",
     "Boston-Freeway/DSCF6881.webp",
     "Newport2Yale/DSCF7212.webp",
     "Newport2Yale/DSCF7306.webp",
@@ -317,9 +320,6 @@
   ],
   "屋久鹿（屋久岛梅花鹿亚种）/ Yakushima Sika Deer (Cervus nippon yakushimae)": [
     "Yakushima/DSCF6218-Enhanced-NR.webp"
-  ],
-  "绵羊 / Domestic Sheep (Ovis aries)": [
-    "TaiWoo/DSCF8004.webp"
   ],
   "加州蝾螈 / California Newt (Taricha torosa)": [
     "CA-Newt/DSCF0462.webp",
@@ -612,5 +612,11 @@
     "Yakushima/DSCF6265-Enhanced-SR.webp",
     "Yakushima/DSCF6281.webp",
     "Yakushima/DSCF6285-Enhanced-NR.webp"
+  ],
+  "绣眼鸟属雏鸟 / White-eye Chick (Zosterops sp.)": [
+    "H-Oahu/B0001788.jpg"
+  ],
+  "虎 / Tiger (Panthera tigris)": [
+    "H-Oahu/IMG_7456_.jpg"
   ]
 }
