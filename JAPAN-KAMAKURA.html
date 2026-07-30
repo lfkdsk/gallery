@@ -1627,6 +1627,60 @@
 
 
 
+<script>
+(function () {
+  var root = document.documentElement;
+  var KEY = 'sdt.overrides.v1';
+
+  window.__sdtDefaultSkin = 'modern';
+  window.__sdtShowButton = false;
+
+  // ── 1) 重放覆盖 ────────────────────────────────────────────────────────
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY)) || {};
+    if (saved['data-skin']) root.dataset.skin = saved['data-skin'];
+    Object.keys(saved).forEach(function (k) {
+      if (k !== 'data-skin') root.style.setProperty(k, saved[k]);
+    });
+  } catch (e) { /* localStorage 不可用（隐私模式等）时就当没存过 */ }
+
+  // ── 2) Shift+D ─────────────────────────────────────────────────────────
+  var loading = false;
+
+  function summon() {
+    if (window.__sdtToggle) { window.__sdtToggle(); return; }   // 已加载，直接开关
+    if (loading) return;
+    loading = true;
+    var s = document.createElement('script');
+    s.src = '/js/skin-devtool.js';
+    s.onload = function () {
+      window.__sdtInit();
+      window.__sdtToggle();      // 首次唤出直接打开，不用再按一次
+    };
+    s.onerror = function () {
+      loading = false;
+      console.warn('[skin-devtool] 加载失败：' + s.src);
+    };
+    document.head.appendChild(s);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'D' || !e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) return;
+    // 输入焦点保护。主题原有的 Shift+1..5 快捷键没做这个，在评论框里敲字会误触
+    // （上游 e538133 也修过一次同类问题）。这里从一开始就带上。
+    var el = document.activeElement;
+    if (el && (el.isContentEditable ||
+               /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
+    e.preventDefault();
+    summon();
+  });
+
+  // 配置里开了浮标，就得先把面板加载出来才有按钮可点
+  if (window.__sdtShowButton) summon();
+})();
+</script>
+
+
   <style>
   :root {
     --main-color: #71AFDD;
