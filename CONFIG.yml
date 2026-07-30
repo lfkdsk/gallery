@@ -13,6 +13,31 @@ footer_logo:
 url: https://gallery.lfkdsk.org
 root: /
 
+# ---------------------------------------------------------------
+# 外观
+# ---------------------------------------------------------------
+# 这里的内容会覆盖主题自带的配置（hexo 原生的 theme_config，优先级最高）。
+# 好处是改外观不用碰 album_template 和 hexo-theme-type 那两个仓库。
+theme_config:
+  # 皮肤。可选 modern | classic | darkroom | gallery | editorial
+  #   modern    柔和圆角、层次阴影、四列图墙（默认）
+  #   classic   重构之前的老样子，留作对比
+  #   darkroom  暗房。恒暗底、五/六列接触样张、重压暗、琥珀强调色
+  #   gallery   画廊。纸白底、大留白、照片下方展签、零阴影零圆角
+  #   editorial 杂志。米白纸底、衬线大标题、首图跨两列做头条
+  skin: modern
+
+  # 打开右下角的皮肤调试面板：实时切皮肤、拖滑块调圆角/间距/动效、取色改主题色，
+  # 改完可一键导出成能粘回 tokens.scss 的代码。默认关，线上访客看不到。
+  skin_devtool: false
+
+  # 主题色。hover 底色、按钮阴影、标签底色这些派生色会用 color-mix 自动跟随，
+  # 不需要另外改。
+  color:
+    main_color: '#71AFDD'
+    sub_color: '#6CD9CE'
+    main_black: '#222831'
+
 photography_page:
   slogan: true
   slogan_descr: 'The moments when I pressed the shutter, the moments are forever.'
