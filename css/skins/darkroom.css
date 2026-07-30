@@ -1,0 +1,43 @@
+/** @format */ /** @format */
+@media (min-width: 1024px) {
+  [data-skin=darkroom] .gpro-container {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1600px) {
+  [data-skin=darkroom] .gpro-container {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+[data-skin=darkroom] .gpro-tile {
+  transition: opacity var(--duration-3) var(--ease-out);
+}
+[data-skin=darkroom] .gpro-tile-descr {
+  justify-content: flex-end;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 62%, var(--tile-scrim) 100%);
+}
+[data-skin=darkroom] .gpro-tile-descr .text-xl {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+[data-skin=darkroom] .gpro-tile-descr .text-sm {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+[data-skin=darkroom] .gpro-slogan {
+  max-width: 620px;
+  opacity: 0.75;
+}
+[data-skin=darkroom] .itp-float-bar {
+  border-top-color: var(--border-subtle);
+  border-bottom-color: var(--border-subtle);
+}
+
+@media (max-width: 768px) {
+  [data-skin=darkroom] .gpro-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

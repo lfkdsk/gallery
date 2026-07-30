@@ -3,7 +3,8 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+
+<html lang="zh-CN" data-skin="modern">
 <!-- Head tag -->
 <head>
   <meta charset="utf-8">
@@ -105,6 +106,10 @@
   }
 </style>
 
+  
+  
+<link rel="stylesheet" href="/css/tokens.css">
+
   <!-- Custom CSS/Sass -->
   
 <link rel="stylesheet" href="/css/style.css">
@@ -112,21 +117,30 @@
   
 <link rel="stylesheet" href="/css/fancybox.css">
 
-  <!--样式切换-->
-  
   
 <link rel="stylesheet" href="/css/material3.css">
 
   
   
   
-  
-  
-  <!--highlight.js CSS-->
-  
-  
-<link rel="stylesheet" href="/css/highlight/github.css">
+<link rel="stylesheet" href="/css/skins/classic.css">
 
+  
+  
+<link rel="stylesheet" href="/css/skins/darkroom.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/gallery.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/editorial.css">
+
+  
+  
+  
+  
   
   
 
@@ -418,12 +432,22 @@
         scroll-behavior: smooth;
     }
 
+    /* 年度回顾是自成一体的沉浸式页面，画布由 --recap-bg 一个人说了算，不跟随
+       全站的明暗模式：各皮肤的 recap 调色本身就是完整的一套（画廊是纸白配墨字，
+       暗房是近黑配琥珀），再叠一层 prefers-color-scheme 只会互相打架。
+       这里必须用 !important——_dark.scss 的 body 规则带 !important，不然画布会被
+       它抢走，变成深底配浅底皮肤的深色字，直接读不了。 */
     body {
         font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui;
-        background: #000;
-        color: #fff;
+        background: var(--recap-bg) !important;
+        color: var(--recap-fg);
         line-height: 1.5;
         overflow-x: hidden;
+    }
+
+    /* 同理，标题也要拿回来：_dark.scss 会给全站 h1..h6 上暗色标题色 */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--recap-fg);
     }
 
     .section {
@@ -437,7 +461,7 @@
     }
 
     .hero {
-        background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+        background: linear-gradient(180deg, var(--recap-bg) 0%, var(--recap-bg-2) 100%);
         text-align: center;
     }
 
@@ -447,7 +471,7 @@
         text-align: center;
         margin-bottom: 1rem;
         line-height: 1.1;
-        background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.8));
+        background: linear-gradient(180deg, var(--recap-fg), var(--recap-fg-dim));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -464,7 +488,7 @@
     .stat-number {
         font-size: clamp(4rem, 15vw, 12rem);
         font-weight: 700;
-        background: linear-gradient(90deg, #007AFF, #FF2D55);
+        background: linear-gradient(90deg, var(--recap-accent), var(--recap-accent-2));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         line-height: 1;
@@ -495,8 +519,8 @@
     }
 
     .stat-card {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 20px;
+        background: var(--recap-card);
+        border-radius: var(--radius-xl);
         padding: 30px;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
@@ -513,7 +537,7 @@
     .stat-title {
         font-size: 1.2rem;
         margin-bottom: 20px;
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--recap-fg-soft);
     }
 
     .chart-container {
@@ -532,13 +556,13 @@
         align-items: center;
         gap: 12px;
         padding: 12px 16px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--recap-card);
         margin-bottom: 8px;
-        border-radius: 8px;
+        border-radius: var(--radius-sm);
     }
 
     .stat-label {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--recap-fg-dim);
         flex: 1;
         min-width: 0;
         overflow-wrap: anywhere;
@@ -547,7 +571,7 @@
     }
 
     .stat-value {
-        color: #007AFF;
+        color: var(--recap-accent);
         font-weight: 500;
         flex-shrink: 0;
         white-space: nowrap;
@@ -568,7 +592,7 @@
         display: block;
         width: 2px;
         height: 60px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(180deg, var(--recap-fg-dim) 0%, transparent 100%);
         animation: scrollIndicator 2s cubic-bezier(0.76, 0, 0.24, 1) infinite;
     }
 
@@ -598,7 +622,7 @@
         top: 0;
         left: 0;
         height: 2px;
-        background: linear-gradient(90deg, #007AFF, #FF2D55);
+        background: linear-gradient(90deg, var(--recap-accent), var(--recap-accent-2));
         z-index: 1000;
     }
 
@@ -639,12 +663,12 @@
 
     .photo-item {
         position: relative;
-        border-radius: 16px;
+        border-radius: var(--radius-lg);
         overflow: hidden;
         aspect-ratio: 4/3;
         transform: translateY(0);
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--recap-card);
     }
 
     .photo-item:hover {
@@ -663,7 +687,7 @@
         left: 0;
         right: 0;
         padding: 20px;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+        background: linear-gradient(0deg, var(--recap-scrim) 0%, rgba(0, 0, 0, 0) 100%);
         color: #fff;
         display: flex;
         justify-content: space-between;
@@ -690,9 +714,9 @@
 
     .photo-wall-container {
         max-width: 1400px;
-        border-radius: 20px;
+        border-radius: var(--radius-xl);
         padding: 30px;
-        background-color: rgba(255, 255, 255, 0.05);
+        background-color: var(--recap-card);
         margin: 0 auto;
     }
 
@@ -754,11 +778,36 @@
 </section>
 
 <script type="module">
-    // 设置全局Chart.js配置
-    Chart.defaults.color = '#fff';
-    Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
-    Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    Chart.defaults.plugins.legend.labels.color = '#fff';
+    // Chart.js 的配色从 CSS 变量读，这样图表能跟着皮肤走。Chart.js 自己不认
+    // var(--…)——它把颜色交给 canvas，canvas 不参与 CSS 级联——所以必须在 JS 里
+    // 先解析成具体值。skin 运行时可切，故把取色和重绘包成函数复用。
+    const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const series = () => cssVar('--recap-series').split(',').map(c => c.trim()).filter(Boolean);
+    const seriesAt = (i, p) => p[i % p.length];   // 条目多于色板时循环取用
+
+    function applyChartTheme() {
+        Chart.defaults.color = cssVar('--recap-fg');
+        Chart.defaults.borderColor = cssVar('--recap-grid');
+        Chart.defaults.plugins.tooltip.backgroundColor = cssVar('--recap-tooltip');
+        Chart.defaults.plugins.legend.labels.color = cssVar('--recap-fg');
+    }
+    applyChartTheme();
+
+    // 切皮肤后把画好的图表重新上色。图表在下面创建时逐个登记到 charts。
+    // 切皮肤后重建图表。不能只改 dataset 的颜色再 update()——Chart.js 把解析好的
+    // 配置缓存在元素上（element.options），实测无论用 update()、update('none')、
+    // 清 controller._cachedDataOpts 还是改成函数式配置，元素级的颜色都不会刷新。
+    // 图表很轻，直接销毁重建最省心也最可靠：工厂函数在调用时才读 CSS 变量。
+    const chartSlots = [];
+    function mountChart(factory) {
+        const slot = { factory, chart: factory() };
+        chartSlots.push(slot);
+        return slot.chart;
+    }
+    new MutationObserver(() => {
+        applyChartTheme();
+        chartSlots.forEach(slot => { slot.chart.destroy(); slot.chart = slot.factory(); });
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-skin'] });
 
     const SQL = await initSqlJs({
         locateFile: file => `/js/sql-wasm.wasm`
@@ -959,13 +1008,13 @@
         window.addEventListener('scroll', updateProgressBar);
 
         // 初始化图表
-        new Chart(document.getElementById('cameraChart'), {
+        mountChart(() => new Chart(document.getElementById('cameraChart'), {
             type: 'doughnut',
             data: {
                 labels: DATA.maker.map(([maker]) => maker),
                 datasets: [{
                     data: DATA.maker.map(([_, count]) => count),
-                    backgroundColor: DATA.maker.map(([maker]) => generatePastelColor()),
+                    backgroundColor: DATA.maker.map((_, i) => seriesAt(i, series())),
                     borderWidth: 0
                 }]
             },
@@ -984,7 +1033,7 @@
                     }
                 }
             }
-        });
+        }));
 
         function renderStats(lensData) {
             const lens = document.createElement('ul');
@@ -1008,14 +1057,14 @@
         const location = document.getElementById("location")
         location.appendChild(renderStats(DATA.locations))
 
-        new Chart(document.getElementById('apertureChart'), {
+        mountChart(() => new Chart(document.getElementById('apertureChart'), {
             type: 'bar',
             data: {
                 labels: DATA.F.map(([f]) => f),
                 datasets: [{
                     label: '使用次数',
                     data: DATA.F.map(([_, count]) => count),
-                    backgroundColor: '#007AFF',
+                    backgroundColor: cssVar('--recap-accent'),
                     borderRadius: 4
                 }]
             },
@@ -1031,7 +1080,7 @@
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
+                            color: cssVar('--recap-grid')
                         }
                     },
                     x: {
@@ -1041,7 +1090,7 @@
                     }
                 }
             }
-        });
+        }));
 
         function renderMonthlyPhotos(container, data) {
             const card = document.createElement('section');
@@ -1098,25 +1147,12 @@
 <link rel="stylesheet" href="" />
 <script src="/js/fancybox.umd.js" defer></script>
 
-<!-- mdui -->
-
 <!-- busuanzi -->
 
 <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script> -->
 
 <!-- highlightjs -->
 
-
-<script src="/js/highlight.min.js"></script>
-
-<script>window.addEventListener('load', () => {
-  hljs.highlightAll(); // initialize highlighting
-});</script>
-<script>
-  $("pre.code").each(function() {
-    $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");
-  });
-</script>
 
 
 
@@ -1148,6 +1184,8 @@
 <!---->
 <!---->
 <!--首页键盘快捷键-->
+
+
 
   <style>
   :root {

@@ -3,7 +3,8 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+
+<html lang="zh-CN" data-skin="modern">
 <!-- Head tag -->
 <head>
   <meta charset="utf-8">
@@ -69,7 +70,7 @@
   <!-- https://material.io/resources/icons/?style=outline -->
   
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_15.1db132b40ba7d80527dfe48e3af5a3d4.js"></script>
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_20.a16abc3c381b339cccd05404911bbf44.js"></script>
   
   
 <style>
@@ -105,33 +106,49 @@
   }
 </style>
 
+  
+  
+<link rel="stylesheet" href="/css/tokens.css">
+
   <!-- Custom CSS/Sass -->
   
-<link rel="stylesheet" href="/gallery/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
   
-<link rel="stylesheet" href="/gallery/css/fancybox.css">
-
-  <!--样式切换-->
-  
-  
-<link rel="stylesheet" href="/gallery/css/material3.css">
+<link rel="stylesheet" href="/css/fancybox.css">
 
   
-  
-  
-  
-  
-  <!--highlight.js CSS-->
-  
-  
-<link rel="stylesheet" href="/gallery/css/highlight/github.css">
+<link rel="stylesheet" href="/css/material3.css">
 
   
   
+  
+<link rel="stylesheet" href="/css/skins/classic.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/darkroom.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/gallery.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/editorial.css">
+
+  
+  
+  
+  
+  
+  
+
+  
+
   <!-- jquery -->
   
-  <script src="/gallery/js/jquery.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
@@ -163,7 +180,7 @@
   
   
   
-  <link rel="manifest" href="/gallery/manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#71afdd">
   
   <!-- Google Search Advanced
@@ -178,11 +195,11 @@
       "@type": "NewsArticle",
       "headline": "照片集",
       "image": "https://imgur.lzmun.com/picgo/after2022/6DD1FBC3-AD8A-4340-842D-6ACF531F8291_1_105_c.jpeg_itp",
-      "datePublished": "Sun Dec 31 2023 12:03:35 GMT+0000",
+      "datePublished": "Fri Aug 18 2023 11:36:16 GMT+0000",
       "author": [{
         "@type": "Person",
         "name": "lfkdsk",
-        "url": "https://lfkdsk.github.io/gallery"
+        "url": "https://gallery.lfkdsk.org"
       }]
     }
   </script>
@@ -216,9 +233,10 @@
   }
 </script>-->
 
-<link rel="stylesheet" href="/gallery/css/tailwind.css">
+<link rel="stylesheet" href="/css/tailwind.css">
 
 <meta name="generator" content="Hexo 6.0.0"></head>
+
 
 
 <!--Other Pages-->
@@ -231,7 +249,7 @@
 
 <div class="itp-float-bar">
   <!--所有页面都显示-->
-  <a class="itp-float-bar-item rounded" href="/gallery/" title="照片集">
+  <a class="itp-float-bar-item rounded" href="/" title="照片集">
     
     <iconpark-icon class="navicon" name="home"></iconpark-icon>
     
@@ -239,27 +257,47 @@
   
   <!--只在 **非文章** 页面显示-->
   
-  <a class="itp-float-bar-item rounded" href="/gallery/location" title="地图">
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-0" href="/location" title="地图">
     
     <iconpark-icon class="navicon" name="local-two"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="https://lfkdsk.github.io" title="归档">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-1" target="_blank" rel="noopener" href="https://lfkdsk.github.io/blog" title="归档">
     
     <iconpark-icon class="navicon" name="inbox"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/query" title="查询">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-2" href="/animals" title="动物">
     
-    <iconpark-icon class="navicon" name="history-query"></iconpark-icon>
+    <iconpark-icon class="navicon" name="cat"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/random" title="随机">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-3" href="/random" title="随机">
     
     <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+    
+  </a>
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-4" href="/status" title="状态监控">
+    
+    <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
+    
+  </a>
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-5" href="/grid-lanes" title="时间线">
+    
+    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    
+  </a>
+  
+  
+  <a class="itp-float-bar-item rounded itp-nav-more" id="itp_nav_more" href="javascript:void(0)" title="More" aria-label="More">
+    
+    <iconpark-icon class="navicon" name="all-application"></iconpark-icon>
     
   </a>
   
@@ -278,14 +316,122 @@
   <div class="itp-float-layer-bg layer-bg-nodisplay" id="close_layer"></div>
 </div>
 
-
+<div class="itp-nav-sheet" id="itp_nav_sheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="itp-nav-sheet-handle"></div>
+  <div class="itp-nav-sheet-grid">
+    
+    <a class="itp-nav-sheet-item" href="/random">
+      <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+      <span>随机</span>
+    </a>
+    
+    <a class="itp-nav-sheet-item" href="/status">
+      <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
+      <span>状态监控</span>
+    </a>
+    
+    <a class="itp-nav-sheet-item" href="/grid-lanes">
+      <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+      <span>时间线</span>
+    </a>
+    
+  </div>
+</div>
+<div class="itp-nav-sheet-bg" id="itp_nav_sheet_bg"></div>
 <style>
-  .navicon {
-    font-size: 18px;
-    padding-top: 18px;
-    color: var(--main-black);
+  /* the SCSS .itp-float-bar .itp-float-bar-item rule is 2-class specificity,
+     so we have to match it here or `display: inline-flex` wins on desktop */
+  .itp-float-bar .itp-nav-more { display: none; }
+  .itp-nav-sheet, .itp-nav-sheet-bg { display: none; }
+  @media (max-width: 768px) {
+    /* hide overflow nav items in the floatbar; sheet shows them all */
+    .itp-float-bar .itp-nav-item.itp-nav-idx-3,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-4,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-5,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-6,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-7,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-8,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-9 { display: none; }
+    .itp-float-bar .itp-nav-more { display: flex; }
+  }
+  .itp-nav-sheet-bg {
+    position: fixed; inset: 0;
+    background: rgba(20,20,20,.35);
+    z-index: 1100;
+    opacity: 0; transition: opacity .18s ease-out;
+  }
+  .itp-nav-sheet-bg.show { display: block; opacity: 1; }
+  .itp-nav-sheet {
+    position: fixed; left: 0; right: 0;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    z-index: 1101;
+    background: var(--surface, #fff);
+    border-top-left-radius: var(--radius-lg, 14px);
+    border-top-right-radius: var(--radius-lg, 14px);
+    box-shadow: 0 -8px 28px rgba(0,0,0,.18);
+    padding: 8px 16px 20px;
+    transform: translateY(100%);
+    transition: transform .22s cubic-bezier(.2,.8,.2,1);
+  }
+  .itp-nav-sheet.show { display: block; transform: translateY(0); }
+  .itp-nav-sheet-handle {
+    width: 40px; height: 4px; border-radius: 2px;
+    background: rgba(120,120,120,.35);
+    margin: 6px auto 14px;
+  }
+  .itp-nav-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 8px;
+  }
+  .itp-nav-sheet-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 8px 4px;
+    color: var(--on-surface, #2f3a2f);
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 10px;
+    transition: background-color .15s ease;
+  }
+  .itp-nav-sheet-item:active { background: rgba(120,120,120,.12); }
+  .itp-nav-sheet-item iconpark-icon { font-size: 24px; }
+  @media (prefers-color-scheme: dark) {
+    .itp-nav-sheet { background: #1d2326; }
+    .itp-nav-sheet-item { color: #e6e0d0; }
+    .itp-nav-sheet-bg { background: rgba(0,0,0,.55); }
   }
 </style>
+<script>
+  (function () {
+    var btn = document.getElementById('itp_nav_more');
+    var sheet = document.getElementById('itp_nav_sheet');
+    var bg = document.getElementById('itp_nav_sheet_bg');
+    if (!btn || !sheet || !bg) return;
+    function open() {
+      sheet.style.display = 'block'; bg.style.display = 'block';
+      // next frame so the transition runs
+      requestAnimationFrame(function () { sheet.classList.add('show'); bg.classList.add('show'); });
+      sheet.setAttribute('aria-hidden', 'false');
+    }
+    function close() {
+      sheet.classList.remove('show'); bg.classList.remove('show');
+      sheet.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { sheet.style.display = 'none'; bg.style.display = 'none'; }, 220);
+    }
+    btn.addEventListener('click', function (e) { e.preventDefault(); sheet.classList.contains('show') ? close() : open(); });
+    bg.addEventListener('click', close);
+    sheet.querySelectorAll('.itp-nav-sheet-item').forEach(function (a) {
+      a.addEventListener('click', function () { close(); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sheet.classList.contains('show')) close();
+    });
+  })();
+</script>
+
+
+
+
   <!-- Main Content -->
   <section class="pjax-area">
   <div class="content-area album-area">
@@ -296,6 +442,336 @@
     
     <div class="container gpro-container grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       
+      
+      <a href="H-Oahu">
+        <div class="gpro-tile lazy" data-src="H-Oahu/R0005851.jpg">
+          <div class="gpro-tile-descr">夏威夷 / 歐胡島</div>
+        </div>
+      </a>
+      
+      <a href="Death-Valley">
+        <div class="gpro-tile lazy" data-src="Death-Valley/B0001532.webp">
+          <div class="gpro-tile-descr">Death Valley</div>
+        </div>
+      </a>
+      
+      <a href="CL-RW">
+        <div class="gpro-tile lazy" data-src="CL-RW/B0001328.webp">
+          <div class="gpro-tile-descr">Crater Lake/ Redwood</div>
+        </div>
+      </a>
+      
+      <a href="Sequoia">
+        <div class="gpro-tile lazy" data-src="Sequoia/IMG_6587.webp">
+          <div class="gpro-tile-descr">Sequoia National Park</div>
+        </div>
+      </a>
+      
+      <a href="SantaRosa-Snoopy">
+        <div class="gpro-tile lazy" data-src="SantaRosa-Snoopy/5.jpeg">
+          <div class="gpro-tile-descr">SantaRosa / Snoopy</div>
+        </div>
+      </a>
+      
+      <a href="395-snow">
+        <div class="gpro-tile lazy" data-src="395-snow/B0000726.webp">
+          <div class="gpro-tile-descr">395 雪景</div>
+        </div>
+      </a>
+      
+      <a href="Fuji2">
+        <div class="gpro-tile lazy" data-src="Fuji2/B0000108-denoise_0000.jpg">
+          <div class="gpro-tile-descr">富士 · 山中湖</div>
+        </div>
+      </a>
+      
+      <a href="Tahoe-Bear">
+        <div class="gpro-tile lazy" data-src="Tahoe-Bear/DSCF0277-3.webp">
+          <div class="gpro-tile-descr">Tahoe Bear</div>
+        </div>
+      </a>
+      
+      <a href="Yosemite">
+        <div class="gpro-tile lazy" data-src="Yosemite/DSCF0132-4.webp">
+          <div class="gpro-tile-descr">Yosemite</div>
+        </div>
+      </a>
+      
+      <a href="Mt-Shasta">
+        <div class="gpro-tile lazy" data-src="Mt-Shasta/DSCF9700.webp">
+          <div class="gpro-tile-descr">Mt.Shasta</div>
+        </div>
+      </a>
+      
+      <a href="CA395">
+        <div class="gpro-tile lazy" data-src="CA395/DSCF9496-3.webp">
+          <div class="gpro-tile-descr">CA 395 赏秋</div>
+        </div>
+      </a>
+      
+      <a href="PointReyesDeer">
+        <div class="gpro-tile lazy" data-src="PointReyesDeer/DSCF9398.webp">
+          <div class="gpro-tile-descr">Point Reyes 再放送！</div>
+        </div>
+      </a>
+      
+      <a href="RubyLakeTrail">
+        <div class="gpro-tile lazy" data-src="RubyLakeTrail/IMG_3363.webp">
+          <div class="gpro-tile-descr">Ruby Lake</div>
+        </div>
+      </a>
+      
+      <a href="Big-Sur">
+        <div class="gpro-tile lazy" data-src="Big-Sur/DSCF8826.webp">
+          <div class="gpro-tile-descr">Big Sur</div>
+        </div>
+      </a>
+      
+      <a href="San-Luis-Berkeley">
+        <div class="gpro-tile lazy" data-src="San-Luis-Berkeley/DSCF8861-1.webp">
+          <div class="gpro-tile-descr">San Luis / Berkeley</div>
+        </div>
+      </a>
+      
+      <a href="Trojan-Point">
+        <div class="gpro-tile lazy" data-src="Trojan-Point/DSCF8699.webp">
+          <div class="gpro-tile-descr">Trojan Point</div>
+        </div>
+      </a>
+      
+      <a href="SharkFinCove">
+        <div class="gpro-tile lazy" data-src="SharkFinCove/DSCF8515.webp">
+          <div class="gpro-tile-descr">Shark Fin Cove</div>
+        </div>
+      </a>
+      
+      <a href="Walden-Pond">
+        <div class="gpro-tile lazy" data-src="Walden-Pond/DSCF8438.webp">
+          <div class="gpro-tile-descr">Walden Pond</div>
+        </div>
+      </a>
+      
+      <a href="Niagara-Falls">
+        <div class="gpro-tile lazy" data-src="Niagara-Falls/DSCF8268-2.webp">
+          <div class="gpro-tile-descr">Niagara Falls</div>
+        </div>
+      </a>
+      
+      <a href="Washington-DC">
+        <div class="gpro-tile lazy" data-src="Washington-DC/DSCF8159.webp">
+          <div class="gpro-tile-descr">Washington DC</div>
+        </div>
+      </a>
+      
+      <a href="UnitedNations">
+        <div class="gpro-tile lazy" data-src="UnitedNations/PhotonCam_20250716_113825.webp">
+          <div class="gpro-tile-descr">联合国</div>
+        </div>
+      </a>
+      
+      <a href="NY2">
+        <div class="gpro-tile lazy" data-src="NY2/DSCF7855-.webp">
+          <div class="gpro-tile-descr">Newyork Day2</div>
+        </div>
+      </a>
+      
+      <a href="NY1">
+        <div class="gpro-tile lazy" data-src="NY1/PhotonCam_HK_20250714_202510.webp">
+          <div class="gpro-tile-descr">Newyork Day1</div>
+        </div>
+      </a>
+      
+      <a href="Newport2Yale">
+        <div class="gpro-tile lazy" data-src="Newport2Yale/DSCF7320.webp">
+          <div class="gpro-tile-descr">Newport - Yale</div>
+        </div>
+      </a>
+      
+      <a href="Boston-City">
+        <div class="gpro-tile lazy" data-src="Boston-City/DSCF6957.webp">
+          <div class="gpro-tile-descr">Boston - Gallery - University</div>
+        </div>
+      </a>
+      
+      <a href="Boston-Freeway">
+        <div class="gpro-tile lazy" data-src="Boston-Freeway/IMG_1043.webp">
+          <div class="gpro-tile-descr">波士顿 · 自由之路</div>
+        </div>
+      </a>
+      
+      <a href="solo-hiking">
+        <div class="gpro-tile lazy" data-src="solo-hiking/DSCF6864.webp">
+          <div class="gpro-tile-descr">Solo Hiking</div>
+        </div>
+      </a>
+      
+      <a href="SantaClara-CloudSea">
+        <div class="gpro-tile lazy" data-src="SantaClara-CloudSea/DSCF6807.webp">
+          <div class="gpro-tile-descr">Santa Clara 云海</div>
+        </div>
+      </a>
+      
+      <a href="tahoe-summer">
+        <div class="gpro-tile lazy" data-src="tahoe-summer/DSCF6665.webp">
+          <div class="gpro-tile-descr">Tahoe Summer</div>
+        </div>
+      </a>
+      
+      <a href="point-reyes">
+        <div class="gpro-tile lazy" data-src="point-reyes/DSCF6357.webp">
+          <div class="gpro-tile-descr">Point Reyes LightHouse</div>
+        </div>
+      </a>
+      
+      <a href="17-miles">
+        <div class="gpro-tile lazy" data-src="17-miles/DSCF6070.webp">
+          <div class="gpro-tile-descr">17-miles</div>
+        </div>
+      </a>
+      
+      <a href="capra-cupertino">
+        <div class="gpro-tile lazy" data-src="capra-cupertino/DSCF4682.webp">
+          <div class="gpro-tile-descr">🐑 来自 Sunnyvale 的羊</div>
+        </div>
+      </a>
+      
+      <a href="Squirrel">
+        <div class="gpro-tile lazy" data-src="Squirrel/DSCF0915.webp">
+          <div class="gpro-tile-descr">🐿 松鼠</div>
+        </div>
+      </a>
+      
+      <a href="BayArea-Hiking">
+        <div class="gpro-tile lazy" data-src="BayArea-Hiking/IMG_8664.webp">
+          <div class="gpro-tile-descr">湾区徒步</div>
+        </div>
+      </a>
+      
+      <a href="Vancouver">
+        <div class="gpro-tile lazy" data-src="Vancouver/DSCF7930.webp">
+          <div class="gpro-tile-descr">温哥华</div>
+        </div>
+      </a>
+      
+      <a href="SF-Asian-Museum">
+        <div class="gpro-tile lazy" data-src="SF-Asian-Museum/DSCF7629.webp">
+          <div class="gpro-tile-descr">旧金山亚洲博物馆</div>
+        </div>
+      </a>
+      
+      <a href="Fuji">
+        <div class="gpro-tile lazy" data-src="Fuji/DSCF7341.webp">
+          <div class="gpro-tile-descr">富士五湖</div>
+        </div>
+      </a>
+      
+      <a href="SumidaAquarium">
+        <div class="gpro-tile lazy" data-src="SumidaAquarium/DSCF7002.webp">
+          <div class="gpro-tile-descr">墨田水族馆</div>
+        </div>
+      </a>
+      
+      <a href="Yakushima">
+        <div class="gpro-tile lazy" data-src="Yakushima/IMG_6838-JPEG.webp">
+          <div class="gpro-tile-descr">屋久岛</div>
+        </div>
+      </a>
+      
+      <a href="Alaska-Bear">
+        <div class="gpro-tile lazy" data-src="Alaska-Bear/DSCF4226-FIXED.webp">
+          <div class="gpro-tile-descr">阿拉斯加 · 与熊共舞</div>
+        </div>
+      </a>
+      
+      <a href="Alaska">
+        <div class="gpro-tile lazy" data-src="Alaska/DSCF3189.webp">
+          <div class="gpro-tile-descr">世界尽头与冷酷仙境</div>
+        </div>
+      </a>
+      
+      <a href="SkyView">
+        <div class="gpro-tile lazy" data-src="SkyView/DSCF2897.webp">
+          <div class="gpro-tile-descr">天际线</div>
+        </div>
+      </a>
+      
+      <a href="BayAreaDaily">
+        <div class="gpro-tile lazy" data-src="BayAreaDaily/0.webp">
+          <div class="gpro-tile-descr">湾区的打工日常</div>
+        </div>
+      </a>
+      
+      <a href="Ocean-Whale">
+        <div class="gpro-tile lazy" data-src="Ocean-Whale/whale.jpeg">
+          <div class="gpro-tile-descr">到海里去</div>
+        </div>
+      </a>
+      
+      <a href="SF-First">
+        <div class="gpro-tile lazy" data-src="SF-First/DSCF1667.webp">
+          <div class="gpro-tile-descr">SF城市初探</div>
+        </div>
+      </a>
+      
+      <a href="Computer-History-Museum">
+        <div class="gpro-tile lazy" data-src="Computer-History-Museum/1.webp">
+          <div class="gpro-tile-descr">CHM</div>
+        </div>
+      </a>
+      
+      <a href="Chiikawa">
+        <div class="gpro-tile lazy" data-src="Chiikawa/DSCF0425.webp">
+          <div class="gpro-tile-descr">Chiikawa</div>
+        </div>
+      </a>
+      
+      <a href="CA-Newt">
+        <div class="gpro-tile lazy" data-src="CA-Newt/DSCF0627.webp">
+          <div class="gpro-tile-descr">CA 蝾螈</div>
+        </div>
+      </a>
+      
+      <a href="FoxFox">
+        <div class="gpro-tile lazy" data-src="FoxFox/DSCF2186-Enhanced-NR.jpg">
+          <div class="gpro-tile-descr">RedFox</div>
+        </div>
+      </a>
+      
+      <a href="BayAnim">
+        <div class="gpro-tile lazy" data-src="BayAnim/DSCF8455.webp">
+          <div class="gpro-tile-descr">Bay Animals</div>
+        </div>
+      </a>
+      
+      <a href="ReLiveSanJose">
+        <div class="gpro-tile lazy" data-src="ReLiveSanJose/DSCF8221.webp">
+          <div class="gpro-tile-descr">San Jose ReLife</div>
+        </div>
+      </a>
+      
+      <a href="WinterYHY">
+        <div class="gpro-tile lazy" data-src="WinterYHY/DSCF8046.webp">
+          <div class="gpro-tile-descr">冬日颐和园</div>
+        </div>
+      </a>
+      
+      <a href="TaiWoo">
+        <div class="gpro-tile lazy" data-src="TaiWoo/DSCF7973.webp">
+          <div class="gpro-tile-descr">太舞 · TAIWOO</div>
+        </div>
+      </a>
+      
+      <a href="Catty">
+        <div class="gpro-tile lazy" data-src="Catty/DSCF7430.webp">
+          <div class="gpro-tile-descr">看！是猫宝</div>
+        </div>
+      </a>
+      
+      <a href="YuLongWu">
+        <div class="gpro-tile lazy" data-src="YuLongWu/DSCF7657.webp">
+          <div class="gpro-tile-descr">一夜鱼龙舞</div>
+        </div>
+      </a>
       
       <a href="DaHuiTang">
         <div class="gpro-tile lazy" data-src="DaHuiTang/DSCF6003.webp">
@@ -400,13 +876,13 @@
       </a>
       
       <a href="MoShiKouCat">
-        <div class="gpro-tile lazy" data-src="MoShiKouCat/15.打呼.jpg">
+        <div class="gpro-tile lazy" data-src="MoShiKouCat/15.打呼.webp">
           <div class="gpro-tile-descr">模式口 · 拍猫</div>
         </div>
       </a>
       
       <a href="FaHaiTample">
-        <div class="gpro-tile lazy" data-src="FaHaiTample/DSCF0680.jpg">
+        <div class="gpro-tile lazy" data-src="FaHaiTample/DSCF0680.webp">
           <div class="gpro-tile-descr">北京 · 法海寺</div>
         </div>
       </a>
@@ -418,7 +894,7 @@
       </a>
       
       <a href="FaYuanTampleCat">
-        <div class="gpro-tile lazy" data-src="FaYuanTampleCat/1.美丽黑猫.jpg">
+        <div class="gpro-tile lazy" data-src="FaYuanTampleCat/1.美丽黑猫.webp">
           <div class="gpro-tile-descr">北京 · 法源寺 · 陶然亭 · 拍猫</div>
         </div>
       </a>
@@ -480,6 +956,24 @@
       <a href="DaLi2022">
         <div class="gpro-tile lazy" data-src="DaLi2022/20230818-033845.6obr4awlbf40.webp">
           <div class="gpro-tile-descr">2022 · 大理</div>
+        </div>
+      </a>
+      
+      <a href="UniversalBJ">
+        <div class="gpro-tile lazy" data-src="UniversalBJ/IMG_2405-JPEG.webp">
+          <div class="gpro-tile-descr">北京环球影城</div>
+        </div>
+      </a>
+      
+      <a href="Train">
+        <div class="gpro-tile lazy" data-src="Train/PhotonCam_20241221_123851.webp">
+          <div class="gpro-tile-descr">Train</div>
+        </div>
+      </a>
+      
+      <a href="Daily">
+        <div class="gpro-tile lazy" data-src="Daily/PhotonCam_OSK_20241115_140022.webp">
+          <div class="gpro-tile-descr">Daily</div>
         </div>
       </a>
       
@@ -574,68 +1068,54 @@
   <!-- Footer -->
 <footer class="itp-footer text-center">
   <section class="footer-info">
-    照片集 &copy; 2017 - 2023
+    照片集 &copy; 2017 - 2026
     
     
-    
-    <span> / </span>
-    <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
-    <span id="busuanzi_container_site_uv">UV <span id="busuanzi_value_site_uv"></span></span>
     
     <span> / Template</span>
     <a href="https://github.com/lfkdsk/album_template" target="_blank">Type
     </a>
   </section>
   
-    <a href="https://lfkdsk.github.io/" target="_blank">
-      <img width="80px" height="80px" style="padding-top: 12px; display: block; margin: 0 auto;" src="https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp" alt="footer logo"></a>
+    <section class="footer-logo">
+      <a href="https://gallery.lfkdsk.org/" target="_blank">
+        <img width="80px" height="80px" style="padding-top: 12px; display: block; margin: 0 auto;" src="https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp" alt="footer logo"></a>
+    </section>
   
 </footer>
+
   <!-- After footer scripts -->
   <!-- fancybox -->
 
 <link rel="stylesheet" href="" />
-<script src="/gallery/js/fancybox.umd.js" defer></script>
-
-<!-- mdui -->
+<script src="/js/fancybox.umd.js" defer></script>
 
 <!-- busuanzi -->
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script>
+<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script> -->
 
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js"></script>
-
-<script>window.addEventListener('load', () => {
-  hljs.highlightAll(); // initialize highlighting
-});</script>
-<script>
-  $("pre.code").each(function() {
-    $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");
-  });
-</script>
 
 
-
-<script src="/gallery/js/app.js"></script>
+<script src="/js/app.js"></script>
 
 
 
 <!--
 
-<script src="/gallery/js/canvas2image.js"></script>
+<script src="/js/canvas2image.js"></script>
 
 
-<script src="/gallery/js/shareimg.js"></script>
+<script src="/js/shareimg.js"></script>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
 -->
 <!--lazyload-->
 
 
-<script src="/gallery/js/lazyload.js"></script>
+<script src="/js/lazyload.js"></script>
 
 
 <!--PJAX-->
@@ -647,6 +1127,8 @@
 <!---->
 <!---->
 <!--首页键盘快捷键-->
+
+
 
   <style>
   :root {

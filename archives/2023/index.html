@@ -3,7 +3,8 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+
+<html lang="zh-CN" data-skin="modern">
 <!-- Head tag -->
 <head>
   <meta charset="utf-8">
@@ -69,7 +70,7 @@
   <!-- https://material.io/resources/icons/?style=outline -->
   
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_15.1db132b40ba7d80527dfe48e3af5a3d4.js"></script>
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_20.a16abc3c381b339cccd05404911bbf44.js"></script>
   
   
 <style>
@@ -105,33 +106,49 @@
   }
 </style>
 
+  
+  
+<link rel="stylesheet" href="/css/tokens.css">
+
   <!-- Custom CSS/Sass -->
   
-<link rel="stylesheet" href="/gallery/css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 
   
-<link rel="stylesheet" href="/gallery/css/fancybox.css">
-
-  <!--样式切换-->
-  
-  
-<link rel="stylesheet" href="/gallery/css/material3.css">
+<link rel="stylesheet" href="/css/fancybox.css">
 
   
-  
-  
-  
-  
-  <!--highlight.js CSS-->
-  
-  
-<link rel="stylesheet" href="/gallery/css/highlight/github.css">
+<link rel="stylesheet" href="/css/material3.css">
 
   
   
+  
+<link rel="stylesheet" href="/css/skins/classic.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/darkroom.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/gallery.css">
+
+  
+  
+<link rel="stylesheet" href="/css/skins/editorial.css">
+
+  
+  
+  
+  
+  
+  
+
+  
+
   <!-- jquery -->
   
-  <script src="/gallery/js/jquery.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
@@ -163,7 +180,7 @@
   
   
   
-  <link rel="manifest" href="/gallery/manifest.json">
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#71afdd">
   
   <!-- Google Search Advanced
@@ -201,9 +218,10 @@
   }
 </script>-->
 
-<link rel="stylesheet" href="/gallery/css/tailwind.css">
+<link rel="stylesheet" href="/css/tailwind.css">
 
 <meta name="generator" content="Hexo 6.0.0"></head>
+
 
 
 <!--Other Pages-->
@@ -216,7 +234,7 @@
 
 <div class="itp-float-bar">
   <!--所有页面都显示-->
-  <a class="itp-float-bar-item rounded" href="/gallery/" title="照片集">
+  <a class="itp-float-bar-item rounded" href="/" title="照片集">
     
     <iconpark-icon class="navicon" name="home"></iconpark-icon>
     
@@ -224,27 +242,47 @@
   
   <!--只在 **非文章** 页面显示-->
   
-  <a class="itp-float-bar-item rounded" href="/gallery/location" title="地图">
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-0" href="/location" title="地图">
     
     <iconpark-icon class="navicon" name="local-two"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="https://lfkdsk.github.io" title="归档">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-1" target="_blank" rel="noopener" href="https://lfkdsk.github.io/blog" title="归档">
     
     <iconpark-icon class="navicon" name="inbox"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/query" title="查询">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-2" href="/animals" title="动物">
     
-    <iconpark-icon class="navicon" name="history-query"></iconpark-icon>
+    <iconpark-icon class="navicon" name="cat"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/random" title="随机">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-3" href="/random" title="随机">
     
     <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+    
+  </a>
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-4" href="/status" title="状态监控">
+    
+    <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
+    
+  </a>
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-5" href="/grid-lanes" title="时间线">
+    
+    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    
+  </a>
+  
+  
+  <a class="itp-float-bar-item rounded itp-nav-more" id="itp_nav_more" href="javascript:void(0)" title="More" aria-label="More">
+    
+    <iconpark-icon class="navicon" name="all-application"></iconpark-icon>
     
   </a>
   
@@ -263,14 +301,122 @@
   <div class="itp-float-layer-bg layer-bg-nodisplay" id="close_layer"></div>
 </div>
 
-
+<div class="itp-nav-sheet" id="itp_nav_sheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="itp-nav-sheet-handle"></div>
+  <div class="itp-nav-sheet-grid">
+    
+    <a class="itp-nav-sheet-item" href="/random">
+      <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+      <span>随机</span>
+    </a>
+    
+    <a class="itp-nav-sheet-item" href="/status">
+      <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
+      <span>状态监控</span>
+    </a>
+    
+    <a class="itp-nav-sheet-item" href="/grid-lanes">
+      <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+      <span>时间线</span>
+    </a>
+    
+  </div>
+</div>
+<div class="itp-nav-sheet-bg" id="itp_nav_sheet_bg"></div>
 <style>
-  .navicon {
-    font-size: 18px;
-    padding-top: 18px;
-    color: var(--main-black);
+  /* the SCSS .itp-float-bar .itp-float-bar-item rule is 2-class specificity,
+     so we have to match it here or `display: inline-flex` wins on desktop */
+  .itp-float-bar .itp-nav-more { display: none; }
+  .itp-nav-sheet, .itp-nav-sheet-bg { display: none; }
+  @media (max-width: 768px) {
+    /* hide overflow nav items in the floatbar; sheet shows them all */
+    .itp-float-bar .itp-nav-item.itp-nav-idx-3,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-4,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-5,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-6,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-7,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-8,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-9 { display: none; }
+    .itp-float-bar .itp-nav-more { display: flex; }
+  }
+  .itp-nav-sheet-bg {
+    position: fixed; inset: 0;
+    background: rgba(20,20,20,.35);
+    z-index: 1100;
+    opacity: 0; transition: opacity .18s ease-out;
+  }
+  .itp-nav-sheet-bg.show { display: block; opacity: 1; }
+  .itp-nav-sheet {
+    position: fixed; left: 0; right: 0;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    z-index: 1101;
+    background: var(--surface, #fff);
+    border-top-left-radius: var(--radius-lg, 14px);
+    border-top-right-radius: var(--radius-lg, 14px);
+    box-shadow: 0 -8px 28px rgba(0,0,0,.18);
+    padding: 8px 16px 20px;
+    transform: translateY(100%);
+    transition: transform .22s cubic-bezier(.2,.8,.2,1);
+  }
+  .itp-nav-sheet.show { display: block; transform: translateY(0); }
+  .itp-nav-sheet-handle {
+    width: 40px; height: 4px; border-radius: 2px;
+    background: rgba(120,120,120,.35);
+    margin: 6px auto 14px;
+  }
+  .itp-nav-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 8px;
+  }
+  .itp-nav-sheet-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 8px 4px;
+    color: var(--on-surface, #2f3a2f);
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 10px;
+    transition: background-color .15s ease;
+  }
+  .itp-nav-sheet-item:active { background: rgba(120,120,120,.12); }
+  .itp-nav-sheet-item iconpark-icon { font-size: 24px; }
+  @media (prefers-color-scheme: dark) {
+    .itp-nav-sheet { background: #1d2326; }
+    .itp-nav-sheet-item { color: #e6e0d0; }
+    .itp-nav-sheet-bg { background: rgba(0,0,0,.55); }
   }
 </style>
+<script>
+  (function () {
+    var btn = document.getElementById('itp_nav_more');
+    var sheet = document.getElementById('itp_nav_sheet');
+    var bg = document.getElementById('itp_nav_sheet_bg');
+    if (!btn || !sheet || !bg) return;
+    function open() {
+      sheet.style.display = 'block'; bg.style.display = 'block';
+      // next frame so the transition runs
+      requestAnimationFrame(function () { sheet.classList.add('show'); bg.classList.add('show'); });
+      sheet.setAttribute('aria-hidden', 'false');
+    }
+    function close() {
+      sheet.classList.remove('show'); bg.classList.remove('show');
+      sheet.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { sheet.style.display = 'none'; bg.style.display = 'none'; }, 220);
+    }
+    btn.addEventListener('click', function (e) { e.preventDefault(); sheet.classList.contains('show') ? close() : open(); });
+    bg.addEventListener('click', close);
+    sheet.querySelectorAll('.itp-nav-sheet-item').forEach(function (a) {
+      a.addEventListener('click', function () { close(); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sheet.classList.contains('show')) close();
+    });
+  })();
+</script>
+
+
+
+
   <!-- Main Content -->
   
 
@@ -299,10 +445,10 @@
   
   
   <div class="h-auto px-3 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-all">
-    <a href="/gallery/2023/undefined/" class="flex items-center">
+    <a href="/2023/undefined/" class="flex items-center">
       <div class="px-1">
         <div class="post-title text-tblack dark:text-white">照片集</div>
-        <span class="text-sm leading-4 text-gray-400">2023-12-31</span>
+        <span class="text-sm leading-4 text-gray-400">2023-08-18</span>
         
       </div>
     </a>
@@ -330,68 +476,54 @@
   <!-- Footer -->
 <footer class="itp-footer text-center">
   <section class="footer-info">
-    照片集 &copy; 2017 - 2023
+    照片集 &copy; 2017 - 2026
     
     
-    
-    <span> / </span>
-    <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
-    <span id="busuanzi_container_site_uv">UV <span id="busuanzi_value_site_uv"></span></span>
     
     <span> / Template</span>
     <a href="https://github.com/lfkdsk/album_template" target="_blank">Type
     </a>
   </section>
   
-    <a href="https://lfkdsk.github.io/" target="_blank">
-      <img width="80px" height="80px" style="padding-top: 12px; display: block; margin: 0 auto;" src="https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp" alt="footer logo"></a>
+    <section class="footer-logo">
+      <a href="https://gallery.lfkdsk.org/" target="_blank">
+        <img width="80px" height="80px" style="padding-top: 12px; display: block; margin: 0 auto;" src="https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp" alt="footer logo"></a>
+    </section>
   
 </footer>
+
   <!-- After footer scripts -->
   <!-- fancybox -->
 
 <link rel="stylesheet" href="" />
-<script src="/gallery/js/fancybox.umd.js" defer></script>
-
-<!-- mdui -->
+<script src="/js/fancybox.umd.js" defer></script>
 
 <!-- busuanzi -->
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script>
+<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script> -->
 
 <!-- highlightjs -->
 
 
-<script src="/gallery/js/highlight.min.js"></script>
-
-<script>window.addEventListener('load', () => {
-  hljs.highlightAll(); // initialize highlighting
-});</script>
-<script>
-  $("pre.code").each(function() {
-    $(this).html("<ol><li>" + $(this).html().replace(/\n/g, "\n</li><li>") + "\n</li></ol>");
-  });
-</script>
 
 
-
-<script src="/gallery/js/app.js"></script>
+<script src="/js/app.js"></script>
 
 
 
 <!--
 
-<script src="/gallery/js/canvas2image.js"></script>
+<script src="/js/canvas2image.js"></script>
 
 
-<script src="/gallery/js/shareimg.js"></script>
+<script src="/js/shareimg.js"></script>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js" defer></script>
 -->
 <!--lazyload-->
 
 
-<script src="/gallery/js/lazyload.js"></script>
+<script src="/js/lazyload.js"></script>
 
 
 <!--PJAX-->
@@ -403,6 +535,8 @@
 <!---->
 <!---->
 <!--首页键盘快捷键-->
+
+
 
   <style>
   :root {
