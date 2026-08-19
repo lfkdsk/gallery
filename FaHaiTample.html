@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF0650" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0650.webp"
+            name="DSCF0650" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0650.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0650.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0650","path":"FaHaiTample/DSCF0650.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0650.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0650.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0650","path":"FaHaiTample/DSCF0650.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0650.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0650.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0650.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0650.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF0652" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0652.webp"
+            name="DSCF0652" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0652.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0652.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0652","path":"FaHaiTample/DSCF0652.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0652.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0652.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0652","path":"FaHaiTample/DSCF0652.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0652.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0652.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0652.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0652.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF0657" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0657.webp"
+            name="DSCF0657" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0657.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0657.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0657","path":"FaHaiTample/DSCF0657.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0657.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0657.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0657","path":"FaHaiTample/DSCF0657.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0657.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0657.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0657.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0657.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="DSCF0661" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0661.webp"
+            name="DSCF0661" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0661.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0661.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0661","path":"FaHaiTample/DSCF0661.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0661.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0661.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0661","path":"FaHaiTample/DSCF0661.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0661.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0661.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0661.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0661.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF0669" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0669.webp"
+            name="DSCF0669" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0669.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0669.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0669","path":"FaHaiTample/DSCF0669.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0669.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0669.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0669","path":"FaHaiTample/DSCF0669.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0669.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0669.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0669.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0669.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF0672" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0672.webp"
+            name="DSCF0672" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0672.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0672.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0672","path":"FaHaiTample/DSCF0672.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0672.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0672.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0672","path":"FaHaiTample/DSCF0672.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0672.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0672.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0672.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0672.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF0675" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0675.webp"
+            name="DSCF0675" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0675.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0675.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0675","path":"FaHaiTample/DSCF0675.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0675.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0675.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0675","path":"FaHaiTample/DSCF0675.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0675.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0675.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0675.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0675.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF0676" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0676.webp"
+            name="DSCF0676" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0676.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0676.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0676","path":"FaHaiTample/DSCF0676.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0676.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0676.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0676","path":"FaHaiTample/DSCF0676.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0676.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0676.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0676.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0676.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF0677" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0677.webp"
+            name="DSCF0677" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0677.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0677.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0677","path":"FaHaiTample/DSCF0677.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0677.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0677.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0677","path":"FaHaiTample/DSCF0677.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0677.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0677.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0677.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0677.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF0680" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0680.webp"
+            name="DSCF0680" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0680.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0680.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0680","path":"FaHaiTample/DSCF0680.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0680.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0680.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0680","path":"FaHaiTample/DSCF0680.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0680.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0680.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0680.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0680.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF0681" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0681.webp"
+            name="DSCF0681" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0681.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0681.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0681","path":"FaHaiTample/DSCF0681.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0681.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0681.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0681","path":"FaHaiTample/DSCF0681.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0681.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0681.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0681.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0681.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="DSCF0682" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0682.webp"
+            name="DSCF0682" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0682.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0682.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0682","path":"FaHaiTample/DSCF0682.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0682.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0682.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0682","path":"FaHaiTample/DSCF0682.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0682.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0682.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0682.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0682.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -888,11 +905,11 @@
           
           
           <a class="album-item" id="12"
-            name="DSCF0683" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0683.webp"
+            name="DSCF0683" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0683.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0683.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0683","path":"FaHaiTample/DSCF0683.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0683.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0683.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0683","path":"FaHaiTample/DSCF0683.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0683.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0683.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0683.webp"
             aria-label="the photo 12"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0683.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -909,11 +926,11 @@
           
           
           <a class="album-item" id="13"
-            name="DSCF0685" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0685.webp"
+            name="DSCF0685" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0685.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0685.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0685","path":"FaHaiTample/DSCF0685.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0685.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0685.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0685","path":"FaHaiTample/DSCF0685.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0685.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0685.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0685.webp"
             aria-label="the photo 13"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0685.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -930,11 +947,11 @@
           
           
           <a class="album-item" id="14"
-            name="DSCF0686" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0686.webp"
+            name="DSCF0686" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0686.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0686.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0686","path":"FaHaiTample/DSCF0686.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0686.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0686.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0686","path":"FaHaiTample/DSCF0686.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0686.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0686.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0686.webp"
             aria-label="the photo 14"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0686.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -951,11 +968,11 @@
           
           
           <a class="album-item" id="15"
-            name="DSCF0687" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0687.webp"
+            name="DSCF0687" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0687.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0687.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0687","path":"FaHaiTample/DSCF0687.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0687.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0687.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0687","path":"FaHaiTample/DSCF0687.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0687.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0687.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0687.webp"
             aria-label="the photo 15"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0687.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -972,11 +989,11 @@
           
           
           <a class="album-item" id="16"
-            name="DSCF0688" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0688.webp"
+            name="DSCF0688" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0688.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0688.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0688","path":"FaHaiTample/DSCF0688.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0688.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0688.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0688","path":"FaHaiTample/DSCF0688.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0688.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0688.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0688.webp"
             aria-label="the photo 16"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0688.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -993,11 +1010,11 @@
           
           
           <a class="album-item" id="17"
-            name="DSCF0689" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0689.webp"
+            name="DSCF0689" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0689.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0689.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0689","path":"FaHaiTample/DSCF0689.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0689.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0689.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0689","path":"FaHaiTample/DSCF0689.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0689.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0689.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0689.webp"
             aria-label="the photo 17"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0689.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1014,11 +1031,11 @@
           
           
           <a class="album-item" id="18"
-            name="DSCF0691" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0691.webp"
+            name="DSCF0691" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0691.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0691.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0691","path":"FaHaiTample/DSCF0691.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0691.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0691.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0691","path":"FaHaiTample/DSCF0691.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0691.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0691.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0691.webp"
             aria-label="the photo 18"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0691.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1035,11 +1052,11 @@
           
           
           <a class="album-item" id="19"
-            name="DSCF0694" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0694.webp"
+            name="DSCF0694" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0694.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0694.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0694","path":"FaHaiTample/DSCF0694.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0694.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0694.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0694","path":"FaHaiTample/DSCF0694.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0694.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0694.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0694.webp"
             aria-label="the photo 19"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0694.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1056,11 +1073,11 @@
           
           
           <a class="album-item" id="20"
-            name="DSCF0695" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0695.webp"
+            name="DSCF0695" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0695.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0695.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0695","path":"FaHaiTample/DSCF0695.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0695.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0695.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0695","path":"FaHaiTample/DSCF0695.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0695.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0695.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0695.webp"
             aria-label="the photo 20"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0695.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1077,11 +1094,11 @@
           
           
           <a class="album-item" id="21"
-            name="DSCF0696" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0696.webp"
+            name="DSCF0696" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0696.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0696.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0696","path":"FaHaiTample/DSCF0696.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0696.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0696.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0696","path":"FaHaiTample/DSCF0696.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0696.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0696.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0696.webp"
             aria-label="the photo 21"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0696.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1098,11 +1115,11 @@
           
           
           <a class="album-item" id="22"
-            name="DSCF0697" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0697.webp"
+            name="DSCF0697" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0697.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0697.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0697","path":"FaHaiTample/DSCF0697.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0697.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0697.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0697","path":"FaHaiTample/DSCF0697.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0697.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0697.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0697.webp"
             aria-label="the photo 22"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0697.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1119,11 +1136,11 @@
           
           
           <a class="album-item" id="23"
-            name="DSCF0698" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0698.webp"
+            name="DSCF0698" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0698.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0698.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0698","path":"FaHaiTample/DSCF0698.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0698.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0698.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0698","path":"FaHaiTample/DSCF0698.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0698.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0698.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0698.webp"
             aria-label="the photo 23"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0698.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1140,11 +1157,11 @@
           
           
           <a class="album-item" id="24"
-            name="DSCF0699" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0699.webp"
+            name="DSCF0699" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0699.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0699.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0699","path":"FaHaiTample/DSCF0699.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0699.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0699.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0699","path":"FaHaiTample/DSCF0699.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0699.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0699.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0699.webp"
             aria-label="the photo 24"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0699.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1161,11 +1178,11 @@
           
           
           <a class="album-item" id="25"
-            name="DSCF0700" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0700.webp"
+            name="DSCF0700" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0700.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0700.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0700","path":"FaHaiTample/DSCF0700.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0700.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0700.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0700","path":"FaHaiTample/DSCF0700.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0700.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0700.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0700.webp"
             aria-label="the photo 25"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0700.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1182,11 +1199,11 @@
           
           
           <a class="album-item" id="26"
-            name="DSCF0701" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0701.webp"
+            name="DSCF0701" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0701.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0701.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0701","path":"FaHaiTample/DSCF0701.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0701.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0701.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0701","path":"FaHaiTample/DSCF0701.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0701.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0701.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0701.webp"
             aria-label="the photo 26"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0701.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1203,11 +1220,11 @@
           
           
           <a class="album-item" id="27"
-            name="DSCF0703" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0703.webp"
+            name="DSCF0703" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0703.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0703.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0703","path":"FaHaiTample/DSCF0703.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0703.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0703.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0703","path":"FaHaiTample/DSCF0703.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0703.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0703.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0703.webp"
             aria-label="the photo 27"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0703.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1224,11 +1241,11 @@
           
           
           <a class="album-item" id="28"
-            name="DSCF0704" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0704.webp"
+            name="DSCF0704" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0704.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0704.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0704","path":"FaHaiTample/DSCF0704.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0704.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0704.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0704","path":"FaHaiTample/DSCF0704.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0704.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0704.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0704.webp"
             aria-label="the photo 28"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0704.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1245,11 +1262,11 @@
           
           
           <a class="album-item" id="29"
-            name="DSCF0705" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0705.webp"
+            name="DSCF0705" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0705.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0705.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0705","path":"FaHaiTample/DSCF0705.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0705.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0705.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0705","path":"FaHaiTample/DSCF0705.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0705.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0705.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0705.webp"
             aria-label="the photo 29"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0705.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1266,11 +1283,11 @@
           
           
           <a class="album-item" id="30"
-            name="DSCF0707" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0707.webp"
+            name="DSCF0707" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0707.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0707.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0707","path":"FaHaiTample/DSCF0707.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0707.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0707.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0707","path":"FaHaiTample/DSCF0707.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0707.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0707.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0707.webp"
             aria-label="the photo 30"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0707.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1287,11 +1304,11 @@
           
           
           <a class="album-item" id="31"
-            name="DSCF0708" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0708.webp"
+            name="DSCF0708" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0708.webp"
             desc=" - · - "
             share="FaHaiTample/DSCF0708.webp"
             video=""
-            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0708","path":"FaHaiTample/DSCF0708.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0708.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FaHaiTample/DSCF0708.webp"}'
+            extra='{"desc":null,"dir":"FaHaiTample","exif":"","exif_data":{},"location":[],"name":"DSCF0708","path":"FaHaiTample/DSCF0708.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0708.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FaHaiTample/DSCF0708.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0708.webp"
             aria-label="the photo 31"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FaHaiTample/DSCF0708.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1464,14 +1481,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

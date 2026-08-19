@@ -47,6 +47,192 @@ function copyToClipboard(content) {
   }
 }
 
+/**
+ * 把「相框 + 照片 + EXIF 卡」渲染成一张可下载的图片。
+ *
+ * ── 为什么不用 html2canvas ──────────────────────────────────────────────
+ * 原来是 html2canvas(node) 直接截图，两个问题：
+ *
+ * 1) 输出尺寸 = 节点在屏幕上的显示尺寸 × devicePixelRatio。实测一张
+ *    12480×8320（104 MP）的原图，下载下来只有 1736×1298（2.3 MP）——只剩 2.2%
+ *    的像素，而且窗口越小下载的图越糊。
+ * 2) 它用 fillText 自己算文字基线，和浏览器的行盒排版对不上：EXIF 卡右侧三行
+ *    整体下沉（上方空一大截、末行贴着卡片下缘），而同一张卡里的分隔线和 logo
+ *    却是居中的。对比 scale=2 与 scale=4.6 的产出，偏移比例一致，说明这是它
+ *    一直以来的渲染差异，不是分辨率造成的。页面排版本身是对的。
+ *
+ * ── 这里的做法 ────────────────────────────────────────────────────────
+ * 自己在 canvas 上画，但**排版仍然从 DOM 读**——每个元素的位置、尺寸、字体、
+ * 颜色都取自 getBoundingClientRect + getComputedStyle，只是把「画」这一步接管
+ * 过来。所以 CSS 依旧是排版的单一来源，改样式不需要同步改这里；同时位置完全
+ * 可控，也不再需要 html2canvas 那 194 KB。
+ *
+ * 文字用 textBaseline: 'middle' 放在各自盒子的垂直中心，字形自然居中，不受
+ * 字体 ascent/descent 不对称的影响——这正是上面第 2 个问题的根源。
+ *
+ * maxEdge 默认 4000：A3 打印约需 3500px，分享绰绰有余。
+ *
+ * @param {Object}      o
+ * @param {HTMLElement} o.node      要渲染的节点（#all-pic）
+ * @param {HTMLImageElement} o.img  节点里的主图
+ * @param {string}     [o.fullSrc]  原图 URL；省略则用 img 当前的 src
+ * @param {string}      o.filename  下载文件名，不含扩展名
+ * @param {Element}    [o.button]   触发按钮，用于显示生成中状态
+ * @param {number}     [o.maxEdge]  输出长边上限
+ */
+async function downloadFramedPhoto(o) {
+  var node = o.node;
+  var img = o.img;
+  var maxEdge = o.maxEdge || 4000;
+  var btn = o.button && o.button.jquery ? o.button[0] : o.button;
+  var btnText = btn ? btn.textContent : null;
+  var objectUrl = null;
+
+  if (btn) {
+    btn.textContent = " 生成中… ";
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.6";
+  }
+
+  try {
+    var nb = node.getBoundingClientRect();
+    var k = maxEdge / Math.max(nb.width, nb.height); // CSS px → 输出像素
+    if (k < 1) k = 1;
+
+    // 相对节点左上角的坐标换算
+    var rel = function (el) {
+      var b = el.getBoundingClientRect();
+      return { x: (b.left - nb.left) * k, y: (b.top - nb.top) * k,
+               w: b.width * k, h: b.height * k, cy: (b.top - nb.top + b.height / 2) * k };
+    };
+    var visible = function (el) {
+      if (!el) return false;
+      var c = getComputedStyle(el);
+      if (c.display === "none" || c.visibility === "hidden") return false;
+      return el.getBoundingClientRect().width > 0;
+    };
+
+    var canvas = document.createElement("canvas");
+    canvas.width = Math.round(nb.width * k);
+    canvas.height = Math.round(nb.height * k);
+    var ctx = canvas.getContext("2d");
+
+    // 底色用节点自己的背景（暗色模式下相框是白的）
+    var nodeCS = getComputedStyle(node);
+    ctx.fillStyle = nodeCS.backgroundColor === "rgba(0, 0, 0, 0)" ? "#ffffff" : nodeCS.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // ── 照片：换成原图后按显示位置铺满 ──────────────────────────────
+    var bmp = null;
+    if (o.fullSrc) {
+      try {
+        var res = await fetch(o.fullSrc, { mode: "cors" });
+        if (res.ok) bmp = await createImageBitmap(await res.blob());
+      } catch (e) {
+        console.warn("原图取不到，退回页面上的图:", e);
+      }
+    }
+    var ir = rel(img);
+    if (bmp) {
+      ctx.drawImage(bmp, ir.x, ir.y, ir.w, ir.h);
+      bmp.close && bmp.close();
+    } else {
+      ctx.drawImage(img, ir.x, ir.y, ir.w, ir.h);
+    }
+
+    // ── EXIF 卡 ────────────────────────────────────────────────────
+    var drawText = function (el) {
+      if (!visible(el)) return;
+      var text = el.textContent.trim();
+      if (!text) return;
+      var c = getComputedStyle(el);
+      var r = rel(el);
+      ctx.font = c.fontStyle + " " + c.fontWeight + " " +
+                 (parseFloat(c.fontSize) * k) + "px " + c.fontFamily;
+      ctx.fillStyle = c.color;
+      ctx.textBaseline = "middle"; // 字形居中于行盒，避开 ascent/descent 不对称
+      ctx.textAlign = "left";
+      // 超宽就截断加省略号，对应 CSS 的 text-overflow: ellipsis
+      var maxW = r.w;
+      if (maxW > 0 && ctx.measureText(text).width > maxW) {
+        while (text.length > 1 && ctx.measureText(text + "…").width > maxW) {
+          text = text.slice(0, -1);
+        }
+        text += "…";
+      }
+      ctx.fillText(text, r.x, r.cy);
+    };
+
+    var wrap = document.getElementById("exif-wrapper");
+    var normal = document.getElementById("normal-wrapper");
+    var card = visible(wrap) ? wrap : (visible(normal) ? normal : null);
+    if (card) {
+      var cr = rel(card);
+      var cc = getComputedStyle(card);
+      ctx.fillStyle = cc.backgroundColor;
+      ctx.fillRect(cr.x, cr.y, cr.w, cr.h);
+    }
+
+    if (visible(wrap)) {
+      // 分隔竖线
+      var divider = wrap.querySelector(".exif-right > div > div:nth-child(2)");
+      if (visible(divider)) {
+        var dr = rel(divider);
+        ctx.fillStyle = getComputedStyle(divider).backgroundColor;
+        ctx.fillRect(dr.x, dr.y, Math.max(dr.w, 1), dr.h);
+      }
+      // 厂商 logo
+      var logo = document.getElementById("exif-maker-logo");
+      if (visible(logo) && logo.complete && logo.naturalWidth) {
+        var lr = rel(logo);
+        ctx.drawImage(logo, lr.x, lr.y, lr.w, lr.h);
+      }
+      ["exif-param", "exif-date", "exif-maker", "exif-lens", "exif-author"]
+        .forEach(function (id) { drawText(document.getElementById(id)); });
+    } else if (visible(normal)) {
+      // 没有 EXIF 数据时的那行居中提示
+      var tip = document.getElementById("no-exif-data");
+      if (visible(tip)) {
+        var tr = rel(tip);
+        var tc = getComputedStyle(tip);
+        ctx.font = tc.fontWeight + " " + (parseFloat(tc.fontSize) * k) + "px " + tc.fontFamily;
+        ctx.fillStyle = tc.color;
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.fillText(tip.textContent.trim(), tr.x + tr.w / 2, tr.cy);
+      }
+    }
+
+    // ── 相框描边 ───────────────────────────────────────────────────
+    var bw = parseFloat(nodeCS.borderTopWidth) * k;
+    if (bw > 0) {
+      ctx.strokeStyle = nodeCS.borderTopColor;
+      ctx.lineWidth = bw;
+      ctx.strokeRect(bw / 2, bw / 2, canvas.width - bw, canvas.height - bw);
+    }
+
+    // toBlob 而不是 toDataURL：后者会先生成一个几 MB 的 base64 字符串白占内存
+    var blob = await new Promise(function (resolve) {
+      canvas.toBlob(resolve, "image/jpeg", 0.92);
+    });
+    if (!blob) throw new Error("canvas.toBlob 返回空");
+
+    objectUrl = URL.createObjectURL(blob);
+    simulateDownloadImageClick(objectUrl, o.filename + ".jpg");
+  } catch (e) {
+    console.error("下载图片生成失败:", e);
+    if (typeof toastr !== "undefined") toastr.error("图片生成失败，请重试");
+  } finally {
+    if (btn) {
+      btn.textContent = btnText;
+      btn.style.pointerEvents = "";
+      btn.style.opacity = "";
+    }
+    // 给下载动作留出时间再释放，否则 Safari 上偶发拿不到内容
+    if (objectUrl) setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 60000);
+  }
+}
+
 function simulateDownloadImageClick(uri, filename) {
   var link = document.createElement("a");
   link.setAttribute("class", "screenshot");

@@ -419,7 +419,6 @@
 
   <!-- Main Content -->
   <script src="js/sql-wasm.js"></script>
-<script src="js/html2canvas.min.js" defer></script>
 <section class="pjax-area">
     <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3 gap-2">
@@ -434,7 +433,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -488,9 +488,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -1041,17 +1058,14 @@ ORDER BY random() LIMIT 1;`
                 node.attr('style', 'padding-top: 60px; padding-bottom:70px')
             }
             download.click(function () {
-                var node = document.getElementById('all-pic');
-                html2canvas(node, {
-                    useCORS: true,
-                    allowTaint: true,
-                    scrollX: 0,
-                    scrollY: 0,
-                }).then(function (canvas) {
-                    if (daily !== null && daily === "true") {
-                        name = "download"
-                    }                       
-                    simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+                // daily 模式下固定文件名，保持原行为
+                if (daily !== null && daily === "true") name = "download";
+                downloadFramedPhoto({
+                    node: document.getElementById('all-pic'),
+                    img: document.getElementById('imgbox'),
+                    fullSrc: imgLink,
+                    filename: name,
+                    button: this,
                 });
             });
         </script>

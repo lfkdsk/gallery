@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="IMG_2772" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/IMG_2772.webp"
+            name="IMG_2772" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/IMG_2772.webp"
             desc=" - · - "
             share="SharkFinCove/IMG_2772.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/60s F2.2 ISO 160 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 12:16:54","EXIF ExposureTime":"1/60s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.33598055555556,-122.01540277777778],"name":"IMG_2772","path":"SharkFinCove/IMG_2772.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2772.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/IMG_2772.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/60s F2.2 ISO 160 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 12:16:54","EXIF ExposureTime":"1/60s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.33598055555556,-122.01540277777778],"name":"IMG_2772","path":"SharkFinCove/IMG_2772.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2772.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/IMG_2772.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2772.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2772.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="IMG_2776" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/IMG_2776.webp"
+            name="IMG_2776" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/IMG_2776.webp"
             desc=" - · - "
             share="SharkFinCove/IMG_2776.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/1323s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 13:55:27","EXIF ExposureTime":"1/1323s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.17144722222222,-122.17128055555555],"name":"IMG_2776","path":"SharkFinCove/IMG_2776.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2776.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/IMG_2776.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/1323s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 13:55:27","EXIF ExposureTime":"1/1323s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.17144722222222,-122.17128055555555],"name":"IMG_2776","path":"SharkFinCove/IMG_2776.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2776.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/IMG_2776.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2776.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2776.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="PhotonCam_20250802_144219" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/PhotonCam_20250802_144219.webp"
+            name="PhotonCam_20250802_144219" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/PhotonCam_20250802_144219.webp"
             desc=" - · - "
             share="SharkFinCove/PhotonCam_20250802_144219.webp"
-            video="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/PhotonCam_20250802_144219.mov"
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/2525s F2.8 ISO 50 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 14:42:18","EXIF ExposureTime":"1/2525s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.115811111111114,-122.15675555555556],"name":"PhotonCam_20250802_144219","path":"SharkFinCove/PhotonCam_20250802_144219.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_20250802_144219.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/PhotonCam_20250802_144219.webp"}'
+            video="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/PhotonCam_20250802_144219.mov"
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/2525s F2.8 ISO 50 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 14:42:18","EXIF ExposureTime":"1/2525s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.115811111111114,-122.15675555555556],"name":"PhotonCam_20250802_144219","path":"SharkFinCove/PhotonCam_20250802_144219.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_20250802_144219.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/PhotonCam_20250802_144219.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_20250802_144219.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_20250802_144219.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="PhotonCam_TK_20250802_182958" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/PhotonCam_TK_20250802_182958.webp"
+            name="PhotonCam_TK_20250802_182958" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/PhotonCam_TK_20250802_182958.webp"
             desc=" - · - "
             share="SharkFinCove/PhotonCam_TK_20250802_182958.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/2513s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 18:29:58","EXIF ExposureTime":"1/2513s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.00414722222222,-122.18511111111111],"name":"PhotonCam_TK_20250802_182958","path":"SharkFinCove/PhotonCam_TK_20250802_182958.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_TK_20250802_182958.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/PhotonCam_TK_20250802_182958.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/2513s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 18:29:58","EXIF ExposureTime":"1/2513s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.00414722222222,-122.18511111111111],"name":"PhotonCam_TK_20250802_182958","path":"SharkFinCove/PhotonCam_TK_20250802_182958.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_TK_20250802_182958.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/PhotonCam_TK_20250802_182958.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_TK_20250802_182958.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/PhotonCam_TK_20250802_182958.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="IMG_2811" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/IMG_2811.webp"
+            name="IMG_2811" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/IMG_2811.webp"
             desc=" - · - "
             share="SharkFinCove/IMG_2811.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/69s F2.8 ISO 200 15.7mm iPhone 15 Pro Max back triple camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 19:33:50","EXIF ExposureTime":"1/69s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 200","EXIF LensModel":"iPhone 15 Pro Max back triple camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.99122222222222,-122.06433055555556],"name":"IMG_2811","path":"SharkFinCove/IMG_2811.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2811.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/IMG_2811.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"Apple iPhone 15 Pro Max 1/69s F2.8 ISO 200 15.7mm iPhone 15 Pro Max back triple camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 19:33:50","EXIF ExposureTime":"1/69s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 200","EXIF LensModel":"iPhone 15 Pro Max back triple camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.99122222222222,-122.06433055555556],"name":"IMG_2811","path":"SharkFinCove/IMG_2811.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2811.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/IMG_2811.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2811.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/IMG_2811.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF8456" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/DSCF8456.webp"
+            name="DSCF8456" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/DSCF8456.webp"
             desc=" - · - "
             share="SharkFinCove/DSCF8456.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"FUJIFILM X-S20 1/2000s F4 ISO 320 54.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 21:05:54","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"54.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8456","path":"SharkFinCove/DSCF8456.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8456.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/DSCF8456.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"FUJIFILM X-S20 1/2000s F4 ISO 320 54.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 21:05:54","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"54.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8456","path":"SharkFinCove/DSCF8456.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8456.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/DSCF8456.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8456.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8456.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF8457" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/DSCF8457.webp"
+            name="DSCF8457" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/DSCF8457.webp"
             desc=" - · - "
             share="SharkFinCove/DSCF8457.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"FUJIFILM X-S20 1/500s F4.5 ISO 160 41.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 21:06:10","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4.5","EXIF FocalLength":"41.1mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8457","path":"SharkFinCove/DSCF8457.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8457.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/DSCF8457.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"FUJIFILM X-S20 1/500s F4.5 ISO 160 41.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 21:06:10","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4.5","EXIF FocalLength":"41.1mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8457","path":"SharkFinCove/DSCF8457.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8457.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/DSCF8457.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8457.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8457.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF8515" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/DSCF8515.webp"
+            name="DSCF8515" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/DSCF8515.webp"
             desc=" - · - "
             share="SharkFinCove/DSCF8515.webp"
             video=""
-            extra='{"desc":null,"dir":"SharkFinCove","exif":"FUJIFILM X-S20 1/2000s F4 ISO 320 26mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 21:34:46","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"26mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8515","path":"SharkFinCove/DSCF8515.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8515.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SharkFinCove/DSCF8515.webp"}'
+            extra='{"desc":null,"dir":"SharkFinCove","exif":"FUJIFILM X-S20 1/2000s F4 ISO 320 26mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:08:02 21:34:46","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"26mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8515","path":"SharkFinCove/DSCF8515.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8515.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SharkFinCove/DSCF8515.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8515.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SharkFinCove/DSCF8515.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -960,14 +977,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

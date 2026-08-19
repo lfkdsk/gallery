@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album default-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF1992" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF1992.webp"
+            name="DSCF1992" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF1992.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF1992.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 2500 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:02:04","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1992","path":"OlympicsCat/DSCF1992.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1992.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF1992.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/240s F4 ISO 2500 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:02:04","EXIF ExposureTime":"1/240s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1992","path":"OlympicsCat/DSCF1992.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1992.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF1992.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1992.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1992.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF1996" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF1996.webp"
+            name="DSCF1996" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF1996.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF1996.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 2500 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:03:04","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1996","path":"OlympicsCat/DSCF1996.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1996.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF1996.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/250s F4 ISO 2500 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:03:04","EXIF ExposureTime":"1/250s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1996","path":"OlympicsCat/DSCF1996.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1996.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF1996.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1996.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1996.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF1999" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF1999.webp"
+            name="DSCF1999" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF1999.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF1999.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/240s F6.4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:03:41","EXIF ExposureTime":"1/240s","EXIF FNumber":"F6.4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1999","path":"OlympicsCat/DSCF1999.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1999.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF1999.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/240s F6.4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:03:41","EXIF ExposureTime":"1/240s","EXIF FNumber":"F6.4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF1999","path":"OlympicsCat/DSCF1999.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1999.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF1999.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1999.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF1999.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="DSCF2003" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2003.webp"
+            name="DSCF2003" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2003.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF2003.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/240s F6.4 ISO 5000 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:04:11","EXIF ExposureTime":"1/240s","EXIF FNumber":"F6.4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2003","path":"OlympicsCat/DSCF2003.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2003.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2003.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/240s F6.4 ISO 5000 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:04:11","EXIF ExposureTime":"1/240s","EXIF FNumber":"F6.4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2003","path":"OlympicsCat/DSCF2003.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2003.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2003.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2003.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2003.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF2012" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2012.webp"
+            name="DSCF2012" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2012.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF2012.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/100s F18 ISO 1250 24.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:19:58","EXIF ExposureTime":"1/100s","EXIF FNumber":"F18","EXIF FocalLength":"24.7mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2012","path":"OlympicsCat/DSCF2012.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2012.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2012.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/100s F18 ISO 1250 24.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 18:19:58","EXIF ExposureTime":"1/100s","EXIF FNumber":"F18","EXIF FocalLength":"24.7mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2012","path":"OlympicsCat/DSCF2012.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2012.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2012.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2012.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2012.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF2045" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2045.webp"
+            name="DSCF2045" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2045.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF2045.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/30s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 19:22:56","EXIF ExposureTime":"1/30s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2045","path":"OlympicsCat/DSCF2045.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2045.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2045.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/30s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 19:22:56","EXIF ExposureTime":"1/30s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2045","path":"OlympicsCat/DSCF2045.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2045.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2045.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2045.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2045.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF2056" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2056.webp"
+            name="DSCF2056" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2056.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF2056.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/10s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 19:25:12","EXIF ExposureTime":"1/10s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2056","path":"OlympicsCat/DSCF2056.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2056.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2056.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/10s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 19:25:12","EXIF ExposureTime":"1/10s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2056","path":"OlympicsCat/DSCF2056.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2056.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2056.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2056.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2056.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF2067" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2067.webp"
+            name="DSCF2067" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2067.webp"
             desc=" - · - "
             share="OlympicsCat/DSCF2067.webp"
             video=""
-            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/5s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 19:28:51","EXIF ExposureTime":"1/5s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2067","path":"OlympicsCat/DSCF2067.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2067.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/OlympicsCat/DSCF2067.webp"}'
+            extra='{"desc":null,"dir":"OlympicsCat","exif":"FUJIFILM X-S20 1/5s F4 ISO 6400 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:09:27 19:28:51","EXIF ExposureTime":"1/5s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 6400","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2067","path":"OlympicsCat/DSCF2067.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2067.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/OlympicsCat/DSCF2067.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2067.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//OlympicsCat/DSCF2067.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -960,14 +977,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

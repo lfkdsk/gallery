@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="5G4A0172" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0172.webp"
+            name="5G4A0172" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0172.webp"
             desc=" - · - "
             share="FoxFox/5G4A0172.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 5000 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:07:55","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0172","path":"FoxFox/5G4A0172.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0172.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0172.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 5000 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:07:55","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 5000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0172","path":"FoxFox/5G4A0172.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0172.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0172.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0172.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0172.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="5G4A0176" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0176.webp"
+            name="5G4A0176" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0176.webp"
             desc=" - · - "
             share="FoxFox/5G4A0176.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 3200 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:08:08","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0176","path":"FoxFox/5G4A0176.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0176.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0176.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 3200 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:08:08","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0176","path":"FoxFox/5G4A0176.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0176.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0176.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0176.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0176.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="5G4A0179" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0179.webp"
+            name="5G4A0179" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0179.webp"
             desc=" - · - "
             share="FoxFox/5G4A0179.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 4000 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:08:10","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0179","path":"FoxFox/5G4A0179.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0179.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0179.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 4000 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:08:10","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0179","path":"FoxFox/5G4A0179.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0179.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0179.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0179.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0179.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="5G4A0181" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0181.webp"
+            name="5G4A0181" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0181.webp"
             desc=" - · - "
             share="FoxFox/5G4A0181.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 4000 166mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:08:17","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"166mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0181","path":"FoxFox/5G4A0181.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0181.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0181.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 4000 166mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:08:17","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"166mm","EXIF ISOSpeedRatings":"ISO 4000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0181","path":"FoxFox/5G4A0181.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0181.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0181.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0181.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0181.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="5G4A0262" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0262.webp"
+            name="5G4A0262" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0262.webp"
             desc=" - · - "
             share="FoxFox/5G4A0262.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 16000 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:10:25","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 16000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0262","path":"FoxFox/5G4A0262.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0262.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/5G4A0262.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"Canon Canon EOS R7 1/640s F2 ISO 16000 213mm 120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x ","exif_data":{"EXIF DateTimeOriginal":"2024:02:25 19:10:25","EXIF ExposureTime":"1/640s","EXIF FNumber":"F2","EXIF FocalLength":"213mm","EXIF ISOSpeedRatings":"ISO 16000","EXIF LensModel":"120-300mm F2.8 DG OS HSM | Sports 013 + ADAPTER EF-EOS R 0.71x","Image Make":"Canon","Image Model":"Canon EOS R7"},"location":[],"name":"5G4A0262","path":"FoxFox/5G4A0262.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0262.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/5G4A0262.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0262.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/5G4A0262.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF2186-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2186-Enhanced-NR.jpg"
+            name="DSCF2186-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2186-Enhanced-NR.jpg"
             desc=" - · - "
             share="FoxFox/DSCF2186-Enhanced-NR.jpg"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/320s F9 ISO 12800 600mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 09:50:44","EXIF ExposureTime":"1/320s","EXIF FNumber":"F9","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2186-Enhanced-NR","path":"FoxFox/DSCF2186-Enhanced-NR.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2186-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2186-Enhanced-NR.jpg"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/320s F9 ISO 12800 600mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 09:50:44","EXIF ExposureTime":"1/320s","EXIF FNumber":"F9","EXIF FocalLength":"600mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2186-Enhanced-NR","path":"FoxFox/DSCF2186-Enhanced-NR.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2186-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2186-Enhanced-NR.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2186-Enhanced-NR.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2186-Enhanced-NR.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF2554-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2554-Enhanced-NR.webp"
+            name="DSCF2554-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2554-Enhanced-NR.webp"
             desc=" - · - "
             share="FoxFox/DSCF2554-Enhanced-NR.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/400s F9 ISO 12800 199.3mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:25:50","EXIF ExposureTime":"1/400s","EXIF FNumber":"F9","EXIF FocalLength":"199.3mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2554-Enhanced-NR","path":"FoxFox/DSCF2554-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2554-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2554-Enhanced-NR.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/400s F9 ISO 12800 199.3mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:25:50","EXIF ExposureTime":"1/400s","EXIF FNumber":"F9","EXIF FocalLength":"199.3mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2554-Enhanced-NR","path":"FoxFox/DSCF2554-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2554-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2554-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2554-Enhanced-NR.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2554-Enhanced-NR.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF2607-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2607-Enhanced-NR.webp"
+            name="DSCF2607-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2607-Enhanced-NR.webp"
             desc=" - · - "
             share="FoxFox/DSCF2607-Enhanced-NR.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/450s F9 ISO 12800 166.8mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:26:19","EXIF ExposureTime":"1/450s","EXIF FNumber":"F9","EXIF FocalLength":"166.8mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2607-Enhanced-NR","path":"FoxFox/DSCF2607-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2607-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2607-Enhanced-NR.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/450s F9 ISO 12800 166.8mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:26:19","EXIF ExposureTime":"1/450s","EXIF FNumber":"F9","EXIF FocalLength":"166.8mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2607-Enhanced-NR","path":"FoxFox/DSCF2607-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2607-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2607-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2607-Enhanced-NR.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2607-Enhanced-NR.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF2757-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2757-Enhanced-NR.webp"
+            name="DSCF2757-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2757-Enhanced-NR.webp"
             desc=" - · - "
             share="FoxFox/DSCF2757-Enhanced-NR.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/600s F6.4 ISO 12800 199.3mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:28:39","EXIF ExposureTime":"1/600s","EXIF FNumber":"F6.4","EXIF FocalLength":"199.3mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2757-Enhanced-NR","path":"FoxFox/DSCF2757-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2757-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2757-Enhanced-NR.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/600s F6.4 ISO 12800 199.3mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:28:39","EXIF ExposureTime":"1/600s","EXIF FNumber":"F6.4","EXIF FocalLength":"199.3mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2757-Enhanced-NR","path":"FoxFox/DSCF2757-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2757-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2757-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2757-Enhanced-NR.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2757-Enhanced-NR.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF2775-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2775-Enhanced-NR.webp"
+            name="DSCF2775-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2775-Enhanced-NR.webp"
             desc=" - · - "
             share="FoxFox/DSCF2775-Enhanced-NR.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/640s F6.4 ISO 12800 264.7mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:28:43","EXIF ExposureTime":"1/640s","EXIF FNumber":"F6.4","EXIF FocalLength":"264.7mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2775-Enhanced-NR","path":"FoxFox/DSCF2775-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2775-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF2775-Enhanced-NR.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/640s F6.4 ISO 12800 264.7mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:18 10:28:43","EXIF ExposureTime":"1/640s","EXIF FNumber":"F6.4","EXIF FocalLength":"264.7mm","EXIF ISOSpeedRatings":"ISO 12800","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF2775-Enhanced-NR","path":"FoxFox/DSCF2775-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2775-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF2775-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2775-Enhanced-NR.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF2775-Enhanced-NR.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF3835-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF3835-Enhanced-NR.webp"
+            name="DSCF3835-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF3835-Enhanced-NR.webp"
             desc=" - · - "
             share="FoxFox/DSCF3835-Enhanced-NR.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/1000s F7.1 ISO 2500 405.6mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:27 09:12:40","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F7.1","EXIF FocalLength":"405.6mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF3835-Enhanced-NR","path":"FoxFox/DSCF3835-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF3835-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF3835-Enhanced-NR.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/1000s F7.1 ISO 2500 405.6mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:27 09:12:40","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F7.1","EXIF FocalLength":"405.6mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF3835-Enhanced-NR","path":"FoxFox/DSCF3835-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF3835-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF3835-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF3835-Enhanced-NR.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF3835-Enhanced-NR.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="DSCF4213-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF4213-Enhanced-NR.webp"
+            name="DSCF4213-Enhanced-NR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF4213-Enhanced-NR.webp"
             desc=" - · - "
             share="FoxFox/DSCF4213-Enhanced-NR.webp"
             video=""
-            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/1000s F8 ISO 2500 539mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:27 09:16:01","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F8","EXIF FocalLength":"539mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4213-Enhanced-NR","path":"FoxFox/DSCF4213-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF4213-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/FoxFox/DSCF4213-Enhanced-NR.webp"}'
+            extra='{"desc":null,"dir":"FoxFox","exif":"FUJIFILM X-S20 1/1000s F8 ISO 2500 539mm XF150-600mmF5.6-8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:04:27 09:16:01","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F8","EXIF FocalLength":"539mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF150-600mmF5.6-8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4213-Enhanced-NR","path":"FoxFox/DSCF4213-Enhanced-NR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF4213-Enhanced-NR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/FoxFox/DSCF4213-Enhanced-NR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF4213-Enhanced-NR.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//FoxFox/DSCF4213-Enhanced-NR.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1040,14 +1057,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

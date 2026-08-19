@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album default-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF0583" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0583.jpg"
+            name="DSCF0583" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0583.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0583.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0583","path":"CiShouTower/DSCF0583.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0583.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0583.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0583","path":"CiShouTower/DSCF0583.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0583.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0583.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0583.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0583.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF0594" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0594.jpg"
+            name="DSCF0594" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0594.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0594.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0594","path":"CiShouTower/DSCF0594.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0594.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0594.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0594","path":"CiShouTower/DSCF0594.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0594.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0594.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0594.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0594.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF0603" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0603.jpg"
+            name="DSCF0603" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0603.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0603.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0603","path":"CiShouTower/DSCF0603.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0603.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0603.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0603","path":"CiShouTower/DSCF0603.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0603.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0603.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0603.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0603.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="DSCF0606" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0606.jpg"
+            name="DSCF0606" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0606.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0606.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0606","path":"CiShouTower/DSCF0606.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0606.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0606.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0606","path":"CiShouTower/DSCF0606.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0606.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0606.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0606.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0606.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF0611" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0611.jpg"
+            name="DSCF0611" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0611.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0611.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0611","path":"CiShouTower/DSCF0611.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0611.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0611.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0611","path":"CiShouTower/DSCF0611.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0611.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0611.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0611.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0611.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF0612" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0612.jpg"
+            name="DSCF0612" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0612.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0612.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0612","path":"CiShouTower/DSCF0612.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0612.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0612.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0612","path":"CiShouTower/DSCF0612.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0612.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0612.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0612.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0612.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF0615" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0615.jpg"
+            name="DSCF0615" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0615.jpg"
             desc=" - · - "
             share="CiShouTower/DSCF0615.jpg"
             video=""
-            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0615","path":"CiShouTower/DSCF0615.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0615.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CiShouTower/DSCF0615.jpg"}'
+            extra='{"desc":null,"dir":"CiShouTower","exif":"","exif_data":{},"location":[],"name":"DSCF0615","path":"CiShouTower/DSCF0615.jpg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0615.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CiShouTower/DSCF0615.jpg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0615.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CiShouTower/DSCF0615.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -939,14 +956,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

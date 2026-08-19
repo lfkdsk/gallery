@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF6442" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6442.webp"
+            name="DSCF6442" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6442.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6442.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2200s F4 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:47:41","EXIF ExposureTime":"1/2200s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6442","path":"tahoe-summer/DSCF6442.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6442.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6442.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2200s F4 ISO 320 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:47:41","EXIF ExposureTime":"1/2200s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6442","path":"tahoe-summer/DSCF6442.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6442.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6442.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6442.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6442.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="IMG_0585" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0585.webp"
+            name="IMG_0585" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0585.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0585.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/1748s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:55:10","EXIF ExposureTime":"1/1748s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04629444444444,-119.94829444444444],"name":"IMG_0585","path":"tahoe-summer/IMG_0585.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0585.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0585.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/1748s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:55:10","EXIF ExposureTime":"1/1748s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04629444444444,-119.94829444444444],"name":"IMG_0585","path":"tahoe-summer/IMG_0585.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0585.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0585.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0585.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0585.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="IMG_0590" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0590.webp"
+            name="IMG_0590" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0590.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0590.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/507s F2.8 ISO 50 15.7mm iPhone 15 Pro Max back triple camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:55:24","EXIF ExposureTime":"1/507s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04628888888889,-119.9482888888889],"name":"IMG_0590","path":"tahoe-summer/IMG_0590.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0590.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0590.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/507s F2.8 ISO 50 15.7mm iPhone 15 Pro Max back triple camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:55:24","EXIF ExposureTime":"1/507s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04628888888889,-119.9482888888889],"name":"IMG_0590","path":"tahoe-summer/IMG_0590.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0590.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0590.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0590.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0590.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="IMG_0597" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0597.webp"
+            name="IMG_0597" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0597.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0597.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/1395s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:57:58","EXIF ExposureTime":"1/1395s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04632222222222,-119.94838611111112],"name":"IMG_0597","path":"tahoe-summer/IMG_0597.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0597.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0597.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/1395s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 11:57:58","EXIF ExposureTime":"1/1395s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04632222222222,-119.94838611111112],"name":"IMG_0597","path":"tahoe-summer/IMG_0597.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0597.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0597.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0597.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0597.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="IMG_0610" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0610.webp"
+            name="IMG_0610" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0610.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0610.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/1449s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 12:07:33","EXIF ExposureTime":"1/1449s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04631388888889,-119.94777777777779],"name":"IMG_0610","path":"tahoe-summer/IMG_0610.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0610.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0610.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/1449s F2.2 ISO 50 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 12:07:33","EXIF ExposureTime":"1/1449s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04631388888889,-119.94777777777779],"name":"IMG_0610","path":"tahoe-summer/IMG_0610.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0610.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0610.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0610.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0610.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="IMG_0611" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0611.webp"
+            name="IMG_0611" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0611.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0611.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/4608s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 12:23:44","EXIF ExposureTime":"1/4608s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04638611111111,-119.9478388888889],"name":"IMG_0611","path":"tahoe-summer/IMG_0611.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0611.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0611.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/4608s F1.8 ISO 64 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 12:23:44","EXIF ExposureTime":"1/4608s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 64","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04638611111111,-119.9478388888889],"name":"IMG_0611","path":"tahoe-summer/IMG_0611.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0611.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0611.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0611.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0611.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="IMG_0612" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0612.webp"
+            name="IMG_0612" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0612.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0612.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/3597s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 12:26:16","EXIF ExposureTime":"1/3597s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04606666666667,-119.94715000000001],"name":"IMG_0612","path":"tahoe-summer/IMG_0612.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0612.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0612.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/3597s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 12:26:16","EXIF ExposureTime":"1/3597s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.04606666666667,-119.94715000000001],"name":"IMG_0612","path":"tahoe-summer/IMG_0612.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0612.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0612.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0612.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0612.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF6454" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6454.webp"
+            name="DSCF6454" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6454.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6454.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2500s F4 ISO 320 18.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:15:02","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F4","EXIF FocalLength":"18.4mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6454","path":"tahoe-summer/DSCF6454.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6454.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6454.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2500s F4 ISO 320 18.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:15:02","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F4","EXIF FocalLength":"18.4mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6454","path":"tahoe-summer/DSCF6454.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6454.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6454.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6454.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6454.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF6462" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6462.webp"
+            name="DSCF6462" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6462.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6462.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F4 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:19:48","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F4","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6462","path":"tahoe-summer/DSCF6462.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6462.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6462.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F4 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:19:48","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F4","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6462","path":"tahoe-summer/DSCF6462.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6462.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6462.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6462.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6462.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF6502" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6502.webp"
+            name="DSCF6502" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6502.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6502.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/300s F5.6 ISO 160 41.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:46:52","EXIF ExposureTime":"1/300s","EXIF FNumber":"F5.6","EXIF FocalLength":"41.1mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6502","path":"tahoe-summer/DSCF6502.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6502.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6502.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/300s F5.6 ISO 160 41.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:46:52","EXIF ExposureTime":"1/300s","EXIF FNumber":"F5.6","EXIF FocalLength":"41.1mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6502","path":"tahoe-summer/DSCF6502.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6502.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6502.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6502.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6502.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF6525" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6525.webp"
+            name="DSCF6525" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6525.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6525.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2000s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:48:36","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6525","path":"tahoe-summer/DSCF6525.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6525.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6525.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2000s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:48:36","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6525","path":"tahoe-summer/DSCF6525.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6525.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6525.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6525.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6525.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="DSCF6543" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6543.webp"
+            name="DSCF6543" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6543.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6543.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/1900s F2.8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:48:47","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6543","path":"tahoe-summer/DSCF6543.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6543.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6543.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/1900s F2.8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:48:47","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6543","path":"tahoe-summer/DSCF6543.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6543.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6543.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6543.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6543.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -888,11 +905,11 @@
           
           
           <a class="album-item" id="12"
-            name="DSCF6578" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6578.webp"
+            name="DSCF6578" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6578.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6578.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:50:18","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6578","path":"tahoe-summer/DSCF6578.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6578.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6578.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:50:18","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6578","path":"tahoe-summer/DSCF6578.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6578.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6578.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6578.webp"
             aria-label="the photo 12"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6578.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -909,11 +926,11 @@
           
           
           <a class="album-item" id="13"
-            name="IMG_0631" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0631.webp"
+            name="IMG_0631" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0631.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0631.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/2710s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:50:55","EXIF ExposureTime":"1/2710s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.205913888888894,-119.92993055555556],"name":"IMG_0631","path":"tahoe-summer/IMG_0631.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0631.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0631.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/2710s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:50:55","EXIF ExposureTime":"1/2710s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[39.205913888888894,-119.92993055555556],"name":"IMG_0631","path":"tahoe-summer/IMG_0631.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0631.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0631.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0631.webp"
             aria-label="the photo 13"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0631.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -930,11 +947,11 @@
           
           
           <a class="album-item" id="14"
-            name="DSCF6629" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6629.webp"
+            name="DSCF6629" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6629.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6629.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/1600s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:52:14","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6629","path":"tahoe-summer/DSCF6629.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6629.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6629.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/1600s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:52:14","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6629","path":"tahoe-summer/DSCF6629.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6629.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6629.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6629.webp"
             aria-label="the photo 14"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6629.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -951,11 +968,11 @@
           
           
           <a class="album-item" id="15"
-            name="DSCF6647" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6647.webp"
+            name="DSCF6647" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6647.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6647.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:56:06","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6647","path":"tahoe-summer/DSCF6647.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6647.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6647.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 13:56:06","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6647","path":"tahoe-summer/DSCF6647.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6647.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6647.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6647.webp"
             aria-label="the photo 15"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6647.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -972,11 +989,11 @@
           
           
           <a class="album-item" id="16"
-            name="DSCF6665" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6665.webp"
+            name="DSCF6665" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6665.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6665.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:10:09","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6665","path":"tahoe-summer/DSCF6665.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6665.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6665.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:10:09","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6665","path":"tahoe-summer/DSCF6665.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6665.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6665.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6665.webp"
             aria-label="the photo 16"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6665.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -993,11 +1010,11 @@
           
           
           <a class="album-item" id="17"
-            name="DSCF6671" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6671.webp"
+            name="DSCF6671" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6671.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6671.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/3500s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:10:53","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6671","path":"tahoe-summer/DSCF6671.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6671.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6671.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/3500s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:10:53","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6671","path":"tahoe-summer/DSCF6671.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6671.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6671.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6671.webp"
             aria-label="the photo 17"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6671.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1014,11 +1031,11 @@
           
           
           <a class="album-item" id="18"
-            name="DSCF6683" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6683.webp"
+            name="DSCF6683" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6683.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6683.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/800s F9 ISO 320 44.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:12:45","EXIF ExposureTime":"1/800s","EXIF FNumber":"F9","EXIF FocalLength":"44.7mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6683","path":"tahoe-summer/DSCF6683.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6683.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6683.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/800s F9 ISO 320 44.7mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:12:45","EXIF ExposureTime":"1/800s","EXIF FNumber":"F9","EXIF FocalLength":"44.7mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6683","path":"tahoe-summer/DSCF6683.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6683.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6683.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6683.webp"
             aria-label="the photo 18"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6683.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1035,11 +1052,11 @@
           
           
           <a class="album-item" id="19"
-            name="DSCF6689" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6689.webp"
+            name="DSCF6689" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6689.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6689.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/420s F9 ISO 160 30.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:12:48","EXIF ExposureTime":"1/420s","EXIF FNumber":"F9","EXIF FocalLength":"30.8mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6689","path":"tahoe-summer/DSCF6689.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6689.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6689.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/420s F9 ISO 160 30.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:12:48","EXIF ExposureTime":"1/420s","EXIF FNumber":"F9","EXIF FocalLength":"30.8mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6689","path":"tahoe-summer/DSCF6689.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6689.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6689.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6689.webp"
             aria-label="the photo 19"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6689.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1056,11 +1073,11 @@
           
           
           <a class="album-item" id="20"
-            name="DSCF6737" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6737.webp"
+            name="DSCF6737" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6737.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6737.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/3800s F4 ISO 320 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:18:57","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6737","path":"tahoe-summer/DSCF6737.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6737.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6737.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/3800s F4 ISO 320 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:18:57","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6737","path":"tahoe-summer/DSCF6737.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6737.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6737.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6737.webp"
             aria-label="the photo 20"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6737.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1077,11 +1094,11 @@
           
           
           <a class="album-item" id="21"
-            name="DSCF6741" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6741.webp"
+            name="DSCF6741" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6741.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6741.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/3000s F4 ISO 160 20.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:26:25","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"20.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6741","path":"tahoe-summer/DSCF6741.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6741.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6741.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/3000s F4 ISO 160 20.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:26:25","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"20.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6741","path":"tahoe-summer/DSCF6741.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6741.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6741.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6741.webp"
             aria-label="the photo 21"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6741.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1098,11 +1115,11 @@
           
           
           <a class="album-item" id="22"
-            name="DSCF6745" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6745.webp"
+            name="DSCF6745" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6745.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6745.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:27:01","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6745","path":"tahoe-summer/DSCF6745.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6745.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6745.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2400s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:27:01","EXIF ExposureTime":"1/2400s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6745","path":"tahoe-summer/DSCF6745.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6745.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6745.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6745.webp"
             aria-label="the photo 22"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6745.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1119,11 +1136,11 @@
           
           
           <a class="album-item" id="23"
-            name="DSCF6773" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6773.webp"
+            name="DSCF6773" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6773.webp"
             desc=" - · - "
             share="tahoe-summer/DSCF6773.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2000s F2.8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:37:17","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6773","path":"tahoe-summer/DSCF6773.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6773.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/DSCF6773.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"FUJIFILM X-S20 1/2000s F2.8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 14:37:17","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6773","path":"tahoe-summer/DSCF6773.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6773.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/DSCF6773.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6773.webp"
             aria-label="the photo 23"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/DSCF6773.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1140,11 +1157,11 @@
           
           
           <a class="album-item" id="24"
-            name="IMG_0664" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0664.webp"
+            name="IMG_0664" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0664.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0664.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/172s F1.9 ISO 25 2.7mm iPhone 15 Pro Max front TrueDepth camera 2.69mm f/1.9 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 18:04:08","EXIF ExposureTime":"1/172s","EXIF FNumber":"F1.9","EXIF FocalLength":"2.7mm","EXIF ISOSpeedRatings":"ISO 25","EXIF LensModel":"iPhone 15 Pro Max front TrueDepth camera 2.69mm f/1.9","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[38.95489166666667,-120.10842222222222],"name":"IMG_0664","path":"tahoe-summer/IMG_0664.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0664.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0664.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/172s F1.9 ISO 25 2.7mm iPhone 15 Pro Max front TrueDepth camera 2.69mm f/1.9 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 18:04:08","EXIF ExposureTime":"1/172s","EXIF FNumber":"F1.9","EXIF FocalLength":"2.7mm","EXIF ISOSpeedRatings":"ISO 25","EXIF LensModel":"iPhone 15 Pro Max front TrueDepth camera 2.69mm f/1.9","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[38.95489166666667,-120.10842222222222],"name":"IMG_0664","path":"tahoe-summer/IMG_0664.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0664.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0664.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0664.webp"
             aria-label="the photo 24"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0664.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1161,11 +1178,11 @@
           
           
           <a class="album-item" id="25"
-            name="IMG_0667" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0667.webp"
+            name="IMG_0667" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0667.webp"
             desc=" - · - "
             share="tahoe-summer/IMG_0667.webp"
             video=""
-            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/359s F2.2 ISO 40 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 18:06:23","EXIF ExposureTime":"1/359s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[38.95509722222223,-120.10831388888889],"name":"IMG_0667","path":"tahoe-summer/IMG_0667.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0667.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/tahoe-summer/IMG_0667.webp"}'
+            extra='{"desc":null,"dir":"tahoe-summer","exif":"Apple iPhone 15 Pro Max 1/359s F2.2 ISO 40 2.2mm iPhone 15 Pro Max back triple camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:06:19 18:06:23","EXIF ExposureTime":"1/359s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 15 Pro Max back triple camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[38.95509722222223,-120.10831388888889],"name":"IMG_0667","path":"tahoe-summer/IMG_0667.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0667.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/tahoe-summer/IMG_0667.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0667.webp"
             aria-label="the photo 25"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//tahoe-summer/IMG_0667.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1338,14 +1355,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

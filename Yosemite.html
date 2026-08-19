@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF0132-4" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/DSCF0132-4.webp"
+            name="DSCF0132-4" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/DSCF0132-4.webp"
             desc=" - · - "
             share="Yosemite/DSCF0132-4.webp"
             video=""
-            extra='{"desc":null,"dir":"Yosemite","exif":"FUJIFILM X-S20 30s F8 ISO 80 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:10:25 18:32:31","EXIF ExposureTime":"30s","EXIF FNumber":"F8","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.71546583333333,-119.67676972166667],"name":"DSCF0132-4","path":"Yosemite/DSCF0132-4.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0132-4.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/DSCF0132-4.webp"}'
+            extra='{"desc":null,"dir":"Yosemite","exif":"FUJIFILM X-S20 30s F8 ISO 80 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:10:25 18:32:31","EXIF ExposureTime":"30s","EXIF FNumber":"F8","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.71546583333333,-119.67676972166667],"name":"DSCF0132-4","path":"Yosemite/DSCF0132-4.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0132-4.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/DSCF0132-4.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0132-4.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0132-4.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF0133-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/DSCF0133-2.webp"
+            name="DSCF0133-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/DSCF0133-2.webp"
             desc=" - · - "
             share="Yosemite/DSCF0133-2.webp"
             video=""
-            extra='{"desc":null,"dir":"Yosemite","exif":"FUJIFILM X-S20 40s F8 ISO 80 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:10:25 18:34:10","EXIF ExposureTime":"40s","EXIF FNumber":"F8","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.71546638833333,-119.67677583333334],"name":"DSCF0133-2","path":"Yosemite/DSCF0133-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0133-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/DSCF0133-2.webp"}'
+            extra='{"desc":null,"dir":"Yosemite","exif":"FUJIFILM X-S20 40s F8 ISO 80 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:10:25 18:34:10","EXIF ExposureTime":"40s","EXIF FNumber":"F8","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.71546638833333,-119.67677583333334],"name":"DSCF0133-2","path":"Yosemite/DSCF0133-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0133-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/DSCF0133-2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0133-2.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0133-2.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF0134-2-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/DSCF0134-2-2.webp"
+            name="DSCF0134-2-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/DSCF0134-2-2.webp"
             desc=" - · - "
             share="Yosemite/DSCF0134-2-2.webp"
             video=""
-            extra='{"desc":null,"dir":"Yosemite","exif":"FUJIFILM X-S20 40s F8 ISO 80 37.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:10:25 18:35:16","EXIF ExposureTime":"40s","EXIF FNumber":"F8","EXIF FocalLength":"37.6mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.7154611,-119.67676943333333],"name":"DSCF0134-2-2","path":"Yosemite/DSCF0134-2-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0134-2-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/DSCF0134-2-2.webp"}'
+            extra='{"desc":null,"dir":"Yosemite","exif":"FUJIFILM X-S20 40s F8 ISO 80 37.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:10:25 18:35:16","EXIF ExposureTime":"40s","EXIF FNumber":"F8","EXIF FocalLength":"37.6mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.7154611,-119.67676943333333],"name":"DSCF0134-2-2","path":"Yosemite/DSCF0134-2-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0134-2-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/DSCF0134-2-2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0134-2-2.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/DSCF0134-2-2.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="IMG_4992" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/IMG_4992.webp"
+            name="IMG_4992" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/IMG_4992.webp"
             desc=" - · - "
             share="Yosemite/IMG_4992.webp"
-            video="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/IMG_4992.mov"
-            extra='{"desc":null,"dir":"Yosemite","exif":"Apple iPhone 15 Pro Max 1/121s F1.8 ISO 125 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:12:19 06:56:12","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 125","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.71573611111111,-119.67686388888889],"name":"IMG_4992","path":"Yosemite/IMG_4992.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/IMG_4992.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/IMG_4992.webp"}'
+            video="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/IMG_4992.mov"
+            extra='{"desc":null,"dir":"Yosemite","exif":"Apple iPhone 15 Pro Max 1/121s F1.8 ISO 125 6.8mm iPhone 15 Pro Max back triple camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:12:19 06:56:12","EXIF ExposureTime":"1/121s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 125","EXIF LensModel":"iPhone 15 Pro Max back triple camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.71573611111111,-119.67686388888889],"name":"IMG_4992","path":"Yosemite/IMG_4992.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/IMG_4992.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/IMG_4992.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/IMG_4992.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/IMG_4992.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="B0001847-HDR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/B0001847-HDR.webp"
+            name="B0001847-HDR" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/B0001847-HDR.webp"
             desc=" - · - "
             share="Yosemite/B0001847-HDR.webp"
             video=""
-            extra='{"desc":null,"dir":"Yosemite","exif":"Hasselblad X1D II 50C 1/10s F8 ISO 100 45mm XCD 45P ","exif_data":{"EXIF DateTimeOriginal":"2025:12:19 19:30:45","EXIF ExposureTime":"1/10s","EXIF FNumber":"F8","EXIF FocalLength":"45mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"XCD 45P","Image Make":"Hasselblad","Image Model":"X1D II 50C"},"location":[37.71564383333333,-119.676944305],"name":"B0001847-HDR","path":"Yosemite/B0001847-HDR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001847-HDR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/B0001847-HDR.webp"}'
+            extra='{"desc":null,"dir":"Yosemite","exif":"Hasselblad X1D II 50C 1/10s F8 ISO 100 45mm XCD 45P ","exif_data":{"EXIF DateTimeOriginal":"2025:12:19 19:30:45","EXIF ExposureTime":"1/10s","EXIF FNumber":"F8","EXIF FocalLength":"45mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"XCD 45P","Image Make":"Hasselblad","Image Model":"X1D II 50C"},"location":[37.71564383333333,-119.676944305],"name":"B0001847-HDR","path":"Yosemite/B0001847-HDR.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001847-HDR.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/B0001847-HDR.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001847-HDR.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001847-HDR.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="B0001583_denoised_p_1780132753651" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/B0001583_denoised_p_1780132753651.webp"
+            name="B0001583_denoised_p_1780132753651" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/B0001583_denoised_p_1780132753651.webp"
             desc=" - · - "
             share="Yosemite/B0001583_denoised_p_1780132753651.webp"
             video=""
-            extra='{"desc":null,"dir":"Yosemite","exif":"Hasselblad X2D II 100C 456s F8 ISO 50 50mm XCD 35-100E ","exif_data":{"EXIF DateTimeOriginal":"2026:05:24 20:53:38","EXIF ExposureTime":"456s","EXIF FNumber":"F8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"B0001583_denoised_p_1780132753651","path":"Yosemite/B0001583_denoised_p_1780132753651.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001583_denoised_p_1780132753651.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Yosemite/B0001583_denoised_p_1780132753651.webp"}'
+            extra='{"desc":null,"dir":"Yosemite","exif":"Hasselblad X2D II 100C 456s F8 ISO 50 50mm XCD 35-100E ","exif_data":{"EXIF DateTimeOriginal":"2026:05:24 20:53:38","EXIF ExposureTime":"456s","EXIF FNumber":"F8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"B0001583_denoised_p_1780132753651","path":"Yosemite/B0001583_denoised_p_1780132753651.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001583_denoised_p_1780132753651.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Yosemite/B0001583_denoised_p_1780132753651.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001583_denoised_p_1780132753651.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Yosemite/B0001583_denoised_p_1780132753651.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -918,14 +935,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

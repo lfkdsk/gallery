@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="IMG_2932" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2932.webp"
+            name="IMG_2932" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2932.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2932.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1748s F2.2 ISO 32 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 18:52:14","EXIF ExposureTime":"1/1748s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90465555555556,-122.61436111111111],"name":"IMG_2932","path":"Trojan-Point/IMG_2932.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2932.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2932.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1748s F2.2 ISO 32 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 18:52:14","EXIF ExposureTime":"1/1748s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90465555555556,-122.61436111111111],"name":"IMG_2932","path":"Trojan-Point/IMG_2932.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2932.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2932.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2932.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2932.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF8681" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8681.webp"
+            name="DSCF8681" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8681.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8681.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/1000s F6.3 ISO 160 39.7mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:19:21","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F6.3","EXIF FocalLength":"39.7mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8681","path":"Trojan-Point/DSCF8681.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8681.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8681.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/1000s F6.3 ISO 160 39.7mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:19:21","EXIF ExposureTime":"1/1000s","EXIF FNumber":"F6.3","EXIF FocalLength":"39.7mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8681","path":"Trojan-Point/DSCF8681.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8681.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8681.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8681.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8681.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF8686" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8686.webp"
+            name="DSCF8686" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8686.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8686.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/1300s F4 ISO 320 27.5mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:28:26","EXIF ExposureTime":"1/1300s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8686","path":"Trojan-Point/DSCF8686.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8686.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8686.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/1300s F4 ISO 320 27.5mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:28:26","EXIF ExposureTime":"1/1300s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8686","path":"Trojan-Point/DSCF8686.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8686.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8686.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8686.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8686.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="IMG_2938" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2938.webp"
+            name="IMG_2938" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2938.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2938.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1894s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:29:24","EXIF ExposureTime":"1/1894s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90466388888889,-122.61799444444443],"name":"IMG_2938","path":"Trojan-Point/IMG_2938.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2938.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2938.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1894s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:29:24","EXIF ExposureTime":"1/1894s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90466388888889,-122.61799444444443],"name":"IMG_2938","path":"Trojan-Point/IMG_2938.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2938.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2938.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2938.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2938.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF8699" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8699.webp"
+            name="DSCF8699" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8699.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8699.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/180s F6.3 ISO 250 64.3mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:49:29","EXIF ExposureTime":"1/180s","EXIF FNumber":"F6.3","EXIF FocalLength":"64.3mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8699","path":"Trojan-Point/DSCF8699.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8699.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8699.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/180s F6.3 ISO 250 64.3mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:49:29","EXIF ExposureTime":"1/180s","EXIF FNumber":"F6.3","EXIF FocalLength":"64.3mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8699","path":"Trojan-Point/DSCF8699.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8699.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8699.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8699.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8699.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="IMG_2942" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2942.webp"
+            name="IMG_2942" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2942.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2942.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/751s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:53:03","EXIF ExposureTime":"1/751s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.89933888888889,-122.61820277777777],"name":"IMG_2942","path":"Trojan-Point/IMG_2942.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2942.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2942.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/751s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 19:53:03","EXIF ExposureTime":"1/751s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.89933888888889,-122.61820277777777],"name":"IMG_2942","path":"Trojan-Point/IMG_2942.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2942.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2942.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2942.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2942.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF8706" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8706.webp"
+            name="DSCF8706" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8706.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8706.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/125s F4 ISO 320 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:00:02","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8706","path":"Trojan-Point/DSCF8706.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8706.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8706.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/125s F4 ISO 320 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:00:02","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8706","path":"Trojan-Point/DSCF8706.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8706.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8706.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8706.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8706.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF8708" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8708.webp"
+            name="DSCF8708" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8708.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8708.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/420s F4 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:00:31","EXIF ExposureTime":"1/420s","EXIF FNumber":"F4","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8708","path":"Trojan-Point/DSCF8708.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8708.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8708.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/420s F4 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:00:31","EXIF ExposureTime":"1/420s","EXIF FNumber":"F4","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8708","path":"Trojan-Point/DSCF8708.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8708.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8708.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8708.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8708.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="IMG_2960" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2960.webp"
+            name="IMG_2960" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2960.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2960.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/5780s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:07:24","EXIF ExposureTime":"1/5780s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90106111111111,-122.61850555555554],"name":"IMG_2960","path":"Trojan-Point/IMG_2960.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2960.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2960.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/5780s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:07:24","EXIF ExposureTime":"1/5780s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90106111111111,-122.61850555555554],"name":"IMG_2960","path":"Trojan-Point/IMG_2960.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2960.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2960.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2960.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2960.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="IMG_2962" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2962.webp"
+            name="IMG_2962" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2962.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2962.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/3057s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:07:45","EXIF ExposureTime":"1/3057s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90098333333333,-122.61855555555555],"name":"IMG_2962","path":"Trojan-Point/IMG_2962.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2962.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2962.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/3057s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:07:45","EXIF ExposureTime":"1/3057s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.90098333333333,-122.61855555555555],"name":"IMG_2962","path":"Trojan-Point/IMG_2962.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2962.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2962.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2962.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2962.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="IMG_2966" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2966.webp"
+            name="IMG_2966" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2966.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2966.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1033s F2.8 ISO 40 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:09:02","EXIF ExposureTime":"1/1033s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.901038888888884,-122.61850277777778],"name":"IMG_2966","path":"Trojan-Point/IMG_2966.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2966.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2966.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1033s F2.8 ISO 40 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 20:09:02","EXIF ExposureTime":"1/1033s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 40","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.901038888888884,-122.61850277777778],"name":"IMG_2966","path":"Trojan-Point/IMG_2966.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2966.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2966.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2966.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2966.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="IMG_2980" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2980.webp"
+            name="IMG_2980" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2980.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2980.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/30s F1.8 ISO 500 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 22:06:19","EXIF ExposureTime":"1/30s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.56404722222222,-122.32733055555555],"name":"IMG_2980","path":"Trojan-Point/IMG_2980.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2980.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2980.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/30s F1.8 ISO 500 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 22:06:19","EXIF ExposureTime":"1/30s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.56404722222222,-122.32733055555555],"name":"IMG_2980","path":"Trojan-Point/IMG_2980.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2980.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2980.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2980.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2980.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -888,11 +905,11 @@
           
           
           <a class="album-item" id="12"
-            name="IMG_2981" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2981.webp"
+            name="IMG_2981" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2981.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2981.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/30s F2.2 ISO 250 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 22:06:31","EXIF ExposureTime":"1/30s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.56404722222222,-122.32733055555555],"name":"IMG_2981","path":"Trojan-Point/IMG_2981.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2981.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2981.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/30s F2.2 ISO 250 2.2mm iPhone 15 Pro Max back camera 2.22mm f/2.2 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 22:06:31","EXIF ExposureTime":"1/30s","EXIF FNumber":"F2.2","EXIF FocalLength":"2.2mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"iPhone 15 Pro Max back camera 2.22mm f/2.2","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.56404722222222,-122.32733055555555],"name":"IMG_2981","path":"Trojan-Point/IMG_2981.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2981.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2981.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2981.webp"
             aria-label="the photo 12"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2981.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -909,11 +926,11 @@
           
           
           <a class="album-item" id="13"
-            name="IMG_2984" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2984.webp"
+            name="IMG_2984" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2984.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_2984.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/56s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 22:12:16","EXIF ExposureTime":"1/56s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.56403611111111,-122.32735],"name":"IMG_2984","path":"Trojan-Point/IMG_2984.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2984.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_2984.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/56s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:09 22:12:16","EXIF ExposureTime":"1/56s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.56403611111111,-122.32735],"name":"IMG_2984","path":"Trojan-Point/IMG_2984.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2984.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_2984.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2984.webp"
             aria-label="the photo 13"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_2984.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -930,11 +947,11 @@
           
           
           <a class="album-item" id="14"
-            name="DSCF8729" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8729.webp"
+            name="DSCF8729" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8729.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8729.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/6000s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 12:31:23","EXIF ExposureTime":"1/6000s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8729","path":"Trojan-Point/DSCF8729.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8729.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8729.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/6000s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 12:31:23","EXIF ExposureTime":"1/6000s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8729","path":"Trojan-Point/DSCF8729.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8729.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8729.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8729.webp"
             aria-label="the photo 14"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8729.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -951,11 +968,11 @@
           
           
           <a class="album-item" id="15"
-            name="IMG_3088" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_3088.webp"
+            name="IMG_3088" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_3088.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_3088.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/11235s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:00:10","EXIF ExposureTime":"1/11235s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.909974999999996,-122.60859444444444],"name":"IMG_3088","path":"Trojan-Point/IMG_3088.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3088.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_3088.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/11235s F1.8 ISO 50 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:00:10","EXIF ExposureTime":"1/11235s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.909974999999996,-122.60859444444444],"name":"IMG_3088","path":"Trojan-Point/IMG_3088.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3088.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_3088.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3088.webp"
             aria-label="the photo 15"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3088.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -972,11 +989,11 @@
           
           
           <a class="album-item" id="16"
-            name="DSCF8738" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8738.webp"
+            name="DSCF8738" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8738.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8738.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/2000s F4 ISO 160 37mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:04:36","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"37mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8738","path":"Trojan-Point/DSCF8738.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8738.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8738.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/2000s F4 ISO 160 37mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:04:36","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"37mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8738","path":"Trojan-Point/DSCF8738.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8738.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8738.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8738.webp"
             aria-label="the photo 16"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8738.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -993,11 +1010,11 @@
           
           
           <a class="album-item" id="17"
-            name="DSCF8740" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8740.webp"
+            name="DSCF8740" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8740.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8740.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/2500s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:04:54","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8740","path":"Trojan-Point/DSCF8740.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8740.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8740.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/2500s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:04:54","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8740","path":"Trojan-Point/DSCF8740.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8740.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8740.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8740.webp"
             aria-label="the photo 17"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8740.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1014,11 +1031,11 @@
           
           
           <a class="album-item" id="18"
-            name="DSCF8742" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8742.webp"
+            name="DSCF8742" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8742.webp"
             desc=" - · - "
             share="Trojan-Point/DSCF8742.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/3800s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:05:18","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8742","path":"Trojan-Point/DSCF8742.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8742.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/DSCF8742.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"FUJIFILM X-S20 1/3800s F3.5 ISO 160 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 13:05:18","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F3.5","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF8742","path":"Trojan-Point/DSCF8742.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8742.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/DSCF8742.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8742.webp"
             aria-label="the photo 18"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/DSCF8742.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1035,11 +1052,11 @@
           
           
           <a class="album-item" id="19"
-            name="IMG_3097" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_3097.webp"
+            name="IMG_3097" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_3097.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_3097.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1080s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 14:55:58","EXIF ExposureTime":"1/1080s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.87073888888889,-122.25840555555556],"name":"IMG_3097","path":"Trojan-Point/IMG_3097.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3097.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_3097.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1080s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 14:55:58","EXIF ExposureTime":"1/1080s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.87073888888889,-122.25840555555556],"name":"IMG_3097","path":"Trojan-Point/IMG_3097.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3097.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_3097.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3097.webp"
             aria-label="the photo 19"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3097.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1056,11 +1073,11 @@
           
           
           <a class="album-item" id="20"
-            name="IMG_3098" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_3098.webp"
+            name="IMG_3098" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_3098.webp"
             desc=" - · - "
             share="Trojan-Point/IMG_3098.webp"
             video=""
-            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1167s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 14:56:02","EXIF ExposureTime":"1/1167s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.87073888888889,-122.25840555555556],"name":"IMG_3098","path":"Trojan-Point/IMG_3098.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3098.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Trojan-Point/IMG_3098.webp"}'
+            extra='{"desc":null,"dir":"Trojan-Point","exif":"Apple iPhone 15 Pro Max 1/1167s F2.8 ISO 32 15.7mm iPhone 15 Pro Max back camera 15.66mm f/2.8 ","exif_data":{"EXIF DateTimeOriginal":"2025:08:17 14:56:02","EXIF ExposureTime":"1/1167s","EXIF FNumber":"F2.8","EXIF FocalLength":"15.7mm","EXIF ISOSpeedRatings":"ISO 32","EXIF LensModel":"iPhone 15 Pro Max back camera 15.66mm f/2.8","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[37.87073888888889,-122.25840555555556],"name":"IMG_3098","path":"Trojan-Point/IMG_3098.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3098.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Trojan-Point/IMG_3098.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3098.webp"
             aria-label="the photo 20"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Trojan-Point/IMG_3098.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1233,14 +1250,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

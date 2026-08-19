@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF6976" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF6976.webp"
+            name="DSCF6976" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF6976.webp"
             desc=" - · - "
             share="Fuji/DSCF6976.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/340s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:02 09:30:14","EXIF ExposureTime":"1/340s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6976","path":"Fuji/DSCF6976.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6976.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF6976.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/340s F1.2 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:02 09:30:14","EXIF ExposureTime":"1/340s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6976","path":"Fuji/DSCF6976.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6976.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF6976.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6976.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6976.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF6979" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF6979.webp"
+            name="DSCF6979" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF6979.webp"
             desc=" - · - "
             share="Fuji/DSCF6979.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/210s F2.8 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:02 09:33:57","EXIF ExposureTime":"1/210s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6979","path":"Fuji/DSCF6979.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6979.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF6979.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/210s F2.8 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:02 09:33:57","EXIF ExposureTime":"1/210s","EXIF FNumber":"F2.8","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6979","path":"Fuji/DSCF6979.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6979.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF6979.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6979.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF6979.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF7254" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7254.webp"
+            name="DSCF7254" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7254.webp"
             desc=" - · - "
             share="Fuji/DSCF7254.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/3800s F1.2 ISO 320 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 06:20:39","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7254","path":"Fuji/DSCF7254.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7254.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7254.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/3800s F1.2 ISO 320 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 06:20:39","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7254","path":"Fuji/DSCF7254.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7254.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7254.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7254.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7254.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="DSCF7258-" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7258-.webp"
+            name="DSCF7258-" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7258-.webp"
             desc=" - · - "
             share="Fuji/DSCF7258-.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/12000s F1.2 ISO 640 27mm AF 27/1.2 XF ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 06:22:21","EXIF ExposureTime":"1/12000s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7258-","path":"Fuji/DSCF7258-.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7258-.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7258-.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/12000s F1.2 ISO 640 27mm AF 27/1.2 XF ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 06:22:21","EXIF ExposureTime":"1/12000s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7258-","path":"Fuji/DSCF7258-.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7258-.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7258-.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7258-.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7258-.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF7274" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7274.webp"
+            name="DSCF7274" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7274.webp"
             desc=" - · - "
             share="Fuji/DSCF7274.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/7500s F4 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 09:16:17","EXIF ExposureTime":"1/7500s","EXIF FNumber":"F4","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7274","path":"Fuji/DSCF7274.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7274.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7274.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/7500s F4 ISO 640 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 09:16:17","EXIF ExposureTime":"1/7500s","EXIF FNumber":"F4","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7274","path":"Fuji/DSCF7274.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7274.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7274.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7274.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7274.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF7283-topaz-sharpen-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7283-topaz-sharpen-2.webp"
+            name="DSCF7283-topaz-sharpen-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7283-topaz-sharpen-2.webp"
             desc=" - · - "
             share="Fuji/DSCF7283-topaz-sharpen-2.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/1400s F5.6 ISO 640 174.3mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 10:47:37","EXIF ExposureTime":"1/1400s","EXIF FNumber":"F5.6","EXIF FocalLength":"174.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7283-topaz-sharpen-2","path":"Fuji/DSCF7283-topaz-sharpen-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7283-topaz-sharpen-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7283-topaz-sharpen-2.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/1400s F5.6 ISO 640 174.3mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 10:47:37","EXIF ExposureTime":"1/1400s","EXIF FNumber":"F5.6","EXIF FocalLength":"174.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7283-topaz-sharpen-2","path":"Fuji/DSCF7283-topaz-sharpen-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7283-topaz-sharpen-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7283-topaz-sharpen-2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7283-topaz-sharpen-2.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7283-topaz-sharpen-2.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF7288" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7288.webp"
+            name="DSCF7288" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7288.webp"
             desc=" - · - "
             share="Fuji/DSCF7288.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/2000s F5.6 ISO 640 137.2mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 10:48:34","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F5.6","EXIF FocalLength":"137.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7288","path":"Fuji/DSCF7288.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7288.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7288.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/2000s F5.6 ISO 640 137.2mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 10:48:34","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F5.6","EXIF FocalLength":"137.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7288","path":"Fuji/DSCF7288.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7288.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7288.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7288.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7288.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF7321" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7321.webp"
+            name="DSCF7321" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7321.webp"
             desc=" - · - "
             share="Fuji/DSCF7321.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/6000s F5.6 ISO 640 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 11:36:42","EXIF ExposureTime":"1/6000s","EXIF FNumber":"F5.6","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7321","path":"Fuji/DSCF7321.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7321.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7321.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/6000s F5.6 ISO 640 18mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 11:36:42","EXIF ExposureTime":"1/6000s","EXIF FNumber":"F5.6","EXIF FocalLength":"18mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7321","path":"Fuji/DSCF7321.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7321.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7321.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7321.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7321.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF7333-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7333-2.webp"
+            name="DSCF7333-2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7333-2.webp"
             desc=" - · - "
             share="Fuji/DSCF7333-2.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/2500s F7.1 ISO 640 34.5mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 12:33:37","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F7.1","EXIF FocalLength":"34.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7333-2","path":"Fuji/DSCF7333-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7333-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7333-2.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/2500s F7.1 ISO 640 34.5mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 12:33:37","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F7.1","EXIF FocalLength":"34.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7333-2","path":"Fuji/DSCF7333-2.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7333-2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7333-2.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7333-2.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7333-2.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF7341" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7341.webp"
+            name="DSCF7341" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7341.webp"
             desc=" - · - "
             share="Fuji/DSCF7341.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/950s F5.6 ISO 640 32.1mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 12:35:55","EXIF ExposureTime":"1/950s","EXIF FNumber":"F5.6","EXIF FocalLength":"32.1mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7341","path":"Fuji/DSCF7341.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7341.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7341.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/950s F5.6 ISO 640 32.1mm 18-300mm F/3.5-6.3 DiIII-A VC VXD B061X ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 12:35:55","EXIF ExposureTime":"1/950s","EXIF FNumber":"F5.6","EXIF FocalLength":"32.1mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"18-300mm F/3.5-6.3 DiIII-A VC VXD B061X","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7341","path":"Fuji/DSCF7341.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7341.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7341.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7341.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7341.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF7376" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7376.webp"
+            name="DSCF7376" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7376.webp"
             desc=" - · - "
             share="Fuji/DSCF7376.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/2200s F1.2 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 16:37:43","EXIF ExposureTime":"1/2200s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7376","path":"Fuji/DSCF7376.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7376.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7376.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/2200s F1.2 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 16:37:43","EXIF ExposureTime":"1/2200s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7376","path":"Fuji/DSCF7376.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7376.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7376.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7376.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7376.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="DSCF7377" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7377.webp"
+            name="DSCF7377" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7377.webp"
             desc=" - · - "
             share="Fuji/DSCF7377.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/20s F1.2 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 17:15:04","EXIF ExposureTime":"1/20s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7377","path":"Fuji/DSCF7377.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7377.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7377.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"FUJIFILM X-S20 1/20s F1.2 ISO 160 27mm AF 27/1.2 XF       ","exif_data":{"EXIF DateTimeOriginal":"2024:11:03 17:15:04","EXIF ExposureTime":"1/20s","EXIF FNumber":"F1.2","EXIF FocalLength":"27mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"AF 27/1.2 XF      ","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF7377","path":"Fuji/DSCF7377.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7377.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7377.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7377.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7377.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -888,11 +905,11 @@
           
           
           <a class="album-item" id="12"
-            name="DSCF7326-Enhanced-NR-topaz-denoise-sharpen" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp"
+            name="DSCF7326-Enhanced-NR-topaz-denoise-sharpen" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp"
             desc=" - · - "
             share="Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp"
             video=""
-            extra='{"desc":null,"dir":"Fuji","exif":"","exif_data":{},"location":[],"name":"DSCF7326-Enhanced-NR-topaz-denoise-sharpen","path":"Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp"}'
+            extra='{"desc":null,"dir":"Fuji","exif":"","exif_data":{},"location":[],"name":"DSCF7326-Enhanced-NR-topaz-denoise-sharpen","path":"Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp"
             aria-label="the photo 12"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//Fuji/DSCF7326-Enhanced-NR-topaz-denoise-sharpen.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1065,14 +1082,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

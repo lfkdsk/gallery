@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF4062" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4062.webp"
+            name="DSCF4062" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4062.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4062.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/750s F5.6 ISO 320 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:08:07","EXIF ExposureTime":"1/750s","EXIF FNumber":"F5.6","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4062","path":"YellowLeafDaJue/DSCF4062.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4062.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4062.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/750s F5.6 ISO 320 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:08:07","EXIF ExposureTime":"1/750s","EXIF FNumber":"F5.6","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4062","path":"YellowLeafDaJue/DSCF4062.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4062.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4062.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4062.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4062.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF4086" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4086.webp"
+            name="DSCF4086" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4086.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4086.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/220s F4 ISO 800 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:17:08","EXIF ExposureTime":"1/220s","EXIF FNumber":"F4","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4086","path":"YellowLeafDaJue/DSCF4086.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4086.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4086.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/220s F4 ISO 800 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:17:08","EXIF ExposureTime":"1/220s","EXIF FNumber":"F4","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4086","path":"YellowLeafDaJue/DSCF4086.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4086.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4086.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4086.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4086.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF4094" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4094.webp"
+            name="DSCF4094" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4094.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4094.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1800s F4 ISO 640 34.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:19:28","EXIF ExposureTime":"1/1800s","EXIF FNumber":"F4","EXIF FocalLength":"34.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4094","path":"YellowLeafDaJue/DSCF4094.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4094.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4094.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1800s F4 ISO 640 34.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:19:28","EXIF ExposureTime":"1/1800s","EXIF FNumber":"F4","EXIF FocalLength":"34.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF4094","path":"YellowLeafDaJue/DSCF4094.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4094.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4094.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4094.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4094.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="DSCF4097" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4097.webp"
+            name="DSCF4097" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4097.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4097.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/480s F4 ISO 640 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:21:25","EXIF ExposureTime":"1/480s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4097","path":"YellowLeafDaJue/DSCF4097.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4097.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4097.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/480s F4 ISO 640 27.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:21:25","EXIF ExposureTime":"1/480s","EXIF FNumber":"F4","EXIF FocalLength":"27.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4097","path":"YellowLeafDaJue/DSCF4097.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4097.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4097.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4097.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4097.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF4104" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4104.webp"
+            name="DSCF4104" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4104.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4104.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2700s F4 ISO 640 20.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:24:06","EXIF ExposureTime":"1/2700s","EXIF FNumber":"F4","EXIF FocalLength":"20.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4104","path":"YellowLeafDaJue/DSCF4104.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4104.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4104.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2700s F4 ISO 640 20.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:24:06","EXIF ExposureTime":"1/2700s","EXIF FNumber":"F4","EXIF FocalLength":"20.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4104","path":"YellowLeafDaJue/DSCF4104.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4104.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4104.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4104.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4104.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF4106" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4106.webp"
+            name="DSCF4106" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4106.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4106.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/800s F4 ISO 640 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:25:01","EXIF ExposureTime":"1/800s","EXIF FNumber":"F4","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4106","path":"YellowLeafDaJue/DSCF4106.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4106.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4106.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/800s F4 ISO 640 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:25:01","EXIF ExposureTime":"1/800s","EXIF FNumber":"F4","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4106","path":"YellowLeafDaJue/DSCF4106.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4106.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4106.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4106.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4106.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF4115" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4115.webp"
+            name="DSCF4115" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4115.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4115.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F5.6 ISO 160 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:28:58","EXIF ExposureTime":"1/500s","EXIF FNumber":"F5.6","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4115","path":"YellowLeafDaJue/DSCF4115.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4115.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4115.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F5.6 ISO 160 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:28:58","EXIF ExposureTime":"1/500s","EXIF FNumber":"F5.6","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4115","path":"YellowLeafDaJue/DSCF4115.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4115.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4115.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4115.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4115.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF4118" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4118.webp"
+            name="DSCF4118" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4118.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4118.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 56.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:30:58","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"56.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4118","path":"YellowLeafDaJue/DSCF4118.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4118.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4118.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 56.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:30:58","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"56.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4118","path":"YellowLeafDaJue/DSCF4118.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4118.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4118.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4118.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4118.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF4124" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4124.webp"
+            name="DSCF4124" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4124.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4124.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/340s F4 ISO 640 18.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:33:46","EXIF ExposureTime":"1/340s","EXIF FNumber":"F4","EXIF FocalLength":"18.4mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4124","path":"YellowLeafDaJue/DSCF4124.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4124.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4124.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/340s F4 ISO 640 18.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:33:46","EXIF ExposureTime":"1/340s","EXIF FNumber":"F4","EXIF FocalLength":"18.4mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4124","path":"YellowLeafDaJue/DSCF4124.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4124.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4124.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4124.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4124.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF4134" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4134.webp"
+            name="DSCF4134" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4134.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4134.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3500s F4 ISO 640 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:36:31","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4134","path":"YellowLeafDaJue/DSCF4134.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4134.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4134.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3500s F4 ISO 640 22.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:36:31","EXIF ExposureTime":"1/3500s","EXIF FNumber":"F4","EXIF FocalLength":"22.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4134","path":"YellowLeafDaJue/DSCF4134.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4134.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4134.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4134.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4134.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF4144" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4144.webp"
+            name="DSCF4144" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4144.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4144.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/400s F5.6 ISO 160 20.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:39:44","EXIF ExposureTime":"1/400s","EXIF FNumber":"F5.6","EXIF FocalLength":"20.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4144","path":"YellowLeafDaJue/DSCF4144.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4144.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4144.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/400s F5.6 ISO 160 20.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:39:44","EXIF ExposureTime":"1/400s","EXIF FNumber":"F5.6","EXIF FocalLength":"20.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4144","path":"YellowLeafDaJue/DSCF4144.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4144.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4144.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4144.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4144.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="DSCF4159" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4159.webp"
+            name="DSCF4159" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4159.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4159.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:46:45","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4159","path":"YellowLeafDaJue/DSCF4159.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4159.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4159.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:46:45","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4159","path":"YellowLeafDaJue/DSCF4159.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4159.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4159.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4159.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4159.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -888,11 +905,11 @@
           
           
           <a class="album-item" id="12"
-            name="DSCF4161" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4161.webp"
+            name="DSCF4161" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4161.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4161.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:47:48","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4161","path":"YellowLeafDaJue/DSCF4161.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4161.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4161.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:47:48","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4161","path":"YellowLeafDaJue/DSCF4161.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4161.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4161.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4161.webp"
             aria-label="the photo 12"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4161.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -909,11 +926,11 @@
           
           
           <a class="album-item" id="13"
-            name="DSCF4163" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4163.webp"
+            name="DSCF4163" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4163.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4163.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:48:25","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4163","path":"YellowLeafDaJue/DSCF4163.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4163.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4163.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:48:25","EXIF ExposureTime":"1/500s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4163","path":"YellowLeafDaJue/DSCF4163.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4163.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4163.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4163.webp"
             aria-label="the photo 13"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4163.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -930,11 +947,11 @@
           
           
           <a class="album-item" id="14"
-            name="DSCF4174" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4174.webp"
+            name="DSCF4174" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4174.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4174.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3000s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:53:51","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4174","path":"YellowLeafDaJue/DSCF4174.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4174.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4174.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3000s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:53:51","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4174","path":"YellowLeafDaJue/DSCF4174.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4174.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4174.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4174.webp"
             aria-label="the photo 14"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4174.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -951,11 +968,11 @@
           
           
           <a class="album-item" id="15"
-            name="DSCF4187" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4187.webp"
+            name="DSCF4187" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4187.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4187.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2500s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:55:23","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4187","path":"YellowLeafDaJue/DSCF4187.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4187.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4187.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2500s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:55:23","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4187","path":"YellowLeafDaJue/DSCF4187.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4187.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4187.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4187.webp"
             aria-label="the photo 15"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4187.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -972,11 +989,11 @@
           
           
           <a class="album-item" id="16"
-            name="DSCF4199" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4199.webp"
+            name="DSCF4199" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4199.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4199.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2200s F4 ISO 640 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:56:44","EXIF ExposureTime":"1/2200s","EXIF FNumber":"F4","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4199","path":"YellowLeafDaJue/DSCF4199.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4199.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4199.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2200s F4 ISO 640 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:56:44","EXIF ExposureTime":"1/2200s","EXIF FNumber":"F4","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4199","path":"YellowLeafDaJue/DSCF4199.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4199.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4199.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4199.webp"
             aria-label="the photo 16"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4199.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -993,11 +1010,11 @@
           
           
           <a class="album-item" id="17"
-            name="DSCF4215" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4215.webp"
+            name="DSCF4215" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4215.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4215.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3200s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:57:43","EXIF ExposureTime":"1/3200s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4215","path":"YellowLeafDaJue/DSCF4215.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4215.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4215.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3200s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:57:43","EXIF ExposureTime":"1/3200s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4215","path":"YellowLeafDaJue/DSCF4215.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4215.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4215.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4215.webp"
             aria-label="the photo 17"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4215.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1014,11 +1031,11 @@
           
           
           <a class="album-item" id="18"
-            name="DSCF4219" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4219.webp"
+            name="DSCF4219" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4219.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4219.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3000s F4 ISO 640 56.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:59:19","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"56.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4219","path":"YellowLeafDaJue/DSCF4219.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4219.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4219.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3000s F4 ISO 640 56.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 12:59:19","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F4","EXIF FocalLength":"56.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4219","path":"YellowLeafDaJue/DSCF4219.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4219.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4219.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4219.webp"
             aria-label="the photo 18"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4219.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1035,11 +1052,11 @@
           
           
           <a class="album-item" id="19"
-            name="DSCF4246" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4246.webp"
+            name="DSCF4246" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4246.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4246.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2000s F4 ISO 640 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:05:23","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4246","path":"YellowLeafDaJue/DSCF4246.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4246.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4246.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/2000s F4 ISO 640 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:05:23","EXIF ExposureTime":"1/2000s","EXIF FNumber":"F4","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4246","path":"YellowLeafDaJue/DSCF4246.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4246.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4246.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4246.webp"
             aria-label="the photo 19"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4246.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1056,11 +1073,11 @@
           
           
           <a class="album-item" id="20"
-            name="DSCF4249" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4249.webp"
+            name="DSCF4249" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4249.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4249.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1600s F4 ISO 640 34.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:05:31","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F4","EXIF FocalLength":"34.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4249","path":"YellowLeafDaJue/DSCF4249.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4249.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4249.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1600s F4 ISO 640 34.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:05:31","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F4","EXIF FocalLength":"34.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4249","path":"YellowLeafDaJue/DSCF4249.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4249.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4249.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4249.webp"
             aria-label="the photo 20"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4249.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1077,11 +1094,11 @@
           
           
           <a class="album-item" id="21"
-            name="DSCF4262" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4262.webp"
+            name="DSCF4262" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4262.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4262.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/200s F4 ISO 160 58.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:08:25","EXIF ExposureTime":"1/200s","EXIF FNumber":"F4","EXIF FocalLength":"58.6mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4262","path":"YellowLeafDaJue/DSCF4262.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4262.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4262.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/200s F4 ISO 160 58.6mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:08:25","EXIF ExposureTime":"1/200s","EXIF FNumber":"F4","EXIF FocalLength":"58.6mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4262","path":"YellowLeafDaJue/DSCF4262.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4262.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4262.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4262.webp"
             aria-label="the photo 21"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4262.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1098,11 +1115,11 @@
           
           
           <a class="album-item" id="22"
-            name="DSCF4279" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4279.webp"
+            name="DSCF4279" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4279.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4279.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/340s F8 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:14:53","EXIF ExposureTime":"1/340s","EXIF FNumber":"F8","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4279","path":"YellowLeafDaJue/DSCF4279.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4279.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4279.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/340s F8 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:14:53","EXIF ExposureTime":"1/340s","EXIF FNumber":"F8","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4279","path":"YellowLeafDaJue/DSCF4279.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4279.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4279.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4279.webp"
             aria-label="the photo 22"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4279.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1119,11 +1136,11 @@
           
           
           <a class="album-item" id="23"
-            name="DSCF4282" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4282.webp"
+            name="DSCF4282" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4282.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4282.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F8 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:16:04","EXIF ExposureTime":"1/500s","EXIF FNumber":"F8","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4282","path":"YellowLeafDaJue/DSCF4282.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4282.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4282.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/500s F8 ISO 160 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:16:04","EXIF ExposureTime":"1/500s","EXIF FNumber":"F8","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4282","path":"YellowLeafDaJue/DSCF4282.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4282.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4282.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4282.webp"
             aria-label="the photo 23"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4282.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1140,11 +1157,11 @@
           
           
           <a class="album-item" id="24"
-            name="DSCF4308" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4308.webp"
+            name="DSCF4308" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4308.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4308.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/400s F4 ISO 640 74.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:27:15","EXIF ExposureTime":"1/400s","EXIF FNumber":"F4","EXIF FocalLength":"74.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4308","path":"YellowLeafDaJue/DSCF4308.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4308.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4308.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/400s F4 ISO 640 74.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:27:15","EXIF ExposureTime":"1/400s","EXIF FNumber":"F4","EXIF FocalLength":"74.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4308","path":"YellowLeafDaJue/DSCF4308.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4308.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4308.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4308.webp"
             aria-label="the photo 24"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4308.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1161,11 +1178,11 @@
           
           
           <a class="album-item" id="25"
-            name="DSCF4311" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4311.webp"
+            name="DSCF4311" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4311.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4311.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/800s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:28:25","EXIF ExposureTime":"1/800s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4311","path":"YellowLeafDaJue/DSCF4311.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4311.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4311.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/800s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:28:25","EXIF ExposureTime":"1/800s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4311","path":"YellowLeafDaJue/DSCF4311.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4311.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4311.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4311.webp"
             aria-label="the photo 25"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4311.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1182,11 +1199,11 @@
           
           
           <a class="album-item" id="26"
-            name="DSCF4316" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4316.webp"
+            name="DSCF4316" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4316.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4316.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/950s F4 ISO 640 65.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:32:15","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"65.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4316","path":"YellowLeafDaJue/DSCF4316.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4316.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4316.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/950s F4 ISO 640 65.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:32:15","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"65.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4316","path":"YellowLeafDaJue/DSCF4316.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4316.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4316.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4316.webp"
             aria-label="the photo 26"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4316.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1203,11 +1220,11 @@
           
           
           <a class="album-item" id="27"
-            name="DSCF4323" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4323.webp"
+            name="DSCF4323" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4323.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4323.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/850s F4 ISO 640 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:35:03","EXIF ExposureTime":"1/850s","EXIF FNumber":"F4","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4323","path":"YellowLeafDaJue/DSCF4323.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4323.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4323.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/850s F4 ISO 640 76.3mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:35:03","EXIF ExposureTime":"1/850s","EXIF FNumber":"F4","EXIF FocalLength":"76.3mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4323","path":"YellowLeafDaJue/DSCF4323.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4323.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4323.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4323.webp"
             aria-label="the photo 27"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4323.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1224,11 +1241,11 @@
           
           
           <a class="album-item" id="28"
-            name="DSCF4331" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4331.webp"
+            name="DSCF4331" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4331.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4331.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/950s F4 ISO 640 69.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:36:38","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"69.8mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4331","path":"YellowLeafDaJue/DSCF4331.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4331.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4331.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/950s F4 ISO 640 69.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:36:38","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"69.8mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4331","path":"YellowLeafDaJue/DSCF4331.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4331.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4331.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4331.webp"
             aria-label="the photo 28"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4331.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1245,11 +1262,11 @@
           
           
           <a class="album-item" id="29"
-            name="DSCF4338" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4338.webp"
+            name="DSCF4338" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4338.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4338.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/4000s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:38:08","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4338","path":"YellowLeafDaJue/DSCF4338.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4338.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4338.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/4000s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:38:08","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4338","path":"YellowLeafDaJue/DSCF4338.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4338.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4338.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4338.webp"
             aria-label="the photo 29"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4338.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1266,11 +1283,11 @@
           
           
           <a class="album-item" id="30"
-            name="DSCF4343" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4343.webp"
+            name="DSCF4343" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4343.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4343.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/900s F4 ISO 640 19.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:41:12","EXIF ExposureTime":"1/900s","EXIF FNumber":"F4","EXIF FocalLength":"19.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4343","path":"YellowLeafDaJue/DSCF4343.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4343.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4343.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/900s F4 ISO 640 19.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 13:41:12","EXIF ExposureTime":"1/900s","EXIF FNumber":"F4","EXIF FocalLength":"19.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4343","path":"YellowLeafDaJue/DSCF4343.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4343.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4343.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4343.webp"
             aria-label="the photo 30"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4343.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1287,11 +1304,11 @@
           
           
           <a class="album-item" id="31"
-            name="DSCF4365" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4365.webp"
+            name="DSCF4365" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4365.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4365.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3800s F4 ISO 640 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:21:06","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F4","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4365","path":"YellowLeafDaJue/DSCF4365.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4365.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4365.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/3800s F4 ISO 640 32.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:21:06","EXIF ExposureTime":"1/3800s","EXIF FNumber":"F4","EXIF FocalLength":"32.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4365","path":"YellowLeafDaJue/DSCF4365.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4365.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4365.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4365.webp"
             aria-label="the photo 31"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4365.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1308,11 +1325,11 @@
           
           
           <a class="album-item" id="32"
-            name="DSCF4368" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4368.webp"
+            name="DSCF4368" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4368.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4368.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/950s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:24:16","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4368","path":"YellowLeafDaJue/DSCF4368.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4368.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4368.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/950s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:24:16","EXIF ExposureTime":"1/950s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4368","path":"YellowLeafDaJue/DSCF4368.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4368.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4368.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4368.webp"
             aria-label="the photo 32"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4368.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1329,11 +1346,11 @@
           
           
           <a class="album-item" id="33"
-            name="DSCF4369" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4369.webp"
+            name="DSCF4369" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4369.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4369.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/850s F4 ISO 640 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:24:41","EXIF ExposureTime":"1/850s","EXIF FNumber":"F4","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4369","path":"YellowLeafDaJue/DSCF4369.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4369.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4369.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/850s F4 ISO 640 48.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:24:41","EXIF ExposureTime":"1/850s","EXIF FNumber":"F4","EXIF FocalLength":"48.5mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4369","path":"YellowLeafDaJue/DSCF4369.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4369.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4369.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4369.webp"
             aria-label="the photo 33"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4369.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1350,11 +1367,11 @@
           
           
           <a class="album-item" id="34"
-            name="DSCF4374" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4374.webp"
+            name="DSCF4374" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4374.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4374.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/340s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:27:13","EXIF ExposureTime":"1/340s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4374","path":"YellowLeafDaJue/DSCF4374.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4374.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4374.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/340s F4 ISO 160 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:27:13","EXIF ExposureTime":"1/340s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4374","path":"YellowLeafDaJue/DSCF4374.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4374.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4374.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4374.webp"
             aria-label="the photo 34"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4374.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1371,11 +1388,11 @@
           
           
           <a class="album-item" id="35"
-            name="DSCF4376" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4376.webp"
+            name="DSCF4376" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4376.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4376.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/350s F4 ISO 160 23.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:29:46","EXIF ExposureTime":"1/350s","EXIF FNumber":"F4","EXIF FocalLength":"23.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4376","path":"YellowLeafDaJue/DSCF4376.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4376.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4376.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/350s F4 ISO 160 23.5mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:29:46","EXIF ExposureTime":"1/350s","EXIF FNumber":"F4","EXIF FocalLength":"23.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4376","path":"YellowLeafDaJue/DSCF4376.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4376.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4376.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4376.webp"
             aria-label="the photo 35"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4376.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1392,11 +1409,11 @@
           
           
           <a class="album-item" id="36"
-            name="DSCF4384" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4384.webp"
+            name="DSCF4384" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4384.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4384.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1500s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:31:49","EXIF ExposureTime":"1/1500s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4384","path":"YellowLeafDaJue/DSCF4384.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4384.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4384.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1500s F4 ISO 640 80mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:31:49","EXIF ExposureTime":"1/1500s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4384","path":"YellowLeafDaJue/DSCF4384.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4384.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4384.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4384.webp"
             aria-label="the photo 36"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4384.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1413,11 +1430,11 @@
           
           
           <a class="album-item" id="37"
-            name="DSCF4410" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4410.webp"
+            name="DSCF4410" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4410.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4410.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/300s F8 ISO 640 52.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:42:48","EXIF ExposureTime":"1/300s","EXIF FNumber":"F8","EXIF FocalLength":"52.4mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4410","path":"YellowLeafDaJue/DSCF4410.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4410.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4410.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/300s F8 ISO 640 52.4mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:42:48","EXIF ExposureTime":"1/300s","EXIF FNumber":"F8","EXIF FocalLength":"52.4mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4410","path":"YellowLeafDaJue/DSCF4410.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4410.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4410.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4410.webp"
             aria-label="the photo 37"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4410.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1434,11 +1451,11 @@
           
           
           <a class="album-item" id="38"
-            name="DSCF4426" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4426.webp"
+            name="DSCF4426" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4426.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4426.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/140s F4 ISO 160 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:50:16","EXIF ExposureTime":"1/140s","EXIF FNumber":"F4","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4426","path":"YellowLeafDaJue/DSCF4426.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4426.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4426.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/140s F4 ISO 160 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:50:16","EXIF ExposureTime":"1/140s","EXIF FNumber":"F4","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4426","path":"YellowLeafDaJue/DSCF4426.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4426.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4426.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4426.webp"
             aria-label="the photo 38"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4426.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1455,11 +1472,11 @@
           
           
           <a class="album-item" id="39"
-            name="DSCF4431" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4431.webp"
+            name="DSCF4431" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4431.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4431.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/100s F4 ISO 250 17.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:50:51","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"17.1mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4431","path":"YellowLeafDaJue/DSCF4431.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4431.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4431.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/100s F4 ISO 250 17.1mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:50:51","EXIF ExposureTime":"1/100s","EXIF FNumber":"F4","EXIF FocalLength":"17.1mm","EXIF ISOSpeedRatings":"ISO 250","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4431","path":"YellowLeafDaJue/DSCF4431.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4431.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4431.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4431.webp"
             aria-label="the photo 39"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4431.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1476,11 +1493,11 @@
           
           
           <a class="album-item" id="40"
-            name="DSCF4438" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4438.webp"
+            name="DSCF4438" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4438.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4438.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1900s F4 ISO 640 26mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:53:10","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F4","EXIF FocalLength":"26mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4438","path":"YellowLeafDaJue/DSCF4438.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4438.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4438.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1900s F4 ISO 640 26mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:53:10","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F4","EXIF FocalLength":"26mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4438","path":"YellowLeafDaJue/DSCF4438.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4438.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4438.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4438.webp"
             aria-label="the photo 40"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4438.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1497,11 +1514,11 @@
           
           
           <a class="album-item" id="41"
-            name="DSCF4442" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4442.webp"
+            name="DSCF4442" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4442.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4442.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1600s F4 ISO 640 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:57:45","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F4","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4442","path":"YellowLeafDaJue/DSCF4442.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4442.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4442.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1600s F4 ISO 640 29.2mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 14:57:45","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F4","EXIF FocalLength":"29.2mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4442","path":"YellowLeafDaJue/DSCF4442.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4442.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4442.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4442.webp"
             aria-label="the photo 41"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4442.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1518,11 +1535,11 @@
           
           
           <a class="album-item" id="42"
-            name="DSCF4450" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4450.webp"
+            name="DSCF4450" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4450.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4450.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1900s F4 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 15:06:36","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4450","path":"YellowLeafDaJue/DSCF4450.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4450.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4450.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1900s F4 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 15:06:36","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4450","path":"YellowLeafDaJue/DSCF4450.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4450.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4450.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4450.webp"
             aria-label="the photo 42"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4450.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1539,11 +1556,11 @@
           
           
           <a class="album-item" id="43"
-            name="DSCF4457" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4457.webp"
+            name="DSCF4457" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4457.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4457.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1600s F4 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 15:07:24","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4457","path":"YellowLeafDaJue/DSCF4457.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4457.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4457.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/1600s F4 ISO 640 16mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 15:07:24","EXIF ExposureTime":"1/1600s","EXIF FNumber":"F4","EXIF FocalLength":"16mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4457","path":"YellowLeafDaJue/DSCF4457.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4457.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4457.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4457.webp"
             aria-label="the photo 43"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4457.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1560,11 +1577,11 @@
           
           
           <a class="album-item" id="44"
-            name="DSCF4481" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4481.webp"
+            name="DSCF4481" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4481.webp"
             desc=" - · - "
             share="YellowLeafDaJue/DSCF4481.webp"
             video=""
-            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/480s F4 ISO 640 35.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 15:13:39","EXIF ExposureTime":"1/480s","EXIF FNumber":"F4","EXIF FocalLength":"35.8mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4481","path":"YellowLeafDaJue/DSCF4481.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4481.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/YellowLeafDaJue/DSCF4481.webp"}'
+            extra='{"desc":null,"dir":"YellowLeafDaJue","exif":"FUJIFILM X-S20 1/480s F4 ISO 640 35.8mm XF16-80mmF4 R OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2023:11:03 15:13:39","EXIF ExposureTime":"1/480s","EXIF FNumber":"F4","EXIF FocalLength":"35.8mm","EXIF ISOSpeedRatings":"ISO 640","EXIF LensModel":"XF16-80mmF4 R OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[40.05157222222222,116.09923055555555],"name":"DSCF4481","path":"YellowLeafDaJue/DSCF4481.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4481.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/YellowLeafDaJue/DSCF4481.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4481.webp"
             aria-label="the photo 44"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//YellowLeafDaJue/DSCF4481.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1737,14 +1754,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

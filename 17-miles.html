@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="PhotonCam_TK_20250503_161312" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161312.webp"
+            name="PhotonCam_TK_20250503_161312" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161312.webp"
             desc=" - · - "
             share="17-miles/PhotonCam_TK_20250503_161312.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/22222s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:13:10","EXIF ExposureTime":"1/22222s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.6056,-121.9593],"name":"PhotonCam_TK_20250503_161312","path":"17-miles/PhotonCam_TK_20250503_161312.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161312.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161312.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/22222s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:13:10","EXIF ExposureTime":"1/22222s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.6056,-121.9593],"name":"PhotonCam_TK_20250503_161312","path":"17-miles/PhotonCam_TK_20250503_161312.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161312.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161312.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161312.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161312.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="PhotonCam_TK_20250503_161330" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161330.webp"
+            name="PhotonCam_TK_20250503_161330" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161330.webp"
             desc=" - · - "
             share="17-miles/PhotonCam_TK_20250503_161330.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/11628s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:13:28","EXIF ExposureTime":"1/11628s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.605650000000004,-121.95931388888889],"name":"PhotonCam_TK_20250503_161330","path":"17-miles/PhotonCam_TK_20250503_161330.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161330.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161330.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/11628s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:13:28","EXIF ExposureTime":"1/11628s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.605650000000004,-121.95931388888889],"name":"PhotonCam_TK_20250503_161330","path":"17-miles/PhotonCam_TK_20250503_161330.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161330.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161330.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161330.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161330.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="PhotonCam_TK_20250503_161336" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161336.webp"
+            name="PhotonCam_TK_20250503_161336" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161336.webp"
             desc=" - · - "
             share="17-miles/PhotonCam_TK_20250503_161336.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/22222s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:13:33","EXIF ExposureTime":"1/22222s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.60558888888889,-121.95931944444445],"name":"PhotonCam_TK_20250503_161336","path":"17-miles/PhotonCam_TK_20250503_161336.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161336.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161336.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/22222s F1.8 ISO 80 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:13:33","EXIF ExposureTime":"1/22222s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 80","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.60558888888889,-121.95931944444445],"name":"PhotonCam_TK_20250503_161336","path":"17-miles/PhotonCam_TK_20250503_161336.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161336.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161336.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161336.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161336.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="PhotonCam_TK_20250503_161528" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161528.webp"
+            name="PhotonCam_TK_20250503_161528" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161528.webp"
             desc=" - · - "
             share="17-miles/PhotonCam_TK_20250503_161528.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/11628s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:15:24","EXIF ExposureTime":"1/11628s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.60572222222223,-121.95918611111111],"name":"PhotonCam_TK_20250503_161528","path":"17-miles/PhotonCam_TK_20250503_161528.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161528.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/PhotonCam_TK_20250503_161528.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"Apple iPhone 15 Pro Max 1/11628s F1.8 ISO 100 6.8mm iPhone 15 Pro Max back camera 6.765mm f/1.78 ","exif_data":{"EXIF DateTimeOriginal":"2025:05:03 16:15:24","EXIF ExposureTime":"1/11628s","EXIF FNumber":"F1.8","EXIF FocalLength":"6.8mm","EXIF ISOSpeedRatings":"ISO 100","EXIF LensModel":"iPhone 15 Pro Max back camera 6.765mm f/1.78","Image Make":"Apple","Image Model":"iPhone 15 Pro Max"},"location":[36.60572222222223,-121.95918611111111],"name":"PhotonCam_TK_20250503_161528","path":"17-miles/PhotonCam_TK_20250503_161528.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161528.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/PhotonCam_TK_20250503_161528.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161528.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/PhotonCam_TK_20250503_161528.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF6070" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6070.webp"
+            name="DSCF6070" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6070.webp"
             desc=" - · - "
             share="17-miles/DSCF6070.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/750s F9 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 06:59:22","EXIF ExposureTime":"1/750s","EXIF FNumber":"F9","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6070","path":"17-miles/DSCF6070.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6070.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6070.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/750s F9 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 06:59:22","EXIF ExposureTime":"1/750s","EXIF FNumber":"F9","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6070","path":"17-miles/DSCF6070.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6070.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6070.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6070.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6070.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF6071" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6071.webp"
+            name="DSCF6071" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6071.webp"
             desc=" - · - "
             share="17-miles/DSCF6071.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/640s F9 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 06:59:25","EXIF ExposureTime":"1/640s","EXIF FNumber":"F9","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6071","path":"17-miles/DSCF6071.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6071.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6071.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/640s F9 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 06:59:25","EXIF ExposureTime":"1/640s","EXIF FNumber":"F9","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6071","path":"17-miles/DSCF6071.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6071.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6071.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6071.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6071.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF6072" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6072.webp"
+            name="DSCF6072" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6072.webp"
             desc=" - · - "
             share="17-miles/DSCF6072.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:06:49","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6072","path":"17-miles/DSCF6072.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6072.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6072.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:06:49","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6072","path":"17-miles/DSCF6072.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6072.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6072.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6072.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6072.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF6073" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6073.webp"
+            name="DSCF6073" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6073.webp"
             desc=" - · - "
             share="17-miles/DSCF6073.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/1100s F9 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:07:03","EXIF ExposureTime":"1/1100s","EXIF FNumber":"F9","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6073","path":"17-miles/DSCF6073.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6073.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6073.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/1100s F9 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:07:03","EXIF ExposureTime":"1/1100s","EXIF FNumber":"F9","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6073","path":"17-miles/DSCF6073.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6073.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6073.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6073.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6073.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF6074" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6074.webp"
+            name="DSCF6074" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6074.webp"
             desc=" - · - "
             share="17-miles/DSCF6074.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/680s F9 ISO 160 90.6mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:07:21","EXIF ExposureTime":"1/680s","EXIF FNumber":"F9","EXIF FocalLength":"90.6mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6074","path":"17-miles/DSCF6074.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6074.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6074.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/680s F9 ISO 160 90.6mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:07:21","EXIF ExposureTime":"1/680s","EXIF FNumber":"F9","EXIF FocalLength":"90.6mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6074","path":"17-miles/DSCF6074.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6074.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6074.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6074.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6074.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF6077" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6077.webp"
+            name="DSCF6077" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6077.webp"
             desc=" - · - "
             share="17-miles/DSCF6077.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/150s F22 ISO 500 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:22:52","EXIF ExposureTime":"1/150s","EXIF FNumber":"F22","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6077","path":"17-miles/DSCF6077.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6077.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6077.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/150s F22 ISO 500 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:22:52","EXIF ExposureTime":"1/150s","EXIF FNumber":"F22","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6077","path":"17-miles/DSCF6077.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6077.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6077.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6077.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6077.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF6084" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6084.webp"
+            name="DSCF6084" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6084.webp"
             desc=" - · - "
             share="17-miles/DSCF6084.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:23:27","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6084","path":"17-miles/DSCF6084.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6084.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6084.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/4000s F2.8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:23:27","EXIF ExposureTime":"1/4000s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6084","path":"17-miles/DSCF6084.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6084.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6084.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6084.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6084.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -867,11 +884,11 @@
           
           
           <a class="album-item" id="11"
-            name="DSCF6087" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6087.webp"
+            name="DSCF6087" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6087.webp"
             desc=" - · - "
             share="17-miles/DSCF6087.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/2500s F5.6 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:23:54","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F5.6","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6087","path":"17-miles/DSCF6087.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6087.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6087.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/2500s F5.6 ISO 160 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:23:54","EXIF ExposureTime":"1/2500s","EXIF FNumber":"F5.6","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6087","path":"17-miles/DSCF6087.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6087.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6087.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6087.webp"
             aria-label="the photo 11"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6087.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -888,11 +905,11 @@
           
           
           <a class="album-item" id="12"
-            name="DSCF6090" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6090.webp"
+            name="DSCF6090" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6090.webp"
             desc=" - · - "
             share="17-miles/DSCF6090.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/480s F8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:25:39","EXIF ExposureTime":"1/480s","EXIF FNumber":"F8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6090","path":"17-miles/DSCF6090.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6090.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6090.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/480s F8 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:25:39","EXIF ExposureTime":"1/480s","EXIF FNumber":"F8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6090","path":"17-miles/DSCF6090.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6090.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6090.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6090.webp"
             aria-label="the photo 12"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6090.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -909,11 +926,11 @@
           
           
           <a class="album-item" id="13"
-            name="DSCF6110" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6110.webp"
+            name="DSCF6110" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6110.webp"
             desc=" - · - "
             share="17-miles/DSCF6110.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/420s F5.6 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:26:55","EXIF ExposureTime":"1/420s","EXIF FNumber":"F5.6","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6110","path":"17-miles/DSCF6110.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6110.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6110.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/420s F5.6 ISO 160 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:26:55","EXIF ExposureTime":"1/420s","EXIF FNumber":"F5.6","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6110","path":"17-miles/DSCF6110.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6110.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6110.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6110.webp"
             aria-label="the photo 13"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6110.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -930,11 +947,11 @@
           
           
           <a class="album-item" id="14"
-            name="DSCF6131" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6131.webp"
+            name="DSCF6131" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6131.webp"
             desc=" - · - "
             share="17-miles/DSCF6131.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/1900s F2.8 ISO 160 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:47:40","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6131","path":"17-miles/DSCF6131.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6131.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6131.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/1900s F2.8 ISO 160 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:47:40","EXIF ExposureTime":"1/1900s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 160","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6131","path":"17-miles/DSCF6131.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6131.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6131.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6131.webp"
             aria-label="the photo 14"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6131.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -951,11 +968,11 @@
           
           
           <a class="album-item" id="15"
-            name="DSCF6132" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6132.webp"
+            name="DSCF6132" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6132.webp"
             desc=" - · - "
             share="17-miles/DSCF6132.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/3000s F2.8 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:48:03","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6132","path":"17-miles/DSCF6132.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6132.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6132.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/3000s F2.8 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 07:48:03","EXIF ExposureTime":"1/3000s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6132","path":"17-miles/DSCF6132.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6132.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6132.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6132.webp"
             aria-label="the photo 15"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6132.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -972,11 +989,11 @@
           
           
           <a class="album-item" id="16"
-            name="DSCF6137" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6137.webp"
+            name="DSCF6137" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6137.webp"
             desc=" - · - "
             share="17-miles/DSCF6137.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/3200s F2.8 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 08:25:45","EXIF ExposureTime":"1/3200s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6137","path":"17-miles/DSCF6137.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6137.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6137.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/3200s F2.8 ISO 320 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 08:25:45","EXIF ExposureTime":"1/3200s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6137","path":"17-miles/DSCF6137.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6137.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6137.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6137.webp"
             aria-label="the photo 16"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6137.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -993,11 +1010,11 @@
           
           
           <a class="album-item" id="17"
-            name="DSCF6139" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6139.webp"
+            name="DSCF6139" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6139.webp"
             desc=" - · - "
             share="17-miles/DSCF6139.webp"
             video=""
-            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/9000s F2.8 ISO 320 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 08:26:50","EXIF ExposureTime":"1/9000s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6139","path":"17-miles/DSCF6139.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6139.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/17-miles/DSCF6139.webp"}'
+            extra='{"desc":null,"dir":"17-miles","exif":"FUJIFILM X-S20 1/9000s F2.8 ISO 320 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2025:05:04 08:26:50","EXIF ExposureTime":"1/9000s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 320","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF6139","path":"17-miles/DSCF6139.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6139.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/17-miles/DSCF6139.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6139.webp"
             aria-label="the photo 17"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//17-miles/DSCF6139.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1170,14 +1187,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="DSCF0462" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0462.webp"
+            name="DSCF0462" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0462.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0462.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 500 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 09:04:47","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0462","path":"CA-Newt/DSCF0462.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0462.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0462.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 500 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 09:04:47","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0462","path":"CA-Newt/DSCF0462.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0462.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0462.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0462.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0462.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="DSCF0627" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0627.webp"
+            name="DSCF0627" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0627.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0627.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 1250 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 09:54:13","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0627","path":"CA-Newt/DSCF0627.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0627.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0627.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/420s F2.8 ISO 1250 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 09:54:13","EXIF ExposureTime":"1/420s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0627","path":"CA-Newt/DSCF0627.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0627.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0627.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0627.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0627.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="DSCF0628" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0628.webp"
+            name="DSCF0628" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0628.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0628.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/125s F2.8 ISO 400 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 09:54:22","EXIF ExposureTime":"1/125s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0628","path":"CA-Newt/DSCF0628.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0628.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0628.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/125s F2.8 ISO 400 140mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 09:54:22","EXIF ExposureTime":"1/125s","EXIF FNumber":"F2.8","EXIF FocalLength":"140mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0628","path":"CA-Newt/DSCF0628.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0628.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0628.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0628.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0628.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="DSCF0693" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0693.webp"
+            name="DSCF0693" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0693.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0693.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 2500 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:03:54","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0693","path":"CA-Newt/DSCF0693.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0693.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0693.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 2500 50mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:03:54","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"50mm","EXIF ISOSpeedRatings":"ISO 2500","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0693","path":"CA-Newt/DSCF0693.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0693.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0693.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0693.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0693.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="DSCF0717" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0717.webp"
+            name="DSCF0717" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0717.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0717.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:29","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0717","path":"CA-Newt/DSCF0717.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0717.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0717.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:29","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0717","path":"CA-Newt/DSCF0717.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0717.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0717.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0717.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0717.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="DSCF0727" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0727.webp"
+            name="DSCF0727" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0727.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0727.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:34","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0727","path":"CA-Newt/DSCF0727.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0727.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0727.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:34","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0727","path":"CA-Newt/DSCF0727.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0727.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0727.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0727.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0727.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="DSCF0736" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0736.webp"
+            name="DSCF0736" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0736.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0736.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:35","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0736","path":"CA-Newt/DSCF0736.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0736.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0736.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:35","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0736","path":"CA-Newt/DSCF0736.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0736.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0736.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0736.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0736.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="DSCF0741" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0741.webp"
+            name="DSCF0741" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0741.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0741.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:35","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0741","path":"CA-Newt/DSCF0741.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0741.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0741.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 3200 71.5mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:35","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"71.5mm","EXIF ISOSpeedRatings":"ISO 3200","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0741","path":"CA-Newt/DSCF0741.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0741.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0741.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0741.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0741.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="DSCF0757" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0757.webp"
+            name="DSCF0757" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0757.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0757.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 1250 68.7mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:45","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"68.7mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0757","path":"CA-Newt/DSCF0757.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0757.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0757.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 1250 68.7mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:45","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"68.7mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0757","path":"CA-Newt/DSCF0757.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0757.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0757.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0757.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0757.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="DSCF0772" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0772.webp"
+            name="DSCF0772" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0772.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0772.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 1250 68.7mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:47","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"68.7mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0772","path":"CA-Newt/DSCF0772.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0772.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0772.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 1250 68.7mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:04:47","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"68.7mm","EXIF ISOSpeedRatings":"ISO 1250","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[],"name":"DSCF0772","path":"CA-Newt/DSCF0772.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0772.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0772.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0772.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0772.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -846,11 +863,11 @@
           
           
           <a class="album-item" id="10"
-            name="DSCF0808" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0808.webp"
+            name="DSCF0808" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0808.webp"
             desc=" - · - "
             share="CA-Newt/DSCF0808.webp"
             video=""
-            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 800 68.7mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:28:18","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"68.7mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.81673888888889,-122.05034166666667],"name":"DSCF0808","path":"CA-Newt/DSCF0808.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0808.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/CA-Newt/DSCF0808.webp"}'
+            extra='{"desc":null,"dir":"CA-Newt","exif":"FUJIFILM X-S20 1/200s F2.8 ISO 800 68.7mm XF50-140mmF2.8 R LM OIS WR ","exif_data":{"EXIF DateTimeOriginal":"2024:03:15 10:28:18","EXIF ExposureTime":"1/200s","EXIF FNumber":"F2.8","EXIF FocalLength":"68.7mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XF50-140mmF2.8 R LM OIS WR","Image Make":"FUJIFILM","Image Model":"X-S20"},"location":[37.81673888888889,-122.05034166666667],"name":"DSCF0808","path":"CA-Newt/DSCF0808.webp","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0808.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/CA-Newt/DSCF0808.webp"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0808.webp"
             aria-label="the photo 10"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//CA-Newt/DSCF0808.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1019,14 +1036,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key

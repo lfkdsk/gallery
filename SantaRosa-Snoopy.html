@@ -418,8 +418,7 @@
 
 
   <!-- Main Content -->
-  <script src="js/html2canvas.min.js" defer></script>
-<script src="js/mini-live-photo.js"></script>
+  <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
     <div class="grid grid-cols-3">
@@ -433,7 +432,8 @@
         <div id="exif-param"></div>
         <div id="exif-date"></div>
     </div>
-    <div class="exif-right" style="display: flex; flex-direction: column; justify-self: center;">
+    
+    <div class="exif-right" style="display: flex; flex-direction: column; justify-content: center;">
         <div style="display: flex; flex-direction:row; justify-content: start;">
             <div style="display: flex; justify-content: center; flex-direction: column;">
                 <img id="exif-maker-logo" class="nofancy" style="object-fit: cover;"></img>
@@ -487,9 +487,26 @@
     }
 
     #exif-lens {
+        /* 镜头型号可能很长，需要「超出截断 + 省略号」。原来直接写 overflow: hidden，
+           但它连纵向一起裁：实测这行字的墨迹会伸出行盒约 1.8px（字体 ascent +
+           descent 之和大于 line-height），底部因此被削。屏幕上 12.8px 字号看不出，
+           下载图放大 4.6 倍后很明显——看着像和下一行叠在一起。
+
+           试过几条路都不行：
+           - overflow-x: hidden + overflow-y: visible ——按 CSS 规范，一个方向非
+             visible 时另一个的 visible 会被算成 auto，照样裁；
+           - overflow-clip-margin ——html2canvas 不支持，实测无效；
+           - 单纯加大 line-height ——盒子变高的同时文字也整体下移，余量只从
+             0.3px 涨到 0.6px，白付出行距。
+
+           成立的做法：padding 在盒子内侧，能把裁剪边往下推；再用等量负 margin
+           抵消掉它对布局的影响，卡片高度不变。实测墨迹底部回到 622.5px，与
+           overflow: visible 的基准完全一致，即一点没被削。 */
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        padding-bottom: 4px;
+        margin-bottom: -4px;
     }
 
     .pic-wrapper {
@@ -636,11 +653,11 @@
           
           
           <a class="album-item" id="0"
-            name="1" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/1.jpeg"
+            name="1" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/1.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/1.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/80s F4 ISO 50 80mm XCD 35-100E@80 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:39:18","EXIF ExposureTime":"1/80s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@80","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"1","path":"SantaRosa-Snoopy/1.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/1.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/1.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/80s F4 ISO 50 80mm XCD 35-100E@80 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:39:18","EXIF ExposureTime":"1/80s","EXIF FNumber":"F4","EXIF FocalLength":"80mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@80","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"1","path":"SantaRosa-Snoopy/1.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/1.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/1.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/1.webp"
             aria-label="the photo 0"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/1.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -657,11 +674,11 @@
           
           
           <a class="album-item" id="1"
-            name="3" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/3.jpeg"
+            name="3" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/3.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/3.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/60s F4 ISO 50 65mm XCD 35-100E@65 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:41:21","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"65mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@65","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"3","path":"SantaRosa-Snoopy/3.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/3.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/3.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/60s F4 ISO 50 65mm XCD 35-100E@65 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:41:21","EXIF ExposureTime":"1/60s","EXIF FNumber":"F4","EXIF FocalLength":"65mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@65","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"3","path":"SantaRosa-Snoopy/3.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/3.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/3.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/3.webp"
             aria-label="the photo 1"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/3.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -678,11 +695,11 @@
           
           
           <a class="album-item" id="2"
-            name="2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/2.jpeg"
+            name="2" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/2.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/2.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/10s F4 ISO 50 60mm XCD 35-100E@60 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:44:55","EXIF ExposureTime":"1/10s","EXIF FNumber":"F4","EXIF FocalLength":"60mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@60","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"2","path":"SantaRosa-Snoopy/2.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/2.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/10s F4 ISO 50 60mm XCD 35-100E@60 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:44:55","EXIF ExposureTime":"1/10s","EXIF FNumber":"F4","EXIF FocalLength":"60mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@60","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"2","path":"SantaRosa-Snoopy/2.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/2.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/2.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/2.webp"
             aria-label="the photo 2"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/2.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -699,11 +716,11 @@
           
           
           <a class="album-item" id="3"
-            name="8" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/8.jpeg"
+            name="8" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/8.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/8.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/20s F2.8 ISO 400 35mm XCD 35-100E@35 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:49:21","EXIF ExposureTime":"1/20s","EXIF FNumber":"F2.8","EXIF FocalLength":"35mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XCD 35-100E@35","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"8","path":"SantaRosa-Snoopy/8.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/8.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/8.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/20s F2.8 ISO 400 35mm XCD 35-100E@35 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:49:21","EXIF ExposureTime":"1/20s","EXIF FNumber":"F2.8","EXIF FocalLength":"35mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XCD 35-100E@35","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"8","path":"SantaRosa-Snoopy/8.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/8.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/8.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/8.webp"
             aria-label="the photo 3"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/8.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -720,11 +737,11 @@
           
           
           <a class="album-item" id="4"
-            name="6" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/6.jpeg"
+            name="6" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/6.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/6.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/20s F3.4 ISO 400 42mm XCD 35-100E@42 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:59:19","EXIF ExposureTime":"1/20s","EXIF FNumber":"F3.4","EXIF FocalLength":"42mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XCD 35-100E@42","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"6","path":"SantaRosa-Snoopy/6.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/6.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/6.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/20s F3.4 ISO 400 42mm XCD 35-100E@42 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 14:59:19","EXIF ExposureTime":"1/20s","EXIF FNumber":"F3.4","EXIF FocalLength":"42mm","EXIF ISOSpeedRatings":"ISO 400","EXIF LensModel":"XCD 35-100E@42","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"6","path":"SantaRosa-Snoopy/6.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/6.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/6.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/6.webp"
             aria-label="the photo 4"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/6.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -741,11 +758,11 @@
           
           
           <a class="album-item" id="5"
-            name="5" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/5.jpeg"
+            name="5" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/5.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/5.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/3s F3.2 ISO 50 45mm XCD 35-100E@45 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 15:41:22","EXIF ExposureTime":"1/3s","EXIF FNumber":"F3.2","EXIF FocalLength":"45mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@45","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"5","path":"SantaRosa-Snoopy/5.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/5.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/5.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/3s F3.2 ISO 50 45mm XCD 35-100E@45 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 15:41:22","EXIF ExposureTime":"1/3s","EXIF FNumber":"F3.2","EXIF FocalLength":"45mm","EXIF ISOSpeedRatings":"ISO 50","EXIF LensModel":"XCD 35-100E@45","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"5","path":"SantaRosa-Snoopy/5.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/5.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/5.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/5.webp"
             aria-label="the photo 5"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/5.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -762,11 +779,11 @@
           
           
           <a class="album-item" id="6"
-            name="7" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/7.jpeg"
+            name="7" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/7.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/7.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/60s F3.5 ISO 800 55mm XCD 35-100E@55 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 17:57:46","EXIF ExposureTime":"1/60s","EXIF FNumber":"F3.5","EXIF FocalLength":"55mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@55","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"7","path":"SantaRosa-Snoopy/7.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/7.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/7.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/60s F3.5 ISO 800 55mm XCD 35-100E@55 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 17:57:46","EXIF ExposureTime":"1/60s","EXIF FNumber":"F3.5","EXIF FocalLength":"55mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@55","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"7","path":"SantaRosa-Snoopy/7.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/7.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/7.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/7.webp"
             aria-label="the photo 6"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/7.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -783,11 +800,11 @@
           
           
           <a class="album-item" id="7"
-            name="4" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/4.jpeg"
+            name="4" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/4.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/4.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/13s F3.4 ISO 800 35mm XCD 35-100E@35 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 18:30:57","EXIF ExposureTime":"1/13s","EXIF FNumber":"F3.4","EXIF FocalLength":"35mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@35","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"4","path":"SantaRosa-Snoopy/4.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/4.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/4.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/13s F3.4 ISO 800 35mm XCD 35-100E@35 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 18:30:57","EXIF ExposureTime":"1/13s","EXIF FNumber":"F3.4","EXIF FocalLength":"35mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@35","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"4","path":"SantaRosa-Snoopy/4.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/4.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/4.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/4.webp"
             aria-label="the photo 7"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/4.webp" alt=""
               loading="eager" decoding="async"></a>
@@ -804,11 +821,11 @@
           
           
           <a class="album-item" id="8"
-            name="10" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/10.jpeg"
+            name="10" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/10.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/10.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/45s F2.8 ISO 800 35mm XCD 35-100E@35 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 18:53:47","EXIF ExposureTime":"1/45s","EXIF FNumber":"F2.8","EXIF FocalLength":"35mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@35","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"10","path":"SantaRosa-Snoopy/10.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/10.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/10.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/45s F2.8 ISO 800 35mm XCD 35-100E@35 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 18:53:47","EXIF ExposureTime":"1/45s","EXIF FNumber":"F2.8","EXIF FocalLength":"35mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@35","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"10","path":"SantaRosa-Snoopy/10.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/10.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/10.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/10.webp"
             aria-label="the photo 8"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/10.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -825,11 +842,11 @@
           
           
           <a class="album-item" id="9"
-            name="9" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/9.jpeg"
+            name="9" rel="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/9.jpeg"
             desc=" - · - "
             share="SantaRosa-Snoopy/9.jpeg"
             video=""
-            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/125s F4 ISO 800 75mm XCD 35-100E@75 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 18:55:06","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"75mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@75","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"9","path":"SantaRosa-Snoopy/9.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/9.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@093643eeccfdea3417665deb947c97d35039d9b2/SantaRosa-Snoopy/9.jpeg"}'
+            extra='{"desc":null,"dir":"SantaRosa-Snoopy","exif":"Hasselblad X2D II 100C 1/125s F4 ISO 800 75mm XCD 35-100E@75 ","exif_data":{"EXIF DateTimeOriginal":"2026:04:12 18:55:06","EXIF ExposureTime":"1/125s","EXIF FNumber":"F4","EXIF FocalLength":"75mm","EXIF ISOSpeedRatings":"ISO 800","EXIF LensModel":"XCD 35-100E@75","Image Make":"Hasselblad","Image Model":"X2D II 100C"},"location":[],"name":"9","path":"SantaRosa-Snoopy/9.jpeg","thum":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/9.webp","url":"https://cdn.jsdelivr.net/gh/lfkdsk/gallery@83f683a513f42b53d8203050e98626f52b94f4e7/SantaRosa-Snoopy/9.jpeg"}'
             href="javascript:void(0);" onClick="changeimg(event)" data-src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/9.webp"
             aria-label="the photo 9"><img class="nofancy" src="https://cdn.jsdelivr.net/gh/lfkdsk/gallery@thumbnail//SantaRosa-Snoopy/9.webp" alt=""
               loading="lazy" decoding="async"></a>
@@ -1002,14 +1019,12 @@
         }
 
         $('#download').click(function () {
-          var node = document.getElementById('all-pic');
-          html2canvas(node, {
-            useCORS: true,
-            allowTaint: true,
-            scrollX: 0,
-            scrollY: 0,
-          }).then(function (canvas) {
-            simulateDownloadImageClick(canvas.toDataURL('image/png'),  name + '.png');
+          downloadFramedPhoto({
+            node: document.getElementById('all-pic'),
+            img: imageBox,
+            fullSrc: imgLink,      // 当前选中照片的原图，不是缩略图
+            filename: name,
+            button: this,
           });
         });
         // key
