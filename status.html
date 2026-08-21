@@ -580,12 +580,14 @@ LIMIT 5;
             margin: 0 auto;
         }
 
+        /* 这三处原本写死 #f0f0f0，把主题的暗色底盖掉了，所以 /status 在暗色下
+           仍是一整块浅灰。改走 token 后跟着 prefers-color-scheme 走。 */
         body {
-            background-color: #f0f0f0;
+            background-color: var(--surface-2);
         }
 
         #wrapper {
-            background-color: #f0f0f0;
+            background-color: var(--surface-2);
         }
 
         #table-wrapper {
@@ -597,8 +599,21 @@ LIMIT 5;
         #chart-wrapper {
             width: 100%;
             height: 100%;
-            background-color: #f0f0f0;
+            background-color: var(--surface-2);
             margin-top: 20px;
+        }
+
+        /* 每年一块热力图。给它 --hm-surface 这个底是修复的关键：
+           空格子是 #EBEDF0，原先直接落在 #f0f0f0 上，两者明度差不到 2%，
+           格子就整片糊掉了。GitHub 的这套配色成立的前提就是铺在纯白上。
+           只加 background / radius / shadow —— 不加 padding 或 border，
+           因为 echarts.init 按 clientWidth/clientHeight 定尺寸，内边距会让
+           画布尺寸和 JS 里设的 1200×250 对不上。 */
+        .status {
+            background-color: var(--hm-surface);
+            border-radius: var(--radius-lg, 16px);
+            box-shadow: var(--shadow-1);
+            margin-bottom: 24px;
         }
 
         .ln-table {
@@ -629,8 +644,8 @@ LIMIT 5;
             text-align: center;
             width: 100%;
             margin: 0 auto;
-            background-color: #ffffff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--surface-1);
+            box-shadow: var(--shadow-1);
             border-radius: 10px;
             padding: 20px;
         }

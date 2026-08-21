@@ -31,6 +31,14 @@
   --border-subtle: rgba(15, 23, 42, 0.06);
   --text-strong: #1f2430;
   --text-muted: #6b7280;
+  --hm-surface: var(--surface-1);
+  --hm-gap: var(--surface-1);
+  --hm-empty: rgba(15, 23, 42, 0.09);
+  --hm-split: rgba(15, 23, 42, 0.22);
+  --hm-label: var(--text-muted);
+  --hm-1: #9be9a8;
+  --hm-2: #40c463;
+  --hm-3: #216e39;
   --lift-hover: -4px;
   --page-top: 120px;
   --page-top-sm: 80px;
@@ -77,6 +85,11 @@
     --border-subtle: rgba(255, 255, 255, 0.06);
     --text-strong: #f3f4f6;
     --text-muted: #9aa0a6;
+    --hm-empty: rgba(255, 255, 255, 0.09);
+    --hm-split: rgba(255, 255, 255, 0.18);
+    --hm-1: #0e4429;
+    --hm-2: #26a641;
+    --hm-3: #39d353;
   }
 }
 :root[data-skin=classic] {
@@ -122,6 +135,11 @@
   }
 }
 :root[data-skin=darkroom] {
+  --hm-empty: rgba(255, 255, 255, 0.09);
+  --hm-split: rgba(255, 255, 255, 0.18);
+  --hm-1: #0e4429;
+  --hm-2: #26a641;
+  --hm-3: #39d353;
   --surface-1: #14161a;
   --surface-2: #0d0e10;
   --surface-muted: #1c1f24;

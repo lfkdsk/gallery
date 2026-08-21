@@ -700,6 +700,32 @@
         padding: 10px 10px;
     }
 
+    /* 嵌入模式（?widget=true）。页面外框那些留白都是给固定导航条让位用的，
+       嵌到 iframe 里就成了照片上下的大片死白，所以一律收掉，让照片尽量铺满。
+       导航条本身也藏起来——嵌入方有自己的界面，不需要站点导航。 */
+    .is-widget .content-area {
+        margin-top: 0 !important;
+    }
+
+    .is-widget .pic-area {
+        padding: 0 !important;
+    }
+
+    /* 相框的衬底。#imgbox 是 object-fit: contain，竖构图时左右（横构图时上下）
+       会露出后面的 .pic-item —— 站内它是黑的，看照片时黑衬底最不干扰。
+       但嵌到小组件里，四周是白的，这块黑就成了一整片突兀的色块，
+       所以嵌入模式下让它跟着白底走。 */
+    .is-widget .pic-item {
+        background-color: #fff !important;
+    }
+
+    .is-widget .itp-float-bar,
+    .is-widget .itp-footer,
+    .is-widget .itp-nav-sheet,
+    .is-widget .itp-nav-sheet-bg {
+        display: none !important;
+    }
+
     .pic-area {
         border-style: solid;
         border-width: thin;

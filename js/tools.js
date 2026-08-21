@@ -339,9 +339,29 @@ function wrapperData(v, author) {
   exifAuthor.text("By " + author);
 }
 
+// 日历热力图的调色板。图表画在 canvas 上，CSS 管不到，所以从 tokens.scss 的
+// CSS 变量里读出来再喂进配置——这样明暗两套值只有一处定义。
+// 第二个参数是兜底：变量缺失（比如样式还没加载完）时退回 GitHub 亮色。
+function heatmapPalette() {
+  var cs = getComputedStyle(document.documentElement);
+  var v = function (name, fallback) {
+    return (cs.getPropertyValue(name) || "").trim() || fallback;
+  };
+  return {
+    empty: v("--hm-empty", "#ebedf0"),
+    gap: v("--hm-gap", "#ffffff"),
+    scale: [v("--hm-1", "#9be9a8"), v("--hm-2", "#40c463"), v("--hm-3", "#216e39")],
+    label: v("--hm-label", "#57606a"),
+    split: v("--hm-split", "rgba(15,23,42,0.22)"),
+  };
+}
+
 function heatmap(db, root) {
   var chartDom = document.getElementById("chart-wrapper");
   var option;
+  // 每年一个实例，存起来是为了系统在明暗之间切换时能重新上色——
+  // CSS 变量会自己更新，但已经画好的 canvas 不会。
+  var instances = [];
   var result = db.exec(
     `
 WITH daily_counts AS (
@@ -376,6 +396,7 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
     subDom.style.height = '250px';
     chartDom.appendChild(subDom);
     var myChart = echarts.init(subDom);
+    var p = heatmapPalette();
     option = {
       tooltip: {
         formatter: function (params) {
@@ -387,7 +408,7 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
         min: 1,
         max: 4,
         inRange: {
-          color: ["#9BE9A8", "#40C463", "#216E39"],
+          color: p.scale,
         },
         orient: "vertical", // 图例的排列方式
         right: 10, // 图例距离右侧的距离
@@ -396,18 +417,27 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
       calendar: [
         {
           itemStyle: {
-            color: "#EBEDF0",
+            // 空格子。描边用 --hm-gap（= 图表底下的 surface），所以它读起来是
+            // 格子之间的缝，而不是一圈框。
+            color: p.empty,
             borderWidth: 3,
-            borderColor: "#fff",
+            borderColor: p.gap,
           },
+          // 默认 left 是 80，年份竖标和 Sun./Mon./Tue. 会叠在一起（这个页面
+          // 一直是这样）。往右让 110，再把年份的 margin 顶到 52，两者才分开。
+          left: 110,
           cellSize: [20, 20],
           range: [year + "-01-01", year + "-12-31"],
-          splitLine: true,
+          // 月份的阶梯分隔线。ECharts 默认是纯黑，在这张图上噪得很；
+          // 调成一条能看见的细线，结构还在但不抢格子。
+          splitLine: { lineStyle: { color: p.split, width: 1 } },
           dayLabel: {
             firstDay: 0,
+            color: p.label,
             nameMap: ["Sun.", "Mon.", "Tue.", "Wed.", "Thu.", "Fri.", "Sat."],
           },
           monthLabel: {
+            color: p.label,
             nameMap: [
               "Jan",
               "Feb",
@@ -425,6 +455,9 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
           },
           yearLabel: {
             show: true,
+            // 之前没设颜色，用的是 ECharts 默认浅灰，在浅底上几乎不可见
+            color: p.label,
+            margin: 52,
           },
           silent: {
             show: true,
@@ -446,7 +479,31 @@ ORDER BY SUBSTR(exifdate, 1, 4) DESC;
 
 
     option && myChart.setOption(option);
+    instances.push(myChart);
     index += 1;
+  }
+
+  // CSS 变量会随系统明暗自动更新，但已经画好的 canvas 不会——重新喂一次调色板。
+  // 只覆盖颜色，不碰数据，所以 setOption 的合并语义正好够用。
+  var mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  if (mq && mq.addEventListener) {
+    mq.addEventListener("change", function () {
+      var np = heatmapPalette();
+      instances.forEach(function (chart) {
+        chart.setOption({
+          visualMap: { inRange: { color: np.scale } },
+          calendar: [
+            {
+              itemStyle: { color: np.empty, borderColor: np.gap },
+              splitLine: { lineStyle: { color: np.split } },
+              dayLabel: { color: np.label },
+              monthLabel: { color: np.label },
+              yearLabel: { color: np.label },
+            },
+          ],
+        });
+      });
+    });
   }
 }
 

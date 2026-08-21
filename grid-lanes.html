@@ -1229,11 +1229,12 @@
             const deviceBody = makeSection('设备信息', 'device');
             const modeBody = makeSection('拍摄模式', 'mode');
             const locationBody = makeSection('位置信息', 'location');
-            const locationKv = document.createElement('div');
-            locationBody.appendChild(locationKv);
+            // 地图在上、坐标在下：地图是这一节的主体，三行坐标表格反而是注脚。
             const locationMapWrap = document.createElement('div');
             locationMapWrap.className = 'glv-map-wrap';
             locationBody.appendChild(locationMapWrap);
+            const locationKv = document.createElement('div');
+            locationBody.appendChild(locationKv);
             const histCanvas = document.createElement('canvas');
             histCanvas.className = 'glv-hist';
             const histWrap = document.createElement('div');
@@ -1451,19 +1452,78 @@
             const formatLat = (lat) => {
                 const v = Number(lat);
                 if (!Number.isFinite(v)) return '—';
-                return `${Math.abs(v).toFixed(5)}° ${v >= 0 ? 'N' : 'S'}`;
+                // 4 位小数 ≈ 11m，够定位到「哪条路上」；5 位是 1m，读起来只是噪声
+                return `${Math.abs(v).toFixed(4)}° ${v >= 0 ? 'N' : 'S'}`;
             };
 
             const formatLon = (lon) => {
                 const v = Number(lon);
                 if (!Number.isFinite(v)) return '—';
-                return `${Math.abs(v).toFixed(5)}° ${v >= 0 ? 'E' : 'W'}`;
+                return `${Math.abs(v).toFixed(4)}° ${v >= 0 ? 'E' : 'W'}`;
             };
 
             const formatAlt = (alt) => {
                 const v = Number(alt);
                 if (!Number.isFinite(v)) return '—';
-                return `${v.toFixed(4)}m`;
+                return `${Math.round(v)} m`;
+            };
+
+            // 库里的 country 来自 natural-earth 的官方长名，直接摆出来太硬。
+            const COUNTRY_SHORT = {
+                'United States of America': 'United States',
+                "People's Republic of China": 'China',
+                'United Kingdom of Great Britain and Northern Ireland': 'United Kingdom',
+                'Russian Federation': 'Russia',
+                'Republic of Korea': 'South Korea',
+                'Czech Republic': 'Czechia',
+            };
+            const shortCountry = (c) => COUNTRY_SHORT[String(c || '').trim()] || String(c || '').trim();
+
+            // 自己用 OSM 瓦片拼一张小地图。
+            //
+            // 原来接的是 staticmap.openstreetmap.de —— 那个域名现在已经
+            // NXDOMAIN，于是每张照片的地图都加载失败、退化成 onerror 里那行纯
+            // 文字链接（也就是说这个卡片从来没真正显示过地图）。换成任何别的第
+            // 三方静态图服务都要么需要 API key、要么哪天同样消失，所以直接用
+            // tile.openstreetmap.org 的瓦片自己摆：纯 <img>，无依赖、无 key。
+            //
+            // 5×3 张 256px 瓦片足以在任意瓦片内偏移下盖满卡片，再用 CSS 把目标
+            // 点顶到卡片中心。
+            const buildTileMap = (lat, lon, zoom) => {
+                const Z = zoom || 14;
+                const TS = 256, COLS = 5, ROWS = 3, n = 2 ** Z;
+                const xf = ((lon + 180) / 360) * n;
+                const rad = (lat * Math.PI) / 180;
+                const yf = ((1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2) * n;
+                const x0 = Math.floor(xf) - 2;
+                const y0 = Math.floor(yf) - 1;
+                const tiles = document.createElement('div');
+                tiles.className = 'glv-map-tiles';
+                tiles.style.width = COLS * TS + 'px';
+                tiles.style.height = ROWS * TS + 'px';
+                tiles.style.left = `calc(50% - ${(xf - x0) * TS}px)`;
+                tiles.style.top = `calc(50% - ${(yf - y0) * TS}px)`;
+                for (let r = 0; r < ROWS; r++) {
+                    for (let c = 0; c < COLS; c++) {
+                        const Y = y0 + r;
+                        if (Y < 0 || Y >= n) continue; // 极区之外没有瓦片
+                        const X = (((x0 + c) % n) + n) % n; // 跨 ±180° 经线时绕回
+                        const im = document.createElement('img');
+                        im.src = `https://tile.openstreetmap.org/${Z}/${X}/${Y}.png`;
+                        im.alt = '';
+                        // 不用 lazy：这张拼图有 1280px 宽却被裁到卡片的三百多
+                        // 像素，绝大多数瓦片落在可视区之外，懒加载在这种被裁剪
+                        // 的内容上并不可靠。一共才 15 张小图，而且只在浮层打开
+                        // 时才建，直接取。
+                        im.loading = 'eager';
+                        im.decoding = 'async';
+                        im.referrerPolicy = 'no-referrer';
+                        im.style.left = c * TS + 'px';
+                        im.style.top = r * TS + 'px';
+                        tiles.appendChild(im);
+                    }
+                }
+                return tiles;
             };
 
             const colorSpaceText = (cs) => {
@@ -1640,9 +1700,28 @@
                 const lat = extra?.gpsLat ?? p.loc?.lat;
                 const lon = extra?.gpsLon ?? p.loc?.lon;
                 const alt = extra?.gpsAlt;
-                const latN = Number(lat);
-                const lonN = Number(lon);
-                const hasLoc = Number.isFinite(latN) && Number.isFinite(lonN);
+
+                // 没有 GPS 的照片在库里 Location 是 NULL（tool.py 的 to_location
+                // 对空数据直接返回 None），SQL 取出来就是 null —— 而
+                // Number(null) === 0 且 Number.isFinite(0) 为真，所以原来的判断
+                // 把「没有位置」当成 (0, 0) 放行了，渲染出 0.00000°N /
+                // 0.00000°E、海拔 0.0000m，以及一个指向几内亚湾的地图链接。
+                //
+                // 所以先把空值挡在 Number() 之前，再排掉 Null Island：相机没定
+                // 到位时也会把 0/0 写进 EXIF，那同样是「没有」，不是真的有人站
+                // 在赤道和本初子午线的交点上拍照。顺带做一次范围校验，坏数据
+                // 不至于把地图链接指到无意义的坐标。
+                const num = (v) =>
+                    v === null || v === undefined || v === '' ? NaN : Number(v);
+                const latN = num(lat);
+                const lonN = num(lon);
+                const altN = num(alt);
+                const hasLoc =
+                    Number.isFinite(latN) &&
+                    Number.isFinite(lonN) &&
+                    !(latN === 0 && lonN === 0) &&
+                    Math.abs(latN) <= 90 &&
+                    Math.abs(lonN) <= 180;
                 const locationSection = locationBody.parentElement;
 
                 if (!hasLoc) {
@@ -1654,33 +1733,52 @@
 
                 if (locationSection) locationSection.hidden = false;
 
-                const rows = [
-                    { key: '纬度', value: formatLat(latN) },
-                    { key: '经度', value: formatLon(lonN) },
-                    { key: '海拔', value: Number.isFinite(Number(alt)) ? formatAlt(alt) : '' },
-                ];
-                renderKeyValue(locationKv, rows);
-
-                const href = `https://www.google.com/maps?q=${latN},${lonN}&z=15`;
-                const imgSrc = `https://staticmap.openstreetmap.de/staticmap.php?center=${latN},${lonN}&zoom=15&size=640x360&scale=2&markers=${latN},${lonN},blue-pushpin`;
+                // ── 地图卡片 ────────────────────────────────────────────
                 locationMapWrap.textContent = '';
                 const a = document.createElement('a');
                 a.className = 'glv-map-card';
-                a.href = href;
+                a.href = `https://www.google.com/maps?q=${latN},${lonN}&z=15`;
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
-                const im = document.createElement('img');
-                im.alt = 'Map';
-                im.loading = 'lazy';
-                im.decoding = 'async';
-                im.referrerPolicy = 'no-referrer';
-                im.src = imgSrc;
-                im.addEventListener('error', () => {
-                    if (!a.isConnected) return;
-                    a.textContent = `Google Maps (${latN.toFixed(5)}, ${lonN.toFixed(5)})`;
-                }, { once: true });
-                a.appendChild(im);
+                a.appendChild(buildTileMap(latN, lonN));
+
+                const pin = document.createElement('span');
+                pin.className = 'glv-map-pin';
+                a.appendChild(pin);
+
+                // 国家名压在地图左上角——它本来就是地理信息，放在地图上比另起
+                // 一行更自然，下面那行也就只剩纯数字，能对齐得整齐。
+                const country = shortCountry(p.loc?.country);
+                if (country) {
+                    const badge = document.createElement('span');
+                    badge.className = 'glv-map-badge';
+                    badge.textContent = country;
+                    a.appendChild(badge);
+                }
+
+                // 用了 OSM 的瓦片就得署名。
+                const attrib = document.createElement('span');
+                attrib.className = 'glv-map-attrib';
+                attrib.textContent = '© OpenStreetMap';
+                a.appendChild(attrib);
                 locationMapWrap.appendChild(a);
+
+                // ── 地图下方的一行 ──────────────────────────────────────
+                // 原来是「纬度/经度/海拔」三行 key-value，读起来是一堆数字表格。
+                locationKv.textContent = '';
+                const meta = document.createElement('div');
+                meta.className = 'glv-map-meta';
+                const c = document.createElement('span');
+                c.className = 'glv-map-coord';
+                c.textContent = `${formatLat(latN)}\u3000${formatLon(lonN)}`;
+                meta.appendChild(c);
+                if (Number.isFinite(altN)) {
+                    const el = document.createElement('span');
+                    el.className = 'glv-map-alt';
+                    el.textContent = `海拔 ${formatAlt(altN)}`;
+                    meta.appendChild(el);
+                }
+                locationKv.appendChild(meta);
             };
 
             const buildChipsNode = (exif) => {
@@ -2882,24 +2980,83 @@
 
         .glv-side .glv-map-card {
             display: block;
+            position: relative;
             width: 100%;
-            height: 120px;
+            height: 140px;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.08);
             background: rgba(28, 28, 30, 0.95);
-            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            line-height: 120px;
-            text-align: center;
-            font-size: 12px;
         }
 
-        .glv-side .glv-map-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .glv-side .glv-map-tiles {
+            position: absolute;
+        }
+
+        /* OSM 只提供浅色瓦片，直接贴进这个深色浮层会刺眼。invert + hue-rotate(180)
+           是把浅色地图翻成深色地图的经典做法：明暗整体反转、色相再转回来，于是
+           水面仍是蓝的、绿地仍是绿的，只有明暗对调。单纯用 brightness() 压暗只会
+           得到一张灰扑扑的浅色地图，可读性反而更差。 */
+        .glv-side .glv-map-tiles img {
+            position: absolute;
+            width: 256px;
+            height: 256px;
             display: block;
+            filter: invert(1) hue-rotate(180deg) saturate(0.7) brightness(0.9) contrast(0.95);
+        }
+
+        .glv-side .glv-map-pin {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            margin: -5px 0 0 -5px;
+            border-radius: 50%;
+            background: #ff453a;
+            box-shadow: 0 0 0 3px rgba(255, 69, 58, 0.28), 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 国家名是注脚不是标题：小、轻、贴角，够读就行，不该在这么小的一张
+           卡片上抢掉地图的位置。 */
+        .glv-side .glv-map-badge {
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            color: rgba(255, 255, 255, 0.78);
+            background: rgba(0, 0, 0, 0.42);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(8px);
+        }
+
+        .glv-side .glv-map-attrib {
+            position: absolute;
+            right: 6px;
+            bottom: 4px;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.5);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+        }
+
+        .glv-side .glv-map-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .glv-side .glv-map-coord,
+        .glv-side .glv-map-alt {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            font-variant-numeric: tabular-nums;
         }
 
         .glv-section[data-variant='tone'] .glv-val {
