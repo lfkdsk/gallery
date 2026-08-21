@@ -715,6 +715,29 @@ function addYearEndSummaryLink(container, root) {
   }
 }
 
+// Live Photo 伴随视频的扩展名大小写不统一：iPhone 导出是 .MOV，有些工具会转成
+// 小写，同一个仓库里两种都可能有（本站 25 个 mov 里有 8 个是大写）。
+//
+// build.py 那边用 {f.lower(): f} 的映射拿到了真实文件名并写进 front-matter（见
+// mov_files），album / flow_album 走的是那条路，不受影响；而按 path 直接查 sqlite
+// 的页面只有 livephoto 布尔值、没有文件名，只能由图片 URL 推一个出来再确认一次。
+//
+// 两个都不通就原样返回，让下游照常失败——这里不该把问题吞掉。
+async function resolveLiveVideoUrl(url) {
+  const alt = /\.mov$/.test(url)
+    ? url.replace(/\.mov$/, '.MOV')
+    : url.replace(/\.MOV$/, '.mov');
+  for (const candidate of [url, alt]) {
+    try {
+      const res = await fetch(candidate, { method: 'HEAD' });
+      if (res.ok) return candidate;
+    } catch (e) {
+      // 网络错误说明不了大小写，继续试下一个
+    }
+  }
+  return url;
+}
+
 function attachLivePhoto(wrap, hasLive, videoUrl) {
   if (hasLive) {
     // data-livephoto

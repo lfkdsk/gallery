@@ -1012,6 +1012,11 @@
             const db = new SQL.Database(new Uint8Array(sqlite_buf));
             var value = null;
             var name = null;
+            // 和 value / name 一样在外层声明：nextImage() 里赋值，下面的下载按钮
+            // 要用。之前写成了函数内的 var，于是点下载直接抛
+            // "imgLink is not defined"，下载压根不会发生——CI 那边表现为
+            // download.png 一直不出现。
+            var imgLink = null;
             function nextImage() {
                 var result = db.exec(
                 `
@@ -1046,7 +1051,7 @@ ORDER BY random() LIMIT 1;`
                 }
                 const v = JSON.parse(result[0].values[0]);
                 value = v;
-                var imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + v.path;
+                imgLink = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + v.path;
                 imageBox.src = '';
                 imageBox.src = imgLink;
                 addBackUp(imageBox,"https://raw.githubusercontent.com/lfkdsk/gallery/master/", v.path);

@@ -1065,9 +1065,15 @@ WHERE photo.path ='` + name + "'"
                 addBackUp(imageBox, "https://raw.githubusercontent.com/lfkdsk/gallery/master/", name);
                 var imageFancy = imageBox.parentElement;
                 imageFancy.setAttribute("href", imgLink);
-                const videourl = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + name.replace(/\.[^/.]+$/, ".mov");
                 var picg = document.getElementById('pic-g');
-                attachLivePhoto(picg, v.livephoto, videourl);
+                // 这一页按 path 直接查 sqlite，拿不到 build.py 算好的 video 字段
+                // （库里只有 livephoto 布尔值），所以先推一个再确认扩展名大小写。
+                if (v.livephoto) {
+                    const guess = 'https://cdn.jsdelivr.net/gh/lfkdsk/gallery@master' + '/' + name.replace(/\.[^/.]+$/, '.mov');
+                    resolveLiveVideoUrl(guess).then((u) => attachLivePhoto(picg, true, u));
+                } else {
+                    attachLivePhoto(picg, false, '');
+                }
                 var fancyBoxImage = document.getElementsByClassName("fancybox__image")[0];
                 if (fancyBoxImage !== undefined) {
                     fancyBoxImage.src = imgLink;
