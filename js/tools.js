@@ -48,6 +48,66 @@ function copyToClipboard(content) {
 }
 
 /**
+ * 按 CSS 的 object-fit / object-position 算出图片在盒子里真正的绘制区域。
+ *
+ * canvas 的 drawImage(img, x, y, w, h) 只有「拉伸铺满」一种行为，等价于
+ * object-fit: fill。把 <img> 的盒子直接当目标矩形，3:2 的相框里放一张竖构图，
+ * 页面上是两侧留黑的 contain，下载图里却被横向拉宽 —— 照片整个变形。
+ *
+ * @param {HTMLElement} el    带 object-fit 的元素（<img>）
+ * @param {Object}      box   它的盒子，{x, y, w, h}，已换算到输出坐标系
+ * @param {number}      srcW  图源的原始宽（像素）
+ * @param {number}      srcH  图源的原始高
+ * @returns {{x: number, y: number, w: number, h: number}} 输出坐标系里的绘制矩形
+ */
+function objectFitRect(el, box, srcW, srcH) {
+  var cs = getComputedStyle(el);
+  var fit = cs.objectFit || "fill";
+  if (!srcW || !srcH || fit === "fill") return box;
+
+  var eb = el.getBoundingClientRect();
+  // box 是乘过 k 的输出像素，none / scale-down 要按 CSS px 的原始尺寸算，
+  // 这里把倍率还原出来
+  var k = eb.width > 0 ? box.w / eb.width : 1;
+  var sx = box.w / srcW;
+  var sy = box.h / srcH;
+  var s;
+  switch (fit) {
+    case "cover":
+      s = Math.max(sx, sy);
+      break;
+    case "none":
+      s = k;
+      break;
+    case "scale-down":
+      s = Math.min(k, Math.min(sx, sy));
+      break;
+    default: // contain
+      s = Math.min(sx, sy);
+  }
+  var w = srcW * s;
+  var h = srcH * s;
+
+  // object-position 决定多出来（cover 时是溢出去）的空间怎么分。计算值一般
+  // 已经是 "50% 50%" 这种，关键字兜个底。
+  var KEYWORD = { left: "0%", top: "0%", center: "50%", right: "100%", bottom: "100%" };
+  var pos = (cs.objectPosition || "50% 50%").trim().split(/\s+/);
+  var offset = function (v, free) {
+    v = v || "50%";
+    if (KEYWORD.hasOwnProperty(v)) v = KEYWORD[v];
+    if (v.charAt(v.length - 1) === "%") return (free * parseFloat(v)) / 100;
+    var px = parseFloat(v);
+    return isNaN(px) ? free / 2 : px * k;
+  };
+  return {
+    x: box.x + offset(pos[0], box.w - w),
+    y: box.y + offset(pos[1], box.h - h),
+    w: w,
+    h: h,
+  };
+}
+
+/**
  * 把「相框 + 照片 + EXIF 卡」渲染成一张可下载的图片。
  *
  * ── 为什么不用 html2canvas ──────────────────────────────────────────────
@@ -122,23 +182,55 @@ async function downloadFramedPhoto(o) {
     ctx.fillStyle = nodeCS.backgroundColor === "rgba(0, 0, 0, 0)" ? "#ffffff" : nodeCS.backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // ── 照片：换成原图后按显示位置铺满 ──────────────────────────────
+    // ── 相框衬底 ───────────────────────────────────────────────────
+    // #imgbox 是 object-fit: contain，竖构图时两侧、横构图时上下会露出后面的
+    // .pic-item：站内它是黑的，嵌入模式（?widget=true）下改成白的。只铺 node
+    // 自己的背景不够——留边处该露的是衬底的颜色，不是相框的。
+    var mats = [];
+    for (var p = img.parentElement; p && p !== node; p = p.parentElement) {
+      mats.unshift(p); // 由外向内，跟页面上的层叠顺序一致
+    }
+    var opaque = function (color) {
+      // "rgba(0, 0, 0, 0)" / "rgb(0 0 0 / 0)" 这种全透明的跳过，别把它当色块铺上去
+      var m = /^rgba?\(([^)]+)\)/.exec(color || "");
+      if (!m) return false;
+      var parts = m[1].split(/[\s,/]+/).filter(Boolean); // 逗号式和 "0 0 0 / 0" 式都吃得下
+      return parts.length < 4 || parseFloat(parts[3]) !== 0;
+    };
+    mats.forEach(function (el) {
+      var bg = getComputedStyle(el).backgroundColor;
+      if (!opaque(bg)) return;
+      var r = rel(el);
+      ctx.fillStyle = bg;
+      ctx.fillRect(r.x, r.y, r.w, r.h);
+    });
+
+    // ── 照片：换成原图后按 object-fit 摆到显示位置 ──────────────────
     var bmp = null;
     if (o.fullSrc) {
       try {
         var res = await fetch(o.fullSrc, { mode: "cors" });
-        if (res.ok) bmp = await createImageBitmap(await res.blob());
+        // 显式 from-image：<img> 渲染时是认 EXIF 方向的，位图这边不跟上，
+        // 竖拍的照片会横躺过来
+        if (res.ok) {
+          bmp = await createImageBitmap(await res.blob(), { imageOrientation: "from-image" });
+        }
       } catch (e) {
         console.warn("原图取不到，退回页面上的图:", e);
       }
     }
+    var src = bmp || img;
+    var sw = bmp ? bmp.width : img.naturalWidth;
+    var sh = bmp ? bmp.height : img.naturalHeight;
     var ir = rel(img);
-    if (bmp) {
-      ctx.drawImage(bmp, ir.x, ir.y, ir.w, ir.h);
-      bmp.close && bmp.close();
-    } else {
-      ctx.drawImage(img, ir.x, ir.y, ir.w, ir.h);
-    }
+    var dr = objectFitRect(img, ir, sw, sh);
+    ctx.save();
+    ctx.beginPath(); // cover / none 会溢出盒子，跟页面上的 overflow: hidden 一样裁掉
+    ctx.rect(ir.x, ir.y, ir.w, ir.h);
+    ctx.clip();
+    ctx.drawImage(src, dr.x, dr.y, dr.w, dr.h);
+    ctx.restore();
+    if (bmp) bmp.close && bmp.close();
 
     // ── EXIF 卡 ────────────────────────────────────────────────────
     var drawText = function (el) {
