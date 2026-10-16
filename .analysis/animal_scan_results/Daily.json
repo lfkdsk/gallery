@@ -1,8 +1,8 @@
 {
   "_meta": {
     "folder": "Daily",
-    "last_scan": "2026-07-26",
-    "thumbnail_source": "origin/thumbnail",
+    "last_scan": "2026-10-16",
+    "thumbnail_source": "main tree (no thumbnail branch on origin)",
     "note": "full current folder inventory marked processed"
   },
   "processed": [
@@ -56,6 +56,23 @@
     "Daily/PhotonCam_OSK_20250216_125601.webp",
     "Daily/PhotonCam_OSK_20250405_182025.jpeg",
     "Daily/WechatIMG3571.webp",
-    "Daily/final-4.webp"
+    "Daily/final-4.webp",
+    "Daily/R0006699.jpg",
+    "Daily/R0006756.jpg",
+    "Daily/R0006825.jpg",
+    "Daily/R0006895.jpg",
+    "Daily/R0006908.jpg",
+    "Daily/R0006918.jpg",
+    "Daily/R0006939.jpg",
+    "Daily/R0006941.jpg",
+    "Daily/R0006951.jpg",
+    "Daily/R0006953.jpg",
+    "Daily/R0006957.jpg",
+    "Daily/R0006958.jpg",
+    "Daily/R0006960.jpg",
+    "Daily/R0006961.jpg",
+    "Daily/R0006962.jpg",
+    "Daily/R0006966.jpg",
+    "Daily/R0006978.jpg"
   ]
 }

@@ -304,3 +304,30 @@ Key 格式：`中文种名·颜色变体 / English Species (Scientific Name)`
 ## 暂存目录
 
 `.analysis/animal_scan_results/` 目录下的 JSON 文件为当前增量扫描缓存；`.animal_scan_results/` 是历史中间结果目录，可保留备查。
+
+---
+
+## 增量扫描记录（2026-10-16）
+
+本次扫描 `2026-07-26` 分析之后新增到主树的 62 张图片（含无 `.jpg` 配对的 HEIC 实况照片）。`origin` 上没有 `thumbnail` 分支，因此直接用主树原图生成临时联系表（HEIC 通过 `pillow-heif` 解码）；联系表已在校验后删除。与 `.jpg` 同名的 `.HEIC` 视为同一张实况照片的重复，只把 `.jpg` 写入索引；`.MOV` 不在扫描范围内。
+
+### 395-green
+
+- Last scanned: 2026-10-16
+- Processed: 25 images
+- Animals: `金毛寻回犬 / Golden Retriever (Canis familiaris)`, `家犬·黑白卷毛（贵宾混种）/ Domestic Dog (Black-and-White Doodle Mix)`
+- Notes: 新相册，完整扫描。`IMG_8279.HEIC` 草地上的深色物体放大后为树桩，不收录。
+
+### 396-autumn-2026
+
+- Last scanned: 2026-10-16
+- Processed: 20 images
+- Animals: `金毛寻回犬·奶油色 / Golden Retriever (English Cream)`, `家犬·黄白混种 / Domestic Dog (Tan-and-White Mixed Breed)`
+- Notes: 新相册，完整扫描。`IMG_9276.HEIC` 与 `IMG_9276.jpg` 为同一张，只收录 `.jpg`。
+
+### Daily
+
+- Last scanned: 2026-10-16
+- Processed: 17 new images
+- Animals: none
+- Notes: Hello Kitty / Miffy 玩偶、狗形雕塑、手绘狗卡片、海报和地面涂鸦均不收录；食物照片不收录。
