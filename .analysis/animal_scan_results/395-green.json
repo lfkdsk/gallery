@@ -1,0 +1,35 @@
+{
+  "_meta": {
+    "folder": "395-green",
+    "last_scan": "2026-10-16",
+    "thumbnail_source": "main tree (no thumbnail branch on origin)",
+    "note": "full folder scanned; HEIC-only live photos decoded with pillow-heif"
+  },
+  "processed": [
+    "395-green/B0001882.jpg",
+    "395-green/B0001885.jpg",
+    "395-green/B0001908.jpg",
+    "395-green/B0001923.jpg",
+    "395-green/B0001938.jpg",
+    "395-green/B0001943.jpg",
+    "395-green/B0001948.jpg",
+    "395-green/B0001950.jpg",
+    "395-green/B0001956.jpg",
+    "395-green/B0001972.jpg",
+    "395-green/B0001983.jpg",
+    "395-green/B0002007.jpg",
+    "395-green/B0002020.jpg",
+    "395-green/B0002026.jpg",
+    "395-green/B0002030.jpg",
+    "395-green/IMG_8142.jpg",
+    "395-green/IMG_8170.jpg",
+    "395-green/IMG_8192.jpg",
+    "395-green/IMG_8216.HEIC",
+    "395-green/IMG_8226.HEIC",
+    "395-green/IMG_8253.HEIC",
+    "395-green/IMG_8279.HEIC",
+    "395-green/IMG_8301.HEIC",
+    "395-green/IMG_8312.HEIC",
+    "395-green/R0006858.jpg"
+  ]
+}

@@ -2,7 +2,7 @@
   "_meta": {
     "description": "动物图片索引 — 按动物种类归档，值为文件路径列表",
     "format": "folder/filename.ext",
-    "generated": "2026-07-26",
+    "generated": "2026-10-16",
     "status": "incremental — processed current image additions after 2026-04-29; see animal_index_guide.md and animal_scan_results/"
   },
   "中华田园猫·三花 / Chinese Domestic Cat (Calico / Tricolor)": [
@@ -618,5 +618,17 @@
   ],
   "虎 / Tiger (Panthera tigris)": [
     "H-Oahu/IMG_7456_.jpg"
+  ],
+  "金毛寻回犬 / Golden Retriever (Canis familiaris)": [
+    "395-green/B0001943.jpg"
+  ],
+  "金毛寻回犬·奶油色 / Golden Retriever (English Cream)": [
+    "396-autumn-2026/IMG_9276.jpg"
+  ],
+  "家犬·黑白卷毛（贵宾混种）/ Domestic Dog (Black-and-White Doodle Mix)": [
+    "395-green/R0006858.jpg"
+  ],
+  "家犬·黄白混种 / Domestic Dog (Tan-and-White Mixed Breed)": [
+    "396-autumn-2026/B0002080.jpg"
   ]
 }
