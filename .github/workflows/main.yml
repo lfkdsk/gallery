@@ -18,39 +18,57 @@ env:
 permissions:
   contents: write
 
+# 两次构建同时推 thumbnail / gh-pages 会互相覆盖，排队依次跑。
+# （缓存只增不删，就算并发了最坏也只是多重算几张。）
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: secrets
     steps:
     - name: Checkout template repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         repository: ${{ env.TEMPLATE_REPO }}
         ref: ${{ env.TEMPLATE_BRANCE }}        
+    # 只检出 yml / md 等小文件，原图一张都不下载：build.py 按 thumbnail 分支上的
+    # manifest.json 缓存，只把新增 / 变化的照片按需 fetch 下来。
     - name: Checkout gallery repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
       with:
         path: gallery
+        filter: blob:none
+        sparse-checkout-cone-mode: false
+        sparse-checkout: |
+          /*.yml
+          /*.css
+          /CNAME
+          /.analysis/
+          /**/index.yml
+          /**/index.md
     - name: Checkout public repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
       continue-on-error: true # allow error.      
       with:
         ref: gh-pages
         path: public        
+    # 缩略图和 manifest.json（照片元数据缓存）都在这个分支，Deploy Thumbnail 时一起推回去。
     - name: Checkout thumbnail repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
       continue-on-error: true # allow error.      
       with:
         ref: thumbnail
         path: thumbnail_public        
     - name: Checkout theme repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         repository: ${{ env.THEME_REPO }}
         ref: ${{ env.THEME_BRANCH }}        
         path: themes/hexo-theme-type
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v6
       with:
         python-version: '3.10' 
         cache: 'pip' # caching pip dependencies        
