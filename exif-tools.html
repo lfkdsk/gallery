@@ -706,8 +706,10 @@
         margin-top: 0 !important;
     }
 
+    /* 嵌入模式外面已经有一圈白边当相框，再描一道黑线就像个 UI 框，去掉。 */
     .is-widget .pic-area {
         padding: 0 !important;
+        border: 0 !important;
     }
 
     /* 相框的衬底。#imgbox 是 object-fit: contain，竖构图时左右（横构图时上下）
@@ -716,6 +718,50 @@
        所以嵌入模式下让它跟着白底走。 */
     .is-widget .pic-item {
         background-color: #fff !important;
+    }
+
+    /* 桌面小组件（Glimpse 之类）只是给网页拍个快照：页面多高都只截第一屏，
+       按钮也点不了。原来照片 + EXIF 就已经占满一屏，三个按钮被挤到最底下，
+       正好被小组件自己的标题栏（"GALLERY · x min ago"）盖住，成了半截。
+       所以嵌入模式下：按钮和 EXIF 都藏掉（EXIF 在小组件里只有几 pt，看不清，
+       只会让画面变挤）；页面钉死成一屏高，照片 cover 填满。四周留一圈
+       --widget-frame（默认 9vmin）的白边当相框，也免得照片四角被小组件圆角
+       裁掉。如果小组件底下还叠着自己的标题栏（Glimpse 可以关掉），用 ?inset=9vh
+       之类的参数在白边之外再多留 --widget-inset，让标题栏上方露出的白边和其他三边一样宽。 */
+    .is-widget #wrapper,
+    .is-widget #tools-wrapper {
+        display: none !important;
+    }
+
+    .is-widget .content-area {
+        height: 100vh;
+        max-height: none !important;
+        max-width: none !important;
+        padding: var(--widget-frame, 9vmin) var(--widget-frame, 9vmin) calc(var(--widget-frame, 9vmin) + var(--widget-inset, 0px)) !important;
+        box-sizing: border-box;
+    }
+
+    .is-widget .content-area > .grid {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .is-widget #all-pic {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .is-widget #pic-g {
+        flex: 1;
+        min-height: 0;
+        aspect-ratio: auto;
+    }
+
+    .is-widget #imgbox {
+        object-fit: cover;
     }
 
     .is-widget .itp-float-bar,
