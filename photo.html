@@ -725,7 +725,7 @@
        按钮也点不了。原来照片 + EXIF 就已经占满一屏，三个按钮被挤到最底下，
        正好被小组件自己的标题栏（"GALLERY · x min ago"）盖住，成了半截。
        所以嵌入模式下：按钮和 EXIF 都藏掉（EXIF 在小组件里只有几 pt，看不清，
-       只会让画面变挤）；页面钉死成一屏高，照片 cover 填满。四周留一圈
+       只会让画面变挤）；页面钉死成一屏高，照片在里面居中。四周留一圈
        --widget-frame（默认 9vmin）的白边当相框，也免得照片四角被小组件圆角
        裁掉。如果小组件底下还叠着自己的标题栏（Glimpse 可以关掉），用 ?inset=9vh
        之类的参数在白边之外再多留 --widget-inset，让标题栏上方露出的白边和其他三边一样宽。 */
@@ -761,8 +761,20 @@
         aspect-ratio: auto;
     }
 
+    /* 照片在白边里完整显示、上下左右居中（contain，不裁切）。
+       不能靠 #imgbox 本身的 height: 100%：Glimpse 用的 WebKit 解析不出 flex 子项
+       里的百分比高度，图片会退回按原始比例排、贴在顶上，底下空一大片白。
+       改成绝对定位铺满 #pic-g，哪个内核都认。 */
+    .is-widget #pic-g {
+        position: relative;
+    }
+
     .is-widget #imgbox {
-        object-fit: cover;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .is-widget .itp-float-bar,

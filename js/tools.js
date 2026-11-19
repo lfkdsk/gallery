@@ -357,64 +357,29 @@ function wrapperData(v, author) {
   var exifLogo = $("#exif-maker-logo");
   var exifAuthor = $("#exif-author");
 
-  const maker = v.exif_data["Image Make"];
-  console.log(maker);
-  exifLogo.attr("class", 'nofancy')
-  switch (maker) {
-    case 'Hasselblad': {
-      exifLogo.attr("src", "img/hasselblad.jpg");
-      exifLogo.addClass("hasselblad-logo");
-      break;
-    }
-    case "Apple": {
-      exifLogo.attr("src", "img/apple.png");
-      exifLogo.addClass("apple-logo");
-      break;
-    }
-    case "RICOH IMAGING COMPANY, LTD.  ": {
-      exifLogo.attr("src", "img/384_ricoh.jpg");
-      exifLogo.addClass("ricoh-logo");
-      break;
-    }
-    case "Canon": {
-      exifLogo.attr("src", "img/canon.png");
-      exifLogo.addClass("canon-logo");
-      break;
-    }
-    case "SONY": {
-      exifLogo.attr("src", "img/sony.png");
-      exifLogo.addClass("sony-logo");
-      break;
-    }
-    case "NIKON CORPORATION": {
-      exifLogo.attr("src", "img/nikon.png");
-      exifLogo.addClass("nikon-logo");
-      break;
-    }
-    case "DJI": {
-      exifLogo.attr("src", "img/dajiang.png");
-      exifLogo.addClass("dji-logo");
-      break;
-    }
-    case "FUJIFILM": {
-      exifLogo.attr("src", "img/fujifilm.png");
-      exifLogo.addClass("fujifilm-logo");
-      break;
-    }
-    case "OM Digital Solutions   ": {
-      exifLogo.attr("src", "img/om-system.svg");
-      exifLogo.addClass("om-system-logo");
-      break;
-    }
-    case "OLYMPUS CORPORATION    ":
-    case "OLYMPUS IMAGING CORP.": {
-      exifLogo.attr("src", "img/OlympusLogoBlueAndGoldRGB.png");
-      exifLogo.addClass("olympus-logo");
-      break;
-    }
-    default: {
-      break;
-    }
+  // EXIF 的 Make 字段并不规整：有的带尾随空格（理光、OM、奥林巴斯），有的被导出
+  // 工具截断在定长缓冲里（尼康 Z6II 导出的 webp 里只剩 "NIKON CORPORATI"）。
+  // 所以统一 trim + 大写后按前缀匹配，而不是对整串做精确比较。
+  const maker = String(v.exif_data["Image Make"] || "").trim().toUpperCase();
+  const logos = [
+    ["HASSELBLAD", "img/hasselblad.jpg", "hasselblad-logo"],
+    ["APPLE", "img/apple.png", "apple-logo"],
+    ["RICOH", "img/384_ricoh.jpg", "ricoh-logo"],
+    ["CANON", "img/canon.png", "canon-logo"],
+    ["SONY", "img/sony.png", "sony-logo"],
+    ["NIKON", "img/nikon.png", "nikon-logo"],
+    ["DJI", "img/dajiang.png", "dji-logo"],
+    ["FUJIFILM", "img/fujifilm.png", "fujifilm-logo"],
+    ["OM DIGITAL", "img/om-system.svg", "om-system-logo"],
+    ["OLYMPUS", "img/OlympusLogoBlueAndGoldRGB.png", "olympus-logo"],
+  ];
+  const hit = logos.find(function (l) { return maker.startsWith(l[0]); });
+  exifLogo.attr("class", 'nofancy');
+  if (hit) {
+    exifLogo.attr("src", hit[1]).addClass(hit[2]).show();
+  } else {
+    // 不认识的厂商：清掉 src 并隐藏，否则会一直显示上一张照片的 logo。
+    exifLogo.removeAttr("src").hide();
   }
   exifParam.text(
     v.exif_data["EXIF ISOSpeedRatings"] +
